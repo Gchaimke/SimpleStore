@@ -1,0 +1,15 @@
+ /*
+SimpleStore
+*/
+
+.card-image {
+    display: block;
+    width: 100%;
+    height: 120px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .card-title{
+      text-align: center;
+      text-transform: capitalize;
+  }
