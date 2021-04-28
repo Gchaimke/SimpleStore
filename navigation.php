@@ -9,7 +9,11 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="btn btn-outline-info fa fa-key text-primary mt-1" aria-hidden="true" href="?login=true"></a>
+                    <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') { ?>
+                        <a class="btn btn-outline-info fas fa-sign-out-alt text-primary mt-1" aria-hidden="true" href="?logout"></a>
+                    <?php } else { ?>
+                        <a class="btn btn-outline-info fa fa-key text-primary mt-1" aria-hidden="true" href="?login=true"></a>
+                    <?php } ?>
                 </li>
             </ul>
             <form class="d-flex">

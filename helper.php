@@ -3,14 +3,14 @@ function login($pass)
 {
     if ($pass == '12345') {
         $_SESSION["login"] = true;
-        echo "loged in";
+        echo "<script>window.location.href = '/';</script>";
     }
 }
 
 function logout()
 {
     $_SESSION["login"] = '';
-    echo "loged out";
+    echo "<script>window.location.href = '/';</script>";
 }
 
 function get_categories()

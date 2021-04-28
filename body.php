@@ -2,7 +2,6 @@
     <?php
     $categories = get_categories();
     $count = 0;
-    $edit = true;
     foreach ($categories as $category) {
         $products = get_products($count);
         echo '<div class="accordion accordion-flush" id="accordionFlushExample">
@@ -25,7 +24,7 @@
     }
 
     if (isset($_GET['add_product']) && $_GET['add_product'] != '' && isset($_GET['category']) && $_GET['category'] != '') {
-        if ($edit) {
+        if ($_SESSION['login']) {
             $new = add_product($products, $product, '');
             save_json($new, 'categories');
         } else {
@@ -34,7 +33,7 @@
     }
 
     if (isset($_GET['add_category']) && $_GET['add_category'] != '') {
-        if ($edit) {
+        if ($_SESSION['login']) {
             $new = add_category($categories, $_GET['add_category']);
             save_json($new, 'categories');
             echo 'save_category ok';
@@ -44,7 +43,7 @@
     }
 
     if (isset($_GET['remove_category']) && $_GET['remove_category'] != '') {
-        if ($edit) {
+        if ($_SESSION['login']) {
             $new = add_category($categories, $_GET['remove_category'], '1');
             save_json($new, 'categories');
             echo 'save_category ok';
@@ -53,12 +52,12 @@
         }
     }
 
-    if (isset($_GET['login'])){
+    if (isset($_GET['login'])) {
         include_once('elements/login.php');
         login($_GET['login']);
     }
 
-    if (isset($_GET['logout'])){
+    if (isset($_GET['logout'])) {
         logout();
     }
     ?>
