@@ -1,6 +1,6 @@
 <?php
 $categories = array(
-    "Vse Myaso" => array(
+    "Vse Myaso 1" => array(
         array(
             'id' => 1,
             'name' => 'myaso',
