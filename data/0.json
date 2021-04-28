@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "myaso",
+        "description": "good",
+        "price": "65",
+        "kind": "kg",
+        "img": "https://cdn.profile.ru/wp-content/uploads/2019/08/shutterstock_1050939104-782x440.jpg"
+    },
+    {
+        "id": 2,
+        "name": "riba",
+        "description": "good",
+        "price": "40",
+        "kind": "kg",
+        "img": "http://capriceeurope.eu/assets/uploads/2020/04/Pescadoo-e1587726895841.jpg"
+    },
+    {
+        "id": 3,
+        "name": "yaica",
+        "description": "good",
+        "price": "15",
+        "kind": "lot",
+        "img": "https://liter.kz/wp-content/uploads/2020/10/pkyblkr-750x422.jpg"
+    }
+]
