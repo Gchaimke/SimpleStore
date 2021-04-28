@@ -19,6 +19,11 @@
             include('elements/card.php');
             echo '</div>';
         }
+        if ($_SESSION['login']) {
+            echo '<div class="col-sm">';
+            include('elements/new_card.php');
+            echo '</div>';
+        }
         echo '</div></div></div></div>';
         $count++;
     }
