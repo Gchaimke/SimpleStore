@@ -1,14 +1,1 @@
-[
-    {
-        "name": "Myaso",
-        "products": "0"
-    },
-    {
-        "name": "Ryba",
-        "products": "1"
-    },
-    {
-        "name": "Yaica",
-        "products": "2"
-    }
-]
+[{"name":"Meat"},{"name":"Eggs"},{"name":"Fish 1"},{"name":"test"}]

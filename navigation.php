@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="tile.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
             SimpleStore</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="btn btn-outline-info fas fa-user text-primary mt-1" href="#"></a>
+                    <a class="btn btn-outline-info fa fa-key text-primary mt-1" aria-hidden="true" href="?login=true"></a>
                 </li>
             </ul>
             <form class="d-flex">
