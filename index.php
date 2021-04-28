@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once('helper.php');
+$company = get_company();
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en">

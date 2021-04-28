@@ -13,6 +13,11 @@ function logout()
     echo "<script>window.location.href = '/';</script>";
 }
 
+function get_company()
+{
+    return json_decode(file_get_contents('data/company.json'));
+}
+
 function get_categories()
 {
     return json_decode(file_get_contents('data/categories.json'));
