@@ -3,7 +3,14 @@
     <div class="card-body">
         <?php if ($logedin) {
             echo "<i class='far fa-trash-alt delete-product' data-category='$category_num ' data-product='$product_num '></i>";
-            echo "<i class='far fa-edit edit-product' data-category='$category_num ' data-product='$product_num '></i>";
+            echo "<i class='far fa-edit edit-product' data-category='$category_num ' 
+            data-product='$product_num ' 
+            data-picture='$product->img' 
+            data-name='$product->name'
+            data-description='$product->description'
+            data-price='$product->price'
+            data-kind='$product->kind'
+            ></i>";
         }
         ?>
         <h5 class="card-title"><?= $product->name ?></h5>

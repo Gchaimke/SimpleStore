@@ -1,16 +1,1 @@
-[
-    {
-        "name": "riba",
-        "description": "good",
-        "price": "40",
-        "kind": "kg",
-        "img": "http:\/\/capriceeurope.eu\/assets\/uploads\/2020\/04\/Pescadoo-e1587726895841.jpg"
-    },
-    {
-        "name": "yaica",
-        "description": "good",
-        "price": "15",
-        "kind": "lot",
-        "img": "https:\/\/liter.kz\/wp-content\/uploads\/2020\/10\/pkyblkr-750x422.jpg"
-    }
-]
+[{"name":"yaica","description":"good","price":"15","kind":"lot","img":"https:\/\/liter.kz\/wp-content\/uploads\/2020\/10\/pkyblkr-750x422.jpg"}]

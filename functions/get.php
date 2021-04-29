@@ -1,12 +1,4 @@
 <?php
-if (isset($_GET['add_product']) && $_GET['add_product'] != '' && isset($_GET['category']) && $_GET['category'] != '') {
-    if ($logedin) {
-        $new = add_product($products, $product, '');
-        save_json($new, 'categories');
-    } else {
-        echo 'please login';
-    }
-}
 
 if (isset($_GET['add_category']) && $_GET['add_category'] != '') {
     if ($logedin) {

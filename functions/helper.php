@@ -39,8 +39,11 @@ function get_products($file = 0)
     return json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/data/$file.json"));
 }
 
-function new_product($name = 'New Product', $description = '', $price = 50, $kind = 'kg', $img = 'https://cdn.pixabay.com/photo/2016/02/19/11/33/trees-1209774__340.jpg')
+function new_product($name = 'New Product', $description = '', $price = 50, $kind = 'kg', $img = '')
 {
+    if ($img == "") {
+        $img = 'https://cdn.pixabay.com/photo/2016/02/19/11/33/trees-1209774__340.jpg';
+    }
     $product = new stdClass();
     $product->name = $name;
     $product->description = $description;
@@ -50,16 +53,18 @@ function new_product($name = 'New Product', $description = '', $price = 50, $kin
     return $product;
 }
 
-function add_product($products, $product)
+function add_product($category_index, $product)
 {
+    $products = get_products($category_index);
     $products[] = $product;
-    return $products;
+    save_json($products, $category_index);
 }
 
 function edit_product($category_index, $product_index, $product)
 {
     $products = get_products($category_index);
     $products[$product_index] = $product;
+    save_json($products, $category_index);
 }
 
 function delete_product($category_index, $product_index)

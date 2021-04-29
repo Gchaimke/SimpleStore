@@ -22,13 +22,16 @@
             echo '</div>';
             $product_num++;
         }
+
+        echo '</div>';
         if ($logedin) {
-            echo '<div class="col-sm">';
             include('elements/new_card.php');
-            echo '</div>';
         }
-        echo '</div></div></div></div>';
+        echo '</div></div></div>';
         $category_num++;
+    }
+    if ($logedin) {
+        include('elements/edit_card.php');
     }
     ?>
 </div>

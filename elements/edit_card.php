@@ -1,9 +1,9 @@
-<button type="button" class="btn btn-outline-dark align-middle add-product_toggle mt-4" data-category='<?= $category_num ?> '>
-    <i class="far fa-plus-square" style="font-size: 2em;"></i>
-</button>
-<div class="card mt-2 new-product" style="width: 100%; display:none;">
+<div class="card mt-2 edit-product-card" style="width: 100%; display:none;">
     <div class="card-body">
-        <h2>New Product</h2>
+        <h2>Edit Product</h2>
+        <input type="hidden" id="edit-product-id" value="" />
+        <input type="hidden" id="edit-category-id" value="" />
+
         <div class="input-group mb-3">
             <label class="input-group-text">Picture URL</label>
             <input type="text" class="form-control picture-url" />
@@ -24,8 +24,8 @@
             <label class="input-group-text">Kind</label>
             <input type="text" class="form-control product-kind" />
         </div>
-        <button type="button" class="btn btn-outline-dark align-middle add-product" data-category='<?= $category_num ?> '>
-            Save
+        <button type="button" class="btn btn-outline-dark align-middle edit-product-btn">
+            Edit
         </button>
     </div>
 </div>

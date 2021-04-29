@@ -27,3 +27,11 @@ SimpleStore
   .edit-product {
     margin-left: 200px;
   }
+
+  .edit-product-card {
+    position: fixed !important;
+    top: 40px;
+    right: 0;
+    left: 0;
+    padding: 0 10%;
+  }
