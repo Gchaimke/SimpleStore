@@ -1,4 +1,5 @@
 <?php
+define("ROOT",$_SERVER['DOCUMENT_ROOT']."/");
 if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = true;
 } else {
@@ -29,22 +30,22 @@ function logout()
 
 function get_company()
 {
-    return json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/data/company.json'));
+    return json_decode(file_get_contents(ROOT . 'data/company.json'));
 }
 
 function edit_company($data)
 {
-    file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/data/company.json", json_encode((object)$data));
+    file_put_contents(ROOT . "data/company.json", json_encode((object)$data));
 }
 
 function get_categories()
 {
-    return json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/data/categories.json'));
+    return json_decode(file_get_contents(ROOT . 'data/categories.json'));
 }
 
 function get_products($file = 0)
 {
-    return json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/data/$file.json"));
+    return json_decode(file_get_contents(ROOT . "data/$file.json"));
 }
 
 function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = 'kg', $img = '')
@@ -107,19 +108,19 @@ function delete_category($category_index)
 {
     $categories = get_categories();
     unset($categories[$category_index]);
-    unlink($_SERVER['DOCUMENT_ROOT'] . "/data/$category_index.json");
+    unlink(ROOT . "data/$category_index.json");
     save_json($categories, 'categories');
 }
 
 function save_json($array, $file_name = 'test')
 {
-    file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/data/$file_name.json", json_encode(array_values($array)));
+    file_put_contents(ROOT . "data/$file_name.json", json_encode(array_values($array)));
 }
 
 function auto_version($file)
 {
-    if (strpos($file, '/') !== 0 || !file_exists($_SERVER['DOCUMENT_ROOT'] . $file)) return $file;
-    $mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $file);
+    if (strpos($file, '/') !== 0 || !file_exists(ROOT . $file)) return $file;
+    $mtime = filemtime(ROOT . $file);
     return sprintf("%s?v=%d", $file, $mtime);
 }
 
