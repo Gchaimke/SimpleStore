@@ -2,6 +2,10 @@
 SimpleStore
 */
 
+ .login-card {
+     margin: 0 auto;
+ }
+
  .card-image {
      display: block;
      width: 100%;

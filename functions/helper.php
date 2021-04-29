@@ -12,9 +12,12 @@ function redirect($url)
 
 function login($pass)
 {
-    if ($pass == '12345') {
+    $company = get_company();
+    if ($pass == $company->phone."x") {
         $_SESSION["login"] = true;
         redirect('/');
+    }else{
+        redirect('/?login_error');
     }
 }
 

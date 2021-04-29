@@ -92,3 +92,7 @@ $('.edit-category_btn').on('click', function () {
         });
 });
 
+$('#login_btn').on('click', function () {
+    var pass = $('#login-pass').val();
+    window.location.href = '/?login='+pass;
+});
