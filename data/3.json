@@ -1,1 +1,23 @@
-[{"name":"New Product","description":"","price":50,"kind":"kg","img":"https:\/\/cdn.pixabay.com\/photo\/2016\/02\/19\/11\/33\/trees-1209774__340.jpg"}]
+[
+    {
+        "name": "myaso",
+        "description": "good",
+        "price": "65",
+        "kind": "kg",
+        "img": "https://cdn.profile.ru/wp-content/uploads/2019/08/shutterstock_1050939104-782x440.jpg"
+    },
+    {
+        "name": "riba",
+        "description": "good",
+        "price": "40",
+        "kind": "kg",
+        "img": "http://capriceeurope.eu/assets/uploads/2020/04/Pescadoo-e1587726895841.jpg"
+    },
+    {
+        "name": "yaica",
+        "description": "good",
+        "price": "15",
+        "kind": "lot",
+        "img": "https://liter.kz/wp-content/uploads/2020/10/pkyblkr-750x422.jpg"
+    }
+]

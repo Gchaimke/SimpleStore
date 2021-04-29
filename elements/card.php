@@ -2,8 +2,8 @@
     <div class="card-image" style="background-image: url('<?= $product->img ?>');"></div>
     <div class="card-body">
         <?php if ($logedin) {
-            echo "<i class='far fa-trash-alt delete-product' data-category='$category_num' data-product=' $product_num '></i>";
-            echo "<i class='far fa-edit edit-product' data-category='$category_num' data-product=' $product_num '></i>";
+            echo "<i class='far fa-trash-alt delete-product' data-category='$category_num ' data-product='$product_num '></i>";
+            echo "<i class='far fa-edit edit-product' data-category='$category_num ' data-product='$product_num '></i>";
         }
         ?>
         <h5 class="card-title"><?= $product->name ?></h5>
