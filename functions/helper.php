@@ -16,7 +16,7 @@ function login($pass)
     if ($pass == $company->pass) {
         $_SESSION["login"] = true;
         redirect('/');
-    }else{
+    } else {
         redirect('/?login_error');
     }
 }
@@ -30,6 +30,11 @@ function logout()
 function get_company()
 {
     return json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/data/company.json'));
+}
+
+function edit_company($data)
+{
+    file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/data/company.json", json_encode((object)$data));
 }
 
 function get_categories()

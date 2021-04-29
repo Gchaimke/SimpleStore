@@ -94,5 +94,22 @@ $('.edit-category_btn').on('click', function () {
 
 $('#login_btn').on('click', function () {
     var pass = $('#login-pass').val();
-    window.location.href = '/?login='+pass;
+    window.location.href = '/?login=' + pass;
+});
+
+$('#edit_company_toggle').on('click', function () {
+    $('#edit_company').toggle();
+});
+
+$('#edit_company').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'post',
+        url: 'post.php',
+        data: $('#edit_company').serialize(),
+        success: function (res) {
+            alert(res);
+            location.reload();
+        }
+    });
 });

@@ -39,3 +39,10 @@ if (isset($_POST['delete_category'])) {
     delete_category(clean($_POST['category']));
     exit;
 }
+
+if (isset($_POST['edit_company'])) {
+    unset($_POST['edit_company']);
+    edit_company($_POST);
+    echo 'Saved';
+    exit;
+}
