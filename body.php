@@ -1,5 +1,10 @@
 <div class="container mt-5">
     <?php
+    if (isset($_SESSION['login']) && $_SESSION['login']) {
+        $logedin = true;
+    } else {
+        $logedin = false;
+    }
     $categories = get_categories();
     $count = 0;
     foreach ($categories as $category) {
@@ -19,7 +24,7 @@
             include('elements/card.php');
             echo '</div>';
         }
-        if ($_SESSION['login']) {
+        if ($logedin) {
             echo '<div class="col-sm">';
             include('elements/new_card.php');
             echo '</div>';
@@ -29,7 +34,7 @@
     }
 
     if (isset($_GET['add_product']) && $_GET['add_product'] != '' && isset($_GET['category']) && $_GET['category'] != '') {
-        if ($_SESSION['login']) {
+        if ($logedin) {
             $new = add_product($products, $product, '');
             save_json($new, 'categories');
         } else {
@@ -38,7 +43,7 @@
     }
 
     if (isset($_GET['add_category']) && $_GET['add_category'] != '') {
-        if ($_SESSION['login']) {
+        if ($logedin) {
             $new = add_category($categories, $_GET['add_category']);
             save_json($new, 'categories');
             echo 'save_category ok';
@@ -48,7 +53,7 @@
     }
 
     if (isset($_GET['remove_category']) && $_GET['remove_category'] != '') {
-        if ($_SESSION['login']) {
+        if ($logedin) {
             $new = add_category($categories, $_GET['remove_category'], '1');
             save_json($new, 'categories');
             echo 'save_category ok';
