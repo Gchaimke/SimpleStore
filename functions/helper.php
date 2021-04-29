@@ -50,7 +50,10 @@ function get_products($file = 0)
 function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = 'kg', $img = '')
 {
     if ($img == "") {
-        $img = 'https://cdn.pixabay.com/photo/2016/02/19/11/33/trees-1209774__340.jpg';
+        $img = 'https://cdn.profile.ru/wp-content/uploads/2019/08/shutterstock_1050939104-782x440.jpg';
+    }
+    if ($kind == "") {
+        $kind = 'кг';
     }
     $product = new stdClass();
     $product->name = $name;

@@ -5,6 +5,7 @@
     }
     $categories = get_categories();
     $category_num = 0;
+    echo "<div>$company->header</div>";
     foreach ($categories as $category) {
         $products = get_products($category_num);
         echo '<div class="accordion accordion-flush" id="accordionFlushExample">
@@ -18,8 +19,11 @@
                 </button>
             </h2>
             <div id="flush-collapse' . $category_num . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $category_num . '" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-            <div class="row">';
+            ';
+        if ($logedin) {
+            include('elements/new_card.php');
+        }
+        echo '<div class="accordion-body"><div class="row">';
         $product_num = 0;
         foreach ($products as $product) {
             echo '<div class="col-sm" >';
@@ -28,12 +32,7 @@
             $product_num++;
         }
 
-        echo '</div>';
-        if ($logedin) {
-            include('elements/new_card.php');
-        }
-        echo '</div></div>';
-        echo '</div>';
+        echo '</div></div></div></div>';
         if ($logedin) {
             echo "<i class='far fa-trash-alt delete-category' data-category='$category_num '></i>";
         }

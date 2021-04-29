@@ -16,6 +16,10 @@
         <input type="text" class="form-control" name="logo" value="<?= $company->logo ?>" />
     </div>
     <div class="input-group mb-3">
+        <label class="input-group-text">Header</label>
+        <textarea type="password" class="form-control" name="header"><?= $company->header ?></textarea>
+    </div>
+    <div class="input-group mb-3">
         <label class="input-group-text">Password</label>
         <input type="password" class="form-control" name="pass" value="<?= $company->pass ?>" />
     </div>
