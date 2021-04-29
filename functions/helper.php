@@ -13,7 +13,7 @@ function redirect($url)
 function login($pass)
 {
     $company = get_company();
-    if ($pass == $company->phone."x") {
+    if ($pass == $company->pass) {
         $_SESSION["login"] = true;
         redirect('/');
     }else{
