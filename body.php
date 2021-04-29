@@ -42,7 +42,11 @@
         if ($logedin) {
             include('elements/new_card.php');
         }
-        echo '</div></div></div>';
+        echo '</div></div>';
+        echo '</div>';
+        if ($logedin) {
+            echo "<i class='far fa-trash-alt delete-category' data-category='$category_num '></i>";
+        }
         $category_num++;
     }
     if ($logedin) {
