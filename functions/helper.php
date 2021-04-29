@@ -74,12 +74,14 @@ function delete_product($category_index, $product_index)
     save_json($products, $category_index);
 }
 
-function add_category($categories, $name = 'New Category')
+function add_category($name = 'New Category')
 {
+    $categories = get_categories();
     $object = new stdClass();
     $object->name = $name;
     $categories[] = $object;
     $products[] = new_product();
+    save_json($categories, 'categories');
     save_json($products, count($categories) - 1);
     return $categories;
 }

@@ -24,3 +24,8 @@ if (isset($_POST['add_product'])) {
     }
     exit;
 }
+
+if (isset($_POST['add_category'])) {
+    add_category($_POST['category_name']);
+    exit;
+}

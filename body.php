@@ -1,4 +1,19 @@
 <div class="container mt-5">
+    <?php if ($logedin) { ?>
+        <button type="button" class="btn btn-outline-dark align-middle new-category_toggle mb-3">
+            New Category
+        </button>
+        <div class="new-category" style="display: none;">
+            <div class="input-group mb-3">
+                <label class="input-group-text">Category Name</label>
+                <input type="text" class="form-control new-category-name" />
+            </div>
+            <button type="button" class="btn btn-outline-dark align-middle add-category mb-3 float-end">
+                Add
+            </button>
+        </div>
+
+    <?php } ?>
     <?php
 
     $categories = get_categories();

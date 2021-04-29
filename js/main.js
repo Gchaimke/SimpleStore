@@ -37,6 +37,15 @@ $('.delete-product').on('click', function () {
         });
 });
 
+$('.add-category').on('click', function () {
+    var category_name = $(this).parent('.new-category').find('.new-category-name').val();
+    $.post("post.php", { add_category: true, category_name: category_name })
+        .done(function () {
+            location.reload();
+        });
+});
+
+
 $('.add-product').on('click', function () {
     var category = $(this).data("category");
     var picture = $(this).parent('.card-body').find('.picture-url').val();
@@ -53,7 +62,10 @@ $('.add-product').on('click', function () {
 
 $('.add-product_toggle').on('click', function () {
     $('.new-product').toggle();
-})
+});
+$('.new-category_toggle').on('click', function () {
+    $('.new-category').toggle();
+});
 
 
 
