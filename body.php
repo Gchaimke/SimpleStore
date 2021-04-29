@@ -6,23 +6,28 @@
         $logedin = false;
     }
     $categories = get_categories();
-    $count = 0;
+    $category_num = 0;
     foreach ($categories as $category) {
-        $products = get_products($count);
+        $products = get_products($category_num);
         echo '<div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
-            <h2 class="accordion-header border-bottom" id="flush-heading' . $count . '">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse' . $count . '" aria-expanded="false" aria-controls="flush-collapse' . $count . '">
+            <h2 class="accordion-header border-bottom" id="flush-heading' . $category_num . '">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse' . $category_num . '" aria-expanded="false" aria-controls="flush-collapse' . $category_num . '">
                 ' . $category->name . '
                 </button>
             </h2>
-            <div id="flush-collapse' . $count . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $count . '" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapse' . $category_num . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $category_num . '" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
             <div class="row">';
+        $product_num = 0;
         foreach ($products as $product) {
-            echo '<div class="col-sm">';
+            echo '<div class="col-sm" >';
+            if ($logedin) {
+                echo "<i class='far fa-trash-alt delete-product' data-category='$category_num' data-product=' $product_num '></i>";
+            }
             include('elements/card.php');
             echo '</div>';
+            $product_num++;
         }
         if ($logedin) {
             echo '<div class="col-sm">';
@@ -30,7 +35,7 @@
             echo '</div>';
         }
         echo '</div></div></div></div>';
-        $count++;
+        $category_num++;
     }
 
     if (isset($_GET['add_product']) && $_GET['add_product'] != '' && isset($_GET['category']) && $_GET['category'] != '') {
