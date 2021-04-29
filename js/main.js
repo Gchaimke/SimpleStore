@@ -71,9 +71,6 @@ $('.delete-category').on('click', function () {
         });
 });
 
-
-
-
 $('.new-category_toggle').on('click', function () {
     $('.new-category').toggle();
 });

@@ -85,6 +85,13 @@ function add_category($name = 'New Category')
     save_json($products, count($categories) - 1);
 }
 
+function edit_category($category_index, $name)
+{
+    $categories = get_categories();
+    $categories[$category_index]->name = $name;
+    save_json($categories, 'categories');
+}
+
 function delete_category($category_index)
 {
     $categories = get_categories();

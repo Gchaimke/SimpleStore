@@ -21,8 +21,11 @@
     foreach ($categories as $category) {
         $products = get_products($category_num);
         echo '<div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-            <h2 class="accordion-header border-bottom" id="flush-heading' . $category_num . '">
+            <div class="accordion-item">';
+        if ($logedin) {
+            echo '<i class="far fa-edit edit-category" data-category="' . $category_num . '"></i>';
+        }
+        echo   '<h2 class="accordion-header border-bottom" id="flush-heading' . $category_num . '">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse' . $category_num . '" aria-expanded="false" aria-controls="flush-collapse' . $category_num . '">
                 ' . $category->name . '
                 </button>

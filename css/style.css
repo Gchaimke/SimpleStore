@@ -45,3 +45,13 @@ SimpleStore
      font-size: 20px;
      color: red;
  }
+
+ .edit-category {
+     position: relative;
+     top: 40px;
+     z-index: 4;
+     color: #1984fe;
+     left: 84px;
+     padding: 5px;
+     cursor: pointer;
+ }
