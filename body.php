@@ -1,10 +1,6 @@
 <div class="container mt-5">
     <?php
-    if (isset($_SESSION['login']) && $_SESSION['login']) {
-        $logedin = true;
-    } else {
-        $logedin = false;
-    }
+
     $categories = get_categories();
     $category_num = 0;
     foreach ($categories as $category) {

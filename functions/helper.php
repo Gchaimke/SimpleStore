@@ -1,4 +1,10 @@
 <?php
+if (isset($_SESSION['login']) && $_SESSION['login']) {
+    $logedin = true;
+} else {
+    $logedin = false;
+}
+
 function login($pass)
 {
     if ($pass == '12345') {

@@ -1,6 +1,6 @@
 <?php
 require_once('functions/helper.php');
-if (isset($_POST['edit_product'])) {
+if (isset($_POST['edit_product']) && $logedin) {
     if (!empty($_POST['category'])) {
         echo "edit from category:" . $_POST['category'] . " product:" . $_POST['product'];
     }
