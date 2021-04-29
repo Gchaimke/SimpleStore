@@ -5,18 +5,23 @@ if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = false;
 }
 
+function redirect($url)
+{
+    echo "<script>window.location.href = '$url';</script>";
+}
+
 function login($pass)
 {
     if ($pass == '12345') {
         $_SESSION["login"] = true;
-        echo "<script>window.location.href = '/';</script>";
+        redirect('/');
     }
 }
 
 function logout()
 {
     $_SESSION["login"] = '';
-    echo "<script>window.location.href = '/';</script>";
+    redirect('/');
 }
 
 function get_company()
