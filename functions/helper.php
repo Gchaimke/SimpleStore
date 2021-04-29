@@ -83,7 +83,14 @@ function add_category($name = 'New Category')
     $products[] = new_product();
     save_json($categories, 'categories');
     save_json($products, count($categories) - 1);
-    return $categories;
+}
+
+function delete_category($category_index)
+{
+    $categories = get_categories();
+    unset($categories[$category_index]);
+    unlink($_SERVER['DOCUMENT_ROOT'] . "/data/$category_index.json");
+    save_json($categories, 'categories');
 }
 
 function save_json($array, $file_name = 'test')

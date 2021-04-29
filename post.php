@@ -29,3 +29,8 @@ if (isset($_POST['add_category'])) {
     add_category($_POST['category_name']);
     exit;
 }
+
+if (isset($_POST['delete_category'])) {
+    delete_category(clean($_POST['category']));
+    exit;
+}

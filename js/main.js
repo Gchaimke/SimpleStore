@@ -1,4 +1,22 @@
 
+$('.add-product').on('click', function () {
+    var category = $(this).data("category");
+    var picture = $(this).parent('.card-body').find('.picture-url').val();
+    var name = $(this).parent('.card-body').find('.product-name').val();
+    var description = $(this).parent('.card-body').find('.product-description').val();
+    var price = $(this).parent('.card-body').find('.product-price').val();
+    var kind = $(this).parent('.card-body').find('.product-kind').val();
+    $.post("post.php", { add_product: true, category: category, picture: picture, name: name, description: description, price: price, kind: kind })
+        .done(function () {
+            location.reload();
+        });
+
+});
+
+$('.add-product_toggle').on('click', function () {
+    $('.new-product').toggle();
+});
+
 $('.edit-product').on('click', function () {
     $('.edit-product-card').find('#edit-product-id').val($(this).data("product"));
     $('.edit-product-card').find('#edit-category-id').val($(this).data("category"));
@@ -45,24 +63,17 @@ $('.add-category').on('click', function () {
         });
 });
 
-
-$('.add-product').on('click', function () {
+$('.delete-category').on('click', function () {
     var category = $(this).data("category");
-    var picture = $(this).parent('.card-body').find('.picture-url').val();
-    var name = $(this).parent('.card-body').find('.product-name').val();
-    var description = $(this).parent('.card-body').find('.product-description').val();
-    var price = $(this).parent('.card-body').find('.product-price').val();
-    var kind = $(this).parent('.card-body').find('.product-kind').val();
-    $.post("post.php", { add_product: true, category: category, picture: picture, name: name, description: description, price: price, kind: kind })
+    $.post("post.php", { delete_category: true, category: category })
         .done(function () {
             location.reload();
         });
-
 });
 
-$('.add-product_toggle').on('click', function () {
-    $('.new-product').toggle();
-});
+
+
+
 $('.new-category_toggle').on('click', function () {
     $('.new-category').toggle();
 });
