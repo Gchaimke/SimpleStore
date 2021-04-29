@@ -22,9 +22,6 @@
         $product_num = 0;
         foreach ($products as $product) {
             echo '<div class="col-sm" >';
-            if ($logedin) {
-                echo "<i class='far fa-trash-alt delete-product' data-category='$category_num' data-product=' $product_num '></i>";
-            }
             include('elements/card.php');
             echo '</div>';
             $product_num++;
