@@ -1,9 +1,10 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/functions/helper.php');
-if (isset($_POST['edit_product']) && $logedin) {
-    echo 'test';
+
+if (isset($_POST['edit_product'])) {
     if (!empty($_POST['category'])) {
-        echo "edit from category:" . $_POST['category'] . " product:" . $_POST['product'];
+        $product = new_product($_POST['name'], $_POST['description'], $_POST['price'], $_POST['kind'], $_POST['picture']);
+        edit_product(clean($_POST['category']),  clean($_POST['product']), $product);
     }
     exit;
 }

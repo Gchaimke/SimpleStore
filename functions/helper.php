@@ -39,7 +39,7 @@ function get_products($file = 0)
     return json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/data/$file.json"));
 }
 
-function new_product($name = 'New Product', $description = '', $price = 50, $kind = 'kg', $img = '')
+function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = 'kg', $img = '')
 {
     if ($img == "") {
         $img = 'https://cdn.pixabay.com/photo/2016/02/19/11/33/trees-1209774__340.jpg';

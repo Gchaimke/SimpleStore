@@ -11,11 +11,21 @@ $('.edit-product').on('click', function () {
 });
 
 $('.edit-product-btn').on('click', function () {
-    $('.edit-product-card').toggle();
-    $.post("post.php", { edit_product: true, category: category, product: product })
+    var product = $(this).parent('.card-body').find('#edit-product-id').val();
+    var category = $(this).parent('.card-body').find('#edit-category-id').val();
+    var picture = $(this).parent('.card-body').find('.picture-url').val();
+    var name = $(this).parent('.card-body').find('.product-name').val();
+    var description = $(this).parent('.card-body').find('.product-description').val();
+    var price = $(this).parent('.card-body').find('.product-price').val();
+    var kind = $(this).parent('.card-body').find('.product-kind').val();
+    $.post("post.php", { edit_product: true, category: category, product: product, picture: picture, name: name, description: description, price: price, kind: kind })
         .done(function () {
             location.reload();
         });
+});
+
+$('.close-edit-product').on('click', function () {
+    $('.edit-product-card').toggle();
 });
 
 $('.delete-product').on('click', function () {

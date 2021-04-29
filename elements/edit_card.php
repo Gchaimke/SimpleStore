@@ -25,7 +25,10 @@
             <input type="text" class="form-control product-kind" />
         </div>
         <button type="button" class="btn btn-outline-dark align-middle edit-product-btn">
-            Edit
+            Save
+        </button>
+        <button type="button" class="btn btn-outline-dark align-middle close-edit-product">
+            Close
         </button>
     </div>
 </div>

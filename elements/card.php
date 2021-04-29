@@ -16,7 +16,8 @@
         <h5 class="card-title"><?= $product->name ?></h5>
         <p class="card-text"><?= $product->description ?></p>
         <div class="d-flex justify-content-center">
-            <h5 class="card-text me-3"><?= $product->price ?></span> ש"ח / <?= $product->kind ?></h5>
+            <h5 class="card-text me-3"><?= $product->price ?> ש"ח</h5>
+            <div> <?= $product->kind ?></div>
         </div>
     </div>
 </div>
