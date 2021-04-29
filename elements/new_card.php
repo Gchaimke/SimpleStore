@@ -24,8 +24,6 @@
             <label class="input-group-text">Kind</label>
             <input type="text" class="form-control product-kind" />
         </div>
-        <button type="button" class="btn btn-outline-dark align-middle add-product" data-category='<?= $category_num ?> '>
-            Save
-        </button>
+        <input type="button" class="btn btn-outline-dark align-middle add-product" data-category='<?= $category_num ?> ' value="Save"/>
     </div>
 </div>

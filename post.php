@@ -30,6 +30,11 @@ if (isset($_POST['add_category'])) {
     exit;
 }
 
+if (isset($_POST['edit_category'])) {
+    edit_category($_POST['category_index'],$_POST['category_name']);
+    exit;
+}
+
 if (isset($_POST['delete_category'])) {
     delete_category(clean($_POST['category']));
     exit;

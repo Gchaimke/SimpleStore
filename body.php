@@ -7,10 +7,10 @@
             <div class="input-group mb-3">
                 <label class="input-group-text">Category Name</label>
                 <input type="text" class="form-control new-category-name" />
+                <input type="hidden" class="new-category-id" />
             </div>
-            <button type="button" class="btn btn-outline-dark align-middle add-category mb-3 float-end">
-                Add
-            </button>
+            <input type="button" class="btn btn-outline-dark align-middle add-category mb-3 float-end" value="Add"/>
+            <input type="button" class="btn btn-outline-dark align-middle edit-category_btn mb-3 float-end" value="Update" style="display: none;"/>
         </div>
 
     <?php } ?>
@@ -23,10 +23,10 @@
         echo '<div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">';
         if ($logedin) {
-            echo '<i class="far fa-edit edit-category" data-category="' . $category_num . '"></i>';
+            echo '<i class="far fa-edit edit-category" data-category="' . $category_num . '" data-name="' . $category->name . '"></i>';
         }
         echo   '<h2 class="accordion-header border-bottom" id="flush-heading' . $category_num . '">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse' . $category_num . '" aria-expanded="false" aria-controls="flush-collapse' . $category_num . '">
+                <button class="accordion-button collapsed" type="button" id="btn_' . $category_num . '" data-bs-toggle="collapse" data-bs-target="#flush-collapse' . $category_num . '" aria-expanded="false" aria-controls="flush-collapse' . $category_num . '">
                 ' . $category->name . '
                 </button>
             </h2>
