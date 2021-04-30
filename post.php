@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/functions/helper.php');
+require_once('functions/helper.php');
 
 if (isset($_POST['edit_product'])) {
     if (!empty($_POST['category'])) {
@@ -31,7 +31,7 @@ if (isset($_POST['add_category'])) {
 }
 
 if (isset($_POST['edit_category'])) {
-    edit_category($_POST['category_index'],$_POST['category_name']);
+    edit_category($_POST['category_index'], $_POST['category_name']);
     exit;
 }
 

@@ -1,5 +1,7 @@
 <?php
-define("ROOT",$_SERVER['DOCUMENT_ROOT']."/");
+define("SITE_ROOT","/");
+define("DOC_ROOT",$_SERVER['DOCUMENT_ROOT'].SITE_ROOT);
+
 if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = true;
 } else {
@@ -16,36 +18,36 @@ function login($pass)
     $company = get_company();
     if ($pass == $company->pass) {
         $_SESSION["login"] = true;
-        redirect('/');
+        redirect(SITE_ROOT);
     } else {
-        redirect('/?login_error');
+        redirect(SITE_ROOT.'?login_error');
     }
 }
 
 function logout()
 {
     $_SESSION["login"] = '';
-    redirect('/');
+    redirect(SITE_ROOT);
 }
 
 function get_company()
 {
-    return json_decode(file_get_contents(ROOT . 'data/company.json'));
+    return json_decode(file_get_contents(DOC_ROOT . 'data/company.json'));
 }
 
 function edit_company($data)
 {
-    file_put_contents(ROOT . "data/company.json", json_encode((object)$data));
+    file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data));
 }
 
 function get_categories()
 {
-    return json_decode(file_get_contents(ROOT . 'data/categories.json'));
+    return json_decode(file_get_contents(DOC_ROOT . 'data/categories.json'));
 }
 
 function get_products($file = 0)
 {
-    return json_decode(file_get_contents(ROOT . "data/$file.json"));
+    return json_decode(file_get_contents(DOC_ROOT . "data/$file.json"));
 }
 
 function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = 'kg', $img = '')
@@ -108,19 +110,19 @@ function delete_category($category_index)
 {
     $categories = get_categories();
     unset($categories[$category_index]);
-    unlink(ROOT . "data/$category_index.json");
+    unlink(DOC_ROOT . "data/$category_index.json");
     save_json($categories, 'categories');
 }
 
 function save_json($array, $file_name = 'test')
 {
-    file_put_contents(ROOT . "data/$file_name.json", json_encode(array_values($array)));
+    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array)));
 }
 
 function auto_version($file)
 {
-    if (strpos($file, '/') !== 0 || !file_exists(ROOT . $file)) return $file;
-    $mtime = filemtime(ROOT . $file);
+    if (strpos($file, '/') !== 0 || !file_exists(DOC_ROOT . $file)) return $file;
+    $mtime = filemtime(DOC_ROOT . $file);
     return sprintf("%s?v=%d", $file, $mtime);
 }
 
