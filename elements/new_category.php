@@ -8,5 +8,6 @@
         </div>
         <input type="button" class="btn btn-outline-dark align-middle add-category mb-3 float-end" value="Add" />
         <input type="button" class="btn btn-outline-dark align-middle edit-category_btn mb-3 float-end" value="Update" style="display: none;" />
+        <input type="button" class="btn btn-outline-dark align-middle add-category-close mb-3" value="Close" />
     </div>
 </div>

@@ -96,6 +96,10 @@ $('#edit_company_toggle').on('click', function () {
     $('#edit_company').toggle();
 });
 
+$('.add-category-close').on('click', function () {
+    $('.new-category').toggle();
+});
+
 $('#edit_company').on('submit', function (e) {
     e.preventDefault();
     $.ajax({

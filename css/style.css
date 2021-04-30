@@ -61,3 +61,33 @@ SimpleStore
      padding: 5px;
      cursor: pointer;
  }
+
+ .add-product_toggle {
+     z-index: 1;
+     position: relative;
+ }
+
+ @media only screen and (max-width: 690px) {
+     .navbar-brand {
+         font-size: 0.9rem !important;
+     }
+     .delete-category {
+         top: -36px;
+         right: 0;
+         z-index: 5;
+     }
+     .new-category {
+         position: fixed;
+         top: 0;
+         padding-top: 130px;
+         left: 10px;
+         background: white;
+         z-index: 6;
+     }
+     .row {
+         margin-top: 40px !important;
+     }
+     .edit-category {
+         left: 100px;
+     }
+ }
