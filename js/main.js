@@ -83,7 +83,7 @@ $('.duplicate-product').on('click', function () {
 $('.product-to-cart').on('click', function () {
     var product = $(this).data("product");
     var price = parseInt($(this).data("price"));
-    $('.cart_items').append("<li>" + product + "</li>");
+    $('.cart_items').append("<li>" + product + " \n</li>");
     var total = parseInt($('.cart-total').text());
     $('.cart-total').text(total + price);
 });
@@ -91,12 +91,8 @@ $('.product-to-cart').on('click', function () {
 $('.cart-send').on('click', function (e) {
     e.preventDefault();
     var url = $(this).attr("href");
-    var text = $('.cart_items').text()+"%0A"+$('.cart-total').text();
-    text = text.replace(" ","%20").replace(/[!'()]/g, escape).replace(/\*/g, "%2A");
-    text = text.replace("\n","%0A");
-
-    alert(url + text);
-    var win = window.open(url + encodeURIComponent("привет"), '_blank');
+    var text = $('.cart_items').text() + "\n TOTAL:" + $('.cart-total').text()+"\n";
+    var win = window.open(url + encodeURIComponent(text), '_blank');
     if (win) {
         //Browser has allowed it to be opened
         win.focus();
