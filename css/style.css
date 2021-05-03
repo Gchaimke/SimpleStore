@@ -4,6 +4,7 @@ SimpleStore
 
  .login-card {
      margin: 0 auto;
+     max-width: max-content !important;
  }
 
  .cart {
@@ -86,6 +87,7 @@ SimpleStore
      left: 0;
      padding: 0 10%;
      z-index: 5;
+     max-width: 100% !important;
  }
 
  #edit_company, .new-category {
@@ -157,7 +159,7 @@ SimpleStore
      .card-body {
          padding: 5px 1rem !important;
      }
-     .cart-total-wraper{
+     .cart-total-wraper {
          display: none;
      }
      .hide_not_mobile {
