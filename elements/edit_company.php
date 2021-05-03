@@ -23,5 +23,6 @@
         <label class="input-group-text">Password</label>
         <input type="password" class="form-control" name="pass" value="<?= $company->pass ?>" />
     </div>
-    <input name="submit" type="submit" class="btn btn-outline-dark align-middle mb-3" value="Update" />
+    <input name="submit" type="submit" class="btn btn-outline-dark align-middle mb-3 float-end" value="Update" />
+    <input name="close" type="button" class="btn btn-outline-dark align-middle mb-3 edit-company-close" value="Close" />
 </form>

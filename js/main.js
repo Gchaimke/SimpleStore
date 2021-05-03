@@ -13,10 +13,6 @@ $('.add-product').on('click', function () {
 
 });
 
-$('.add-product_toggle').on('click', function () {
-    $('.new-product').toggle();
-});
-
 $('.edit-product').on('click', function () {
     $('.edit-product-card').find('#edit-product-id').val($(this).data("product"));
     $('.edit-product-card').find('#edit-category-id').val($(this).data("category"));
@@ -42,9 +38,7 @@ $('.edit-product-btn').on('click', function () {
         });
 });
 
-$('.close-edit-product').on('click', function () {
-    $('.edit-product-card').toggle();
-});
+
 
 $('.delete-product').on('click', function () {
     var category = $(this).data("category");
@@ -71,10 +65,6 @@ $('.delete-category').on('click', function () {
         });
 });
 
-$('.new-category_toggle').on('click', function () {
-    $('.new-category').toggle();
-});
-
 $('.edit-category').on('click', function () {
     $('.new-category').find('.new-category-name').val($(this).data("name"));
     $('.new-category').find('.new-category-id').val($(this).data("category"));
@@ -92,11 +82,21 @@ $('.edit-category_btn').on('click', function () {
         });
 });
 
-$('#edit_company_toggle').on('click', function () {
+
+$('.add-product_toggle').on('click', function () {
+    $('.new-product').toggle();
+});
+
+$('.close-edit-product').on('click', function () {
+    $('.edit-product-card').toggle();
+});
+
+$('#edit_company_toggle, .edit-company-close').on('click', function () {
     $('#edit_company').toggle();
 });
 
-$('.add-category-close').on('click', function () {
+$('.add-category-close, .new-category_toggle').on('click', function () {
+    $(this).parent('.new-category').find('.new-category-name').val("");
     $('.new-category').toggle();
 });
 
