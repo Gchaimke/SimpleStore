@@ -86,7 +86,7 @@ $('.duplicate-product').on('click', function () {
 
 $('.product-to-cart').on('click', function () {
     var numItems = $('.cart-product').length
-    if (numItems < 13) {
+    if (numItems < 10) {
         var product = $(this).data("product");
         var price = parseInt($(this).data("price"));
         $('.cart_items').append("<li><span data-price='" + price + "' class='bg-danger remove-from-cart'>X</span><span class='cart-product'>" + product + "</span> " + price + " ש\"ח</li>");
@@ -94,7 +94,7 @@ $('.product-to-cart').on('click', function () {
         $('.cart-total').text(total + price);
         $('.mobile-cart-total').text(total + price);
     }else{
-        alert ("Max cart items is 13!");
+        alert ("Max cart items is 10!");
     }
 });
 
