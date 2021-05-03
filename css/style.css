@@ -6,14 +6,21 @@ SimpleStore
      margin: 0 auto;
  }
 
- .cart{
-    position: fixed !important;
-    right: 5px;
-    top: 60px;
-    z-index: 6;
-    max-width: 12rem;
-  }
+ .cart {
+     position: fixed !important;
+     right: 5px;
+     top: 60px;
+     z-index: 6;
+     max-width: 12rem;
+ }
 
+ .remove-from-cart {
+    padding: 0 5px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-right: 5px;
+}
  .card-image {
      display: block;
      width: 100%;
@@ -28,7 +35,7 @@ SimpleStore
      text-transform: capitalize;
  }
 
- .delete-product, .edit-product, .duplicate-product, .product-to-cart{
+ .delete-product, .edit-product, .duplicate-product {
      position: absolute;
      margin-top: -132px;
      background: #fffffff2;
@@ -42,16 +49,19 @@ SimpleStore
      margin-left: 200px;
  }
 
- .duplicate-product{
-    margin-left: 100px;
+ .duplicate-product {
+     margin-left: 100px;
  }
 
  .product-to-cart {
-    margin-left: 200px;
-    margin-top: 60px;
+    font-size: 1em;
+    margin-left: 10px;
+    cursor: pointer;
     border: 1px solid;
     color: #1aa778;
-  }
+    padding: 5px 15px;
+    border-radius: 5px;
+}
 
  .edit-product-card {
      position: fixed !important;
@@ -63,16 +73,16 @@ SimpleStore
  }
 
  #edit_company, .new-category {
-    position: fixed !important;
-    right: 0;
-    top: 40px;
-    left: 0;
-    padding: 0 10%;
-    z-index: 5;
-    background: white;
-    padding-top: 50px;
-    border-bottom: black 1px solid;
-  }
+     position: fixed !important;
+     right: 0;
+     top: 40px;
+     left: 0;
+     padding: 0 10%;
+     z-index: 5;
+     background: white;
+     padding-top: 50px;
+     border-bottom: black 1px solid;
+ }
 
  .delete-category {
      cursor: pointer;
