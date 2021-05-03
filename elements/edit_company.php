@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-dark align-middle mb-3" id="edit_company_toggle">
+<button type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" id="edit_company_toggle">
     Edit Company
 </button>
 <form id="edit_company" style="display: none;">
