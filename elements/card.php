@@ -11,6 +11,7 @@
             data-price='$product->price'
             data-kind='$product->kind'
             ></i>";
+            echo "<i class='far fa-clone duplicate-product' data-category='$category_num ' data-product='$product_num '></i>";
         }
         ?>
         <center>

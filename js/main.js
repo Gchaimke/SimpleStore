@@ -1,3 +1,51 @@
+$('#edit_company').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'post',
+        url: 'post.php',
+        data: $('#edit_company').serialize(),
+        success: function (res) {
+            alert(res);
+            location.reload();
+        }
+    });
+});
+
+$('.add-category').on('click', function () {
+    var category_name = $(this).parent('.new-category').find('.new-category-name').val();
+    $.post("post.php", { add_category: true, category_name: category_name })
+        .done(function () {
+            location.reload();
+        });
+});
+
+$('.delete-category').on('click', function () {
+    var confim = confirm('Delete this category?');
+    if (confim) {
+        var category = $(this).data("category");
+        $.post("post.php", { delete_category: true, category: category })
+            .done(function () {
+                location.reload();
+            });
+    }
+});
+
+$('.edit-category').on('click', function () {
+    $('.new-category').find('.new-category-name').val($(this).data("name"));
+    $('.new-category').find('.new-category-id').val($(this).data("category"));
+    $('.new-category').find('.add-category').hide();
+    $('.edit-category_btn').show();
+    $('.new-category').show();
+});
+
+$('.edit-category_btn').on('click', function () {
+    var category_name = $(this).parent('.new-category').find('.new-category-name').val();
+    var category_index = $(this).parent('.new-category').find('.new-category-id').val();
+    $.post("post.php", { edit_category: true, category_name: category_name, category_index: category_index })
+        .done(function () {
+            location.reload();
+        });
+});
 
 $('.add-product').on('click', function () {
     var category = $(this).data("category");
@@ -38,48 +86,16 @@ $('.edit-product-btn').on('click', function () {
         });
 });
 
-
-
 $('.delete-product').on('click', function () {
-    var category = $(this).data("category");
-    var product = $(this).data("product");
-    $.post("post.php", { delete_product: true, category: category, product: product })
-        .done(function () {
-            location.reload();
-        });
-});
-
-$('.add-category').on('click', function () {
-    var category_name = $(this).parent('.new-category').find('.new-category-name').val();
-    $.post("post.php", { add_category: true, category_name: category_name })
-        .done(function () {
-            location.reload();
-        });
-});
-
-$('.delete-category').on('click', function () {
-    var category = $(this).data("category");
-    $.post("post.php", { delete_category: true, category: category })
-        .done(function () {
-            location.reload();
-        });
-});
-
-$('.edit-category').on('click', function () {
-    $('.new-category').find('.new-category-name').val($(this).data("name"));
-    $('.new-category').find('.new-category-id').val($(this).data("category"));
-    $('.new-category').find('.add-category').hide();
-    $('.edit-category_btn').show();
-    $('.new-category').show();
-});
-
-$('.edit-category_btn').on('click', function () {
-    var category_name = $(this).parent('.new-category').find('.new-category-name').val();
-    var category_index = $(this).parent('.new-category').find('.new-category-id').val();
-    $.post("post.php", { edit_category: true, category_name: category_name, category_index: category_index })
-        .done(function () {
-            location.reload();
-        });
+    var confim = confirm('Delete this product?');
+    if (confim) {
+        var category = $(this).data("category");
+        var product = $(this).data("product");
+        $.post("post.php", { delete_product: true, category: category, product: product })
+            .done(function () {
+                location.reload();
+            });
+    }
 });
 
 
@@ -100,15 +116,3 @@ $('.add-category-close, .new-category_toggle').on('click', function () {
     $('.new-category').toggle();
 });
 
-$('#edit_company').on('submit', function (e) {
-    e.preventDefault();
-    $.ajax({
-        type: 'post',
-        url: 'post.php',
-        data: $('#edit_company').serialize(),
-        success: function (res) {
-            alert(res);
-            location.reload();
-        }
-    });
-});

@@ -20,7 +20,7 @@ SimpleStore
      text-transform: capitalize;
  }
 
- .delete-product, .edit-product{
+ .delete-product, .edit-product, .duplicate-product{
      position: absolute;
      margin-top: -132px;
      background: #fffffff2;
@@ -32,6 +32,10 @@ SimpleStore
 
  .edit-product {
      margin-left: 200px;
+ }
+
+ .duplicate-product{
+    margin-left: 100px;
  }
 
  .edit-product-card {
