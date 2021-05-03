@@ -1,3 +1,7 @@
+var cart_opened = false;
+$(document).ready(function () {
+    $('.cart-send').hide();
+});
 $('#edit_company').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
@@ -83,9 +87,35 @@ $('.duplicate-product').on('click', function () {
 $('.product-to-cart').on('click', function () {
     var product = $(this).data("product");
     var price = parseInt($(this).data("price"));
-    $('.cart_items').append("<li><span data-price='" + price + "' class='bg-danger remove-from-cart'>X</span><span class='cart-product'>" + product + "</span> "+price+" ש\"ח</li>");
+    $('.cart_items').append("<li><span data-price='" + price + "' class='bg-danger remove-from-cart'>X</span><span class='cart-product'>" + product + "</span> " + price + " ש\"ח</li>");
     var total = parseInt($('.cart-total').text());
     $('.cart-total').text(total + price);
+    $('.mobile-cart-total').text(total + price);
+
+});
+
+$('.cart').hover(
+    function () {
+        $('.cart_items').show();
+        $('.cart-send').show();
+    }, function () {
+        if (!cart_opened) {
+            $('.cart_items').hide()
+            $('.cart-send').hide();
+        }
+    }
+);
+
+$('.cart').on('click', function () {
+    if (cart_opened) {
+        cart_opened = false;
+        $('.close-cart').hide();
+        $('.cart-send').hide();
+    } else {
+        cart_opened = true;
+        $('.close-cart').show();
+        $('.cart-send').show();
+    }
 });
 
 $('.cart-send').on('click', function (e) {
@@ -106,10 +136,11 @@ $('.cart-send').on('click', function (e) {
     }
 });
 
-$(document).on('click', '.remove-from-cart', function(){
+$(document).on('click', '.remove-from-cart', function () {
     var price = parseInt($(this).data("price"));
     var total = parseInt($('.cart-total').text());
     $('.cart-total').text(total - price);
+    $('.mobile-cart-total').text(total - price);
     $(this).parent().remove();
 });
 

@@ -5,7 +5,7 @@ $company = get_company();
 
 ?>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js h-100" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -26,12 +26,20 @@ $company = get_company();
     <meta name="theme-color" content="#fafafa">
 </head>
 
-<body>
-
+<body class="d-flex flex-column h-100">
     <?php include_once('navigation.php'); ?>
-    <?php include_once('functions/get.php'); ?>
-    <?php include_once('body.php'); ?>
-    <?php include_once('elements/cart.php'); ?>
+    <main class="flex-shrink-0">
+        <div class="container mt-5 mb-5">
+        <?php include_once('functions/get.php'); ?>
+        <?php include_once('body.php'); ?>
+        <?php include_once('elements/cart.php'); ?>
+    </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">Coded & Designed by <a href="mailto:gchaimke@mail.com">Chaim Gorbov</a></span>
+        </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="<?= auto_version('js/main.js') ?>"></script>
     <script src="js/vendor/modernizr-3.11.2.min.js"></script>
