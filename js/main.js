@@ -1,4 +1,3 @@
-var cart_opened = false;
 $(document).ready(function () {
     $('.cart-send').hide();
 });
@@ -98,28 +97,10 @@ $('.product-to-cart').on('click', function () {
     }
 });
 
-$('.cart').hover(
-    function () {
-        $('.cart_items').show();
-        $('.cart-send').show();
-    }, function () {
-        if (!cart_opened) {
-            $('.cart_items').hide()
-            $('.cart-send').hide();
-        }
-    }
-);
-
-$('.cart').on('click', function () {
-    if (cart_opened) {
-        cart_opened = false;
-        $('.close-cart').hide();
-        $('.cart-send').hide();
-    } else {
-        cart_opened = true;
-        $('.close-cart').show();
-        $('.cart-send').show();
-    }
+$('.cart_header, .close-cart').on('click', function () {
+        $('.cart_items').toggle();
+        $('.close-cart').toggle();
+        $('.cart-send').toggle();   
 });
 
 $('.cart-send').on('click', function (e) {

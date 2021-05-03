@@ -45,6 +45,7 @@ SimpleStore
      text-align: center;
      text-transform: capitalize;
      min-width: 150px;
+     cursor: pointer;
  }
 
  .delete-product, .edit-product, .duplicate-product {
