@@ -81,6 +81,14 @@ function edit_product($category_index, $product_index, $product)
     save_json($products, $category_index);
 }
 
+function duplicate_product($category_index, $product_index)
+{
+    $products = get_products($category_index);
+    $product = $products[$product_index];
+    $products[] = $product;
+    save_json($products, $category_index);
+}
+
 function delete_product($category_index, $product_index)
 {
     $products = get_products($category_index);
