@@ -1,4 +1,4 @@
-<div class="card mt-2">
+<div class="card product-card mt-2">
     <div class="card-image" style="background-image: url('<?= $product->img ?>');"></div>
     <div class="card-body">
         <?php if ($logedin) {

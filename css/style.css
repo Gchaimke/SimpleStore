@@ -28,7 +28,7 @@ SimpleStore
      cursor: pointer;
  }
 
- .card.mt-2 {
+ .product-card {
      max-width: min-content;
  }
 
