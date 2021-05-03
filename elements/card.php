@@ -13,6 +13,7 @@
             ></i>";
             echo "<i class='far fa-clone duplicate-product' data-category='$category_num ' data-product='$product_num '></i>";
         }
+        echo "<i class='fas fa-cart-plus product-to-cart' data-product='$product->name $product->description' data-price='$product->price'></i>";
         ?>
         <center>
             <h5 class="card-title"><?= $product->name ?></h5>

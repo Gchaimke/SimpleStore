@@ -31,7 +31,7 @@ $company = get_company();
     <?php include_once('navigation.php'); ?>
     <?php include_once('functions/get.php'); ?>
     <?php include_once('body.php'); ?>
-
+    <?php include_once('elements/cart.php'); ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="<?= auto_version('js/main.js') ?>"></script>
     <script src="js/vendor/modernizr-3.11.2.min.js"></script>

@@ -6,6 +6,14 @@ SimpleStore
      margin: 0 auto;
  }
 
+ .cart{
+    position: fixed !important;
+    right: 5px;
+    top: 60px;
+    z-index: 6;
+    max-width: 12rem;
+  }
+
  .card-image {
      display: block;
      width: 100%;
@@ -20,7 +28,7 @@ SimpleStore
      text-transform: capitalize;
  }
 
- .delete-product, .edit-product, .duplicate-product{
+ .delete-product, .edit-product, .duplicate-product, .product-to-cart{
      position: absolute;
      margin-top: -132px;
      background: #fffffff2;
@@ -37,6 +45,13 @@ SimpleStore
  .duplicate-product{
     margin-left: 100px;
  }
+
+ .product-to-cart {
+    margin-left: 200px;
+    margin-top: 60px;
+    border: 1px solid;
+    color: #1aa778;
+  }
 
  .edit-product-card {
      position: fixed !important;

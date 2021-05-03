@@ -6,7 +6,6 @@
                 <label class="input-group-text">Password</label>
                 <input type="password" id="login-pass" class="form-control" name="password" />
             </div>
-
         </div>
         <center>
             <input type="button" id="login_btn" class="btn btn-outline-dark" value="Login" />
