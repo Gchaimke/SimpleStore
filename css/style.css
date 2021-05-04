@@ -4,15 +4,33 @@ SimpleStore
 
  .login-card {
      margin: 0 auto;
+     max-width: max-content !important;
  }
 
- .cart{
-    position: fixed !important;
-    right: 5px;
-    top: 60px;
-    z-index: 6;
-    max-width: 12rem;
-  }
+ .cart {
+     position: fixed !important;
+     right: 5px;
+     top: 60px;
+     z-index: 4;
+ }
+
+ .remove-from-cart {
+     padding: 0 5px;
+     border-radius: 10px;
+     color: white;
+     cursor: pointer;
+     margin-right: 5px;
+ }
+
+ .close-cart {
+     padding: 7px 0;
+     text-align: center;
+     cursor: pointer;
+ }
+
+ .product-card {
+     max-width: min-content;
+ }
 
  .card-image {
      display: block;
@@ -26,9 +44,11 @@ SimpleStore
  .card-title {
      text-align: center;
      text-transform: capitalize;
+     min-width: 150px;
+     cursor: pointer;
  }
 
- .delete-product, .edit-product, .duplicate-product, .product-to-cart{
+ .delete-product, .edit-product, .duplicate-product {
      position: absolute;
      margin-top: -132px;
      background: #fffffff2;
@@ -45,22 +65,30 @@ SimpleStore
   
  .gallery_image{
     cursor: pointer;
+}
+
+ .delete-product {
+     left: 5px;
  }
 
  .edit-product {
-     margin-left: 200px;
+     right: 0;
  }
 
- .duplicate-product{
-    margin-left: 100px;
+ .duplicate-product {
+     right: 0;
+     margin-top: -70px;
  }
 
  .product-to-cart {
-    margin-left: 200px;
-    margin-top: 60px;
-    border: 1px solid;
-    color: #1aa778;
-  }
+     font-size: 1em;
+     margin-left: 10px;
+     cursor: pointer;
+     border: 1px solid;
+     color: #1aa778;
+     padding: 5px 15px;
+     border-radius: 5px;
+ }
 
  .edit-product-card {
      position: fixed !important;
@@ -69,19 +97,20 @@ SimpleStore
      left: 0;
      padding: 0 10%;
      z-index: 5;
+     max-width: 100% !important;
  }
 
  #edit_company, .new-category {
-    position: fixed !important;
-    right: 0;
-    top: 40px;
-    left: 0;
-    padding: 0 10%;
-    z-index: 5;
-    background: white;
-    padding-top: 50px;
-    border-bottom: black 1px solid;
-  }
+     position: fixed !important;
+     right: 0;
+     top: 40px;
+     left: 0;
+     padding: 0 10%;
+     z-index: 5;
+     background: white;
+     padding-top: 50px;
+     border-bottom: black 1px solid;
+ }
 
  .delete-category {
      cursor: pointer;
@@ -107,6 +136,10 @@ SimpleStore
      position: relative;
  }
 
+ .hide_not_mobile {
+     display: none;
+ }
+
  @media only screen and (max-width: 690px) {
      .navbar-brand {
          font-size: 0.9rem !important;
@@ -129,5 +162,17 @@ SimpleStore
      }
      .edit-category {
          left: 100px;
+     }
+     .card.mt-2 {
+         max-width: initial;
+     }
+     .card-body {
+         padding: 5px 1rem !important;
+     }
+     .cart-total-wraper {
+         display: none;
+     }
+     .hide_not_mobile {
+         display: block;
      }
  }

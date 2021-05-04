@@ -3,10 +3,10 @@
         <a class="navbar-brand" href="<?=SITE_ROOT?>">
             <img src="<?=$company->logo?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
             <?=$company->name?> - <?=$company->phone?></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler02" aria-controls="navbarToggler02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse" id="navbarToggler02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
             <li class="nav-item me-4">
