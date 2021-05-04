@@ -154,9 +154,9 @@ function get_images($dir = DOC_ROOT . "img/products/")
     return $result;
 }
 
-function upload_image()
+function upload_image($file)
 {
-    $filename = $_FILES['imagefile']['name'];
+    $filename = $file;
     $valid_ext = array('png', 'jpeg', 'jpg');
     $location = DOC_ROOT ."img/products/" . $filename;
     $file_extension = pathinfo($location, PATHINFO_EXTENSION);

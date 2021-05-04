@@ -58,7 +58,7 @@ if (isset($_POST['get_form_url'])) {
     exit;
 }
 
-if (isset($_POST['imagefile'])) {
-    upload_image();
+if (isset($_FILES['imagefile']['name'])) {
+    upload_image($_FILES['imagefile']['name']);
     exit;
 }

@@ -8,18 +8,18 @@ SimpleStore
  }
 
  .cart {
-    position: fixed !important;
-    right: 5px;
-    top: 60px;
-    z-index: 4;
-    background: white;
-    border: 1px solid;
-    border-radius: 5px;
-  }
+     position: fixed !important;
+     right: 5px;
+     top: 60px;
+     z-index: 4;
+     background: white;
+     border: 1px solid;
+     border-radius: 5px;
+ }
 
-  .cart_items {
-    padding-right: 1rem;
-  }
+ .cart_items {
+     padding-right: 1rem;
+ }
 
  .remove-from-cart {
      padding: 0 5px;
@@ -59,14 +59,25 @@ SimpleStore
      cursor: pointer;
  }
 
+ .gallery_upload {
+     position: fixed;
+     background: #c7ffec;
+     padding: 2rem;
+     z-index: 10;
+     width: 100%;
+     left: 0;
+     top: 0;
+     padding-top: 200px;
+ }
+
  .gallery_image.card {
-    width: fit-content;
-    margin: 5px;
-  }
-  
- .gallery_image{
-    cursor: pointer;
-}
+     width: fit-content;
+     margin: 5px;
+ }
+
+ .gallery_image {
+     cursor: pointer;
+ }
 
  .delete-product {
      left: 5px;

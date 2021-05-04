@@ -168,10 +168,9 @@ $('.get_form_url').on('click', function () {
         });
 });
 
-$('.gallery_upload_form').on('submit', function () {
-    e.preventDefault();
+$('.upload_btn').on('click', function () {
     var fd = new FormData();
-    var files = $('#file')[0].files;
+    var files = $('#imagefile')[0].files;
 
     // Check file selected or not
     if (files.length > 0) {

@@ -2,6 +2,7 @@
 <?php if ($logedin) {
     include('elements/edit_company.php');
     include('elements/new_category.php');
+    include('elements/uploader.php');
 }
 $categories = get_categories();
 $category_num = 0;
