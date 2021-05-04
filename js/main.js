@@ -155,6 +155,18 @@ $('.delete-product').on('click', function () {
     }
 });
 
+$('.gallery_image').on('click', function () {
+    $iamge_path = $(this).data('path');
+    $('.picture-url').val($iamge_path);
+});
+
+$('.select_image_toggle').on('click', function () {
+    $('.gallery_view').toggle();
+});
+
+$('.upload_image_toggle').on('click', function () {
+    $('.gallery_upload').toggle();
+});
 
 $('.add-product_toggle').on('click', function () {
     $('.new-product').toggle();

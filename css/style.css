@@ -58,6 +58,15 @@ SimpleStore
      cursor: pointer;
  }
 
+ .gallery_image.card {
+    width: fit-content;
+    margin: 5px;
+  }
+  
+ .gallery_image{
+    cursor: pointer;
+}
+
  .delete-product {
      left: 5px;
  }

@@ -36,3 +36,4 @@ if (isset($_GET['login_error'])) {
 if (isset($_GET['logout'])) {
     logout();
 }
+

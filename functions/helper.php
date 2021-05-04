@@ -1,6 +1,5 @@
 <?php
-define("SITE_ROOT","/");
-define("DOC_ROOT",$_SERVER['DOCUMENT_ROOT'].SITE_ROOT);
+require_once('config.php');
 
 if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = true;
@@ -20,7 +19,7 @@ function login($pass)
         $_SESSION["login"] = true;
         redirect(SITE_ROOT);
     } else {
-        redirect(SITE_ROOT.'?login_error');
+        redirect(SITE_ROOT . '?login_error');
     }
 }
 
@@ -53,10 +52,10 @@ function get_products($file = 0)
 function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = 'kg', $img = '')
 {
     if ($img == "") {
-        $img = 'https://cdn.profile.ru/wp-content/uploads/2019/08/shutterstock_1050939104-782x440.jpg';
+        $img = SITE_ROOT . 'img/product.jpg';
     }
     if ($kind == "") {
-        $kind = 'кг';
+        $kind = '1кг';
     }
     $product = new stdClass();
     $product->name = $name;
@@ -137,4 +136,58 @@ function auto_version($file)
 function clean($str)
 {
     return str_replace(' ', '', $str);
+}
+
+function get_images($dir = DOC_ROOT."img/products/")
+{
+    $result = array();
+    $cdir = scandir($dir);
+    foreach ($cdir as $key => $value) {
+        if (!in_array($value, array(".", ".."))) {
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
+            } else {
+                $result[] = $value;
+            }
+        }
+    }
+
+    return $result;
+}
+
+function save_image_from_url($image_name, $url)
+{
+    $valid_ext = array('png', 'jpeg', 'jpg');
+    $image_ext = explode('.', $url);
+    $image_ext = end($image_ext);
+    $image_ext = strtolower($image_ext);
+
+    $tmp = DOC_ROOT . 'img/tmp.' . $image_ext;
+    $location = DOC_ROOT . 'img/products/' . $image_name . '.' . $image_ext;
+
+    if (in_array($image_ext, $valid_ext)) {
+        file_put_contents($tmp, file_get_contents($url));
+        compressImage($tmp, $location, 60);
+    } else {
+        echo 'image not valid ' . $image_ext;
+    }
+}
+
+// Compress image
+function compressImage($source, $destination, $quality)
+{
+
+    $info = getimagesize($source);
+
+    if ($info['mime'] == 'image/jpeg')
+        $image = imagecreatefromjpeg($source);
+
+    elseif ($info['mime'] == 'image/gif')
+        $image = imagecreatefromgif($source);
+
+    elseif ($info['mime'] == 'image/png')
+        $image = imagecreatefrompng($source);
+
+    imagejpeg($image, $destination, $quality);
+    unlink($source);
 }
