@@ -70,14 +70,19 @@ SimpleStore
      padding-top: 200px;
  }
 
- .gallery_image.card {
-     width: fit-content;
-     margin: 5px;
- }
-
  .gallery_image {
      cursor: pointer;
  }
+
+ .gallery_image>span {
+     min-height: 150px;
+     background-size: cover;
+     background-position: center;
+ }
+
+ .row.overflow-auto {
+    height: 300px;
+  }
 
  .delete-product {
      left: 5px;
@@ -187,4 +192,7 @@ SimpleStore
      .hide_not_mobile {
          display: block;
      }
+     .row.overflow-auto {
+        height: 260px;
+      }
  }
