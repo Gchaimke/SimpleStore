@@ -154,21 +154,6 @@ function get_images($dir = DOC_ROOT . "img/products/")
     return $result;
 }
 
-function upload_image($file)
-{
-    $filename = $file;
-    $valid_ext = array('png', 'jpeg', 'jpg');
-    $location = DOC_ROOT ."img/products/" . $filename;
-    $file_extension = pathinfo($location, PATHINFO_EXTENSION);
-    $file_extension = strtolower($file_extension);
-    if (in_array($file_extension, $valid_ext)) {
-        compressImage($_FILES['imagefile']['tmp_name'], $location, 60);
-        echo "$filename file upladed";
-    } else {
-        echo "$filename Invalid file type.";
-    }
-}
-
 function save_image($image_name, $url)
 {
     $valid_ext = array('png', 'jpeg', 'jpg');

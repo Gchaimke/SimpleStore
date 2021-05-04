@@ -32,7 +32,6 @@ if (isset($_GET['login_error'])) {
     include_once('elements/login.php');
 }
 
-
 if (isset($_GET['logout'])) {
     logout();
 }

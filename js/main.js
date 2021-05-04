@@ -171,10 +171,10 @@ $('.get_form_url').on('click', function () {
 $('.upload_btn').on('click', function () {
     var fd = new FormData();
     var files = $('#imagefile')[0].files;
-
-    // Check file selected or not
-    if (files.length > 0) {
+    var name = $('.upload_image_name').val();
+    if (files.length > 0 && name != "") {
         fd.append('file', files[0]);
+        fd.append('name', name);
         $.ajax({
             url: 'post.php',
             type: 'post',
@@ -183,10 +183,12 @@ $('.upload_btn').on('click', function () {
             processData: false,
             success: function (response) {
                 alert(response);
+                $(document).find('.picture-url').val('/img/products/' + response);
+                $('.gallery_upload').hide();
             },
         });
     } else {
-        alert("Please select a file.");
+        alert("Please select a file and set name!");
     }
 });
 

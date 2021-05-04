@@ -58,7 +58,27 @@ if (isset($_POST['get_form_url'])) {
     exit;
 }
 
-if (isset($_FILES['imagefile']['name'])) {
-    upload_image($_FILES['imagefile']['name']);
+if (isset($_FILES['file']['name'])) {
+
+    $filename = $_FILES['file']['name'];
+    $imageFileType = pathinfo($filename, PATHINFO_EXTENSION);
+    $imageFileType = strtolower($imageFileType);
+
+    $location = DOC_ROOT . "img/products/" . clean($_POST['name']) . "." . $imageFileType;
+    /* Valid extensions */
+    $valid_extensions = array("jpg", "jpeg", "png");
+
+    $response = 0;
+    /* Check file extension */
+    if (in_array(strtolower($imageFileType), $valid_extensions)) {
+        /* Upload file */
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
+            $response = clean($_POST['name']) . "." . $imageFileType;
+        }
+    }
+
+    echo $response;
     exit;
 }
+
+echo 0;

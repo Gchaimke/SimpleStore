@@ -3,6 +3,10 @@
         <div class="col-md-4 m-auto">
             <h6>Upload file</h6>
             <form method='post' action='' enctype='multipart/form-data' class="gallery_upload_form">
+                <div class="input-group mb-3">
+                    <label class="input-group-text">Set Iamge Name</label>
+                    <input type="text" class="form-control upload_image_name" />
+                </div>
                 <input type='file' id="imagefile" name='imagefile'>
                 <input type='button' value='Upload' class='upload_btn'>
             </form>
