@@ -16,6 +16,10 @@ $images = get_images();
         <div>
             <h6>Upload from URL</h6>
             <div class="input-group mb-3">
+                <label class="input-group-text">Set Iamge Name</label>
+                <input type="text" class="form-control upload_image_name" />
+            </div>
+            <div class="input-group mb-3">
                 <label class="input-group-text">Image URL</label>
                 <input type="text" class="form-control upload_image_url" />
             </div>

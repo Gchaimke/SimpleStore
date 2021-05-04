@@ -156,12 +156,39 @@ $('.delete-product').on('click', function () {
 });
 
 $('.get_form_url').on('click', function () {
-    var url = $(this).parent('.card-body').find('#edit-product-id').val();
-    $.post("post.php", { get_form_url: true, url: url})
-        .done(function () {
-            alert('ok')
+    var name = $(this).parent().find('.upload_image_name').val();
+    var url = $(this).parent().find('.upload_image_url').val();
+    $.post("post.php", { get_form_url: true, url: url, name: name })
+        .done(function (e) {
+            $(document).find('.picture-url').val('/img/products/' + e);
+            alert(e + " uploaded!");
+            $('.gallery_upload').hide();
+            //$('.edit-product-btn').trigger("click");
             //location.reload();
         });
+});
+
+$('.gallery_upload_form').on('submit', function () {
+    e.preventDefault();
+    var fd = new FormData();
+    var files = $('#file')[0].files;
+
+    // Check file selected or not
+    if (files.length > 0) {
+        fd.append('file', files[0]);
+        $.ajax({
+            url: 'post.php',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert(response);
+            },
+        });
+    } else {
+        alert("Please select a file.");
+    }
 });
 
 $('.gallery_image').on('click', function () {

@@ -36,7 +36,3 @@ if (isset($_GET['login_error'])) {
 if (isset($_GET['logout'])) {
     logout();
 }
-
-if (isset($_GET['get_image'])) {
-    save_image('save_image',$_GET['get_image']);
-}

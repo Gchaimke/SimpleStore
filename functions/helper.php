@@ -154,22 +154,22 @@ function get_images($dir = DOC_ROOT . "img/products/")
     return $result;
 }
 
-function upload_image($file)
+function upload_image()
 {
+    $filename = $_FILES['imagefile']['name'];
     $valid_ext = array('png', 'jpeg', 'jpg');
-    $filename =$file;
-    $file_extension = pathinfo($filename, PATHINFO_EXTENSION);
+    $location = DOC_ROOT ."img/products/" . $filename;
+    $file_extension = pathinfo($location, PATHINFO_EXTENSION);
     $file_extension = strtolower($file_extension);
-    $location = DOC_ROOT . 'img/products/' . $filename;
-    // Check extension
     if (in_array($file_extension, $valid_ext)) {
         compressImage($_FILES['imagefile']['tmp_name'], $location, 60);
+        echo "$filename file upladed";
     } else {
-        echo "Invalid file type.";
+        echo "$filename Invalid file type.";
     }
 }
 
-function save_image($image_name = "", $url)
+function save_image($image_name, $url)
 {
     $valid_ext = array('png', 'jpeg', 'jpg');
     $image_ext = pathinfo($url, PATHINFO_EXTENSION);
@@ -181,7 +181,7 @@ function save_image($image_name = "", $url)
     if (in_array($image_ext, $valid_ext)) {
         file_put_contents($tmp, file_get_contents($url));
         compressImage($tmp, $location, 60);
-        echo 'ok';
+        echo $image_name . '.' . $image_ext;
     } else {
         echo 'image not valid ' . $image_ext;
     }
@@ -190,18 +190,13 @@ function save_image($image_name = "", $url)
 // Compress image
 function compressImage($source, $destination, $quality)
 {
-
     $info = getimagesize($source);
-
     if ($info['mime'] == 'image/jpeg')
         $image = imagecreatefromjpeg($source);
-
     elseif ($info['mime'] == 'image/gif')
         $image = imagecreatefromgif($source);
-
     elseif ($info['mime'] == 'image/png')
         $image = imagecreatefrompng($source);
-
     imagejpeg($image, $destination, $quality);
     unlink($source);
 }

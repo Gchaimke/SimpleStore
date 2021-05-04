@@ -54,31 +54,11 @@ if (isset($_POST['edit_company'])) {
 }
 
 if (isset($_POST['get_form_url'])) {
-    save_image('test',clean($_POST['url']));
+    save_image(clean($_POST['name']), clean($_POST['url']));
     exit;
 }
 
 if (isset($_POST['imagefile'])) {
-    // Getting file name
-  $filename = $_FILES['imagefile']['name'];
- 
-  // Valid extension
-  $valid_ext = array('png','jpeg','jpg');
-
-  // Location
-  $location = DOC_ROOT . 'img/products/'.$filename;
-
-  // file extension
-  $file_extension = pathinfo($location, PATHINFO_EXTENSION);
-  $file_extension = strtolower($file_extension);
-
-  // Check extension
-  if(in_array($file_extension,$valid_ext)){
-
-    // Compress Image
-    compressImage($_FILES['imagefile']['tmp_name'],$location,60);
-
-  }else{
-    echo "Invalid file type.";
-  }
+    upload_image();
+    exit;
 }
