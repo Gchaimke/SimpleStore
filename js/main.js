@@ -185,3 +185,7 @@ $('.add-category-close, .new-category_toggle').on('click', function () {
     $('.new-category').toggle();
 });
 
+$('.close-parent').on('click', function () {
+    $(this).parent().toggle();
+});
+

@@ -6,6 +6,7 @@ $images = get_images();
     <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="Select Image">
     <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" value="Upload Image">
     <div class="gallery_upload m-2 col-md-4" style="display: none;">
+        <span class='btn btn-close bg-warning close-parent float-end' aria-label="Close"></span>
         <h6>Upload file</h6>
         <form method='post' action='' enctype='multipart/form-data'>
             <input type='file' name='imagefile'>
@@ -20,6 +21,7 @@ $images = get_images();
         <input type="button" class="btn btn-outline-dark align-middle mb-3" id="get_form_url" value="Get From URL">
     </div>
     <div class="m-2 gallery_view" style="display: none;">
+        <span class='btn btn-close bg-warning close-parent float-end' aria-label="Close"></span>
         <b>Click to select image</b>
         <div class="d-flex">
             <?php
