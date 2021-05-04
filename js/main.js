@@ -182,9 +182,13 @@ $('.upload_btn').on('click', function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                alert(response);
-                $(document).find('.picture-url').val('/img/products/' + response);
-                $('.gallery_upload').hide();
+                if (response != "Error") {
+                    alert(response);
+                    $(document).find('.picture-url').val('/img/products/' + response);
+                    $('.gallery_upload').hide();
+                }else{
+                    alert('file not uploaded');
+                }
             },
         });
     } else {

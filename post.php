@@ -68,7 +68,7 @@ if (isset($_FILES['file']['name'])) {
     /* Valid extensions */
     $valid_extensions = array("jpg", "jpeg", "png");
 
-    $response = 0;
+    $response = "Error";
     /* Check file extension */
     if (in_array(strtolower($imageFileType), $valid_extensions)) {
         /* Upload file */
@@ -81,4 +81,4 @@ if (isset($_FILES['file']['name'])) {
     exit;
 }
 
-echo 0;
+echo "Error";
