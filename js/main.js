@@ -91,7 +91,7 @@ $('.product-to-cart').on('click', function () {
 $('.cart-send').on('click', function (e) {
     e.preventDefault();
     var url = $(this).attr("href");
-    var text = $('.cart_items').text() + "\n TOTAL:" + $('.cart-total').text()+"\n";
+    var text = $('.cart_items').text() + "\n TOTAL:" + $('.cart-total').text() + "\n";
     var win = window.open(url + encodeURIComponent(text), '_blank');
     if (win) {
         //Browser has allowed it to be opened
@@ -130,6 +130,18 @@ $('.delete-product').on('click', function () {
     }
 });
 
+$('.gallery_image').on('click', function () {
+    $iamge_path = $(this).data('path');
+    $('.picture-url').val($iamge_path);
+});
+
+$('.select_image_toggle').on('click', function () {
+    $('.gallery_view').toggle();
+});
+
+$('.upload_image_toggle').on('click', function () {
+    $('.gallery_upload').toggle();
+});
 
 $('.add-product_toggle').on('click', function () {
     $('.new-product').toggle();

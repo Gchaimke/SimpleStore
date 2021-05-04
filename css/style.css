@@ -38,6 +38,15 @@ SimpleStore
      cursor: pointer;
  }
 
+ .gallery_image.card {
+    width: fit-content;
+    margin: 5px;
+  }
+  
+ .gallery_image{
+    cursor: pointer;
+ }
+
  .edit-product {
      margin-left: 200px;
  }
