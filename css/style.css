@@ -17,6 +17,10 @@ SimpleStore
     border-radius: 5px;
   }
 
+  .cart_items {
+    padding-right: 1rem;
+  }
+
  .remove-from-cart {
      padding: 0 5px;
      border-radius: 10px;
