@@ -1,4 +1,3 @@
-<input type="button" class="btn btn-outline-dark align-middle mb-3" id="edit_company_toggle" value="Edit Company">
 <form id="edit_company" style="display: none;">
     <input type="hidden" name="edit_company" value="true" />
     <div class="input-group mb-3">

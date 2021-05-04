@@ -21,6 +21,8 @@ foreach ($categories as $category) {
             <div id="flush-collapse' . $category_num . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $category_num . '" data-bs-parent="#accordionFlush">
             ';
     if ($logedin) {
+        echo '<button type="button" class="btn btn-outline-dark align-middle add-product_toggle mt-md-4 float-end mb-md-4" data-category="' . $category_num . '">
+        <i class="far fa-plus-square" style="font-size: 2em;"></i></button>';
         include('elements/new_card.php');
     }
     echo '<div class="accordion-body"><div class="row">';

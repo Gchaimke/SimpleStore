@@ -1,4 +1,3 @@
-<input type="button" class="btn btn-outline-dark align-middle new-category_toggle mb-3 mt-3" value="New Category" />
 <div class="container mb-5">
     <div class="new-category" style="display: none;">
         <div class="input-group mb-3">

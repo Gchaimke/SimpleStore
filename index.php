@@ -30,10 +30,12 @@ $company = get_company();
     <?php include_once('navigation.php'); ?>
     <main class="flex-shrink-0">
         <div class="container mt-5 mb-5">
-        <?php include_once('functions/get.php'); ?>
-        <?php include_once('body.php'); ?>
-        <?php include_once('elements/cart.php'); ?>
-    </div>
+            <?php include_once('functions/get.php'); ?>
+            <input type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" id="edit_company_toggle" value="Edit Company">
+            <input type="button" class="btn btn-outline-dark align-middle new-category_toggle mb-3 mt-3" value="New Category" />
+            <?php include_once('body.php'); ?>
+            <?php include_once('elements/cart.php'); ?>
+        </div>
     </main>
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
