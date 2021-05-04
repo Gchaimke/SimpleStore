@@ -6,7 +6,7 @@ $images = get_images();
     <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="Select Image">
     <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" value="Upload Image">
     <div class="gallery_upload m-2 col-md-4" style="display: none;">
-        <h6>Upload from file</h6>
+        <h6>Upload file</h6>
         <form method='post' action='' enctype='multipart/form-data'>
             <input type='file' name='imagefile'>
             <input type='submit' value='Upload' name='upload'>
