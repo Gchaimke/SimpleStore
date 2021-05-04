@@ -138,11 +138,11 @@ function clean($str)
     return str_replace(' ', '', $str);
 }
 
-function get_images($dir = DOC_ROOT."img/products/")
+function get_images($dir = DOC_ROOT . "img/products/")
 {
     $result = array();
     $cdir = scandir($dir);
-    foreach ($cdir as $key => $value) {
+    foreach ($cdir as $value) {
         if (!in_array($value, array(".", ".."))) {
             if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
                 $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
@@ -151,15 +151,28 @@ function get_images($dir = DOC_ROOT."img/products/")
             }
         }
     }
-
     return $result;
 }
 
-function save_image_from_url($image_name, $url)
+function upload_image($file)
 {
     $valid_ext = array('png', 'jpeg', 'jpg');
-    $image_ext = explode('.', $url);
-    $image_ext = end($image_ext);
+    $filename =$file;
+    $file_extension = pathinfo($filename, PATHINFO_EXTENSION);
+    $file_extension = strtolower($file_extension);
+    $location = DOC_ROOT . 'img/products/' . $filename;
+    // Check extension
+    if (in_array($file_extension, $valid_ext)) {
+        compressImage($_FILES['imagefile']['tmp_name'], $location, 60);
+    } else {
+        echo "Invalid file type.";
+    }
+}
+
+function save_image($image_name = "", $url)
+{
+    $valid_ext = array('png', 'jpeg', 'jpg');
+    $image_ext = pathinfo($url, PATHINFO_EXTENSION);
     $image_ext = strtolower($image_ext);
 
     $tmp = DOC_ROOT . 'img/tmp.' . $image_ext;
@@ -168,6 +181,7 @@ function save_image_from_url($image_name, $url)
     if (in_array($image_ext, $valid_ext)) {
         file_put_contents($tmp, file_get_contents($url));
         compressImage($tmp, $location, 60);
+        echo 'ok';
     } else {
         echo 'image not valid ' . $image_ext;
     }

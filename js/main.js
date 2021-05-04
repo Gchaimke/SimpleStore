@@ -92,15 +92,15 @@ $('.product-to-cart').on('click', function () {
         var total = parseInt($('.cart-total').text());
         $('.cart-total').text(total + price);
         $('.mobile-cart-total').text(total + price);
-    }else{
-        alert ("Max cart items is 10!");
+    } else {
+        alert("Max cart items is 10!");
     }
 });
 
 $('.cart_header, .close-cart').on('click', function () {
-        $('.cart_items').toggle();
-        $('.close-cart').toggle();
-        $('.cart-send').toggle();   
+    $('.cart_items').toggle();
+    $('.close-cart').toggle();
+    $('.cart-send').toggle();
 });
 
 $('.cart-send').on('click', function (e) {
@@ -153,6 +153,15 @@ $('.delete-product').on('click', function () {
                 location.reload();
             });
     }
+});
+
+$('.get_form_url').on('click', function () {
+    var url = $(this).parent('.card-body').find('#edit-product-id').val();
+    $.post("post.php", { get_form_url: true, url: url})
+        .done(function () {
+            alert('ok')
+            //location.reload();
+        });
 });
 
 $('.gallery_image').on('click', function () {
