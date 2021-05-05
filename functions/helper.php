@@ -54,7 +54,7 @@ function get_products($file = 0)
     return json_decode(file_get_contents(DOC_ROOT . "data/$file.json"));
 }
 
-function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = 'kg', $img = '')
+function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = '1kg', $img = 'img/product.jpg')
 {
     if ($img == "") {
         $img = 'img/product.jpg';

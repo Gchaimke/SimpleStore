@@ -9,7 +9,9 @@ $('#edit_company').on('submit', function (e) {
         data: $('#edit_company').serialize(),
         success: function (res) {
             alert(res);
-            location.reload();
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
         }
     });
 });
@@ -18,7 +20,9 @@ $('.add-category').on('click', function () {
     var category_name = $(this).parent('.new-category').find('.new-category-name').val();
     $.post("post.php", { add_category: true, category_name: category_name })
         .done(function () {
-            location.reload();
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
         });
 });
 
@@ -28,7 +32,9 @@ $('.delete-category').on('click', function () {
         var category = $(this).data("category");
         $.post("post.php", { delete_category: true, category: category })
             .done(function () {
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
             });
     }
 });
@@ -46,7 +52,9 @@ $('.edit-category_btn').on('click', function () {
     var category_index = $(this).parent('.new-category').find('.new-category-id').val();
     $.post("post.php", { edit_category: true, category_name: category_name, category_index: category_index })
         .done(function () {
-            location.reload();
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
         });
 });
 
@@ -59,7 +67,9 @@ $('.add-product').on('click', function () {
     var kind = $(this).parent('.card-body').find('.product-kind').val();
     $.post("post.php", { add_product: true, category: category, picture: picture, name: name, description: description, price: price, kind: kind })
         .done(function () {
-            location.reload();
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
         });
 });
 
@@ -71,7 +81,7 @@ $('.edit-product').on('click', function () {
     $('.edit-product-card').find('.product-description').val($(this).data("description"));
     $('.edit-product-card').find('.product-price').val($(this).data("price"));
     $('.edit-product-card').find('.product-kind').val($(this).data("kind"));
-    $('.edit-product-card').find('.upload_image_toggle').attr("data-name",$(this).data("name"));
+    $('.edit-product-card').find('.upload_image_toggle').attr("data-name", $(this).data("name"));
     $('.edit-product-card').toggle();
 });
 
@@ -80,7 +90,9 @@ $('.duplicate-product').on('click', function () {
     var product = $(this).data("product");
     $.post("post.php", { duplicate_product: true, category: category, product: product })
         .done(function () {
-            location.reload();
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
         });
 });
 
@@ -140,7 +152,9 @@ $('.edit-product-btn').on('click', function () {
     var kind = $(this).parent('.card-body').find('.product-kind').val();
     $.post("post.php", { edit_product: true, category: category, product: product, picture: picture, name: name, description: description, price: price, kind: kind })
         .done(function () {
-            location.reload();
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
         });
 });
 
@@ -151,7 +165,9 @@ $('.delete-product').on('click', function () {
         var product = $(this).data("product");
         $.post("post.php", { delete_product: true, category: category, product: product })
             .done(function () {
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
             });
     }
 });
