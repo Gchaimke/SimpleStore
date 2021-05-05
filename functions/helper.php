@@ -39,6 +39,11 @@ function edit_company($data)
     file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data));
 }
 
+function get_favorites()
+{
+    return json_decode(file_get_contents(DOC_ROOT . 'data/favorites.json'));
+}
+
 function get_categories()
 {
     return json_decode(file_get_contents(DOC_ROOT . 'data/categories.json'));
