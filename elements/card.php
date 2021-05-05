@@ -1,5 +1,5 @@
 <div class="card product-card mt-2">
-    <div class="card-image" style="background-image: url('<?= $product->img ?>');"></div>
+    <div class="card-image" style="background-image: url('<?= SITE_ROOT .$product->img ?>');"></div>
     <div class="card-body">
         <?php if ($logedin) {
             echo "<i class='far fa-trash-alt delete-product text-danger' data-category='$category_num ' data-product='$product_num '></i>";

@@ -175,7 +175,7 @@ $('.get_form_url').on('click', function () {
     var url = $(this).parent().find('.upload_image_url').val();
     $.post("post.php", { get_form_url: true, url: url, name: name })
         .done(function (e) {
-            $(document).find('.picture-url').val('/img/products/' + e);
+            $(document).find('.picture-url').val('img/products/' + e);
             alert(e + " uploaded!");
             $('.gallery_upload').hide();
             //$('.edit-product-btn').trigger("click");
@@ -199,7 +199,7 @@ $('.upload_btn').on('click', function () {
             success: function (response) {
                 if (response != "Error") {
                     alert(response);
-                    $(document).find('.picture-url').val('/img/products/' + response);
+                    $(document).find('.picture-url').val('img/products/' + response);
                     $('.gallery_upload').hide();
                 } else {
                     alert('file not uploaded');
@@ -212,8 +212,8 @@ $('.upload_btn').on('click', function () {
 });
 
 $('.gallery_image .image').on('click', function () {
-    $iamge_path = $(this).data('path');
-    $('.picture-url').val($iamge_path);
+    $image_path = $(this).data('path');
+    $('.picture-url').val($image_path);
     $('.gallery_view').toggle();
 });
 
