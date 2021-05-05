@@ -155,6 +155,20 @@ $('.delete-product').on('click', function () {
     }
 });
 
+$('.delete-gallery-image').on('click', function () {
+    var confim = confirm('Delete this picture?');
+    if (confim) {
+        var image = $(this).data("path");
+        $.post("post.php", { delete_gallery_image: true, image: image })
+            .done(function (e) {
+                alert(e);
+            });
+        $(this).parent().parent().toggle();
+
+    }
+});
+
+
 $('.get_form_url').on('click', function () {
     var name = $(this).parent().find('.upload_image_name').val();
     var url = $(this).parent().find('.upload_image_url').val();
@@ -186,7 +200,7 @@ $('.upload_btn').on('click', function () {
                     alert(response);
                     $(document).find('.picture-url').val('/img/products/' + response);
                     $('.gallery_upload').hide();
-                }else{
+                } else {
                     alert('file not uploaded');
                 }
             },
@@ -196,9 +210,10 @@ $('.upload_btn').on('click', function () {
     }
 });
 
-$('.gallery_image').on('click', function () {
+$('.gallery_image .image').on('click', function () {
     $iamge_path = $(this).data('path');
     $('.picture-url').val($iamge_path);
+    $('.gallery_view').toggle();
 });
 
 $('.select_image_toggle').on('click', function () {

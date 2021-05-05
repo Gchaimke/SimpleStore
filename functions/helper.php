@@ -172,6 +172,14 @@ function save_image($image_name, $url)
     }
 }
 
+function delete_image($image)
+{
+    if (unlink(DOC_ROOT.$image)) {
+        echo 'success';
+    } else {
+        echo 'fail';
+    }
+}
 // Compress image
 function compressImage($source, $destination, $quality)
 {

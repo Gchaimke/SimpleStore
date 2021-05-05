@@ -70,7 +70,7 @@ SimpleStore
      padding-top: 200px;
  }
 
- .gallery_image {
+ .gallery_image>.image {
      cursor: pointer;
  }
 
@@ -108,14 +108,15 @@ SimpleStore
  }
 
  .edit-product-card {
-     position: fixed !important;
-     top: 40px;
-     right: 0;
-     left: 0;
-     padding: 0 10%;
-     z-index: 5;
-     max-width: 100% !important;
- }
+    position: fixed !important;
+    top: -10px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 40px 10%;
+    z-index: 5;
+    max-width: 100% !important;
+  }
 
  #edit_company, .new-category {
      position: fixed !important;

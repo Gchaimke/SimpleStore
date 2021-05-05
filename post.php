@@ -58,6 +58,11 @@ if (isset($_POST['get_form_url'])) {
     exit;
 }
 
+if (isset($_POST['delete_gallery_image'])) {
+    delete_image(clean($_POST['image']));
+    exit;
+}
+
 if (isset($_FILES['file']['name'])) {
 
     $filename = $_FILES['file']['name'];

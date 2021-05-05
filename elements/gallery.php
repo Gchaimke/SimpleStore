@@ -11,9 +11,9 @@ $images = get_images();
         <div class="row overflow-auto">
             <?php
             foreach ($images as $image) {
-                echo "<div class='col gallery_image m-2' data-path='/img/products/$image'>
-                        <span style=\"background-image: url('/img/products/$image');;height: 100px;display: block;width: 100%;min-width: 150px;margin: auto;\"></span>
-                        <div>$image</div>
+                echo "<div class='col gallery_image m-2'>
+                        <span class='w-full d-block image' data-path='/img/products/$image' style=\"background-image: url('/img/products/$image');min-width: 150px;\"></span>
+                        <div class='flex text-nowrap'>$image <i class='btn far fa-trash-alt delete-gallery-image text-danger' data-path='/img/products/$image'></i></div>
                 </div>";
             }
             ?>
