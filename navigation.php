@@ -9,7 +9,8 @@
         <div class="collapse navbar-collapse" id="navbarToggler02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item me-4">
-                    <i class="btn btn-outline-info fas fa-info-circle text-warning mt-1" aria-hidden="true"></i>
+                    <button type="button" class="btn btn-outline-info fas fa-info-circle text-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    </button>
                 </li>
             </ul>
             <div class="nav-item me-4">
