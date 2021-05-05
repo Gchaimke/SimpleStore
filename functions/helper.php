@@ -128,9 +128,9 @@ function save_json($array, $file_name = 'test')
 
 function auto_version($file)
 {
-    if (strpos($file, '/') !== 0 || !file_exists(DOC_ROOT . $file)) return $file;
+    if (!file_exists(DOC_ROOT . $file)) return $file;
     $mtime = filemtime(DOC_ROOT . $file);
-    return sprintf("%s?v=%d", $file, $mtime);
+    return sprintf("%s?v=%d", SITE_ROOT . $file, $mtime);
 }
 
 function clean($str)
@@ -174,7 +174,7 @@ function save_image($image_name, $url)
 
 function delete_image($image)
 {
-    if (unlink(DOC_ROOT.$image)) {
+    if (unlink(DOC_ROOT . $image)) {
         echo 'success';
     } else {
         echo 'fail';
