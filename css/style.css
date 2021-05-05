@@ -1,6 +1,9 @@
  /*
 SimpleStore
 */
+.rtl {
+    direction: rtl;
+}
 
  .login-card {
      margin: 0 auto;
