@@ -57,7 +57,7 @@ function get_products($file = 0)
 function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = 'kg', $img = '')
 {
     if ($img == "") {
-        $img = SITE_ROOT . 'img/product.jpg';
+        $img = 'img/product.jpg';
     }
     if ($kind == "") {
         $kind = '1кг';
