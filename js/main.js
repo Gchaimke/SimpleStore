@@ -71,6 +71,7 @@ $('.edit-product').on('click', function () {
     $('.edit-product-card').find('.product-description').val($(this).data("description"));
     $('.edit-product-card').find('.product-price').val($(this).data("price"));
     $('.edit-product-card').find('.product-kind').val($(this).data("kind"));
+    $('.edit-product-card').find('.upload_image_toggle').attr("data-name",$(this).data("name"));
     $('.edit-product-card').toggle();
 });
 
@@ -222,6 +223,7 @@ $('.select_image_toggle').on('click', function () {
 
 $('.upload_image_toggle').on('click', function () {
     $('.gallery_upload').toggle();
+    $('.upload_image_name').val($(this).data('name'));
 });
 
 $('.add-product_toggle').on('click', function () {

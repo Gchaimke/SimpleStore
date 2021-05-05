@@ -2,7 +2,9 @@
     <label class="input-group-text">Picture URL</label>
     <input type="text" class="form-control picture-url" />
 </div>
-<?php include("elements/gallery.php")?>
+<input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="Select Image">
+<input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="" value="Upload Image">
+<?php include("elements/gallery.php") ?>
 <div class="input-group mb-3">
     <label class="input-group-text">Name</label>
     <input type="text" class="form-control product-name" />

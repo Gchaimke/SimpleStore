@@ -4,11 +4,7 @@
         <input type="hidden" id="edit-product-id" value="" />
         <input type="hidden" id="edit-category-id" value="" />
         <?php include('elements/edit_product.php'); ?>
-        <button type="button" class="btn btn-outline-dark align-middle edit-product-btn">
-            Save
-        </button>
-        <button type="button" class="btn btn-outline-dark align-middle close-edit-product">
-            Close
-        </button>
+        <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="Save">
+        <input type="button" class="btn btn-outline-dark align-middle close-edit-product float-end" value="Close">
     </div>
 </div>

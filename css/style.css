@@ -81,8 +81,8 @@ SimpleStore
  }
 
  .row.overflow-auto {
-    height: 300px;
-  }
+     height: 300px;
+ }
 
  .delete-product {
      left: 5px;
@@ -108,15 +108,15 @@ SimpleStore
  }
 
  .edit-product-card {
-    position: fixed !important;
-    top: -10px;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    padding: 40px 10%;
-    z-index: 5;
-    max-width: 100% !important;
-  }
+     position: fixed !important;
+     top: -10px;
+     bottom: 0;
+     right: 0;
+     left: 0;
+     padding: 40px 10%;
+     z-index: 5;
+     max-width: 100% !important;
+ }
 
  #edit_company, .new-category {
      position: fixed !important;
@@ -194,6 +194,9 @@ SimpleStore
          display: block;
      }
      .row.overflow-auto {
-        height: 260px;
-      }
+         height: 260px;
+     }
+     .edit-product-card {
+         padding: 55px 2%;
+     }
  }
