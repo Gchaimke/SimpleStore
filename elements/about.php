@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Autor: Chaim Gorbov</p>
+                <p>Autor:<a href="mailto:gchaimke@gmail.com"> Chaim Gorbov</a></p>
                 <p>Version: 1.0</p>
                 <p>Date: 05.05.2021</p>
                 <p>In this project: HTML5, CSS, JS, Jquery, Bootstrap 5, PHP 7.4</p>
