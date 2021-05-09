@@ -121,6 +121,7 @@ $('.product-to-cart').on('click', function () {
         var total = parseInt($('.cart-total').text());
         $('.cart-total').text(total + price);
         $('.mobile-cart-total').text(total + price);
+        splash_cart();
     } else {
         alert("Max cart items is 10!");
     }
@@ -135,14 +136,15 @@ $('.cart_header, .close-cart').on('click', function () {
 $('.cart-send').on('click', function (e) {
     e.preventDefault();
     var url = $(this).attr("href");
-    var text = "";
+    var cart = "";
     $('.cart_items>li').each(function () {
-        text += $(this).find(".cart-product").text() +" "+ $(this).find(".cart_qty").text()+"\n";
+        cart += $(this).find(".cart-product").text() + " " + $(this).find(".cart_qty").text() + "\n";
     })
-    text += "\n TOTAL:" + $('.cart-total').text() + "\n";
-    var win = window.open(url + encodeURIComponent(text), '_blank');
+    var total = "\n TOTAL:" + $('.cart-total').text();
+    var win = window.open(url + encodeURIComponent(cart + total), '_blank');
     if (win) {
         //Browser has allowed it to be opened
+        cart_log(cart,$('.cart-total').text());
         win.focus();
     } else {
         //Browser has blocked it
@@ -242,6 +244,21 @@ $('.upload_btn').on('click', function () {
         alert("Please select a file and set name!");
     }
 });
+
+function cart_log(cart, total) {
+    $.post("post.php", { cart_log: true, cart: cart, total: total })
+        .done(function (e) {
+            console.log(e);
+        });
+}
+
+function splash_cart() {
+    $('.cart').css('background', '#acf5a7');
+    $('.cart').css('transition-duration', '150ms');
+    setTimeout(function () {
+        $('.cart').css('background', 'white');
+    }, 300);
+}
 
 $('.gallery_image .image').on('click', function () {
     $image_path = $(this).data('path');

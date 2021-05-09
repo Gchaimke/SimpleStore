@@ -63,6 +63,11 @@ if (isset($_POST['delete_gallery_image'])) {
     exit;
 }
 
+if (isset($_POST['cart_log'])) {
+    cart_log($_POST['cart'],$_POST['total']);
+    exit;
+}
+
 if (isset($_FILES['file']['name'])) {
 
     $filename = $_FILES['file']['name'];

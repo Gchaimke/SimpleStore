@@ -198,3 +198,21 @@ function compressImage($source, $destination, $quality)
     imagejpeg($image, $destination, $quality);
     unlink($source);
 }
+
+function cart_log($cart,$total)
+{
+    $log_name = date('m_y');
+    $log_path = DOC_ROOT . "data/log/$log_name.json";
+    $cart_items = new stdClass();
+    $log_date = date('d/m/y H:i:s');
+    $cart_items->date = $log_date;
+    $cart_items->items = $cart;
+    $cart_items->total = $total;
+    if (file_exists($log_path)) {
+        $log = json_decode(file_get_contents($log_path));
+    }else{
+        $log = new stdClass();
+    }
+    $log[] = $cart_items;
+    file_put_contents($log_path, json_encode($log));
+}
