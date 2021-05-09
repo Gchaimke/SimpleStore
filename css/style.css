@@ -5,6 +5,11 @@ SimpleStore
     direction: rtl;
 }
 
+.statistic {
+    background: aliceblue;
+    padding: 20px 10px;
+}
+
  .login-card {
      margin: 0 auto;
      max-width: max-content !important;

@@ -199,7 +199,7 @@ function compressImage($source, $destination, $quality)
     unlink($source);
 }
 
-function cart_log($cart,$total)
+function cart_log($cart, $total)
 {
     $log_name = date('m_y');
     $log_path = DOC_ROOT . "data/log/$log_name.json";
@@ -210,9 +210,24 @@ function cart_log($cart,$total)
     $cart_items->total = $total;
     if (file_exists($log_path)) {
         $log = json_decode(file_get_contents($log_path));
-    }else{
+    } else {
         $log = new stdClass();
     }
     $log[] = $cart_items;
     file_put_contents($log_path, json_encode($log));
+}
+
+function month_statistic($file_name = '')
+{
+    if ($file_name == '') {
+        $file_name = date('m_y');
+        $file_name = DOC_ROOT . "data/log/$file_name.json";
+    } else {
+        $file_name = DOC_ROOT . "data/log/$file_name.json";
+    }
+    if (file_exists($file_name)) {
+        return json_decode(file_get_contents($file_name));
+    } else {
+        echo 'No statistic for this month yet.';
+    }
 }
