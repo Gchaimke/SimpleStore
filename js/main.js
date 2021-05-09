@@ -140,7 +140,7 @@ $('.cart-send').on('click', function (e) {
     $('.cart_items>li').each(function () {
         cart += $(this).find(".cart-product").text() + " " + $(this).find(".cart_qty").text() + "\n";
     })
-    var total = "\n TOTAL:" + $('.cart-total').text();
+    var total = "\n TOTAL:~" + $('.cart-total').text();
     if (cart != '') {
         var win = window.open(url + encodeURIComponent(cart + total), '_blank');
         if (win) {

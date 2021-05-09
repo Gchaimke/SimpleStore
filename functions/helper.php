@@ -210,8 +210,6 @@ function cart_log($cart, $total)
     $cart_items->total = $total;
     if (file_exists($log_path)) {
         $log = json_decode(file_get_contents($log_path));
-    } else {
-        $log = new stdClass();
     }
     $log[] = $cart_items;
     file_put_contents($log_path, json_encode($log));
@@ -229,5 +227,6 @@ function month_statistic($file_name = '')
         return json_decode(file_get_contents($file_name));
     } else {
         echo 'No statistic for this month yet.';
+        return array();
     }
 }
