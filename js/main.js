@@ -97,11 +97,27 @@ $('.duplicate-product').on('click', function () {
 });
 
 $('.product-to-cart').on('click', function () {
+    var productId = $(this).data("product_id");
     var numItems = $('.cart-product').length
+    var exists = $('.cart_items').find('[data-product_id=' + productId + ']').data('product_id');
     if (numItems < 10) {
         var product = $(this).data("product");
         var price = parseInt($(this).data("price"));
-        $('.cart_items').append("<li><span data-price='" + price + "' class='bg-danger remove-from-cart'>X</span><span class='cart-product'>" + product + "</span> " + price + " ש\"ח</li>");
+        var qty = $(this).data("qty");
+        if (exists) {
+            var current_price = $('.cart_items').find('[data-product_id=' + productId + ']>.cart_price');
+            var current_qty = $('.cart_items').find('[data-product_id=' + productId + ']>.cart_qty');
+            var current_total_qty = parseInt(current_qty.text().match(/\d+/)[0]) + parseInt(qty.match(/\d+/)[0])
+            current_qty.text(current_total_qty + qty.slice(-2) + " ");
+            var current_total_price = parseInt(current_price.text()) + price;
+            $('.cart_items').find('[data-product_id=' + productId + ']>.remove-from-cart').attr("data-price", current_total_price);
+            current_price.text(current_total_price);
+        } else {
+            $('.cart_items').append("<li data-product_id='" + productId + "'><span data-price='" + price +
+                "' class='bg-danger remove-from-cart'>X</span><span class='cart-product'>" + product +
+                " </span><span class='cart_qty'> " + qty +
+                " </span><span class='cart_price'>" + price + "</span>ש\"ח</li>");
+        }
         var total = parseInt($('.cart-total').text());
         $('.cart-total').text(total + price);
         $('.mobile-cart-total').text(total + price);
@@ -120,8 +136,8 @@ $('.cart-send').on('click', function (e) {
     e.preventDefault();
     var url = $(this).attr("href");
     var text = "";
-    $('.cart-product').each(function () {
-        text += $(this).text() + "\n";
+    $('.cart_items>li').each(function () {
+        text += $(this).find(".cart-product").text() +" "+ $(this).find(".cart_qty").text()+"\n";
     })
     text += "\n TOTAL:" + $('.cart-total').text() + "\n";
     var win = window.open(url + encodeURIComponent(text), '_blank');
