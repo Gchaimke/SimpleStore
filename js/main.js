@@ -141,15 +141,20 @@ $('.cart-send').on('click', function (e) {
         cart += $(this).find(".cart-product").text() + " " + $(this).find(".cart_qty").text() + "\n";
     })
     var total = "\n TOTAL:" + $('.cart-total').text();
-    var win = window.open(url + encodeURIComponent(cart + total), '_blank');
-    if (win) {
-        //Browser has allowed it to be opened
-        cart_log(cart,$('.cart-total').text());
-        win.focus();
-    } else {
-        //Browser has blocked it
-        alert('Please allow popups for this website');
+    if (cart != '') {
+        var win = window.open(url + encodeURIComponent(cart + total), '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            cart_log(cart, $('.cart-total').text());
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
+    }else{
+        alert('Cart is empty!');
     }
+
 });
 
 $(document).on('click', '.remove-from-cart', function () {
