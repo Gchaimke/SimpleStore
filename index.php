@@ -42,7 +42,7 @@ $company = get_company();
             <?php } ?>
             <?php
             include_once('elements/login.php');
-            include_once('elements/prodcuts.php');
+            include_once('elements/products.php');
             include_once('elements/cart.php');
             ?>
         </div>

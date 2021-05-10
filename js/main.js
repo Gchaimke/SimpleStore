@@ -50,21 +50,6 @@ $('.add-product_toggle').on('click', function () {
     $('.edit_product_items').find('#edit-category-id').val($(this).data("category"));
 });
 
-$('.add-product').on('click', function () {
-    var category = $('.edit_product_items').find("#edit-category-id").val();
-    var picture = $('.edit_product_items').find('.picture-url').val();
-    var name = $('.edit_product_items').find('.product-name').val();
-    var description = $('.edit_product_items').find('.product-description').val();
-    var price = $('.edit_product_items').find('.product-price').val();
-    var kind = $('.edit_product_items').find('.product-kind').val();
-    $.post("post.php", { add_product: true, category: category, picture: picture, name: name, description: description, price: price, kind: kind })
-        .done(function () {
-            setTimeout(function () {
-                location.reload();
-            }, 500);
-        });
-});
-
 $('.edit-product').on('click', function () {
     $('.edit_product_items').find('#edit-product-id').val($(this).data("product"));
     $('.edit_product_items').find('#edit-category-id').val($(this).data("category"));

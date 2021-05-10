@@ -19,7 +19,6 @@ foreach ($categories as $category) {
     if ($logedin) {
         echo '<button type="button" class="btn btn-outline-dark align-middle add-product_toggle mt-md-4 float-end mb-md-4" data-category="' . $category->id . '" data-bs-toggle="modal" data-bs-target="#edit_product">
         <i class="far fa-plus-square" style="font-size: 2em;"></i></button>';
-        include('elements/new_card.php');
     }
     echo '<div class="accordion-body"><div class="row">';
     $product_num = 0;

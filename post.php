@@ -16,14 +16,6 @@ if (isset($_POST['delete_product'])) {
     exit;
 }
 
-if (isset($_POST['add_product'])) {
-    if (!empty($_POST['category'])) {
-        $product = new_product($_POST['name'], $_POST['description'], $_POST['price'], $_POST['kind'], $_POST['picture']);
-        add_product(clean($_POST['category']), $product);
-    }
-    exit;
-}
-
 if (isset($_POST['duplicate_product'])) {
     if (!empty($_POST['category'])) {
         duplicate_product(clean($_POST['category']), clean($_POST['product']));

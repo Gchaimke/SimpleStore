@@ -37,8 +37,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="Update">
-                    <input type="button" class="btn btn-outline-dark align-middle add-product" value="Add" />
+                    <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="Save">
                 </div>
             </div>
 
