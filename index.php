@@ -33,11 +33,16 @@ $company = get_company();
             <?php include_once('elements/about.php'); ?>
             <?php include_once('functions/get.php'); ?>
             <?php if ($logedin) { ?>
-                <?php include_once('elements/statistic.php'); ?>
-                <input type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" id="edit_company_toggle" value="Edit Company" data-bs-toggle="modal" data-bs-target="#editCompany">
-                <input type="button" class="btn btn-outline-dark align-middle new-category_toggle mb-3 mt-3" value="New Category" />
+                <?php
+                include_once('elements/statistic.php');
+                include_once('elements/edit_company.php');
+                include_once('elements/new_category.php');
+                include_once('elements/uploader.php');
+                ?>
+                <input type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" value="Edit Company" data-bs-toggle="modal" data-bs-target="#editCompany">
+                <input type="button" class="btn btn-outline-dark align-middle category_editor_toggle mb-3 mt-3" value="New Category" data-bs-toggle="modal" data-bs-target="#categoryEditor">
             <?php } ?>
-            <?php include_once('body.php'); ?>
+            <?php include_once('elements/prodcuts.php'); ?>
             <?php include_once('elements/cart.php'); ?>
         </div>
     </main>

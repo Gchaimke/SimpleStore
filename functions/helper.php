@@ -51,7 +51,9 @@ function get_categories()
 
 function get_products($file = 0)
 {
-    return json_decode(file_get_contents(DOC_ROOT . "data/$file.json"));
+    if (file_exists(DOC_ROOT . "data/$file.json")) {
+        return json_decode(file_get_contents(DOC_ROOT . "data/$file.json"));
+    }
 }
 
 function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = '1kg', $img = 'img/product.jpg')
@@ -97,26 +99,36 @@ function delete_product($category_index, $product_index)
 function add_category($name = 'New Category')
 {
     $categories = get_categories();
+    $last_category =  end($categories);
     $object = new stdClass();
+    $object->id = isset($last_category->id) ? $last_category->id + 1 : 0;
     $object->name = $name;
     $categories[] = $object;
     $products[] = new_product();
     save_json($categories, 'categories');
-    save_json($products, count($categories) - 1);
+    save_json($products, $object->id);
 }
 
-function edit_category($category_index, $name)
+function edit_category($id, $name)
 {
     $categories = get_categories();
-    $categories[$category_index]->name = $name;
+    foreach ($categories as $key => $category) {
+        if ($category->id == $id) {
+            $categories[$key]->name = $name;
+        }
+    }
     save_json($categories, 'categories');
 }
 
-function delete_category($category_index)
+function delete_category($id)
 {
     $categories = get_categories();
-    unset($categories[$category_index]);
-    unlink(DOC_ROOT . "data/$category_index.json");
+    foreach ($categories as $key => $category) {
+        if ($category->id == $id) {
+            unset($categories[$key]);
+        }
+    }
+    unlink(DOC_ROOT . "data/$id.json");
     save_json($categories, 'categories');
 }
 

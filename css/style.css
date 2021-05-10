@@ -127,18 +127,6 @@ SimpleStore
      max-width: 100% !important;
  }
 
- #edit_company, .new-category {
-     position: fixed !important;
-     right: 0;
-     top: 40px;
-     left: 0;
-     padding: 0 10%;
-     z-index: 5;
-     background: white;
-     padding-top: 50px;
-     border-bottom: black 1px solid;
- }
-
  .delete-category {
      cursor: pointer;
      position: relative;
@@ -175,14 +163,6 @@ SimpleStore
          top: -36px;
          right: 0;
          z-index: 5;
-     }
-     .new-category {
-         position: fixed;
-         top: 0;
-         padding-top: 130px;
-         left: 10px;
-         background: white;
-         z-index: 6;
      }
      .row {
          margin-top: 40px !important;
