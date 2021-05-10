@@ -34,7 +34,7 @@ $company = get_company();
             <?php include_once('functions/get.php'); ?>
             <?php if ($logedin) { ?>
                 <?php include_once('elements/statistic.php'); ?>
-                <input type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" id="edit_company_toggle" value="Edit Company">
+                <input type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" id="edit_company_toggle" value="Edit Company" data-bs-toggle="modal" data-bs-target="#editCompany">
                 <input type="button" class="btn btn-outline-dark align-middle new-category_toggle mb-3 mt-3" value="New Category" />
             <?php } ?>
             <?php include_once('body.php'); ?>
