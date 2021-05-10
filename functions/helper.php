@@ -36,7 +36,7 @@ function get_company()
 
 function edit_company($data)
 {
-    file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data));
+    file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data), JSON_UNESCAPED_UNICODE);
 }
 
 function get_favorites()
@@ -56,18 +56,12 @@ function get_products($file = 0)
 
 function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = '1kg', $img = 'img/product.jpg')
 {
-    if ($img == "") {
-        $img = 'img/product.jpg';
-    }
-    if ($kind == "") {
-        $kind = '1кг';
-    }
     $product = new stdClass();
-    $product->name = $name;
+    $product->name = $name != '' ? $name : 'New Product';
     $product->description = $description;
-    $product->price = $price;
-    $product->kind = $kind;
-    $product->img = $img;
+    $product->price = $price != '' ? $price : 50;
+    $product->kind = $kind != '' ? $kind : '1kg';
+    $product->img = $img != '' ? $img : 'img/product.jpg';
     return $product;
 }
 
@@ -128,7 +122,7 @@ function delete_category($category_index)
 
 function save_json($array, $file_name = 'test')
 {
-    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array)));
+    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
 function auto_version($file)
@@ -212,7 +206,7 @@ function cart_log($cart, $total)
         $log = json_decode(file_get_contents($log_path));
     }
     $log[] = $cart_items;
-    file_put_contents($log_path, json_encode($log));
+    file_put_contents($log_path, json_encode($log, JSON_UNESCAPED_UNICODE));
 }
 
 function month_statistic($file_name = '')
