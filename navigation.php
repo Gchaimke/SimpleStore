@@ -17,7 +17,7 @@
                 <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') { ?>
                     <a class="btn btn-outline-info fas fa-sign-out-alt text-primary mt-1" aria-hidden="true" href="?logout"></a>
                 <?php } else { ?>
-                    <a class="btn btn-outline-info fa fa-key text-primary mt-1" aria-hidden="true" href="?login"></a>
+                    <button class="btn btn-outline-info fa fa-key text-primary mt-1" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#login_view"></button>
                 <?php } ?>
             </div>
         </div>

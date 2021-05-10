@@ -42,8 +42,11 @@ $company = get_company();
                 <input type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" value="Edit Company" data-bs-toggle="modal" data-bs-target="#editCompany">
                 <input type="button" class="btn btn-outline-dark align-middle category_editor_toggle mb-3 mt-3" value="New Category" data-bs-toggle="modal" data-bs-target="#categoryEditor">
             <?php } ?>
-            <?php include_once('elements/prodcuts.php'); ?>
-            <?php include_once('elements/cart.php'); ?>
+            <?php
+            include_once('elements/login.php');
+            include_once('elements/prodcuts.php');
+            include_once('elements/cart.php');
+            ?>
         </div>
     </main>
     <footer class="footer mt-auto py-3 bg-light">
