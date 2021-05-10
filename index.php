@@ -36,7 +36,7 @@ $company = get_company();
                 <?php
                 include_once('elements/statistic.php');
                 include_once('elements/edit_company.php');
-                include_once('elements/new_category.php');
+                include_once('elements/edit_category.php');
                 include_once('elements/uploader.php');
                 ?>
                 <input type="button" class="btn btn-outline-dark align-middle mb-3 mt-3" value="Edit Company" data-bs-toggle="modal" data-bs-target="#editCompany">
