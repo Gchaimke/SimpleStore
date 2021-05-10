@@ -44,13 +44,19 @@ $('.edit-category_btn').on('click', function () {
         });
 });
 
+$('.add-product_toggle').on('click', function () {
+    $('.edit_product_items').find('input').not(':button').val("");
+    $('.edit_product_items').find('textarea').val("");
+    $('.edit_product_items').find('#edit-category-id').val($(this).data("category"));
+});
+
 $('.add-product').on('click', function () {
-    var category = $(this).data("category");
-    var picture = $(this).parent('.card-body').find('.picture-url').val();
-    var name = $(this).parent('.card-body').find('.product-name').val();
-    var description = $(this).parent('.card-body').find('.product-description').val();
-    var price = $(this).parent('.card-body').find('.product-price').val();
-    var kind = $(this).parent('.card-body').find('.product-kind').val();
+    var category = $('.edit_product_items').find("#edit-category-id").val();
+    var picture = $('.edit_product_items').find('.picture-url').val();
+    var name = $('.edit_product_items').find('.product-name').val();
+    var description = $('.edit_product_items').find('.product-description').val();
+    var price = $('.edit_product_items').find('.product-price').val();
+    var kind = $('.edit_product_items').find('.product-kind').val();
     $.post("post.php", { add_product: true, category: category, picture: picture, name: name, description: description, price: price, kind: kind })
         .done(function () {
             setTimeout(function () {
@@ -60,15 +66,30 @@ $('.add-product').on('click', function () {
 });
 
 $('.edit-product').on('click', function () {
-    $('.edit-product-card').find('#edit-product-id').val($(this).data("product"));
-    $('.edit-product-card').find('#edit-category-id').val($(this).data("category"));
-    $('.edit-product-card').find('.picture-url').val($(this).data("picture"));
-    $('.edit-product-card').find('.product-name').val($(this).data("name"));
-    $('.edit-product-card').find('.product-description').val($(this).data("description"));
-    $('.edit-product-card').find('.product-price').val($(this).data("price"));
-    $('.edit-product-card').find('.product-kind').val($(this).data("kind"));
-    $('.edit-product-card').find('.upload_image_toggle').attr("data-name", $(this).data("name"));
-    $('.edit-product-card').toggle();
+    $('.edit_product_items').find('#edit-product-id').val($(this).data("product"));
+    $('.edit_product_items').find('#edit-category-id').val($(this).data("category"));
+    $('.edit_product_items').find('.picture-url').val($(this).data("picture"));
+    $('.edit_product_items').find('.product-name').val($(this).data("name"));
+    $('.edit_product_items').find('.product-description').val($(this).data("description"));
+    $('.edit_product_items').find('.product-price').val($(this).data("price"));
+    $('.edit_product_items').find('.product-kind').val($(this).data("kind"));
+    $('.edit_product_items').find('.upload_image_toggle').attr("data-name", $(this).data("name"));
+});
+
+$('.edit-product-btn').on('click', function () {
+    var product = $('.edit_product_items').find('#edit-product-id').val();
+    var category = $('.edit_product_items').find('#edit-category-id').val();
+    var picture = $('.edit_product_items').find('.picture-url').val();
+    var name = $('.edit_product_items').find('.product-name').val();
+    var description = $('.edit_product_items').find('.product-description').val();
+    var price = $('.edit_product_items').find('.product-price').val();
+    var kind = $('.edit_product_items').find('.product-kind').val();
+    $.post("post.php", { edit_product: true, category: category, product: product, picture: picture, name: name, description: description, price: price, kind: kind })
+        .done(function () {
+            setTimeout(function () {
+                location.reload();
+            }, 500);
+        });
 });
 
 $('.duplicate-product').on('click', function () {
@@ -137,7 +158,7 @@ $('.cart-send').on('click', function (e) {
             //Browser has blocked it
             alert('Please allow popups for this website');
         }
-    }else{
+    } else {
         alert('Cart is empty!');
     }
 
@@ -149,22 +170,6 @@ $(document).on('click', '.remove-from-cart', function () {
     $('.cart-total').text(total - price);
     $('.mobile-cart-total').text(total - price);
     $(this).parent().remove();
-});
-
-$('.edit-product-btn').on('click', function () {
-    var product = $(this).parent('.card-body').find('#edit-product-id').val();
-    var category = $(this).parent('.card-body').find('#edit-category-id').val();
-    var picture = $(this).parent('.card-body').find('.picture-url').val();
-    var name = $(this).parent('.card-body').find('.product-name').val();
-    var description = $(this).parent('.card-body').find('.product-description').val();
-    var price = $(this).parent('.card-body').find('.product-price').val();
-    var kind = $(this).parent('.card-body').find('.product-kind').val();
-    $.post("post.php", { edit_product: true, category: category, product: product, picture: picture, name: name, description: description, price: price, kind: kind })
-        .done(function () {
-            setTimeout(function () {
-                location.reload();
-            }, 500);
-        });
 });
 
 $('.delete-product').on('click', function () {
@@ -203,8 +208,6 @@ $('.get_form_url').on('click', function () {
             $(document).find('.picture-url').val('img/products/' + e);
             alert(e + " uploaded!");
             $('.gallery_upload').hide();
-            //$('.edit-product-btn').trigger("click");
-            //location.reload();
         });
 });
 
@@ -264,14 +267,6 @@ $('.select_image_toggle').on('click', function () {
 $('.upload_image_toggle').on('click', function () {
     $('.gallery_upload').toggle();
     $('.upload_image_name').val($(this).data('name'));
-});
-
-$('.add-product_toggle').on('click', function () {
-    $('.new-product').toggle();
-});
-
-$('.close-edit-product').on('click', function () {
-    $('.edit-product-card').toggle();
 });
 
 $('.category_editor_toggle').on('click', function () {

@@ -17,7 +17,7 @@ foreach ($categories as $category) {
             <div id="flush-collapse' . $category->id . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $category->id . '" data-bs-parent="#accordionFlush">
             ';
     if ($logedin) {
-        echo '<button type="button" class="btn btn-outline-dark align-middle add-product_toggle mt-md-4 float-end mb-md-4" data-category="' . $category->id . '">
+        echo '<button type="button" class="btn btn-outline-dark align-middle add-product_toggle mt-md-4 float-end mb-md-4" data-category="' . $category->id . '" data-bs-toggle="modal" data-bs-target="#edit_product">
         <i class="far fa-plus-square" style="font-size: 2em;"></i></button>';
         include('elements/new_card.php');
     }
@@ -34,7 +34,4 @@ foreach ($categories as $category) {
     if ($logedin) {
         echo "<i class='far fa-trash-alt delete-category' data-category='$category->id '></i>";
     }
-}
-if ($logedin) {
-    include('elements/edit_card.php');
 }

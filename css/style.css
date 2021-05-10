@@ -65,14 +65,8 @@ SimpleStore
  }
 
  .gallery_upload {
-     position: fixed;
-     background: #c7ffec;
+     background: #e6e6e6;
      padding: 2rem;
-     z-index: 10;
-     width: 100%;
-     left: 0;
-     top: 0;
-     padding-top: 200px;
  }
 
  .gallery_image>.image {
@@ -110,17 +104,6 @@ SimpleStore
      color: #1aa778;
      padding: 5px 15px;
      border-radius: 5px;
- }
-
- .edit-product-card {
-     position: fixed !important;
-     top: -10px;
-     bottom: 0;
-     right: 0;
-     left: 0;
-     padding: 40px 10%;
-     z-index: 5;
-     max-width: 100% !important;
  }
 
  .delete-category {
@@ -181,7 +164,5 @@ SimpleStore
      .row.overflow-auto {
          height: 260px;
      }
-     .edit-product-card {
-         padding: 55px 2%;
-     }
+
  }

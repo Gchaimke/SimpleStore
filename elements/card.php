@@ -1,5 +1,5 @@
 <div class="card product-card mt-2">
-    <div class="card-image" style="background-image: url('<?= SITE_ROOT .$product->img ?>');"></div>
+    <div class="card-image" style="background-image: url('<?= SITE_ROOT . $product->img ?>');"></div>
     <div class="card-body">
         <?php if ($logedin) {
             echo "<i class='far fa-trash-alt delete-product text-danger' data-category='$category->id ' data-product='$product_num '></i>";
@@ -10,6 +10,7 @@
             data-description='$product->description'
             data-price='$product->price'
             data-kind='$product->kind'
+            data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"
             ></i>";
             echo "<i class='far fa-clone duplicate-product' data-category='$category->id ' data-product='$product_num '></i>";
         }
