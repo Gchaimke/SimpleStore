@@ -56,7 +56,7 @@ if (isset($_POST['delete_gallery_image'])) {
 }
 
 if (isset($_POST['cart_log'])) {
-    cart_log($_POST['cart'],$_POST['total']);
+    echo cart_log($_POST['cart'],$_POST['total']);
     exit;
 }
 

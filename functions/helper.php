@@ -224,6 +224,8 @@ function cart_log($cart, $total)
 
     $log->$next = $cart_items;
     file_put_contents($log_path, json_encode($log, JSON_UNESCAPED_UNICODE));
+    send_email($next);
+    return $next;
 }
 
 function month_statistic($file_name = '')
@@ -237,9 +239,43 @@ function month_statistic($file_name = '')
     if (file_exists($file_name)) {
         return json_decode(file_get_contents($file_name));
     } else {
-        echo 'No statistic for this month yet.';
         return array();
     }
+}
+
+function get_order($order_num = 0)
+{
+    if ($order_num != 0) {
+        $order =  isset(month_statistic()->$order_num) ? month_statistic()->$order_num : false;
+        if ($order) {
+            return order_to_html($order);
+        }
+
+        $prev_month_order = date('m_y', strtotime("-1 month"));
+        $order =  isset(month_statistic($prev_month_order)->$order_num) ? month_statistic($prev_month_order)->$order_num : false;
+        if ($order) {
+            return order_to_html($order);
+        }
+
+        return "<h3>Order #$order_num not found!</h3>";
+    }
+}
+
+function order_to_html($order)
+{
+    $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
+    $html = "<tr><th style='$style'>product</th><th style='$style'>Qtty</th><th style='$style'>Price</th></tr>";
+    foreach ($order->items as $value) {
+        $html .= "<tr>";
+        $value = explode(',', $value);
+        foreach ($value as $td) {
+            $html .= "<td style='$style'>$td</td>";
+        }
+        $html .= '</tr>';
+    }
+    $html .= "<tr><td style='$style'>Total</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
+    return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
+        <table style='width:100%;$style'>$html</table>";
 }
 
 function send_email($order_num = 0)
@@ -247,30 +283,14 @@ function send_email($order_num = 0)
     if ($order_num != 0) {
         $to = "gchaimke@gmail.com";
         $subject = "Order #" . $order_num;
-        $order = month_statistic()->$order_num;
-
-        $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
-        $html = "<tr><th style='$style'>product</th><th style='$style'>Qtty</th><th style='$style'>Price</th></tr>";
-        foreach ($order->items as $value) {
-            $html .= "<tr>";
-            $value = explode(',', $value);
-            foreach ($value as $td) {
-                $html .= "<td style='$style'>$td</td>";
-            }
-            $html .= '</tr>';
-        }
-        $html .= "<tr><td style='$style'>Total</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
-        $message = "<html><head><title>HTML email</title></head><body>
-                    <h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
-                    <table style='width:100%;$style'>$html</table>
-                    </body></html>";
-
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+        $message =  get_order($order_num) . "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: admin@mc88.co.il" . "\r\n";
         $headers .= "BC: gchaim@avdor.com" . "\r\n";
 
         mail($to, $subject, $message, $headers);
-        echo $message;
+        return $message;
     }
 }

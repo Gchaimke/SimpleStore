@@ -12,5 +12,7 @@
     <center>
         <b class="cart-total-wraper" style="font-size:1rem;">Total: <span class="cart-total">0</span> ש"ח</b>
         <div><a class="btn btn-outline-success text-info my-2 cart-send" aria-hidden="true" href="https://api.whatsapp.com/send/?phone=972<?php echo substr($company->phone, 1); ?>&text="><i class="fab fa-whatsapp"></i> Send</a></div>
+        <div><a class="btn btn-outline-success text-info my-2 cart-send-email" aria-hidden="true" ><i class="far fa-paper-plane"></i> Send</a></div>
+
     </center>
 </div>

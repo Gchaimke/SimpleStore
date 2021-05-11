@@ -16,8 +16,11 @@ if (isset($_GET['logout'])) {
     logout();
 }
 
-if (isset($_GET['email'])) {
-    send_email(512002);
+if (isset($_GET['email_order'])) {
+    send_email($_GET['email_order']);
 }
 
-
+if (isset($_GET['order'])) {
+    $order = get_order($_GET['order']);
+    print_r($order);
+}
