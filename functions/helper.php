@@ -225,7 +225,7 @@ function cart_log($cart, $total, $client)
 
     $log->$next = $cart_items;
     file_put_contents($log_path, json_encode($log, JSON_UNESCAPED_UNICODE));
-    //send_email($next);
+    send_email($next);
     return $next;
 }
 
@@ -246,16 +246,21 @@ function month_statistic($file_name = '')
 
 function get_order($order_num = 0)
 {
+    global $logedin;
     if ($order_num != 0) {
         $order =  isset(month_statistic()->$order_num) ? month_statistic()->$order_num : false;
         if ($order) {
-            return order_to_html($order)."<br>".get_order_client($order_num);
+            $html = order_to_html($order);
+            $client = $logedin?order_client_to_html($order):'';
+            return $html.$client;
         }
 
         $prev_month_order = date('m_y', strtotime("-1 month"));
         $order =  isset(month_statistic($prev_month_order)->$order_num) ? month_statistic($prev_month_order)->$order_num : false;
         if ($order) {
-            return order_to_html($order)."<br>".get_order_client($order_num);
+            $html = order_to_html($order);
+            $client = $logedin?order_client_to_html($order):'';
+            return $html.$client;
         }
 
         return "<h3>Order #$order_num not found!</h3>";
@@ -275,23 +280,18 @@ function get_order_client($order_num = 0)
         if ($order) {
             return order_client_to_html($order);
         }
-
         return "<h3>Client from order #$order_num not found!</h3>";
     }
 }
 
 function order_client_to_html($order)
 {
-    global $logedin;
-    $html ='';
-    if ($logedin) {
-        $html .= "<h3>Shipment Address</h3>";
-        $html .= "<ul>";
-        foreach ($order->client as $key => $value) {
-            $html .= "<li>$key: $value</li>";
-        }
-        $html .= '</ul>';
+    $html = "<br><h3>Shipment Address</h3>";
+    $html .= "<ul>";
+    foreach ($order->client as $key => $value) {
+        $html .= "<li>$key: $value</li>";
     }
+    $html .= '</ul>';
     return $html;
 }
 
@@ -318,7 +318,7 @@ function send_email($order_num = 0)
         $to = "gchaimke@gmail.com";
         $subject = "Order #" . $order_num;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-        $message =  get_order($order_num) . "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a>";
+        $message =  get_order($order_num) . get_order_client($order_num )."<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: admin@mc88.co.il" . "\r\n";
