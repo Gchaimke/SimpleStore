@@ -205,7 +205,7 @@ function compressImage($source, $destination, $quality)
     unlink($source);
 }
 
-function cart_log($cart, $total)
+function cart_log($cart, $total, $client)
 {
     $log_name = date('m_y');
     $log_path = DOC_ROOT . "data/orders/$log_name.json";
@@ -221,10 +221,11 @@ function cart_log($cart, $total)
     $cart_items->date = $log_date;
     $cart_items->items = $cart;
     $cart_items->total = $total;
+    $cart_items->client = $client;
 
     $log->$next = $cart_items;
     file_put_contents($log_path, json_encode($log, JSON_UNESCAPED_UNICODE));
-    send_email($next);
+    //send_email($next);
     return $next;
 }
 
