@@ -21,6 +21,9 @@ if (isset($_GET['email_order'])) {
 }
 
 if (isset($_GET['order'])) {
-    $order = get_order($_GET['order']);
-    print_r($order);
+    $order = order_to_html($_GET['order']);
+    if($logedin){
+        $order .= order_client_to_html($_GET['order']);
+    }
+    print($order."<h2 style='color:green;text-align: center;'>Order sent success,<br> thank you!</h2>");
 }
