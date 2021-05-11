@@ -281,7 +281,7 @@ function get_order_client($order_num = 0)
         if ($order) {
             return order_client_to_html($order);
         }
-        return "<h3>Client from order #$order_num not found!</h3>";
+        return "<h3>Client order #$order_num not found!</h3>";
     }
 }
 
@@ -310,7 +310,7 @@ function order_to_html($order)
     }
     $html .= "<tr><td style='$style'>Total</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
     return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
-        <table style='width:100%;$style'>$html</table>";
+        <table style='width:100%;$style'>$html</table><br><h2 style='color:green;'>Order sent success, thank you!</h2>";
 }
 
 function send_email($order_num = 0)
@@ -319,8 +319,8 @@ function send_email($order_num = 0)
     if ($order_num != 0) {
         $to = $company->email;
         $subject = "Order #" . $order_num;
-        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-        $message =  get_order($order_num) . get_order_client($order_num )."<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a>";
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".SITE_ROOT."?order=".$order_num;
+        $message =  get_order($order_num) . get_order_client($order_num )."<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: admin@mc88.co.il" . "\r\n";

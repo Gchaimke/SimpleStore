@@ -12,7 +12,7 @@ $('#edit_company').on('submit', function (e) {
         data: $('#edit_company').serialize(),
         success: function (res) {
             alert(res);
-            //location.reload();
+            location.reload();
         }
     });
 });
@@ -270,7 +270,7 @@ $('.upload_btn').on('click', function () {
 function cart_log(cart, total, client) {
     $.post("post.php", { cart_log: true, cart: cart, total: total, client: client })
         .done(function (e) {
-            location.replace("/?order="+e);
+            location.replace(location.protocol + '//' + location.host + location.pathname+"?order="+e);
         });
 }
 
