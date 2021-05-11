@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+$company = get_company();
 
 if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = true;
@@ -14,7 +15,7 @@ function redirect($url)
 
 function login($pass)
 {
-    $company = get_company();
+    global $company;
     if ($pass == $company->pass) {
         $_SESSION["login"] = true;
         redirect(SITE_ROOT);
@@ -314,8 +315,9 @@ function order_to_html($order)
 
 function send_email($order_num = 0)
 {
+    global $company;
     if ($order_num != 0) {
-        $to = "gchaimke@gmail.com";
+        $to = $company->email;
         $subject = "Order #" . $order_num;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         $message =  get_order($order_num) . get_order_client($order_num )."<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a>";
