@@ -279,7 +279,7 @@ function order_to_html($order_num = 0)
 {
     $order = get_order($order_num);
     $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
-    $html = "<tr><th style='$style'>product</th><th style='$style'>Qtty</th><th style='$style'>Price</th></tr>";
+    $html = "<tr><th style='$style'>Product</th><th style='$style'>Qtty</th><th style='$style'>Price</th></tr>";
     foreach ($order->items as $value) {
         $html .= "<tr>";
         $value = explode(',', $value);
