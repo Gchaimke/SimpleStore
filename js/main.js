@@ -172,7 +172,6 @@ $('.cart-send-email').on('click', function (e) {
             $(client).each(function (index, obj) {
                 data[obj.name] = obj.value;
             });
-            console.log(data);
             cart_log(log, $('.cart-total').text(), data);
         });
     } else {
@@ -258,7 +257,7 @@ $('.upload_btn').on('click', function () {
 function cart_log(cart, total, client) {
     $.post("post.php", { cart_log: true, cart: cart, total: total, client: client })
         .done(function (e) {
-            console.log(e);
+            location.replace("/?order="+e);
         });
 }
 

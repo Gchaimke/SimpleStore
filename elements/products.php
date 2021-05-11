@@ -1,7 +1,6 @@
 <?php
 
 $categories = get_categories();
-echo "<div class='mb-4'>$company->header</div>";
 foreach ($categories as $category) {
     $products = get_products($category->id);
     echo '<div class="accordion accordion-flush" id="accordionFlush">

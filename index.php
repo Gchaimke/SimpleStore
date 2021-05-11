@@ -43,6 +43,7 @@ $company = get_company();
             <?php
             include_once('elements/login.php');
             include_once('elements/customer.php');
+            echo "<div class='m-4'>$company->header</div>";
             include_once('elements/products.php');
             include_once('elements/cart.php');
             ?>
