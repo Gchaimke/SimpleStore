@@ -310,7 +310,7 @@ function order_to_html($order)
     }
     $html .= "<tr><td style='$style'>Total</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
     return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
-        <table style='width:100%;$style'>$html</table><br><h2 style='color:green;'>Order sent success, thank you!</h2>";
+        <table style='width:100%;$style'>$html</table><br><h2 style='color:green;text-align: center;'>Order sent success,<br> thank you!</h2>";
 }
 
 function send_email($order_num = 0)
