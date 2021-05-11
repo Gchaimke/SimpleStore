@@ -217,7 +217,7 @@ function cart_log($cart, $total, $client)
     $cart_items = new stdClass();
     $log_date = date('d/m/y H:i:s');
     $last_item =  end($log);
-    $next = isset($last_item->id) ? $last_item->id + 1 : date('md000');
+    $next = isset($last_item->id) ? $last_item->id + 1 : intval(date('md')) . '000';
     $cart_items->id = $next;
     $cart_items->date = $log_date;
     $cart_items->items = $cart;
@@ -299,12 +299,12 @@ function send_email($order_num = 0)
     if ($order_num != 0) {
         $to = $company->email;
         $subject = "Order #" . $order_num;
-        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".SITE_ROOT."?order=".$order_num;
-        $message =  order_to_html($order_num) . order_client_to_html($order_num)."<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SITE_ROOT . "?order=" . $order_num;
+        $message =  order_to_html($order_num) . order_client_to_html($order_num) . "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: admin@mc88.co.il" . "\r\n";
-        $headers .= "CC: ".get_order($order_num)->client->email . "\r\n";
+        $headers .= "CC: " . get_order($order_num)->client->email . "\r\n";
         $headers .= "BC: gchaimke@gmail.com" . "\r\n";
 
         mail($to, $subject, $message, $headers);
