@@ -208,7 +208,7 @@ function compressImage($source, $destination, $quality)
 function cart_log($cart, $total)
 {
     $log_name = date('m_y');
-    $log_path = DOC_ROOT . "data/log/$log_name.json";
+    $log_path = DOC_ROOT . "data/orders/$log_name.json";
     if (file_exists($log_path)) {
         $log = json_decode(file_get_contents($log_path));
     }
@@ -230,9 +230,9 @@ function month_statistic($file_name = '')
 {
     if ($file_name == '') {
         $file_name = date('m_y');
-        $file_name = DOC_ROOT . "data/log/$file_name.json";
+        $file_name = DOC_ROOT . "data/orders/$file_name.json";
     } else {
-        $file_name = DOC_ROOT . "data/log/$file_name.json";
+        $file_name = DOC_ROOT . "data/orders/$file_name.json";
     }
     if (file_exists($file_name)) {
         return json_decode(file_get_contents($file_name));
@@ -248,30 +248,22 @@ function send_email($order_num = 0)
         $to = "gchaimke@gmail.com";
         $subject = "Order #" . $order_num;
         $order = month_statistic()->$order_num;
-        $html = '<tr><th>product</th><th>Qtty</th><th>Price</th></tr>';
+
+        $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
+        $html = "<tr><th style='$style'>product</th><th style='$style'>Qtty</th><th style='$style'>Price</th></tr>";
         foreach ($order->items as $value) {
-            $html .= '<tr>';
+            $html .= "<tr>";
             $value = explode(',', $value);
             foreach ($value as $td) {
-                $html .= "<td>$td</td>";
+                $html .= "<td style='$style'>$td</td>";
             }
             $html .= '</tr>';
         }
-        $html .= "<tr><td>Total</td><td colspan='2'>$order->total</td></tr>";
-        $style = '<style>
-                    table, th, td {
-                        border: 1px solid black;
-                        border-collapse: collapse;
-                        padding: 5px;
-                    }
-                    .msg_header{
-                        text-align: center;
-                        background: #bb80a1;
-                        color: white;
-                        padding: 30px;
-                    }
-                </stile>';
-        $message = "<html><head><title>HTML email</title>$style</head><body><h3 class='msg_header'>$order->date <br> Order:#$order->id</h3><table style='width:100%;'>$html</table></body></html>";
+        $html .= "<tr><td style='$style'>Total</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
+        $message = "<html><head><title>HTML email</title></head><body>
+                    <h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
+                    <table style='width:100%;$style'>$html</table>
+                    </body></html>";
 
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -279,6 +271,6 @@ function send_email($order_num = 0)
         $headers .= "BC: gchaim@avdor.com" . "\r\n";
 
         mail($to, $subject, $message, $headers);
-        echo 'mail sended';
+        echo $message;
     }
 }
