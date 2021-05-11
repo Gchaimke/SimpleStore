@@ -249,17 +249,50 @@ function get_order($order_num = 0)
     if ($order_num != 0) {
         $order =  isset(month_statistic()->$order_num) ? month_statistic()->$order_num : false;
         if ($order) {
-            return order_to_html($order);
+            return order_to_html($order)."<br>".get_order_client($order_num);
         }
 
         $prev_month_order = date('m_y', strtotime("-1 month"));
         $order =  isset(month_statistic($prev_month_order)->$order_num) ? month_statistic($prev_month_order)->$order_num : false;
         if ($order) {
-            return order_to_html($order);
+            return order_to_html($order)."<br>".get_order_client($order_num);
         }
 
         return "<h3>Order #$order_num not found!</h3>";
     }
+}
+
+function get_order_client($order_num = 0)
+{
+    if ($order_num != 0) {
+        $order =  isset(month_statistic()->$order_num) ? month_statistic()->$order_num : false;
+        if ($order) {
+            return order_client_to_html($order);
+        }
+
+        $prev_month_order = date('m_y', strtotime("-1 month"));
+        $order =  isset(month_statistic($prev_month_order)->$order_num) ? month_statistic($prev_month_order)->$order_num : false;
+        if ($order) {
+            return order_client_to_html($order);
+        }
+
+        return "<h3>Client from order #$order_num not found!</h3>";
+    }
+}
+
+function order_client_to_html($order)
+{
+    global $logedin;
+    $html ='';
+    if ($logedin) {
+        $html .= "<h3>Shipment Address</h3>";
+        $html .= "<ul>";
+        foreach ($order->client as $key => $value) {
+            $html .= "<li>$key: $value</li>";
+        }
+        $html .= '</ul>';
+    }
+    return $html;
 }
 
 function order_to_html($order)
