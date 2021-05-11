@@ -209,15 +209,20 @@ function cart_log($cart, $total)
 {
     $log_name = date('m_y');
     $log_path = DOC_ROOT . "data/log/$log_name.json";
-    $cart_items = new stdClass();
-    $log_date = date('d/m/y H:i:s');
-    $cart_items->date = $log_date;
-    $cart_items->items = $cart;
-    $cart_items->total = $total;
     if (file_exists($log_path)) {
         $log = json_decode(file_get_contents($log_path));
     }
-    $log[] = $cart_items;
+
+    $cart_items = new stdClass();
+    $log_date = date('d/m/y H:i:s');
+    $last_item =  end($log);
+    $next = isset($last_item->id) ? $last_item->id + 1 : date('md000');
+    $cart_items->id = $next;
+    $cart_items->date = $log_date;
+    $cart_items->items = $cart;
+    $cart_items->total = $total;
+
+    $log->$next = $cart_items;
     file_put_contents($log_path, json_encode($log, JSON_UNESCAPED_UNICODE));
 }
 
@@ -234,5 +239,46 @@ function month_statistic($file_name = '')
     } else {
         echo 'No statistic for this month yet.';
         return array();
+    }
+}
+
+function send_email($order_num = 0)
+{
+    if ($order_num != 0) {
+        $to = "gchaimke@gmail.com";
+        $subject = "Order #" . $order_num;
+        $order = month_statistic()->$order_num;
+        $html = '<tr><th>product</th><th>Qtty</th><th>Price</th></tr>';
+        foreach ($order->items as $value) {
+            $html .= '<tr>';
+            $value = explode(',', $value);
+            foreach ($value as $td) {
+                $html .= "<td>$td</td>";
+            }
+            $html .= '</tr>';
+        }
+        $html .= "<tr><td>Total</td><td colspan='2'>$order->total</td></tr>";
+        $style = '<style>
+                    table, th, td {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        padding: 5px;
+                    }
+                    .msg_header{
+                        text-align: center;
+                        background: #bb80a1;
+                        color: white;
+                        padding: 30px;
+                    }
+                </stile>';
+        $message = "<html><head><title>HTML email</title>$style</head><body><h3 class='msg_header'>$order->date <br> Order:#$order->id</h3><table style='width:100%;'>$html</table></body></html>";
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= "From: admin@mc88.co.il" . "\r\n";
+        $headers .= "BC: gchaim@avdor.com" . "\r\n";
+
+        mail($to, $subject, $message, $headers);
+        echo 'mail sended';
     }
 }

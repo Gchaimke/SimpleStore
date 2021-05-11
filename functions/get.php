@@ -15,3 +15,9 @@ if (isset($_GET['login_error'])) {
 if (isset($_GET['logout'])) {
     logout();
 }
+
+if (isset($_GET['email'])) {
+    send_email(512002);
+}
+
+

@@ -128,16 +128,18 @@ $('.cart_header, .close-cart').on('click', function () {
 $('.cart-send').on('click', function (e) {
     e.preventDefault();
     var url = $(this).attr("href");
-    var cart = "";
+    var msg = "";
+    let log = {};
     $('.cart_items>li').each(function () {
-        cart += $(this).find(".cart-product").text() + " " + $(this).find(".cart_qty").text() + "\n";
+        msg +=$(this).data('product_id')+" "+ $(this).find(".cart-product").text() + " " + $(this).find(".cart_qty").text() + "\n ";
+        log[$(this).data('product_id')] = $(this).find(".cart-product").text() + "," + $(this).find(".cart_qty").text()+ "," + $(this).find(".cart_price").text();
     })
     var total = "\n TOTAL:~" + $('.cart-total').text();
-    if (cart != '') {
-        var win = window.open(url + encodeURIComponent(cart + total), '_blank');
+    if (msg != '') {
+        var win = window.open(url + encodeURIComponent(msg + total), '_blank');
         if (win) {
             //Browser has allowed it to be opened
-            cart_log(cart, $('.cart-total').text());
+            cart_log(log, $('.cart-total').text());
             win.focus();
         } else {
             //Browser has blocked it
