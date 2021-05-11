@@ -4,6 +4,19 @@ $(document).ready(function () {
     $('.cart-send-email').hide();
 });
 
+$('#edit_company').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'post',
+        url: 'post.php',
+        data: $('#edit_company').serialize(),
+        success: function (res) {
+            alert(res);
+            //location.reload();
+        }
+    });
+});
+
 $('.add-category').on('click', function () {
     var category_name = $('.category_editor').find('.category_editor-name').val();
     $.post("post.php", { add_category: true, category_name: category_name })

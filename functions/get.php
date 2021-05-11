@@ -24,8 +24,3 @@ if (isset($_GET['order'])) {
     $order = get_order($_GET['order']);
     print_r($order);
 }
-
-if (isset($_GET['client'])) {
-    $client = get_order_client($_GET['client']);
-    print_r($client);
-}

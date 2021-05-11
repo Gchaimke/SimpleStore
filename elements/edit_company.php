@@ -17,6 +17,10 @@
                         <input type="text" class="form-control" name="phone" value="<?= $company->phone ?>" />
                     </div>
                     <div class="input-group mb-3">
+                        <label class="input-group-text">Email</label>
+                        <input type="text" class="form-control" name="email" value="<?= $company->email ?>" />
+                    </div>
+                    <div class="input-group mb-3">
                         <label class="input-group-text">Logo</label>
                         <input type="text" class="form-control" name="logo" value="<?= $company->logo ?>" />
                     </div>
