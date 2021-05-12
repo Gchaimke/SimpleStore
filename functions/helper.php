@@ -335,13 +335,16 @@ function get_order($order_num = 0)
 function order_client_to_html($order_num = 0)
 {
     $order = get_order($order_num);
-    $html = "<br><h3>Shipment Address</h3>";
-    $html .= "<ul>";
-    foreach ($order->client as $key => $value) {
-        $html .= "<li>$key: $value</li>";
+    if (is_object($order)) {
+        $html = "<br><h3>Shipment Address</h3>";
+        $html .= "<ul>";
+        foreach ($order->client as $key => $value) {
+            $html .= "<li>$key: $value</li>";
+        }
+        $html .= '</ul>';
+        return $html;
     }
-    $html .= '</ul>';
-    return $html;
+    return "<br>Order not found";
 }
 
 function order_to_html($order_num = 0)
