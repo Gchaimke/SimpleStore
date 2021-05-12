@@ -21,7 +21,7 @@
                 ?>
                 <div class="input-group mb-3">
                     <label class="input-group-text">Name</label>
-                    <input type="text" class="form-control product-name" />
+                    <input type="text" class="form-control product-name" name="product_name"/>
                 </div>
                 <div class="input-group mb-3">
                     <label class="input-group-text">Description</label>

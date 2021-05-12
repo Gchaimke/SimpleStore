@@ -54,6 +54,20 @@ function get_categories()
     return json_decode(file_get_contents(DOC_ROOT . 'data/categories.json'));
 }
 
+function get_category($id)
+{
+    global $categories;
+    foreach ($categories as $category) {
+        if ($category->id == $id) {
+            if (!property_exists($category, 'last_index')) {
+                $category->last_index = 0;
+            }
+            return $category;
+        }
+    }
+    return null;
+}
+
 function get_products($file = 0)
 {
     if (file_exists(DOC_ROOT . "data/$file.json")) {
@@ -61,43 +75,90 @@ function get_products($file = 0)
     }
 }
 
-function new_product($name = 'New Product', $description = 'description', $price = '50', $kind = '1kg', $img = 'img/product.jpg')
+function new_product($product_array = array())
 {
     $product = new stdClass();
-    $product->name = $name != '' ? $name : 'New Product';
-    $product->description = $description;
-    $product->price = $price != '' ? $price : 50;
-    $product->kind = $kind != '' ? $kind : '1kg';
-    $product->img = $img != '' ? $img : 'img/product.jpg';
-    return $product;
+    if ($product_array['id'] == '') {
+        $product->name = $product_array['name'] != '' ? $product_array['name'] : 'New Product';
+        $product->description = $product_array['description'] != '' ? $product_array['description'] : '';
+        $product->price = $product_array['price'] != '' ? $product_array['price'] : 50;
+        $product->kind = $product_array['kind'] != '' ? $product_array['kind'] : '1kg';
+        $product->img = $product_array['img'] != '' ? $product_array['img'] : 'img/product.jpg';
+        $product->id = "";
+        return $product;
+    }
 }
 
 function add_product($category_index, $product)
 {
+    $category = get_category($category_index);
     $products = get_products($category_index);
+    $product = new_product($product);
+    $product->id = $category->last_index + 1;
     $products[] = $product;
     save_json($products, $category_index);
-}
-
-function edit_product($category_index, $product_index, $product)
-{
-    $products = get_products($category_index);
-    $products[$product_index] = $product;
-    save_json($products, $category_index);
+    edit_category($category_index, "last_index", $category->last_index + 1);
 }
 
 function duplicate_product($category_index, $product_index)
 {
+    $category = get_category($category_index);
     $products = get_products($category_index);
-    $product = $products[$product_index];
-    $products[] = $product;
+    $new_product = new stdClass();
+    foreach ($products as $curent_product) {
+        if ($curent_product->id == $product_index) {
+            $new_product = clone ($curent_product);
+        }
+    }
+    $new_product->id = $category->last_index + 1;
+    $products[] = $new_product;
     save_json($products, $category_index);
+    edit_category($category_index, "last_index", $category->last_index + 1);
+}
+
+function edit_product($category_index, $product)
+{
+    $products = get_products($category_index);
+    $product = (object)$product;
+    $product->id = intval($product->id);
+    foreach ($products as $key => $curent_product) {
+        if ($curent_product->id == $product->id) {
+            $products[$key] = $product;
+        }
+    }
+    save_json($products, $category_index);
+}
+
+function update_products_id($category_index = '')
+{
+    if ($category_index != '') {
+        $category = get_category($category_index);
+        if (isset($category)) {
+            $products = get_products($category_index);
+            foreach ($products as $key => $product) {
+                if (!property_exists($product, 'id')) {
+                    $product->id = $category->last_index;
+                    $products[$key] = $product;
+                    $category->last_index++;
+                }
+            }
+            save_json($products, $category_index);
+            edit_category($category_index, "last_index", $category->last_index);
+            echo 'updated';
+            return;
+        }
+    }
+    echo 'no category with id ' . $category_index;
 }
 
 function delete_product($category_index, $product_index)
 {
     $products = get_products($category_index);
-    unset($products[$product_index]);
+    foreach ($products as $key => $curent_product) {
+        if ($curent_product->id ==  $product_index) {
+            unset($products[$key]);
+        }
+    }
     save_json($products, $category_index);
 }
 
@@ -105,21 +166,22 @@ function add_category($name = 'New Category')
 {
     $categories = get_categories();
     $last_category =  end($categories);
-    $object = new stdClass();
-    $object->id = isset($last_category->id) ? $last_category->id + 1 : 0;
-    $object->name = $name;
-    $categories[] = $object;
+    $category = new stdClass();
+    $category->id = isset($last_category->id) ? $last_category->id + 1 : 0;
+    $category->name = $name;
+    $category->last_index = 0;
+    $categories[] = $category;
     $products[] = new_product();
     save_json($categories, 'categories');
-    save_json($products, $object->id);
+    save_json($products, $category->id);
 }
 
-function edit_category($id, $name)
+function edit_category($id, $key, $value)
 {
     $categories = get_categories();
-    foreach ($categories as $key => $category) {
+    foreach ($categories as $index => $category) {
         if ($category->id == $id) {
-            $categories[$key]->name = $name;
+            $categories[$index]->$key = $value;
         }
     }
     save_json($categories, 'categories');

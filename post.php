@@ -3,8 +3,19 @@ require_once('functions/helper.php');
 
 if (isset($_POST['edit_product'])) {
     if (!empty($_POST['category'])) {
-        $product = new_product($_POST['name'], $_POST['description'], $_POST['price'], $_POST['kind'], $_POST['picture']);
-        edit_product(clean($_POST['category']),  clean($_POST['product']), $product);
+        $product = array(
+            'id' => clean($_POST['product_id']),
+            'name' => $_POST['name'],
+            'description' => $_POST['description'],
+            'price' => $_POST['price'],
+            'kind' => $_POST['kind'],
+            'img' => $_POST['img'],
+        );
+        if (!empty($_POST['product_id'])) {
+            edit_product(clean($_POST['category']), $product);
+        } else {
+            add_product(clean($_POST['category']), $product);
+        }
     }
     exit;
 }
@@ -29,7 +40,7 @@ if (isset($_POST['add_category'])) {
 }
 
 if (isset($_POST['edit_category'])) {
-    edit_category($_POST['category_index'], $_POST['category_name']);
+    edit_category($_POST['category_index'], "name", $_POST['category_name']);
     exit;
 }
 
@@ -56,7 +67,7 @@ if (isset($_POST['delete_gallery_image'])) {
 }
 
 if (isset($_POST['cart_log'])) {
-    echo cart_log($_POST['cart'],$_POST['total'],$_POST['client']);
+    echo cart_log($_POST['cart'], $_POST['total'], $_POST['client']);
     exit;
 }
 

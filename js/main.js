@@ -68,7 +68,7 @@ $('.add-product_toggle').on('click', function () {
 $('.edit-product').on('click', function () {
     $('.edit_product_items').find('#edit-product-id').val($(this).data("product"));
     $('.edit_product_items').find('#edit-category-id').val($(this).data("category"));
-    $('.edit_product_items').find('.picture-url').val($(this).data("picture"));
+    $('.edit_product_items').find('.picture-url').val($(this).data("img"));
     $('.edit_product_items').find('.product-name').val($(this).data("name"));
     $('.edit_product_items').find('.product-description').val($(this).data("description"));
     $('.edit_product_items').find('.product-price').val($(this).data("price"));
@@ -77,26 +77,28 @@ $('.edit-product').on('click', function () {
 });
 
 $('.edit-product-btn').on('click', function () {
-    var product = $('.edit_product_items').find('#edit-product-id').val();
+    var product_id = $('.edit_product_items').find('#edit-product-id').val();
     var category = $('.edit_product_items').find('#edit-category-id').val();
-    var picture = $('.edit_product_items').find('.picture-url').val();
+    var img = $('.edit_product_items').find('.picture-url').val();
     var name = $('.edit_product_items').find('.product-name').val();
     var description = $('.edit_product_items').find('.product-description').val();
     var price = $('.edit_product_items').find('.product-price').val();
     var kind = $('.edit_product_items').find('.product-kind').val();
-    $.post("post.php", { edit_product: true, category: category, product: product, picture: picture, name: name, description: description, price: price, kind: kind })
-        .done(function () {
+    $.post("post.php", { edit_product: true, category: category, product_id: product_id, img: img, name: name, description: description, price: price, kind: kind })
+        .done(function (e) {
+            console.log(e)
             setTimeout(function () {
                 location.reload();
             }, 500);
         });
 });
 
-$('.duplicate-product').on('click', function () {
+$(document).on('click', '.duplicate-product', function () {
     var category = $(this).data("category");
     var product = $(this).data("product");
     $.post("post.php", { duplicate_product: true, category: category, product: product })
-        .done(function () {
+        .done(function (e) {
+            console.log(e)
             setTimeout(function () {
                 location.reload();
             }, 500);
