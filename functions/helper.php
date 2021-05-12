@@ -1,6 +1,7 @@
 <?php
 require_once('config.php');
 $company = get_company();
+$stats = month_statistic();
 $categories = get_categories();
 $images = get_images();
 

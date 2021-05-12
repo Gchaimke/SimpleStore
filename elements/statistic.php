@@ -1,9 +1,6 @@
-<?php
-$stats = month_statistic();
-$total = 0;
-?>
 <div class="content statistic">
     <?php
+    $total = 0;
     foreach ($stats as $item) {
         $total += $item->total;
     }
