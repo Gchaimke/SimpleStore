@@ -1,6 +1,9 @@
 <?php
 require_once('config.php');
 $company = get_company();
+$categories = get_categories();
+$images = get_images();
+
 
 if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = true;
