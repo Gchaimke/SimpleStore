@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once('functions/helper.php');
+include_once('functions/get.php');
+include_once('elements/about.php');
 ?>
 <!doctype html>
 <html class="no-js h-100" lang="en">
@@ -28,8 +30,6 @@ include_once('functions/helper.php');
     <?php include_once('navigation.php'); ?>
     <main class="flex-shrink-0">
         <div class="container mt-5 mb-5">
-            <?php include_once('elements/about.php'); ?>
-            <?php include_once('functions/get.php'); ?>
             <?php include_once('elements/message.php'); ?>
             <?php if ($logedin) {
                 include_once('elements/statistic.php');

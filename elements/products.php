@@ -1,5 +1,5 @@
 <?php
-if (is_countable($categories)) {
+if (is_iterable($categories)) {
     foreach ($categories as $category) {
         $products = get_products($category->id);
         echo '<div class="accordion accordion-flush" id="accordionFlush">
@@ -20,7 +20,7 @@ if (is_countable($categories)) {
         }
         echo '<div class="accordion-body"><div class="row">';
         $product_num = 0;
-        if (is_countable($products)) {
+        if (is_iterable($products)) {
             foreach ($products as $product) {
                 echo '<div class="col-sm" >';
                 include('elements/card.php');
@@ -34,4 +34,7 @@ if (is_countable($categories)) {
             echo "<i class='far fa-trash-alt delete-category' data-category='$category->id '></i>";
         }
     }
+}else{
+    echo 'No Categories';
 }
+

@@ -4,7 +4,7 @@
         <b>Click to select image</b>
         <div class="row overflow-auto">
             <?php
-            if (is_countable($images)) {
+            if (is_iterable($images)) {
                 foreach ($images as $image) {
                     echo "<div class='col gallery_image m-2'>
                         <span class='w-full d-block image' data-path='img/products/$image' style=\"background-image: url('" . SITE_ROOT . "img/products/$image');min-width: 150px;\"></span>
