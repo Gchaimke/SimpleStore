@@ -4,6 +4,7 @@ $company = get_company();
 $stats = month_statistic();
 $categories = get_categories();
 $images = get_images();
+$favorites = get_favorites();
 
 
 if (isset($_SESSION['login']) && $_SESSION['login']) {

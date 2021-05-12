@@ -1,23 +1,50 @@
 [
     {
-        "name": "myaso",
-        "description": "good",
-        "price": "65",
-        "kind": "kg",
-        "img": "https:\/\/cdn.profile.ru\/wp-content\/uploads\/2019\/08\/shutterstock_1050939104-782x440.jpg"
+        "name": "1",
+        "description": "",
+        "price": "195",
+        "kind": "1кг",
+        "img": "img\/products\/Ангус.jpg",
+        "id": 22
     },
     {
-        "name": "riba",
-        "description": "good",
-        "price": "40",
-        "kind": "kg",
-        "img": "http:\/\/capriceeurope.eu\/assets\/uploads\/2020\/04\/Pescadoo-e1587726895841.jpg"
+        "name": "2",
+        "description": "",
+        "price": "200",
+        "kind": "1кг",
+        "img": "img\/products\/Ангус.jpg",
+        "id": 21
     },
     {
-        "name": "yaica",
-        "description": "good",
-        "price": "15",
-        "kind": "lot",
-        "img": "https:\/\/liter.kz\/wp-content\/uploads\/2020\/10\/pkyblkr-750x422.jpg"
+        "name": "3",
+        "description": "(10 ребер)",
+        "price": "23",
+        "kind": "1кг",
+        "img": "img\/products\/Асадо.jpg",
+        "id": 35
+    },
+    {
+        "name": "4",
+        "description": "",
+        "price": "195",
+        "kind": "1кг",
+        "img": "img\/products\/Ангус.jpg",
+        "id": 22
+    },
+    {
+        "name": "5",
+        "description": "",
+        "price": "200",
+        "kind": "1кг",
+        "img": "img\/products\/Ангус.jpg",
+        "id": 21
+    },
+    {
+        "name": "6",
+        "description": "(10 ребер)",
+        "price": "23",
+        "kind": "1кг",
+        "img": "img\/products\/Асадо.jpg",
+        "id": 35
     }
 ]
