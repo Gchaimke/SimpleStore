@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once('functions/helper.php');
-$company = get_company();
 ?>
 <!doctype html>
 <html class="no-js h-100" lang="en">
@@ -31,6 +30,7 @@ $company = get_company();
         <div class="container mt-5 mb-5">
             <?php include_once('elements/about.php'); ?>
             <?php include_once('functions/get.php'); ?>
+            <?php include_once('elements/message.php'); ?>
             <?php if ($logedin) {
                 include_once('elements/statistic.php');
                 include_once('elements/edit_company.php');

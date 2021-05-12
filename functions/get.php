@@ -4,12 +4,11 @@ if (isset($_GET['login'])) {
     if ($_GET['login'] != '') {
         $login = login($_GET['login']);
     }
-    include_once('elements/login.php');
 }
 
 if (isset($_GET['login_error'])) {
-    echo "<script>alert('Password Error');</script>";
-    include_once('elements/login.php');
+    $message['kind'] = 3;
+    $message['text'] = 'Password Error';
 }
 
 if (isset($_GET['logout'])) {
@@ -25,5 +24,7 @@ if (isset($_GET['order'])) {
     if($logedin){
         $order .= order_client_to_html($_GET['order']);
     }
-    print($order."<h2 style='color:green;text-align: center;'>Order sent success,<br> thank you!</h2>");
+    print($order);
+    $message['kind'] = 1;
+    $message['text'] = "Order sent success, thank you!";
 }
