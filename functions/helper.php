@@ -135,9 +135,9 @@ function delete_category($id)
 
 function save_json($array, $file_name = 'test')
 {
-    usort($array, function($a, $b) { //Sort the array using a user defined function
+    usort($array, function ($a, $b) { //Sort the array using a user defined function
         return $a->name > $b->name ? 1 : -1; //Compare the scores
-    });   
+    });
     file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
@@ -281,19 +281,23 @@ function order_client_to_html($order_num = 0)
 function order_to_html($order_num = 0)
 {
     $order = get_order($order_num);
-    $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
-    $html = "<tr><th style='$style'>Product</th><th style='$style'>Qtty</th><th style='$style'>Price</th></tr>";
-    foreach ($order->items as $value) {
-        $html .= "<tr>";
-        $value = explode(',', $value);
-        foreach ($value as $td) {
-            $html .= "<td style='$style'>$td</td>";
+    if (is_object($order)) {
+        $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
+        $th_style = 'text-align: center;background-color: #bce0ff;font-size: larger;';
+        $html = "<tr><th style='$style $th_style'>Продукт</th><th style='$style $th_style'>Количество</th><th style='$style $th_style'>Цена</th></tr>";
+        foreach ($order->items as $value) {
+            $html .= "<tr>";
+            $value = explode(',', $value);
+            foreach ($value as $td) {
+                $html .= "<td style='$style'>$td</td>";
+            }
+            $html .= '</tr>';
         }
-        $html .= '</tr>';
-    }
-    $html .= "<tr><td style='$style'>Total</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
-    return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
+        $html .= "<tr><td style='$style'>Сумма (<span style='color:red;'>приблизительно</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
+        return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
         <table style='width:100%;$style'>$html</table><br>";
+    }
+    return $order;
 }
 
 function send_email($order_num = 0)

@@ -21,10 +21,12 @@ if (isset($_GET['email_order'])) {
 
 if (isset($_GET['order'])) {
     $order = order_to_html($_GET['order']);
-    if($logedin){
+    if ($logedin) {
         $order .= order_client_to_html($_GET['order']);
     }
     print($order);
-    $message['kind'] = 1;
-    $message['text'] = "Order sent success, thank you!";
+    if (isset($_GET['sent'])) {
+        $message['kind'] = 1;
+        $message['text'] = "Заказ отправлен успешно, будем на связи! <i class=\"far fa-smile-wink\"></i>";
+    }
 }
