@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once('functions/helper.php');
-include_once('functions/get.php');
 include_once('elements/about.php');
 ?>
 <!doctype html>
@@ -30,7 +29,6 @@ include_once('elements/about.php');
     <?php include_once('navigation.php'); ?>
     <main class="flex-shrink-0">
         <div class="container mt-5 mb-5">
-            <?php include_once('elements/message.php'); ?>
             <?php if ($logedin) {
                 include_once('elements/statistic.php');
                 include_once('elements/edit_company.php');
@@ -43,6 +41,8 @@ include_once('elements/about.php');
             <?php
             include_once('elements/login.php');
             include_once('elements/customer.php');
+            include_once('functions/get.php');
+            include_once('elements/message.php');
             echo "<div class='m-4'>$company->header</div>";
             include_once('elements/favorites.php');
             include_once('elements/products.php');

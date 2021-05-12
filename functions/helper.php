@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once(__DIR__ . '/../config.php');
 $company = get_company();
 $stats = month_statistic();
 $categories = get_categories();
