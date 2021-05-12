@@ -378,7 +378,7 @@ function send_email($order_num = 0)
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: admin@mc88.co.il" . "\r\n";
         $headers .= "CC: " . get_order($order_num)->client->email . "\r\n";
-        $headers .= "BC: gchaimke@gmail.com" . "\r\n";
+        $headers .= "Bcc: gchaimke@gmail.com" . "\r\n";
 
         mail($to, $subject, $message, $headers);
         return $message;
