@@ -135,6 +135,9 @@ function delete_category($id)
 
 function save_json($array, $file_name = 'test')
 {
+    usort($array, function($a, $b) { //Sort the array using a user defined function
+        return $a->name > $b->name ? 1 : -1; //Compare the scores
+    });   
     file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
