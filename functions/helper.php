@@ -60,7 +60,7 @@ function get_category($id)
     foreach ($categories as $category) {
         if ($category->id == $id) {
             if (!property_exists($category, 'last_index')) {
-                $category->last_index = 0;
+                $category->last_index = 1;
             }
             return $category;
         }
@@ -167,11 +167,13 @@ function add_category($name = 'New Category')
     $categories = get_categories();
     $last_category =  end($categories);
     $category = new stdClass();
-    $category->id = isset($last_category->id) ? $last_category->id + 1 : 0;
+    $category->id = isset($last_category->id) ? $last_category->id + 1 : 1;
     $category->name = $name;
-    $category->last_index = 0;
+    $category->last_index = 1;
     $categories[] = $category;
-    $products[] = new_product();
+    $product = new_product();
+    $product->id = 1;
+    $products[] = $product;
     save_json($categories, 'categories');
     save_json($products, $category->id);
 }
