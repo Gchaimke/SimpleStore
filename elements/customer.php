@@ -32,7 +32,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary send">Send</button>
+                <button type="button" class="btn btn-primary send"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> Send</button>
             </div>
         </div>
     </div>

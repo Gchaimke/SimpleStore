@@ -182,12 +182,14 @@ $('.cart-send-email').on('click', function (e) {
     if (!$.isEmptyObject(log)) {
         $('#client_data').modal('show');
         $("#client_data").on("click", ".send", function () {
+            $(this).prop('disabled', true);
+            $('.spinner-border').toggle();
             client = $('#client_form').serializeArray();
             var data = {};
             $(client).each(function (index, obj) {
                 data[obj.name] = obj.value;
             });
-            cart_log(log, $('.cart-total').text(), data);
+            //cart_log(log, $('.cart-total').text(), data);
         });
     } else {
         alert('Cart is empty!');
