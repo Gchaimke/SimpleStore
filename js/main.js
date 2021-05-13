@@ -189,7 +189,7 @@ $('.cart-send-email').on('click', function (e) {
             $(client).each(function (index, obj) {
                 data[obj.name] = obj.value;
             });
-            //cart_log(log, $('.cart-total').text(), data);
+            cart_log(log, $('.cart-total').text(), data);
         });
     } else {
         alert('Cart is empty!');
