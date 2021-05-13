@@ -23,7 +23,7 @@
         <center>
             <h5 class="card-title"><?= $product->name ?></h5>
             <p class="card-text"><?= $product->description ?></p>
-            <div class="d-flex justify-content-center text-nowrap">
+            <div class="d-flex justify-content-center text-nowrap card-footer">
                 <h5 class="card-text me-3"><?= $product->price ?> ש"ח</h5>
                 <div> <?= $product->kind ?></div>
                 <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id' data-product='$product->name' data-qty='$product->kind' data-price='$product->price'></i>" ?>

@@ -19,15 +19,14 @@ if ($favorite_num == 1) {
             if ($logedin) {
                 echo "<i class='far fa-trash-alt delete-favorite text-danger' data-category='favorites' data-product='$product->id'></i>";
             }
-            $product_cart_id = 'favorites_' . $product->id
             ?>
             <center>
                 <h5 class="card-title"><?= $product->name ?></h5>
                 <p class="card-text"><?= $product->description ?></p>
-                <div class="d-flex justify-content-center text-nowrap">
+                <div class="d-flex justify-content-center text-nowrap card-footer">
                     <h5 class="card-text me-3"><?= $product->price ?> ש"ח</h5>
                     <div> <?= $product->kind ?></div>
-                    <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id' data-product='$product->name' data-qty='$product->kind' data-price='$product->price'></i>" ?>
+                    <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product->id' data-product='$product->name' data-qty='$product->kind' data-price='$product->price'></i>" ?>
                 </div>
             </center>
         </div>

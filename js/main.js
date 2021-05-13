@@ -2,6 +2,15 @@ let is_whatsapp = false;
 $(document).ready(function () {
     $('.cart-send-whatsapp').hide();
     $('.cart-send-email').hide();
+    $('.card-title').each(function () {
+        var text_length = $(this).text().length;
+        if (text_length > 14) {
+            $(this).css({ 'font-size': "1rem" });
+        }
+        if (text_length > 20) {
+            $(this).css({ 'font-size': "0.9rem" });
+        }
+    })
 });
 
 $('#edit_company').on('submit', function (e) {
@@ -328,3 +337,4 @@ $('.carousel .carousel-item').each(function () {
         next.children(':first-child').clone().appendTo($(this));
     }
 });
+
