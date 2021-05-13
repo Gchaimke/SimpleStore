@@ -54,6 +54,10 @@ SimpleStore 1
      cursor: pointer;
  }
 
+ .card-text {
+    min-height: 25px;
+  }
+
  .delete-product, .edit-product, .duplicate-product, .delete-favorite {
      position: absolute;
      margin-top: -132px;

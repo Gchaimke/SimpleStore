@@ -2,13 +2,24 @@ let is_whatsapp = false;
 $(document).ready(function () {
     $('.cart-send-whatsapp').hide();
     $('.cart-send-email').hide();
-    $('.card-title').each(function () {
+    $('.card-title, .card-text').each(function () {
         var text_length = $(this).text().length;
-        if (text_length > 14) {
-            $(this).css({ 'font-size': "1rem" });
-        }
-        if (text_length > 20) {
-            $(this).css({ 'font-size': "0.9rem" });
+        var have_text = $(this).parent().find('.card-text')
+        if (have_text.text().length > 10) {
+            if (text_length > 14) {
+                $(this).css({ 'font-size': "1rem" });
+            }
+            if (text_length > 20) {
+                $(this).css({ 'font-size': "0.9rem", "line-height": "12px" });
+            }
+            if (text_length > 22) {
+                $(this).css({ 'font-size': "0.8rem", "line-height": "12px" });
+            }
+        } else {
+            if (text_length > 14) {
+                $(this).css({ 'font-size': "1rem" });
+                have_text.css({ "min-height": "10px" })
+            }
         }
     })
 });
