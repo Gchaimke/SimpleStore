@@ -332,7 +332,7 @@ $('.close-parent').on('click', function () {
 //Bootstrap carousel
 
 $('.carousel .carousel-item').each(function () {
-    var minPerSlide = 5;
+    var minPerSlide = 3;
     var next = $(this).next();
     if (!next.length) {
         next = $(this).siblings(':first');
@@ -349,3 +349,11 @@ $('.carousel .carousel-item').each(function () {
     }
 });
 
+//jQuery Slider
+
+$('#exampleSlider').multislider();
+
+$('#exampleSlider').multislider({
+    interval:5000,
+    interval:2000
+});

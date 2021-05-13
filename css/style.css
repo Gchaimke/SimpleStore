@@ -55,8 +55,8 @@ SimpleStore 1
  }
 
  .card-text {
-    min-height: 25px;
-  }
+     min-height: 25px;
+ }
 
  .delete-product, .edit-product, .duplicate-product, .delete-favorite {
      position: absolute;
@@ -172,6 +172,14 @@ SimpleStore 1
 
  /*Bootstrap carousel*/
 
+ .carousel-control-next, .carousel-control-prev {
+     width: 5% !important;
+ }
+
+ .carousel-control-next:hover, .carousel-control-prev:hover {
+     background: black;
+ }
+
  @media (max-width: 768px) {
      .carousel-inner .carousel-item>div {
          display: none;
@@ -199,3 +207,11 @@ SimpleStore 1
  .carousel-inner .carousel-item-right, .carousel-inner .carousel-item-left {
      transform: translateX(0);
  }
+
+ /*jQuery slider */
+ .item { width: 20%; }
+ .MS-content {
+    margin: 15px 5%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
