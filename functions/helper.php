@@ -1,4 +1,9 @@
 <?php
+if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+    die('Direct access not allowed');
+    exit();
+};
+
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DOC_ROOT . "data/orders/");
 $company = get_company();
@@ -22,7 +27,7 @@ function redirect($url)
 function login($pass)
 {
     global $company;
-    if ($pass == $company->pass) {
+    if ($pass == PASS) {
         $_SESSION["login"] = true;
         redirect(SITE_ROOT);
     } else {
