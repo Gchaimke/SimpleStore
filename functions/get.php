@@ -34,3 +34,8 @@ if (isset($_GET['order'])) {
 if (isset($_GET['update_data'])) {
     update_products_id($_GET['update_data']);
 }
+
+
+if (isset($_GET['old'])) {
+    print_r(old_to_new());
+}

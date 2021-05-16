@@ -312,15 +312,15 @@ function cart_log($cart, $total, $client)
 
 function add_zero($orders)
 {
-    $order_count = '';
-    if ($orders > 0) {
-        $order_count = '00' . $orders;
-    } else if ($orders >= 10) {
-        $order_count = '0' . $orders;
-    } else {
-        $order_count = $orders;
+    if ($orders > 0 && $orders < 10) {
+        return '00' . $orders;
     }
-    return $order_count;
+    if ($orders >= 10 && $orders < 100) {
+        return '0' . $orders;
+    }
+    if ($orders > 100) {
+        return $orders;
+    }
 }
 
 function get_orders($month)
@@ -332,6 +332,17 @@ function get_orders($month)
         return $orders;
     }
     return null;
+}
+
+function old_to_new()
+{
+    $orders = json_decode(file_get_contents(ORDERS_PATH . "05_21.json"));
+    $tmp = [];
+    foreach ($orders as $order) {
+        $order_path = ORDERS_PATH . date("my/") . date("my_") . substr($order->id, -3) . ".json";
+        file_put_contents($order_path, json_encode($order, JSON_UNESCAPED_UNICODE));
+    }
+    return $tmp;
 }
 
 function get_order($order_num = 0)

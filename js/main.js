@@ -192,24 +192,28 @@ $('.cart-send-whatsapp').on('click', function (e) {
 });
 
 
-$('.cart-send-email').on('click', function (e) {
-    e.preventDefault();
-    let log = {};
+$('.cart-send-email').on('click', function () {
+    let cart = {};
     let client = [];
     $('.cart_items>li').each(function () {
-        log[$(this).data('product_id')] = $(this).find(".cart-product").text() + "," + $(this).find(".cart_qty").text() + "," + $(this).find(".cart_price").text();
+        cart[$(this).data('product_id')] = $(this).find(".cart-product").text() + "," + $(this).find(".cart_qty").text() + "," + $(this).find(".cart_price").text();
     })
-    if (!$.isEmptyObject(log)) {
+    if (!$.isEmptyObject(cart)) {
         $('#client_data').modal('show');
-        $("#client_data").on("click", ".send", function () {
+        $("#client_form").on("submit", function (out) {
+            out.preventDefault();
             $(this).prop('disabled', true);
+            $('.close, .btn-close').prop('disabled', true);
             $('.spinner-border').toggle();
             client = $('#client_form').serializeArray();
             var data = {};
             $(client).each(function (index, obj) {
                 data[obj.name] = obj.value;
             });
-            cart_log(log, $('.cart-total').text(), data);
+            $.post("post.php", { cart_log: true, cart: cart, total: $('.cart-total').text(), client: data })
+                .done(function (e) {
+                    location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
+                });
         });
     } else {
         alert('Cart is empty!');
@@ -354,6 +358,6 @@ $('.carousel .carousel-item').each(function () {
 $('#exampleSlider').multislider();
 
 $('#exampleSlider').multislider({
-    interval:5000,
-    interval:2000
+    interval: 5000,
+    interval: 2000
 });

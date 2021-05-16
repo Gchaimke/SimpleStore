@@ -10,11 +10,11 @@
                 <form id="client_form">
                     <div class="input-group mt-2">
                         <label class="input-group-text">Name</label>
-                        <input type="text" class="form-control" name="name" />
+                        <input type="text" class="form-control" name="name" required />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text">Phone</label>
-                        <input type="text" class="form-control" name="phone" />
+                        <input type="text" class="form-control" name="phone" required />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text">Email</label>
@@ -28,12 +28,13 @@
                         <label class="input-group-text">City</label>
                         <input type="text" class="form-control" name="city" />
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary send"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> Send</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary send"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> Send</button>
-            </div>
+
         </div>
     </div>
 </div>
