@@ -169,18 +169,21 @@ $('.cart-send-whatsapp').on('click', function (e) {
     e.preventDefault();
     var url = $(this).attr("href");
     var msg = "";
-    let log = {};
+    let cart = {};
     let client = [];
     $('.cart_items>li').each(function () {
         msg += $(this).find(".cart-product").text() + " " + $(this).find(".cart_qty").text() + "\n ";
-        log[$(this).data('product_id')] = $(this).find(".cart-product").text() + "," + $(this).find(".cart_qty").text() + "," + $(this).find(".cart_price").text();
+        cart[$(this).data('product_id')] = $(this).find(".cart-product").text() + "," + $(this).find(".cart_qty").text() + "," + $(this).find(".cart_price").text();
     })
     var total = "\n TOTAL:~" + $('.cart-total').text();
     if (msg != '') {
         var win = window.open(url + encodeURIComponent(msg + total), '_blank');
         if (win) {
             //Browser has allowed it to be opened
-            cart_log(log, $('.cart-total').text(), client);
+            $.post("post.php", { cart_log: true, cart: cart, total: $('.cart-total').text(), client: client })
+                .done(function (e) {
+                    location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
+                });
             win.focus();
         } else {
             //Browser has blocked it
@@ -294,13 +297,6 @@ $('.upload_btn').on('click', function () {
         alert("Please select a file and set name!");
     }
 });
-
-function cart_log(cart, total, client) {
-    $.post("post.php", { cart_log: true, cart: cart, total: total, client: client })
-        .done(function (e) {
-            location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
-        });
-}
 
 function splash_cart() {
     $('.cart').css('background', '#acf5a7');
