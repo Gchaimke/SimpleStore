@@ -28,10 +28,6 @@
                         <label class="input-group-text">Header</label>
                         <textarea type="password" class="form-control" name="header"><?= $company->header ?></textarea>
                     </div>
-                    <div class="input-group mb-3">
-                        <label class="input-group-text">Password</label>
-                        <input type="password" class="form-control" name="pass" value="<?= $company->pass ?>" />
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <input name="submit" type="submit" class="btn btn-outline-dark align-middle" value="Update" />
