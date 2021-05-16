@@ -85,9 +85,14 @@ function update_stats()
     $orders = get_orders(date('my'));
     if (is_array($orders)) {
         foreach ($orders["orders"] as $order) {
-            $stats['total'] += json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order))->total;
+            $order = json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order));
+            if (property_exists($order, "client")) {
+                if ($order->client->name != 'test') {
+                    $stats['total'] += $order->total;
+                    $stats['count']++;
+                }
+            }
         }
-        $stats['count'] = count($orders["orders"]);
     }
     file_put_contents(DOC_ROOT . "data/stats.json", json_encode($stats));
 }

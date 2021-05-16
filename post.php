@@ -99,4 +99,11 @@ if (isset($_POST['get_stats'])) {
     exit;
 }
 
+if (isset($_POST['update_stats'])) {
+    update_stats();
+    echo 'ok';
+    exit;
+}
+
+
 echo "Error";

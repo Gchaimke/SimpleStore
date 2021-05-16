@@ -25,16 +25,20 @@ $(document).ready(function () {
     });
 
     if ($(".statistic").length) {
-        $.post("post.php", { get_stats: true})
-            .done(function (e) {
-                setTimeout(function () {
-                    var obj = JSON.parse(e);
-                    $(".statistic").find("#stats_orders").text(obj.count);
-                    $(".statistic").find("#stats_total").text(obj.total);
-                }, 2000);
-            });
+        get_stasts();
     }
 });
+
+function get_stasts() {
+    $.post("post.php", { get_stats: true })
+        .done(function (e) {
+            setTimeout(function () {
+                var obj = JSON.parse(e);
+                $(".statistic").find("#stats_orders").text(obj.count);
+                $(".statistic").find("#stats_total").text(obj.total);
+            }, 2000);
+        });
+}
 
 $('#edit_company').on('submit', function (e) {
     e.preventDefault();
@@ -217,7 +221,7 @@ $('.cart-send-email').on('click', function () {
         $('#client_data').modal('show');
         $("#client_form").on("submit", function (out) {
             out.preventDefault();
-            $('.close, .btn-close .send').prop('disabled', true);
+            $('.close, .btn-close, .send').prop('disabled', true);
             $('.spinner-border').toggle();
             client = $('#client_form').serializeArray();
             var data = {};
@@ -339,6 +343,19 @@ $('.category_editor_toggle').on('click', function () {
 $('.close-parent').on('click', function () {
     $(this).parent().toggle();
 });
+
+$('#update_stats').on('click', function () {
+    $('.spinner_status').toggle();
+    $(this).prop('disabled', true);
+    $.post("post.php", { update_stats: true })
+        .done(function (e) {
+            get_stasts();
+            alert(e);
+        });
+    $('.spinner_status').toggle();
+    $(this).prop('disabled', false);
+});
+
 
 //Bootstrap carousel
 
