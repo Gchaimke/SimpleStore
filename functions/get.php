@@ -1,8 +1,4 @@
 <?php
-if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
-    die('Direct access not allowed');
-    exit();
-};
 
 if (isset($_GET['login'])) {
     if ($_GET['login'] != '') {
