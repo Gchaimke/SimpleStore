@@ -376,12 +376,18 @@ function old_to_new()
 
 function get_order($order_num = 0)
 {
-    $order_month = explode("_", $order_num)[0];
+    $order_month = explode("_", $order_num);
+    if (count($order_month) != 2) {
+        $order_month = "0521";
+        $order_num = $order_month."_".substr($order_num,-3);
+    } else {
+        $order_month = $order_month[0];
+    }
     $order_path = ORDERS_PATH . $order_month . '/' . $order_num . ".json";
     if (file_exists($order_path)) {
         return json_decode(file_get_contents($order_path));
     }
-    return "<h3>Order #$order_num not found!</h3>$order_path";
+    return "<h3>Order #$order_num not found!</h3>";
 }
 
 function order_client_to_html($order_num = 0)
@@ -396,7 +402,7 @@ function order_client_to_html($order_num = 0)
         $html .= '</ul>';
         return $html;
     }
-    return "<br>Order not found";
+    return "<br>Client not found";
 }
 
 function order_to_html($order_num = 0)
