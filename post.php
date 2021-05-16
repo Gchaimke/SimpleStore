@@ -94,4 +94,9 @@ if (isset($_FILES['file']['name'])) {
     exit;
 }
 
+if (isset($_POST['get_stats'])) {
+    echo get_stats();
+    exit;
+}
+
 echo "Error";

@@ -30,12 +30,3 @@ if (isset($_GET['order'])) {
         $message['text'] = "Заказ отправлен успешно, будем на связи! <i class=\"far fa-smile-wink\"></i>";
     }
 }
-
-if (isset($_GET['update_data'])) {
-    update_products_id($_GET['update_data']);
-}
-
-
-if (isset($_GET['old'])) {
-    print_r(old_to_new());
-}

@@ -7,7 +7,6 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DOC_ROOT . "data/orders/");
 $company = get_company();
-$orders = get_orders(date('my'));
 $categories = get_categories();
 $images = get_files();
 $favorites = get_favorites();
@@ -77,6 +76,31 @@ function save_json($array, $file_name = 'test')
         return $a->name > $b->name ? 1 : -1; //Compare the scores
     });
     file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
+}
+
+function update_stats()
+{
+    $stats['total'] = 0;
+    $stats['count'] = 0;
+    $orders = get_orders(date('my'));
+    if (is_array($orders)) {
+        foreach ($orders["orders"] as $order) {
+            $stats['total'] += json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order))->total;
+        }
+        $stats['count'] = count($orders["orders"]);
+    }
+    file_put_contents(DOC_ROOT . "data/stats.json", json_encode($stats));
+}
+
+function get_stats()
+{
+    $path = DOC_ROOT . 'data/stats.json';
+    if (file_exists($path)) {
+        return file_get_contents($path);
+    } else {
+        update_stats();
+        return file_get_contents($path);
+    }
 }
 
 function get_company()

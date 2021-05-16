@@ -2,6 +2,7 @@ let is_whatsapp = false;
 $(document).ready(function () {
     $('.cart-send-whatsapp').hide();
     $('.cart-send-email').hide();
+
     $('.card-title, .card-text').each(function () {
         var text_length = $(this).text().length;
         var have_text = $(this).parent().find('.card-text')
@@ -21,7 +22,18 @@ $(document).ready(function () {
                 have_text.css({ "min-height": "10px" })
             }
         }
-    })
+    });
+
+    if ($(".statistic").length) {
+        $.post("post.php", { get_stats: true})
+            .done(function (e) {
+                setTimeout(function () {
+                    var obj = JSON.parse(e);
+                    $(".statistic").find("#stats_orders").text(obj.count);
+                    $(".statistic").find("#stats_total").text(obj.total);
+                }, 2000);
+            });
+    }
 });
 
 $('#edit_company').on('submit', function (e) {
@@ -205,8 +217,7 @@ $('.cart-send-email').on('click', function () {
         $('#client_data').modal('show');
         $("#client_form").on("submit", function (out) {
             out.preventDefault();
-            $(this).prop('disabled', true);
-            $('.close, .btn-close').prop('disabled', true);
+            $('.close, .btn-close .send').prop('disabled', true);
             $('.spinner-border').toggle();
             client = $('#client_form').serializeArray();
             var data = {};
