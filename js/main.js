@@ -350,10 +350,14 @@ $('.carousel .carousel-item').each(function () {
 });
 
 //jQuery Slider
+if ($("#exampleSlider").length) {
 
-$('#exampleSlider').multislider();
+    $('#exampleSlider').multislider();
 
-$('#exampleSlider').multislider({
-    interval: 5000,
-    interval: 2000
-});
+    $('#exampleSlider').multislider({
+        interval: 5000,
+        interval: 2000
+    });
+
+
+}
