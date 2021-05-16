@@ -1,9 +1,10 @@
 <?php
 require_once(__DIR__ . '/../config.php');
+define("ORDERS_PATH", DOC_ROOT . "data/orders/");
 $company = get_company();
-$stats = month_statistic();
+$orders = get_orders(date('my'));
 $categories = get_categories();
-$images = get_images();
+$images = get_files();
 $favorites = get_favorites();
 
 
@@ -33,6 +34,44 @@ function logout()
 {
     $_SESSION["login"] = '';
     redirect(SITE_ROOT);
+}
+
+function auto_version($file)
+{
+    if (!file_exists(DOC_ROOT . $file)) return $file;
+    $mtime = filemtime(DOC_ROOT . $file);
+    return sprintf("%s?v=%d", SITE_ROOT . $file, $mtime);
+}
+
+function clean($str)
+{
+    return str_replace(' ', '', $str);
+}
+
+function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"])
+{
+    $result = array();
+    $cdir = scandir($dir);
+    foreach ($cdir as $value) {
+        $extension = explode('.', $value);
+        $extension = end($extension);
+        if (in_array($extension, $kind)) {
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
+            } else {
+                $result[] = $value;
+            }
+        }
+    }
+    return $result;
+}
+
+function save_json($array, $file_name = 'test')
+{
+    usort($array, function ($a, $b) { //Sort the array using a user defined function
+        return $a->name > $b->name ? 1 : -1; //Compare the scores
+    });
+    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
 function get_company()
@@ -202,42 +241,6 @@ function delete_category($id)
     save_json($categories, 'categories');
 }
 
-function save_json($array, $file_name = 'test')
-{
-    usort($array, function ($a, $b) { //Sort the array using a user defined function
-        return $a->name > $b->name ? 1 : -1; //Compare the scores
-    });
-    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
-}
-
-function auto_version($file)
-{
-    if (!file_exists(DOC_ROOT . $file)) return $file;
-    $mtime = filemtime(DOC_ROOT . $file);
-    return sprintf("%s?v=%d", SITE_ROOT . $file, $mtime);
-}
-
-function clean($str)
-{
-    return str_replace(' ', '', $str);
-}
-
-function get_images($dir = DOC_ROOT . "img/products/")
-{
-    $result = array();
-    $cdir = scandir($dir);
-    foreach ($cdir as $value) {
-        if (!in_array($value, array(".", ".."))) {
-            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
-                $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
-            } else {
-                $result[] = $value;
-            }
-        }
-    }
-    return $result;
-}
-
 function save_image($image_name, $url)
 {
     $valid_ext = array('png', 'jpeg', 'jpg');
@@ -280,59 +283,60 @@ function compressImage($source, $destination, $quality)
 
 function cart_log($cart, $total, $client)
 {
-    $log_name = date('m_y');
-    $log_path = DOC_ROOT . "data/orders/$log_name.json";
-    if (file_exists($log_path)) {
-        $log = json_decode(file_get_contents($log_path));
+    $orders_path = ORDERS_PATH . date('my');
+    if (!file_exists($orders_path)) {
+        mkdir($orders_path, 0700);
     }
+    $orders = get_files($orders_path, ["json"]);
+    $order_count = add_zero(count($orders) + 1);
+    $order_name = date('my_') . $order_count;
+    $order_path = $orders_path . "/$order_name.json";
 
-    $cart_items = new stdClass();
+    $order = new stdClass();
     $log_date = date('d/m/y H:i:s');
-    $last_item =  end($log);
-    $next = isset($last_item->id) ? $last_item->id + 1 : intval(date('md')) . '000';
-    $cart_items->id = $next;
-    $cart_items->date = $log_date;
-    $cart_items->items = $cart;
-    $cart_items->total = $total;
-    $cart_items->client = $client;
+    $order->id = $order_name;
+    $order->date = $log_date;
+    $order->items = $cart;
+    $order->total = $total;
+    $order->client = $client;
 
-    $log->$next = $cart_items;
-    file_put_contents($log_path, json_encode($log, JSON_UNESCAPED_UNICODE));
-    send_email($next);
-    return $next;
+    file_put_contents($order_path, json_encode($order, JSON_UNESCAPED_UNICODE));
+    send_email($order_name);
+    return $order_name;
 }
 
-function month_statistic($file_name = '')
+function add_zero($orders)
 {
-    if ($file_name == '') {
-        $file_name = date('m_y');
-        $file_name = DOC_ROOT . "data/orders/$file_name.json";
+    $order_count = '';
+    if ($orders > 0) {
+        $order_count = '00' . $orders;
+    } else if ($orders >= 10) {
+        $order_count = '0' . $orders;
     } else {
-        $file_name = DOC_ROOT . "data/orders/$file_name.json";
+        $order_count = $orders;
     }
-    if (file_exists($file_name)) {
-        return json_decode(file_get_contents($file_name));
-    } else {
-        return array();
+    return $order_count;
+}
+
+function get_orders($month)
+{
+    $orders_path = ORDERS_PATH . $month;
+    if (file_exists($orders_path)) {
+        $orders['orders'] = get_files($orders_path, ["json"]);
+        $orders['month'] = $month;
+        return $orders;
     }
+    return null;
 }
 
 function get_order($order_num = 0)
 {
-    if ($order_num != 0) {
-        $order =  isset(month_statistic()->$order_num) ? month_statistic()->$order_num : false;
-        if ($order) {
-            return $order;
-        }
-
-        $prev_month_order = date('m_y', strtotime("-1 month"));
-        $order =  isset(month_statistic($prev_month_order)->$order_num) ? month_statistic($prev_month_order)->$order_num : false;
-        if ($order) {
-            return $order;
-        }
-
-        return "<h3>Order #$order_num not found!</h3>";
+    $order_month = explode("_", $order_num)[0];
+    $order_path = ORDERS_PATH . $order_month . '/' . $order_num . ".json";
+    if (file_exists($order_path)) {
+        return json_decode(file_get_contents($order_path));
     }
+    return "<h3>Order #$order_num not found!</h3>$order_path";
 }
 
 function order_client_to_html($order_num = 0)
