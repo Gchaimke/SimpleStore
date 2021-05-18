@@ -191,7 +191,12 @@ SimpleStore 1
      }
  }
 
- @media (max-width: 768px) {}
+ @media (max-width: 768px) {
+    .delete-product, .edit-product, .duplicate-product, .favorite-product {
+        margin-top: -110px;
+        margin-right: 5px;
+      }
+ }
 
  /* display 3 */
 
@@ -199,6 +204,8 @@ SimpleStore 1
      .MS-content {
          height: 260px;
      }
+
+
  }
 
  /*jQuery slider */
@@ -213,3 +220,12 @@ SimpleStore 1
      white-space: nowrap;
      height: 280px;
  }
+
+ .MS-controls {
+    width: 50%;
+    margin: auto;
+  }
+
+  button.btn.MS-right {
+    float: right;
+  }
