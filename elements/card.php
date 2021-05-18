@@ -6,8 +6,8 @@
             $product->id = $product_num;
         }
         if ($logedin) {
-            echo "<i class='far fa-trash-alt delete-product text-danger' data-category='$category->id' data-product='$product->id'></i>";
-            echo "<i class='far fa-edit edit-product text-info' data-category='$category->id ' 
+            echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$category->id' data-product='$product->id'></i>";
+            echo "<i class='btn btn-outline-info far fa-edit edit-product' data-category='$category->id ' 
             data-product='$product->id' 
             data-img='$product->img' 
             data-name='$product->name'
@@ -16,7 +16,8 @@
             data-kind='$product->kind'
             data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"
             ></i>";
-            echo "<i class='far fa-clone duplicate-product' data-category='$category->id ' data-product='$product->id'></i>";
+            echo "<i class='btn btn-outline-dark far fa-clone duplicate-product' data-category='$category->id ' data-product='$product->id'></i>";
+            echo "<i class='btn btn-outline-warning far fa-star favorite-product' data-category='$category->id ' data-product='$product->id'></i>";
         }
         $product_cart_id = $category->id.'_'.$product->id
         ?>
@@ -24,7 +25,7 @@
             <h5 class="card-title"><?= $product->name ?></h5>
             <p class="card-text"><?= $product->description ?></p>
             <div class="d-flex justify-content-center text-nowrap">
-                <h5 class="card-text me-3"><?= $product->price ?> ₪</h5>
+                <h5 class="card-price me-3"><?= $product->price ?> ₪</h5>
                 <div> <?= $product->kind ?></div>
                 <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id' data-product='$product->name' data-qty='$product->kind' data-price='$product->price'></i>" ?>
             </div>

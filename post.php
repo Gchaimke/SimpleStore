@@ -34,6 +34,13 @@ if (isset($_POST['duplicate_product'])) {
     exit;
 }
 
+if (isset($_POST['favorite_product'])) {
+    if (!empty($_POST['category'])) {
+        favorite_product(clean($_POST['category']), clean($_POST['product']));
+    }
+    exit;
+}
+
 if (isset($_POST['add_category'])) {
     add_category($_POST['category_name']);
     exit;

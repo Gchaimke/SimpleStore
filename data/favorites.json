@@ -1,50 +1,42 @@
 [
     {
-        "name": "1",
+        "name": "Грудинка индюшиная",
         "description": "",
-        "price": "195",
-        "kind": "1кг",
-        "img": "img\/products\/Ангус.jpg",
-        "id": 22
-    },
-    {
-        "name": "2",
-        "description": "",
-        "price": "200",
-        "kind": "1кг",
-        "img": "img\/products\/Ангус.jpg",
-        "id": 21
-    },
-    {
-        "name": "3",
-        "description": "(10 ребер)",
         "price": "23",
         "kind": "1кг",
-        "img": "img\/products\/Асадо.jpg",
-        "id": 35
+        "img": "img\/products\/Грудка.jpg",
+        "id": "3_6"
     },
     {
-        "name": "4",
+        "name": "Грудка",
         "description": "",
-        "price": "195",
+        "price": "18",
         "kind": "1кг",
-        "img": "img\/products\/Ангус.jpg",
-        "id": 22
+        "img": "img\/products\/Грудка.jpg",
+        "id": "2_10"
     },
     {
-        "name": "5",
+        "name": "Нога ягнёнка на кости мороженая",
         "description": "",
-        "price": "200",
+        "price": "65",
         "kind": "1кг",
-        "img": "img\/products\/Ангус.jpg",
-        "id": 21
+        "img": "img\/products\/Ногаягнёнка.jpg",
+        "id": "1_6"
     },
     {
-        "name": "6",
-        "description": "(10 ребер)",
-        "price": "23",
+        "name": "Паргит без кожи",
+        "description": "",
+        "price": "30",
         "kind": "1кг",
-        "img": "img\/products\/Асадо.jpg",
-        "id": 35
+        "img": "img\/products\/Грудка.jpg",
+        "id": "2_4"
+    },
+    {
+        "name": "Сердечки индюшиные",
+        "description": "",
+        "price": "15",
+        "kind": "1кг",
+        "img": "img\/products\/Сердечкииндюшиные.jpg",
+        "id": "3_4"
     }
 ]

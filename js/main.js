@@ -19,7 +19,10 @@ $(document).ready(function () {
         } else {
             if (text_length > 14) {
                 $(this).css({ 'font-size': "1rem" });
-                have_text.css({ "min-height": "10px" })
+                have_text.css({ "min-height": "20px" });
+            }
+            if (text_length > 30) {
+                $(this).css({ 'font-size': "0.9rem", "line-height": "16px" });
             }
         }
     });
@@ -133,6 +136,18 @@ $(document).on('click', '.duplicate-product', function () {
     var category = $(this).data("category");
     var product = $(this).data("product");
     $.post("post.php", { duplicate_product: true, category: category, product: product })
+        .done(function (e) {
+            console.log(e)
+            setTimeout(function () {
+                location.reload();
+            }, 500);
+        });
+});
+
+$(document).on('click', '.favorite-product', function () {
+    var category = $(this).data("category");
+    var product = $(this).data("product");
+    $.post("post.php", { favorite_product: true, category: category, product: product })
         .done(function (e) {
             console.log(e)
             setTimeout(function () {
@@ -273,7 +288,6 @@ $('.delete-gallery-image').on('click', function () {
     }
 });
 
-
 $('.get_form_url').on('click', function () {
     var name = $(this).parent().find('.upload_image_name').val();
     var url = $(this).parent().find('.upload_image_url').val();
@@ -360,7 +374,7 @@ $('#update_stats').on('click', function () {
 //jQuery Slider
 if ($("#favorites_slider").length) {
     $('#favorites_slider').multislider({
-        duration: 100,
-        interval: 5000
+        duration: 0,
+        interval: 1000000
     });
 }

@@ -190,6 +190,21 @@ function duplicate_product($category_index, $product_index)
     edit_category($category_index, "last_index", $category->last_index + 1);
 }
 
+function favorite_product($category_index, $product_index)
+{
+    $products = get_products($category_index);
+    $favorites = get_products("favorites");
+    $new_product = new stdClass();
+    foreach ($products as $curent_product) {
+        if ($curent_product->id == $product_index) {
+            $new_product = clone ($curent_product);
+        }
+    }
+    $new_product->id = $category_index."_".$product_index;
+    $favorites[] = $new_product;
+    save_json($favorites, "favorites");
+}
+
 function edit_product($category_index, $product)
 {
     $products = get_products($category_index);
@@ -379,7 +394,7 @@ function get_order($order_num = 0)
     $order_month = explode("_", $order_num);
     if (count($order_month) != 2) {
         $order_month = "0521";
-        $order_num = $order_month."_".substr($order_num,-3);
+        $order_num = $order_month . "_" . substr($order_num, -3);
     } else {
         $order_month = $order_month[0];
     }

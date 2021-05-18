@@ -2,7 +2,7 @@
 SimpleStore 1
 */
 
-.card-content, .cart, .statistic {
+ .card-content, .cart, .statistic {
      font-family: sans-serif;
  }
 
@@ -42,6 +42,10 @@ SimpleStore 1
      max-width: min-content;
  }
 
+ .card-body {
+    min-height: 145px;
+  }
+
  .card-image {
      display: block;
      width: 100%;
@@ -62,14 +66,18 @@ SimpleStore 1
      min-height: 25px;
  }
 
- .delete-product, .edit-product, .duplicate-product, .delete-favorite {
+ .card-text, .card-title {
+     white-space: pre-wrap;
+ }
+
+ .delete-product, .edit-product, .duplicate-product, .favorite-product {
      position: absolute;
      margin-top: -132px;
-     background: #fffffff2;
+     background: white !important;
      font-size: 2em;
      padding: 10px;
      border-radius: 5px;
-     cursor: pointer;
+     box-shadow: 1px 1px 3px 0px #0000006b;
  }
 
  .gallery_upload {
@@ -95,12 +103,21 @@ SimpleStore 1
      left: 5px;
  }
 
+ .btn-outline-danger.delete-product:hover, .btn-outline-dark.duplicate-product:hover {
+     color: black !important;
+ }
+
  .edit-product {
      right: 0;
  }
 
  .duplicate-product {
      right: 0;
+     margin-top: -70px;
+ }
+
+ .favorite-product {
+     left: 0;
      margin-top: -70px;
  }
 
@@ -174,20 +191,15 @@ SimpleStore 1
      }
  }
 
- @media (max-width: 768px) {
-
- }
-
+ @media (max-width: 768px) {}
 
  /* display 3 */
 
  @media (min-width: 768px) {
-    .MS-content {
-        height: 260px;
-    }
+     .MS-content {
+         height: 260px;
+     }
  }
-
-
 
  /*jQuery slider */
 
@@ -199,5 +211,5 @@ SimpleStore 1
      margin: 15px 5%;
      overflow: hidden;
      white-space: nowrap;
-     height: fit-content;
+     height: 280px;
  }
