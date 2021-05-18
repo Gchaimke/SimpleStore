@@ -176,7 +176,9 @@ $('.product-to-cart').on('click', function () {
             $('.cart_items').append("<li data-product_id='" + productId + "'><span data-price='" + price +
                 "' class='bg-danger remove-from-cart'>X</span><span class='cart-product'>" + product +
                 " </span><span class='cart_qty'>" + qty +
-                " </span><span class='cart_price'>" + price + "</span> ₪</li>");
+                " </span><span class='cart_price'>" + price + "</span> ₪ "+
+                "<div class='cart-controls text-nowrap mb-2 text-center'>"+
+                "<span class='btn btn-warning ml-2 minus'>-</span><b class='m-2'>1</b><span class='btn btn-success plus'>+</span></div><hr></li>");
         }
         var total = parseInt($('.cart-total').text());
         $('.cart-total').text(total + price);

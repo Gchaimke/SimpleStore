@@ -27,6 +27,9 @@ SimpleStore 1
 
  .cart_items {
      padding-right: 1rem;
+     overflow-y: auto;
+     max-height: 65vh;
+     border-bottom: 1px solid;
  }
 
  .remove-from-cart {
@@ -37,6 +40,11 @@ SimpleStore 1
      margin-right: 5px;
      line-height: 34px;
  }
+
+.plus, .minus {
+    line-height: 10px !important; 
+    font-size: 25px !important;
+  }
 
  .product-card {
      max-width: min-content;
