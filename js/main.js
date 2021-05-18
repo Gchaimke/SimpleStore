@@ -375,6 +375,6 @@ $('#update_stats').on('click', function () {
 if ($("#favorites_slider").length) {
     $('#favorites_slider').multislider({
         duration: 0,
-        interval: 1000000
+        interval: 5000
     });
 }
