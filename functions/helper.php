@@ -420,7 +420,7 @@ function order_to_html($order_num = 0)
             }
             $html .= '</tr>';
         }
-        $html .= "<tr><td style='$style'>Сумма (<span style='color:red;'>приблизительно</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total ש\"ח</td></tr>";
+        $html .= "<tr><td style='$style'>Сумма (<span style='color:red;'>приблизительно</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total ₪</td></tr>";
         return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
         <table style='width:100%;$style'>$html</table><br>";
     }

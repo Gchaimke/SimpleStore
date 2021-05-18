@@ -2,6 +2,10 @@
 SimpleStore 1
 */
 
+.card-content, .cart, .statistic {
+     font-family: sans-serif;
+ }
+
  .rtl {
      direction: rtl;
  }
@@ -209,9 +213,13 @@ SimpleStore 1
  }
 
  /*jQuery slider */
- .item { width: 20%; }
+
+ .item {
+     width: 20%;
+ }
+
  .MS-content {
-    margin: 15px 5%;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+     margin: 15px 5%;
+     overflow: hidden;
+     white-space: nowrap;
+ }
