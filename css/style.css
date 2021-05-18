@@ -43,8 +43,8 @@ SimpleStore 1
  }
 
  .card-body {
-    min-height: 145px;
-  }
+     min-height: 145px;
+ }
 
  .card-image {
      display: block;
@@ -99,25 +99,19 @@ SimpleStore 1
      height: 300px;
  }
 
- .delete-product {
-     left: 5px;
- }
-
  .btn-outline-danger.delete-product:hover, .btn-outline-dark.duplicate-product:hover {
      color: black !important;
  }
 
- .edit-product {
+ .delete-product,.favorite-product {
+    left: 0;
+}
+
+ .edit-product,.duplicate-product {
      right: 0;
  }
 
- .duplicate-product {
-     right: 0;
-     margin-top: -70px;
- }
-
- .favorite-product {
-     left: 0;
+ .favorite-product,.duplicate-product {
      margin-top: -70px;
  }
 
@@ -159,21 +153,44 @@ SimpleStore 1
      display: none;
  }
 
+ /*jQuery slider */
+
+ .item {
+     width: 10%;
+ }
+
+ .MS-content {
+     margin: 15px 5%;
+     overflow: hidden;
+     white-space: nowrap;
+     height: 300px;
+ }
+
+ .MS-controls {
+     width: 50%;
+     margin: auto;
+ }
+
+ button.btn.MS-right {
+     float: right;
+ }
+
  @media only screen and (max-width: 690px) {
      .navbar-brand {
          font-size: 0.9rem !important;
      }
-     .delete-category {
-         top: -36px;
-         right: 0;
-         z-index: 5;
-     }
+     .delete-product, .edit-product {
+        margin-top: -122px;
+    }
+
+    .favorite-product,.duplicate-product {
+        margin-top: -50px;
+    }
+
      .row {
          margin-top: 40px !important;
      }
-     .edit-category {
-         left: 100px;
-     }
+
      .card.mt-2 {
          max-width: initial;
      }
@@ -189,43 +206,14 @@ SimpleStore 1
      .row.overflow-auto {
          height: 260px;
      }
+     .MS-content {
+         height: 280px;
+     }
+
  }
 
- @media (max-width: 768px) {
-    .delete-product, .edit-product, .duplicate-product, .favorite-product {
-        margin-top: -110px;
-        margin-right: 5px;
-      }
- }
+ @media (max-width: 768px) {}
 
  /* display 3 */
 
- @media (min-width: 768px) {
-     .MS-content {
-         height: 260px;
-     }
-
-
- }
-
- /*jQuery slider */
-
- .item {
-     width: 10%;
- }
-
- .MS-content {
-     margin: 15px 5%;
-     overflow: hidden;
-     white-space: nowrap;
-     height: 280px;
- }
-
- .MS-controls {
-    width: 50%;
-    margin: auto;
-  }
-
-  button.btn.MS-right {
-    float: right;
-  }
+ @media (min-width: 768px) {}
