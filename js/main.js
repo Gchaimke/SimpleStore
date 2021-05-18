@@ -156,6 +156,26 @@ $(document).on('click', '.favorite-product', function () {
         });
 });
 
+$(document).on('click', '.plus', function () {
+    var productId = $(this).parent().data("product_id");
+    var price = parseInt($(this).parent().data("price"));
+    var qty = $(this).parent().data("qty");
+    update_cart(productId, price, qty);
+    update_cart_total(price);
+});
+
+$(document).on('click', '.minus', function () {
+    var productId = $(this).parent().data("product_id");
+    var price = 0 - parseInt($(this).parent().data("price"));
+    var qty = $(this).parent().data("qty");
+    var minus_qty = 0 - parseInt(qty.match(/\d+/)[0])
+    var updated = update_cart(productId, price, minus_qty);
+    update_cart_total(price);
+    if (updated <= 0) {
+        $('.cart_items').find('li[data-product_id=' + productId + ']').remove();
+    };
+});
+
 $('.product-to-cart').on('click', function () {
     var productId = $(this).data("product_id");
     var numItems = $('.cart-product').length
@@ -165,29 +185,41 @@ $('.product-to-cart').on('click', function () {
         var price = parseInt($(this).data("price"));
         var qty = $(this).data("qty");
         if (exists) {
-            var current_price = $('.cart_items').find('[data-product_id=' + productId + ']>.cart_price');
-            var current_qty = $('.cart_items').find('[data-product_id=' + productId + ']>.cart_qty');
-            var current_total_qty = parseInt(current_qty.text().match(/\d+/)[0]) + parseInt(qty.match(/\d+/)[0])
-            current_qty.text(current_total_qty + qty.slice(-2) + " ");
-            var current_total_price = parseInt(current_price.text()) + price;
-            $('.cart_items').find('[data-product_id=' + productId + ']>.remove-from-cart').attr("data-price", current_total_price);
-            current_price.text(current_total_price);
+            update_cart(productId, price, qty);
         } else {
             $('.cart_items').append("<li data-product_id='" + productId + "'><span data-price='" + price +
                 "' class='bg-danger remove-from-cart'>X</span><span class='cart-product'>" + product +
                 " </span><span class='cart_qty'>" + qty +
-                " </span><span class='cart_price'>" + price + "</span> ₪ "+
-                "<div class='cart-controls text-nowrap mb-2 text-center'>"+
+                " </span><span class='cart_price'>" + price + "</span> ₪ " +
+                "<div class='cart-controls text-nowrap mb-2 text-center' data-price='" + price + "' data-qty='" + qty + "' data-product_id='" + productId + "'>" +
                 "<span class='btn btn-warning ml-2 minus'>-</span><b class='m-2'>1</b><span class='btn btn-success plus'>+</span></div><hr></li>");
         }
-        var total = parseInt($('.cart-total').text());
-        $('.cart-total').text(total + price);
-        $('.mobile-cart-total').text(total + price);
-        splash_cart();
+        update_cart_total(price);
     } else {
         alert("Max cart items is 10!");
     }
 });
+
+function update_cart(productId, price, qty) {
+    if (!Number.isInteger(qty)) {
+        qty = parseInt(qty.match(/\d+/)[0]);
+    }
+    var current_price = $('.cart_items').find('[data-product_id=' + productId + ']>.cart_price');
+    var current_qty = $('.cart_items').find('[data-product_id=' + productId + ']>.cart_qty');
+    var current_total_qty = parseInt(current_qty.text().match(/\d+/)[0]) + qty;
+    current_qty.text(current_total_qty + current_qty.text().slice(-3));
+    var current_total_price = parseInt(current_price.text()) + price;
+    $('.cart_items').find('[data-product_id=' + productId + ']>.remove-from-cart').attr("data-price", current_total_price);
+    current_price.text(current_total_price);
+    return current_total_price;
+}
+
+function update_cart_total(price) {
+    var total = parseInt($('.cart-total').text());
+    $('.cart-total').text(total + price);
+    $('.mobile-cart-total').text(total + price);
+    splash_cart();
+}
 
 $('.cart_header, .close-cart').on('click', function () {
     $('.cart_items').toggle();
