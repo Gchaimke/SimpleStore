@@ -1,4 +1,4 @@
-<div class="col-md mb-3 item col">
+<div class="item mb-5 col">
     <div class="card product-card mt-2">
         <div class="card-image" style="background-image: url('<?= SITE_ROOT . $product->img ?>');"></div>
         <div class="card-body">

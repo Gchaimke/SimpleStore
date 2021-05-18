@@ -156,11 +156,11 @@ SimpleStore 1
  /*jQuery slider */
 
  .item {
-     width: 10%;
+     width: 50%;
  }
 
  .MS-content {
-     margin: 15px 5%;
+     margin: 15px 1%;
      overflow: hidden;
      white-space: nowrap;
      height: 300px;
