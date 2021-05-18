@@ -32,6 +32,10 @@ SimpleStore 1
      border-bottom: 1px solid;
  }
 
+ .cart_items>li {
+     transition-duration: 5s;
+ }
+
  .remove-from-cart {
      padding: 5px 9px;
      border-radius: 10px;
@@ -41,10 +45,10 @@ SimpleStore 1
      line-height: 34px;
  }
 
-.plus, .minus {
-    line-height: 10px !important; 
-    font-size: 25px !important;
-  }
+ .plus, .minus {
+     line-height: 10px !important;
+     font-size: 25px !important;
+ }
 
  .product-card {
      max-width: min-content;
@@ -111,15 +115,15 @@ SimpleStore 1
      color: black !important;
  }
 
- .delete-product,.favorite-product {
-    left: 0;
-}
+ .delete-product, .favorite-product {
+     left: 0;
+ }
 
- .edit-product,.duplicate-product {
+ .edit-product, .duplicate-product {
      right: 0;
  }
 
- .favorite-product,.duplicate-product {
+ .favorite-product, .duplicate-product {
      margin-top: -70px;
  }
 
@@ -188,17 +192,14 @@ SimpleStore 1
          font-size: 0.9rem !important;
      }
      .delete-product, .edit-product {
-        margin-top: -122px;
-    }
-
-    .favorite-product,.duplicate-product {
-        margin-top: -50px;
-    }
-
+         margin-top: -122px;
+     }
+     .favorite-product, .duplicate-product {
+         margin-top: -50px;
+     }
      .row {
          margin-top: 40px !important;
      }
-
      .card.mt-2 {
          max-width: initial;
      }
@@ -217,7 +218,6 @@ SimpleStore 1
      .MS-content {
          height: 280px;
      }
-
  }
 
  @media (max-width: 768px) {}
