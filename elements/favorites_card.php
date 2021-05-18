@@ -4,8 +4,8 @@
         <div class="card-body">
             <?php
             if ($logedin) {
-                echo "<i class='far fa-trash-alt delete-product text-danger' data-category='favorites' data-product='$product->id'></i>";
-                echo "<i class='far fa-edit edit-product text-info' data-category='$category->id ' 
+                echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='favorites' data-product='$product->id'></i>";
+                echo "<i class='btn btn-outline-info far fa-edit edit-product' data-category='$category->id ' 
                 data-product='$product->id' 
                 data-img='$product->img' 
                 data-name='$product->name'
