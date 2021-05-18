@@ -357,35 +357,10 @@ $('#update_stats').on('click', function () {
 });
 
 
-//Bootstrap carousel
-
-$('.carousel .carousel-item').each(function () {
-    var minPerSlide = 3;
-    var next = $(this).next();
-    if (!next.length) {
-        next = $(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo($(this));
-
-    for (var i = 0; i < minPerSlide; i++) {
-        next = next.next();
-        if (!next.length) {
-            next = $(this).siblings(':first');
-        }
-
-        next.children(':first-child').clone().appendTo($(this));
-    }
-});
-
 //jQuery Slider
-if ($("#exampleSlider").length) {
-
-    $('#exampleSlider').multislider();
-
-    $('#exampleSlider').multislider({
-        interval: 5000,
-        interval: 2000
+if ($("#favorites_slider").length) {
+    $('#favorites_slider').multislider({
+        duration: 100,
+        interval: 5000
     });
-
-
 }

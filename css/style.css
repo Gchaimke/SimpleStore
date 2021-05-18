@@ -174,16 +174,6 @@ SimpleStore 1
      }
  }
 
- /*Bootstrap carousel*/
-
- .carousel-control-next, .carousel-control-prev {
-     width: 5% !important;
- }
-
- .carousel-control-next:hover, .carousel-control-prev:hover {
-     background: black;
- }
-
  @media (max-width: 768px) {
      .carousel-inner .carousel-item>div {
          display: none;
@@ -215,7 +205,7 @@ SimpleStore 1
  /*jQuery slider */
 
  .item {
-     width: 20%;
+     width: 10%;
  }
 
  .MS-content {

@@ -1,14 +1,4 @@
-<?php
-
-
-if ($favorite_num == 1) {
-    echo '<div class="carousel-item active">';
-} else {
-    echo '<div class="carousel-item">';
-}
-
-?>
-<div class="col-md mb-3">
+<div class="col-md mb-3 item col">
     <div class="card product-card mt-2">
         <div class="card-image" style="background-image: url('<?= SITE_ROOT . $product->img ?>');"></div>
         <div class="card-body">
@@ -32,12 +22,3 @@ if ($favorite_num == 1) {
         </div>
     </div>
 </div>
-<?php
-
-if ($favorite_num == 1) {
-    echo '</div>';
-}else{
-    echo '</div>';
-
-}
-?>
