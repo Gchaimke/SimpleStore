@@ -1,5 +1,5 @@
 <div class="cart">
-    <span class='btn btn-close close-cart position-absolute' style="display: none;" aria-label="Close"></span>
+    <span class='btn btn-close close-cart position-absolute end-0' style="display: none;" aria-label="Close"></span>
     <center>
         <h6 class="card-title cart_header d-flex justify-content-center text-nowrap bg-info text-white py-1">
             <span class="me-2">Cart </span>
