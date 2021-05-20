@@ -356,7 +356,7 @@ function cart_log($cart, $total, $client)
 
 function add_zero($orders)
 {
-    if ($orders > 0 && $orders < 10) {
+    if ($orders >= 0 && $orders < 10) {
         return '00' . $orders;
     }
     if ($orders >= 10 && $orders < 100) {
