@@ -5,4 +5,4 @@
         <button type="submit" class="btn btn-dark send">найти</button>
     </div>
 </form>
-<div class="row" id="search_result"></div>
+<div class="row mb-3" id="search_result"></div>
