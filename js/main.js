@@ -172,11 +172,7 @@ $(document).on('click', '.minus', function () {
     var updated = update_cart(productId, price, minus_qty);
     update_cart_total(price);
     if (updated <= 0) {
-        $('.cart_items').find('li[data-product_id=' + productId + ']').fadeOut(500,function(){
-            setTimeout(function(){
-                $(this).remove();
-            },1000)
-        });
+        $('.cart_items').find('li[data-product_id=' + productId + ']').remove();
     };
 });
 
