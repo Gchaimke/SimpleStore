@@ -112,5 +112,27 @@ if (isset($_POST['update_stats'])) {
     exit;
 }
 
+if (isset($_POST['search'])) {
+    if (strlen($_POST['search']) >= 3) {
+        $search = $_POST['search'];
+        $str = "";
+        foreach ($categories as $category) {
+            $products = get_products($category->id);
+            if (is_iterable($products)) {
+                foreach ($products as $product) {
+                    $search_name = str_replace(' ', '', $product->name);
+                    if (stripos($search_name, $search) !== false) {
+                        $str .= $category->id . "_" . $product->id . ",";
+                    } 
+                }
+            }
+        }
+        echo $str;
+    } else {
+        echo "Min chars 3";
+    }
+    exit;
+}
+
 
 echo "Error";

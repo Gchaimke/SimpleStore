@@ -2,9 +2,6 @@
     <div class="card-image" style="background-image: url('<?= SITE_ROOT . $product->img ?>');"></div>
     <div class="card-body">
         <?php
-        if(!isset($product->id)){
-            $product->id = $product_num;
-        }
         if ($logedin) {
             echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$category->id' data-product='$product->id'></i>";
             echo "<i class='btn btn-outline-info far fa-edit edit-product' data-category='$category->id ' 
@@ -19,7 +16,6 @@
             echo "<i class='btn btn-outline-dark far fa-clone duplicate-product' data-category='$category->id ' data-product='$product->id'></i>";
             echo "<i class='btn btn-outline-warning far fa-star favorite-product' data-category='$category->id ' data-product='$product->id'></i>";
         }
-        $product_cart_id = $category->id.'_'.$product->id
         ?>
         <center class="card-content">
             <h5 class="card-title"><?= $product->name ?></h5>

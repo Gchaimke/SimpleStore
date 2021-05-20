@@ -25,7 +25,6 @@ function redirect($url)
 
 function login($pass)
 {
-    global $company;
     if ($pass == PASS) {
         $_SESSION["login"] = true;
         redirect(SITE_ROOT);
@@ -459,4 +458,13 @@ function send_email($order_num = 0)
         mail($to, $subject, $message, $headers);
         return $message;
     }
+}
+
+function str_contains($haystack, $needle, $ignoreCase = true) {
+    if ($ignoreCase) {
+        $haystack = strtolower($haystack);
+        $needle   = strtolower($needle);
+    }
+    $needlePos = strpos($haystack, $needle);
+    return ($needlePos === false ? false : ($needlePos+1));
 }

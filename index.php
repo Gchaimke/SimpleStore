@@ -45,6 +45,7 @@ include_once('elements/about.php');
             include_once('elements/message.php');
             echo "<div class='m-4'>$company->header</div>";
             include_once('elements/favorites.php');
+            include_once('elements/search.php');
             include_once('elements/products.php');
             include_once('elements/cart.php');
             ?>

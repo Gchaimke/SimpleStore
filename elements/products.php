@@ -22,7 +22,11 @@ if (is_iterable($categories)) {
         $product_num = 0;
         if (is_iterable($products)) {
             foreach ($products as $product) {
-                echo '<div class="col-sm" >';
+                if (!isset($product->id)) {
+                    $product->id = $product_num;
+                }
+                $product_cart_id = $category->id . '_' . $product->id;
+                echo "<div class='col-sm' id='$product_cart_id'>";
                 include('elements/card.php');
                 echo '</div>';
                 $product_num++;
@@ -34,7 +38,6 @@ if (is_iterable($categories)) {
             echo "<i class='far fa-trash-alt delete-category' data-category='$category->id '></i>";
         }
     }
-}else{
+} else {
     echo 'No Categories';
 }
-
