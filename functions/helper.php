@@ -362,7 +362,7 @@ function add_zero($orders)
     if ($orders >= 10 && $orders < 100) {
         return '0' . $orders;
     }
-    if ($orders > 100) {
+    if ($orders >= 100) {
         return $orders;
     }
 }
