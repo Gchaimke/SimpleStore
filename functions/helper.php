@@ -449,7 +449,7 @@ function send_email($order_num = 0)
         $subject = "Order #" . $order_num;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SITE_ROOT . "?order=" . $order_num;
         $message =  order_to_html($order_num) . order_client_to_html($order_num) . "<b style='color:red;'>Этот меил используется для рассылки
-         и не проверяется администартором, для связи и уточнений используйте <a href='https://wa.me/$company->phone'>Вотсап</a> </b><br><br>".
+         и не проверяется администартором, для связи и уточнений используйте <a href='https://wa.me/972$company->phone'>Вотсап</a> </b><br><br>".
         "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
