@@ -1,1 +1,58 @@
-[{"name":"Грудинка индюшиная","description":"","price":"23","kind":"1кг","img":"img\/products\/Грудка.jpg","id":"3_6"},{"name":"Жир Бараний ","description":" ","price":"55","kind":"1кг","img":"img\/products\/Жир.jpg","id":"1_7"},{"name":"Нога ягнёнка на кости мороженая","description":"","price":"65","kind":"1кг","img":"img\/products\/Ногаягнёнка.jpg","id":"1_6"},{"name":"Нога ягнёнка на кости свежая","description":"","price":"80","kind":"1кг","img":"img\/products\/Ногаягнёнка.jpg","id":"1_5"},{"name":"Паргит без кожи","description":"","price":"30","kind":"1кг","img":"img\/products\/Грудка.jpg","id":"2_4"},{"name":"Рёбрышки ягненка премиум мороженые","description":"","price":"75","kind":"1кг","img":"img\/products\/Рёбрышки.jpg","id":"1_2"},{"name":"язык молочного теленка","description":"","price":"27","kind":"1кг","img":"img\/products\/языкмолочноготеленка.jpeg","id":"0_38"}]
+[
+    {
+        "name": "Грудинка индюшиная",
+        "description": "",
+        "price": "23",
+        "kind": "1кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": "3_6"
+    },
+    {
+        "name": "Жир Бараний ",
+        "description": " ",
+        "price": "55",
+        "kind": "1кг",
+        "img": "img\/products\/Жир.jpg",
+        "id": "1_7"
+    },
+    {
+        "name": "Нога ягнёнка на кости мороженая",
+        "description": "",
+        "price": "65",
+        "kind": "1кг",
+        "img": "img\/products\/Ногаягнёнка.jpg",
+        "id": "1_6"
+    },
+    {
+        "name": "Нога ягнёнка на кости свежая",
+        "description": "",
+        "price": "80",
+        "kind": "1кг",
+        "img": "img\/products\/Ногаягнёнка.jpg",
+        "id": "1_5"
+    },
+    {
+        "name": "Паргит без кожи",
+        "description": "",
+        "price": "30",
+        "kind": "1кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": "2_4"
+    },
+    {
+        "name": "Рёбрышки ягненка премиум мороженые",
+        "description": "",
+        "price": "75",
+        "kind": "1кг",
+        "img": "img\/products\/Рёбрышки.jpg",
+        "id": "1_2"
+    },
+    {
+        "name": "язык молочного теленка",
+        "description": "",
+        "price": "27",
+        "kind": "1кг",
+        "img": "img\/products\/языкмолочноготеленка.jpeg",
+        "id": "0_38"
+    }
+]

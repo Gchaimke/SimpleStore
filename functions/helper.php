@@ -10,6 +10,7 @@ $company = get_company();
 $categories = get_categories();
 $images = get_files();
 $favorites = get_favorites();
+$distrikts = get_json("distrikts");
 
 
 if (isset($_SESSION['login']) && $_SESSION['login']) {
@@ -106,6 +107,15 @@ function get_stats()
         return file_get_contents($path);
     }
 }
+function get_json($file)
+{
+    $path = DOC_ROOT . "data/$file.json";
+    if (file_exists($path)) {
+        return json_decode(file_get_contents($path));
+    }else{
+        return json_decode("{}");
+    }
+}
 
 function get_company()
 {
@@ -199,7 +209,7 @@ function favorite_product($category_index, $product_index)
             $new_product = clone ($curent_product);
         }
     }
-    $new_product->id = $category_index."_".$product_index;
+    $new_product->id = $category_index . "_" . $product_index;
     $favorites[] = $new_product;
     save_json($favorites, "favorites");
 }
@@ -449,8 +459,8 @@ function send_email($order_num = 0)
         $subject = "Order #" . $order_num;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SITE_ROOT . "?order=" . $order_num;
         $message =  order_to_html($order_num) . order_client_to_html($order_num) . "<b style='color:red;'>Этот меил используется для рассылки
-         и не проверяется администартором, для связи и уточнений используйте <a href='https://wa.me/972$company->phone'>Вотсап</a> </b><br><br>".
-        "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
+         и не проверяется администартором, для связи и уточнений используйте <a href='https://wa.me/972$company->phone'>Вотсап</a> </b><br><br>" .
+            "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: admin@mc88.co.il" . "\r\n";
@@ -462,11 +472,12 @@ function send_email($order_num = 0)
     }
 }
 
-function str_contains($haystack, $needle, $ignoreCase = true) {
+function str_contains($haystack, $needle, $ignoreCase = true)
+{
     if ($ignoreCase) {
         $haystack = strtolower($haystack);
         $needle   = strtolower($needle);
     }
     $needlePos = strpos($haystack, $needle);
-    return ($needlePos === false ? false : ($needlePos+1));
+    return ($needlePos === false ? false : ($needlePos + 1));
 }
