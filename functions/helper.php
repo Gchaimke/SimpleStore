@@ -72,6 +72,16 @@ function clean($str)
     return str_replace(' ', '', $str);
 }
 
+function get_data($file)
+{
+    $path = DOC_ROOT . "data/$file.json";
+    if (file_exists($path)) {
+        return json_decode(file_get_contents($path));
+    } else {
+        return json_decode("{}");
+    }
+}
+
 function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"])
 {
     $result = array();
@@ -125,16 +135,6 @@ function get_stats()
     } else {
         update_stats();
         return file_get_contents($path);
-    }
-}
-
-function get_data($file)
-{
-    $path = DOC_ROOT . "data/$file.json";
-    if (file_exists($path)) {
-        return json_decode(file_get_contents($path));
-    } else {
-        return json_decode("{}");
     }
 }
 
