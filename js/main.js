@@ -222,7 +222,7 @@ function update_cart_total(price) {
 }
 
 $('.cart_header, .close-cart').on('click', function () {
-    $('.cart_items').toggle();
+    $('.cart-wraper').toggle();
     $('.close-cart').toggle();
     if (is_whatsapp) {
         $('.cart-send-whatsapp').toggle();
@@ -422,6 +422,16 @@ $('#search').on('submit', function (e) {
         });
 });
 
+$('.lang-ru').on('click', function () { change_language("ru") });
+$('.lang-he').on('click', function () { change_language("he") });
+
+function change_language(language) {
+    $.post("post.php", { set_lang: true, language: language })
+        .done(function (e) {
+            //alert(e);
+            location.reload();
+        });
+}
 
 //jQuery Slider
 if ($("#favorites_slider").length) {

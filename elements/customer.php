@@ -26,7 +26,7 @@
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text"><?php lang($lng,"city") ?></label>
-                        <input type="text" class="form-control" name="city" />
+                        <?php include_once('elements/cities.php'); ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal"><?php lang($lng,"close") ?></button>

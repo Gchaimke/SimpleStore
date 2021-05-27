@@ -1,8 +1,15 @@
-body{
+main {
     direction: rtl;
 }
 
-.delete-category {
+.cart {
     right: initial;
-    left: 50px;
-  }
+}
+
+.delete-category {
+    right: 180px;
+}
+
+.edit-category {
+    left: -105px;
+}

@@ -1,6 +1,6 @@
 <div class="card product-card mt-2">
     <div class="card-image" style="background-image: url('<?= SITE_ROOT . $product->img ?>');"></div>
-    <div class="card-body">
+    <div class="card-body product">
         <?php
         if ($logedin) {
             echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$category->id' data-product='$product->id'></i>";
@@ -17,7 +17,7 @@
             echo "<i class='btn btn-outline-warning far fa-star favorite-product' data-category='$category->id ' data-product='$product->id'></i>";
         }
         ?>
-        <center class="card-content">
+        <div class="card-content text-center">
             <h5 class="card-title"><?= $product->name ?></h5>
             <p class="card-text"><?= $product->description ?></p>
             <div class="d-flex justify-content-center text-nowrap">
@@ -25,6 +25,6 @@
                 <div class="mx-1"> <?= $product->kind ?></div>
                 <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id' data-product='$product->name' data-qty='$product->kind' data-price='$product->price'></i>" ?>
             </div>
-        </center>
+        </div>
     </div>
 </div>

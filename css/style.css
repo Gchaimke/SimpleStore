@@ -6,6 +6,10 @@ SimpleStore 1
      font-family: sans-serif;
  }
 
+ .card-body.day-card {
+    min-height: 100px;
+  }
+
  .rtl {
      direction: rtl;
  }
@@ -54,7 +58,7 @@ SimpleStore 1
      max-width: min-content;
  }
 
- .card-body {
+ .card-body.product {
      min-height: 145px;
  }
 
@@ -70,7 +74,7 @@ SimpleStore 1
  .card-title {
      text-align: center;
      text-transform: capitalize;
-     min-width: 150px;
+     min-width: min-content;
      cursor: pointer;
  }
 
@@ -138,13 +142,13 @@ SimpleStore 1
  }
 
  .delete-category {
-     cursor: pointer;
-     position: relative;
-     top: -36px;
-     right: 50px;
-     font-size: 20px;
-     color: red;
- }
+    cursor: pointer;
+    position: relative;
+    top: -36px;
+    right: -180px;
+    font-size: 20px;
+    color: red;
+  }
 
  .edit-category {
      position: relative;
@@ -159,10 +163,6 @@ SimpleStore 1
  .add-product_toggle {
      z-index: 1;
      position: relative;
- }
-
- .hide_not_mobile {
-     display: none;
  }
 
  /*jQuery slider */
@@ -200,17 +200,16 @@ SimpleStore 1
      .row {
          margin-top: 40px !important;
      }
+
+     .card-body.day-card {
+        min-height: initial;
+      }
+
      .card.mt-2 {
          max-width: initial;
      }
      .card-body {
          padding: 5px 1rem !important;
-     }
-     .cart-total-wraper {
-         display: none;
-     }
-     .hide_not_mobile {
-         display: block;
      }
      .row.overflow-auto {
          height: 260px;

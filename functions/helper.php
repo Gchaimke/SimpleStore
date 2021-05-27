@@ -19,16 +19,23 @@ if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = false;
 }
 
-if (isset($_SESSION['language']) && $_SESSION['language']) {
-    $lng = $_SESSION['language'];
+if (isset($_COOKIE['language']) && $_COOKIE['language']) {
+    $lng = $_COOKIE['language'];
 } else {
-    $lng = 'he';
+    $lng = 'ru';
 }
 
-function lang($lng= "ru",$key = "chaim")
+function set_lang($lng)
+{
+    $cookie_name = "language";
+    $cookie_value = $lng;
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), SITE_ROOT); // 86400 = 1 day
+}
+
+function lang($lng = "ru", $key = "chaim")
 {
     require(__DIR__ . "/../lang/$lng.php");
-    echo key_exists($key,$lang)?$lang[$key]:"not translated ";
+    echo key_exists($key, $lang) ? $lang[$key] : "not translated ";
 }
 
 function redirect($url)
@@ -124,7 +131,7 @@ function get_json($file)
     $path = DOC_ROOT . "data/$file.json";
     if (file_exists($path)) {
         return json_decode(file_get_contents($path));
-    }else{
+    } else {
         return json_decode("{}");
     }
 }

@@ -106,6 +106,12 @@ if (isset($_POST['get_stats'])) {
     exit;
 }
 
+if (isset($_POST['set_lang'])) {
+    set_lang($_POST['language']);
+    exit;
+}
+
+
 if (isset($_POST['update_stats'])) {
     update_stats();
     echo 'ok';
