@@ -123,7 +123,7 @@ if (isset($_POST['search'])) {
         $search = $_POST['search'];
         $str = "";
         foreach ($categories as $category) {
-            $products = get_products($category->id);
+            $products = get_data($category->id);
             if (is_iterable($products)) {
                 foreach ($products as $product) {
                     $search_name = str_replace(' ', '', $product->name);

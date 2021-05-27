@@ -1,6 +1,6 @@
 <?php $name_lang="name_".$lng?>
 <select class="form-select" aria-label="Select" name="city">
-    <option selected>Select</option>
+    <option selected><?php lang($lng,"select")?></option>
     <?php foreach ($distrikts as $distrikt) : ?>
         <?php foreach ($distrikt as $key => $data) : ?>
             <optgroup label="<?=$data->$name_lang ?>">

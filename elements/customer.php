@@ -22,10 +22,10 @@
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text"><?php lang($lng,"address") ?></label>
-                        <input type="text" class="form-control" name="address" />
+                        <input type="text" class="form-control" placeholder="<?php lang($lng,"address_pl") ?>" name="address" />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text"><?php lang($lng,"city") ?></label>
+                        <label class="input-group-text" ><?php lang($lng,"city") ?></label>
                         <?php include_once('elements/cities.php'); ?>
                     </div>
                     <div class="modal-footer">

@@ -6,11 +6,12 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DOC_ROOT . "data/orders/");
-$company = get_company();
-$categories = get_categories();
+
+$company = get_data("company");
+$categories = get_data("categories");
 $images = get_files();
-$favorites = get_favorites();
-$distrikts = get_json("distrikts");
+$favorites = get_data("favorites");
+$distrikts = get_data("distrikts");
 
 
 if (isset($_SESSION['login']) && $_SESSION['login']) {
@@ -126,7 +127,8 @@ function get_stats()
         return file_get_contents($path);
     }
 }
-function get_json($file)
+
+function get_data($file)
 {
     $path = DOC_ROOT . "data/$file.json";
     if (file_exists($path)) {
@@ -136,24 +138,9 @@ function get_json($file)
     }
 }
 
-function get_company()
-{
-    return json_decode(file_get_contents(DOC_ROOT . 'data/company.json'));
-}
-
 function edit_company($data)
 {
     file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data, JSON_UNESCAPED_UNICODE));
-}
-
-function get_favorites()
-{
-    return json_decode(file_get_contents(DOC_ROOT . 'data/favorites.json'));
-}
-
-function get_categories()
-{
-    return json_decode(file_get_contents(DOC_ROOT . 'data/categories.json'));
 }
 
 function get_category($id)
@@ -170,31 +157,31 @@ function get_category($id)
     return null;
 }
 
-function get_products($file = 0)
-{
-    if (file_exists(DOC_ROOT . "data/$file.json")) {
-        return json_decode(file_get_contents(DOC_ROOT . "data/$file.json"));
-    }
-}
-
 function new_product($product_array = array())
 {
     $product = new stdClass();
-    if ($product_array['id'] == '') {
+    if (key_exists('id', $product_array) && $product_array['id'] == '') {
         $product->name = $product_array['name'] != '' ? $product_array['name'] : 'New Product';
         $product->description = $product_array['description'] != '' ? $product_array['description'] : '';
         $product->price = $product_array['price'] != '' ? $product_array['price'] : 50;
         $product->kind = $product_array['kind'] != '' ? $product_array['kind'] : '1kg';
         $product->img = $product_array['img'] != '' ? $product_array['img'] : 'img/product.jpg';
         $product->id = "";
-        return $product;
+    }else{
+        $product->name = 'New Product';
+        $product->description = '';
+        $product->price = 50;
+        $product->kind = '1kg';
+        $product->img = 'img/product.jpg';
+        $product->id = "";
     }
+    return $product;
 }
 
 function add_product($category_index, $product)
 {
     $category = get_category($category_index);
-    $products = get_products($category_index);
+    $products = get_data($category_index);
     $product = new_product($product);
     $product->id = $category->last_index + 1;
     $products[] = $product;
@@ -205,7 +192,7 @@ function add_product($category_index, $product)
 function duplicate_product($category_index, $product_index)
 {
     $category = get_category($category_index);
-    $products = get_products($category_index);
+    $products = get_data($category_index);
     $new_product = new stdClass();
     foreach ($products as $curent_product) {
         if ($curent_product->id == $product_index) {
@@ -220,8 +207,8 @@ function duplicate_product($category_index, $product_index)
 
 function favorite_product($category_index, $product_index)
 {
-    $products = get_products($category_index);
-    $favorites = get_products("favorites");
+    $products = get_data($category_index);
+    $favorites = get_data("favorites");
     $new_product = new stdClass();
     foreach ($products as $curent_product) {
         if ($curent_product->id == $product_index) {
@@ -235,7 +222,7 @@ function favorite_product($category_index, $product_index)
 
 function edit_product($category_index, $product)
 {
-    $products = get_products($category_index);
+    $products = get_data($category_index);
     $product = (object)$product;
     $product->id = intval($product->id);
     foreach ($products as $key => $curent_product) {
@@ -251,7 +238,7 @@ function update_products_id($category_index = '')
     if ($category_index != '') {
         $category = get_category($category_index);
         if (isset($category)) {
-            $products = get_products($category_index);
+            $products = get_data($category_index);
             foreach ($products as $key => $product) {
                 if (!property_exists($product, 'id')) {
                     $product->id = $category->last_index;
@@ -270,7 +257,7 @@ function update_products_id($category_index = '')
 
 function delete_product($category_index, $product_index)
 {
-    $products = get_products($category_index);
+    $products = get_data($category_index);
     foreach ($products as $key => $curent_product) {
         if ($curent_product->id ==  $product_index) {
             unset($products[$key]);
@@ -281,7 +268,7 @@ function delete_product($category_index, $product_index)
 
 function add_category($name = 'New Category')
 {
-    $categories = get_categories();
+    $categories = get_data("categories");
     $last_category =  end($categories);
     $category = new stdClass();
     $category->id = isset($last_category->id) ? $last_category->id + 1 : 1;
@@ -297,7 +284,7 @@ function add_category($name = 'New Category')
 
 function edit_category($id, $key, $value)
 {
-    $categories = get_categories();
+    $categories = get_data("categories");
     foreach ($categories as $index => $category) {
         if ($category->id == $id) {
             $categories[$index]->$key = $value;
@@ -308,7 +295,7 @@ function edit_category($id, $key, $value)
 
 function delete_category($id)
 {
-    $categories = get_categories();
+    $categories = get_data("categories");
     foreach ($categories as $key => $category) {
         if ($category->id == $id) {
             unset($categories[$key]);

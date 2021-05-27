@@ -14,4 +14,6 @@ $lang = array(
     "email" => "אמייל",
     "city" => "עיר",
     "address" => "כתובת",
+    "address_pl" => "רחוב, בית, דירה",
+    "select"=>"בחירה",
 );

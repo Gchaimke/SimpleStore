@@ -7,8 +7,8 @@ SimpleStore 1
  }
 
  .card-body.day-card {
-    min-height: 100px;
-  }
+     min-height: 100px;
+ }
 
  .rtl {
      direction: rtl;
@@ -141,28 +141,27 @@ SimpleStore 1
      border-radius: 5px;
  }
 
- .delete-category {
-    cursor: pointer;
-    position: relative;
-    top: -36px;
-    right: -180px;
-    font-size: 20px;
-    color: red;
-  }
-
- .edit-category {
+ .delete-category, .edit-category, .add-product_toggle {
      position: relative;
      top: 40px;
-     z-index: 4;
-     color: #1984fe;
-     left: 100px;
+     font-size: 1.3rem;
      padding: 5px;
+     z-index: 4;
      cursor: pointer;
  }
 
+ .delete-category {
+     color: red;
+     left: 130px;
+ }
+
+ .edit-category {
+     color: #1984fe;
+     left: 100px;
+ }
+
  .add-product_toggle {
-     z-index: 1;
-     position: relative;
+     right: 50px;
  }
 
  /*jQuery slider */
@@ -200,11 +199,9 @@ SimpleStore 1
      .row {
          margin-top: 40px !important;
      }
-
      .card-body.day-card {
-        min-height: initial;
-      }
-
+         min-height: initial;
+     }
      .card.mt-2 {
          max-width: initial;
      }
