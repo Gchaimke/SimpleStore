@@ -3,34 +3,34 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="client_dataLabel">Shipment Address</h5>
+                <h5 class="modal-title" id="client_dataLabel"><?php lang($lng,"shipment") ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="client_form">
                     <div class="input-group mt-2">
-                        <label class="input-group-text">Name</label>
+                        <label class="input-group-text"><?php lang($lng,"name") ?></label>
                         <input type="text" class="form-control" name="name" required />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text">Phone</label>
+                        <label class="input-group-text"><?php lang($lng,"phone") ?></label>
                         <input type="text" class="form-control" name="phone" required />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text">Email</label>
+                        <label class="input-group-text"><?php lang($lng,"email") ?></label>
                         <input type="text" class="form-control" name="email" />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text">Address</label>
+                        <label class="input-group-text"><?php lang($lng,"address") ?></label>
                         <input type="text" class="form-control" name="address" />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text">City</label>
+                        <label class="input-group-text"><?php lang($lng,"city") ?></label>
                         <input type="text" class="form-control" name="city" />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary send"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> Send</button>
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal"><?php lang($lng,"close") ?></button>
+                        <button type="submit" class="btn btn-primary send"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> <?php lang($lng,"send") ?></button>
                     </div>
                 </form>
             </div>

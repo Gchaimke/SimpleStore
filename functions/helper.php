@@ -19,6 +19,18 @@ if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = false;
 }
 
+if (isset($_SESSION['language']) && $_SESSION['language']) {
+    $lng = $_SESSION['language'];
+} else {
+    $lng = 'he';
+}
+
+function lang($lng= "ru",$key = "chaim")
+{
+    require(__DIR__ . "/../lang/$lng.php");
+    echo key_exists($key,$lang)?$lang[$key]:"not translated ";
+}
+
 function redirect($url)
 {
     echo "<script>window.location.href = '$url';</script>";

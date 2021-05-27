@@ -1,0 +1,8 @@
+body{
+    direction: rtl;
+}
+
+.delete-category {
+    right: initial;
+    left: 50px;
+  }
