@@ -6,7 +6,7 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DOC_ROOT . "data/orders/");
-
+$carrency = "₪";
 $company = get_data("company");
 $categories = get_data("categories");
 $images = get_files();
@@ -24,6 +24,18 @@ if (isset($_COOKIE['language']) && $_COOKIE['language']) {
     $lng = $_COOKIE['language'];
 } else {
     $lng = 'ru';
+}
+
+if (isset($_COOKIE['items']) && $_COOKIE['items']) {
+    $previos_cart = $_COOKIE['items'];
+} else {
+    $previos_cart = '';
+}
+
+if (isset($_COOKIE['total']) && $_COOKIE['total']) {
+    $previos_total = $_COOKIE['total'];
+} else {
+    $previos_total = 0;
 }
 
 function set_lang($lng)
@@ -345,7 +357,7 @@ function compressImage($source, $destination, $quality)
     unlink($source);
 }
 
-function cart_log($cart, $total, $client)
+function save_cart($cart, $total, $client)
 {
     $orders_path = ORDERS_PATH . date('my');
     if (!file_exists($orders_path)) {
@@ -437,6 +449,7 @@ function order_client_to_html($order_num = 0)
 
 function order_to_html($order_num = 0)
 {
+    global $carrency;
     $order = get_order($order_num);
     if (is_object($order)) {
         $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
@@ -450,7 +463,7 @@ function order_to_html($order_num = 0)
             }
             $html .= '</tr>';
         }
-        $html .= "<tr><td style='$style'>Сумма (<span style='color:red;'>приблизительно</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total ₪</td></tr>";
+        $html .= "<tr><td style='$style'>Сумма (<span style='color:red;'>приблизительно</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total$carrency></td></tr>";
         return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
         <table style='width:100%;$style'>$html</table><br>";
     }
