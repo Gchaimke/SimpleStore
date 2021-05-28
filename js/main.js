@@ -265,16 +265,20 @@ $(document).on('click', '.remove-from-cart', function () {
 $('#clear-cart').on('click', function () {
     var confim = confirm('Clear cart?');
     if (confim) {
-        $('.cart_items').find('li').each(function () {
-            remove_cookie("items[" + $(this).attr("data-product_id") + "]");
-            $(this).remove();
-        })
-        $('.cart-total').text(0);
-        $('.mobile-cart-total').text(0);
-        set_cookie("total", 0);
-        $('.close-cart').trigger( "click" );
+        clear_cart();
     }
 });
+
+function clear_cart() {
+    $('.cart_items').find('li').each(function () {
+        remove_cookie("items[" + $(this).attr("data-product_id") + "]");
+        $(this).remove();
+    })
+    $('.cart-total').text(0);
+    $('.mobile-cart-total').text(0);
+    set_cookie("total", 0);
+    $('.close-cart').trigger("click");
+}
 
 function set_cookie(name, data) {
     $.post("post.php", { set_cookie: true, name: name, data: data })
@@ -315,8 +319,10 @@ $('.cart-send-whatsapp').on('click', function (e) {
     if (msg != '') {
         var win = window.open(url + encodeURIComponent(msg + total), '_blank');
         if (win) {
+            var total = $('.cart-total').text();
+            clear_cart();
             //Browser has allowed it to be opened
-            $.post("post.php", { save_cart: true, cart: cart, total: $('.cart-total').text(), client: client })
+            $.post("post.php", { save_cart: true, cart: cart, total: total, client: client })
                 .done(function (e) {
                     location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
                 });
@@ -336,7 +342,7 @@ $('.cart-send-email').on('click', function () {
     let client = [];
     $('.cart_items>li').each(function () {
         cart[$(this).data('product_id')] = $(this).find(".cart-product").text() + "," + $(this).find(".cart_qty").text() + "," + $(this).find(".cart_price").text();
-    })
+    });
     if (!$.isEmptyObject(cart)) {
         $('#client_data').modal('show');
         $("#client_form").on("submit", function (out) {
@@ -348,7 +354,9 @@ $('.cart-send-email').on('click', function () {
             $(client).each(function (index, obj) {
                 data[obj.name] = obj.value;
             });
-            $.post("post.php", { save_cart: true, cart: cart, total: $('.cart-total').text(), client: data })
+            var total = $('.cart-total').text();
+            clear_cart();
+            $.post("post.php", { save_cart: true, cart: cart, total: total, client: data })
                 .done(function (e) {
                     location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
                 });

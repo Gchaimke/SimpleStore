@@ -14,6 +14,10 @@ SimpleStore 1
     line-height: 16px !important;
 }
 
+.cart-wraper {
+    min-width: 200px;
+}
+
  .rtl {
      direction: rtl;
  }
