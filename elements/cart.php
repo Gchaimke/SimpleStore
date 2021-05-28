@@ -1,5 +1,6 @@
 <div class="cart">
-    <span class='btn btn-close close-cart position-absolute end-0' style="display: none;" aria-label="Close"></span>
+    <span class='btn btn-close position-absolute end-0 close-cart' style="display: none;" aria-label="Close"></span>
+    <span class='btn btn-outline-danger far fa-trash-alt position-absolute start-0' id="clear-cart" style="display: none;"></span>
     <h6 class="card-title cart_header d-flex justify-content-center text-nowrap bg-info text-white p-2">
         <span class="me-2"><i class="fas fa-shopping-cart"></i> <span class="mobile-cart-total">0</span><?= $carrency ?></span>
     </h6>

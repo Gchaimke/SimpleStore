@@ -81,14 +81,23 @@ if (isset($_POST['save_cart'])) {
 if (isset($_POST['set_cookie'])) {
     $cookie_name = $_POST['name'];
     $cookie_value = $_POST['data'];
-    setcookie($cookie_name, json_encode( $cookie_value,JSON_UNESCAPED_UNICODE), time() + (86400 * 30), SITE_ROOT); // 86400 = 1 day
-    print_r( $_COOKIE);
+    setcookie($cookie_name, json_encode($cookie_value, JSON_UNESCAPED_UNICODE), time() + (86400 * 30), SITE_ROOT); // 86400 = 1 day
+    print_r($_COOKIE);
     exit;
 }
 
 if (isset($_POST['remove_cookie'])) {
     $cookie_name = $_POST['name'];
-    unset($_COOKIE[$cookie_name]); 
+    unset($_COOKIE[$cookie_name]);
+    if (isset($_COOKIE[$cookie_name])) {
+        foreach ($_COOKIE as $cookieKey => $cookieValue) {
+            if (strpos($cookieKey, $cookie_name) === 0) {
+                // remove the cookie
+                setcookie($cookieKey, null, -1);
+                unset($_COOKIE[$cookieKey]);
+            }
+        }
+    }
     setcookie($cookie_name, null, -1, '/');
     exit;
 }
@@ -145,7 +154,7 @@ if (isset($_POST['search'])) {
                     $search_name = str_replace(' ', '', $product->name);
                     if (stripos($search_name, $search) !== false) {
                         $str .= $category->id . "_" . $product->id . ",";
-                    } 
+                    }
                 }
             }
         }
