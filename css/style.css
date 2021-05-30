@@ -26,10 +26,16 @@ SimpleStore 1
      background: aliceblue;
      line-height: 37px;
      flex-direction: row !important;
- }
- .statistic, .statistic>span{
     border-radius: 5px;
+
  }
+ .statistic>span{
+    border-radius: 5px 0 0 5px;
+ }
+
+ .statistic>span {
+    right: 10px;
+}
 
  #update_stats {
      padding: 10px;
