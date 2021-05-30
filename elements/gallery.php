@@ -1,7 +1,7 @@
 <div class="gallery-wrapper m-2 col-sm">
     <div class="m-2 gallery_view" style="display: none;">
         <span class='btn btn-close bg-warning close-parent float-end' aria-label="Close"></span>
-        <b>Click to select image</b>
+        <b><?=lang($lng,"Click to select the image")?></b>
         <div class="row overflow-auto">
             <?php
             if (is_iterable($images)) {

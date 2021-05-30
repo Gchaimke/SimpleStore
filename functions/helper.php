@@ -47,8 +47,9 @@ function set_lang($lng)
 
 function lang($lng = "ru", $key = "chaim")
 {
-    require(__DIR__ . "/../lang/$lng.php");
-    echo key_exists($key, $lang) ? $lang[$key] : "not translated ";
+    require(DOC_ROOT . "lang/$lng.php");
+    $out =  key_exists($key, $lang) ? $lang[$key] : $key;
+    return $out;
 }
 
 function redirect($url)
@@ -171,16 +172,18 @@ function get_category($id)
 
 function new_product($product_array = array())
 {
+    global $lng;
+    $name = lang($lng, "new_product");
     $product = new stdClass();
     if (key_exists('id', $product_array) && $product_array['id'] == '') {
-        $product->name = $product_array['name'] != '' ? $product_array['name'] : 'New Product';
+        $product->name = $product_array['name'] != '' ? $product_array['name'] : $name;
         $product->description = $product_array['description'] != '' ? $product_array['description'] : '';
         $product->price = $product_array['price'] != '' ? $product_array['price'] : 50;
         $product->kind = $product_array['kind'] != '' ? $product_array['kind'] : '1kg';
         $product->img = $product_array['img'] != '' ? $product_array['img'] : 'img/product.jpg';
         $product->id = "";
-    }else{
-        $product->name = 'New Product';
+    } else {
+        $product->name = $name;
         $product->description = '';
         $product->price = 50;
         $product->kind = '1kg';
@@ -245,28 +248,6 @@ function edit_product($category_index, $product)
     save_json($products, $category_index);
 }
 
-function update_products_id($category_index = '')
-{
-    if ($category_index != '') {
-        $category = get_category($category_index);
-        if (isset($category)) {
-            $products = get_data($category_index);
-            foreach ($products as $key => $product) {
-                if (!property_exists($product, 'id')) {
-                    $product->id = $category->last_index;
-                    $products[$key] = $product;
-                    $category->last_index++;
-                }
-            }
-            save_json($products, $category_index);
-            edit_category($category_index, "last_index", $category->last_index);
-            echo 'updated';
-            return;
-        }
-    }
-    echo 'no category with id ' . $category_index;
-}
-
 function delete_product($category_index, $product_index)
 {
     $products = get_data($category_index);
@@ -319,6 +300,7 @@ function delete_category($id)
 
 function save_image($image_name, $url)
 {
+    global $lng;
     $valid_ext = array('png', 'jpeg', 'jpg');
     $image_ext = pathinfo($url, PATHINFO_EXTENSION);
     $image_ext = strtolower($image_ext);
@@ -331,7 +313,8 @@ function save_image($image_name, $url)
         compressImage($tmp, $location, 60);
         echo $image_name . '.' . $image_ext;
     } else {
-        echo 'image not valid ' . $image_ext;
+        $msg = lang($lng, "image_not_valid");
+        echo $msg . ' ' . $image_ext;
     }
 }
 
@@ -405,19 +388,9 @@ function get_orders($month)
     return null;
 }
 
-function old_to_new()
-{
-    $orders = json_decode(file_get_contents(ORDERS_PATH . "05_21.json"));
-    $tmp = [];
-    foreach ($orders as $order) {
-        $order_path = ORDERS_PATH . date("my/") . date("my_") . substr($order->id, -3) . ".json";
-        file_put_contents($order_path, json_encode($order, JSON_UNESCAPED_UNICODE));
-    }
-    return $tmp;
-}
-
 function get_order($order_num = 0)
 {
+    global $lng;
     $order_month = explode("_", $order_num);
     if (count($order_month) != 2) {
         $order_month = "0521";
@@ -429,14 +402,17 @@ function get_order($order_num = 0)
     if (file_exists($order_path)) {
         return json_decode(file_get_contents($order_path));
     }
-    return "<h3>Order #$order_num not found!</h3>";
+    $msg = lang($lng, "order_not_found");
+    return "<h3>#$order_num $msg</h3>";
 }
 
 function order_client_to_html($order_num = 0)
 {
+    global $lng;
     $order = get_order($order_num);
     if (is_object($order)) {
-        $html = "<br><h3>Shipment Address</h3>";
+        $msg = lang($lng, "shipment_address");
+        $html = "<br><h3>$msg</h3>";
         $html .= "<ul>";
         foreach ($order->client as $key => $value) {
             $html .= "<li>$key: $value</li>";
@@ -444,17 +420,25 @@ function order_client_to_html($order_num = 0)
         $html .= '</ul>';
         return $html;
     }
-    return "<br>Client not found";
+    $msg = lang($lng, "client_not_found");
+    return "<br>$msg";
 }
 
 function order_to_html($order_num = 0)
 {
     global $carrency;
+    global $lng;
     $order = get_order($order_num);
     if (is_object($order)) {
         $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
         $th_style = 'text-align: center;background-color: #bce0ff;font-size: larger;';
-        $html = "<tr><th style='$style $th_style'>Продукт</th><th style='$style $th_style'>Количество</th><th style='$style $th_style'>Цена</th></tr>";
+        $product = lang($lng, "product");
+        $qtty = lang($lng, "qtty");
+        $price = lang($lng, "price");
+        $total = lang($lng, "total");
+        $approximately = lang($lng, "approximately");
+        $order_lbl = lang($lng, "order");
+        $html = "<tr><th style='$style $th_style'>$product</th><th style='$style $th_style'>$qtty</th><th style='$style $th_style'>$price</th></tr>";
         foreach ($order->items as $value) {
             $html .= "<tr>";
             $value = explode(',', $value);
@@ -463,8 +447,8 @@ function order_to_html($order_num = 0)
             }
             $html .= '</tr>';
         }
-        $html .= "<tr><td style='$style'>Сумма (<span style='color:red;'>приблизительно</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
-        return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> Order: #$order->id</h3>
+        $html .= "<tr><td style='$style'>$total (<span style='color:red;'>$approximately</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
+        return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> $order_lbl: #$order->id</h3>
         <table style='width:100%;$style'>$html</table><br>";
     }
     return $order;
@@ -473,12 +457,14 @@ function order_to_html($order_num = 0)
 function send_email($order_num = 0)
 {
     global $company;
+    global $lng;
+    $msg = lang($lng, "email_not_useble");
     if ($order_num != 0) {
         $to = $company->email;
         $subject = "Order #" . $order_num;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SITE_ROOT . "?order=" . $order_num;
-        $message =  order_to_html($order_num) . order_client_to_html($order_num) . "<b style='color:red;'>Этот меил используется для рассылки
-         и не проверяется администартором, для связи и уточнений используйте <a href='https://wa.me/972$company->phone'>Вотсап</a> </b><br><br>" .
+        $message =  order_to_html($order_num) . order_client_to_html($order_num) .
+            "<b style='color:red;'> $msg <a href='https://wa.me/972$company->phone'>Вотсап</a> </b><br><br>" .
             "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -499,4 +485,42 @@ function str_contains($haystack, $needle, $ignoreCase = true)
     }
     $needlePos = strpos($haystack, $needle);
     return ($needlePos === false ? false : ($needlePos + 1));
+}
+
+
+/**
+ * TO DO: Delete After Use
+ */
+function update_products_id($category_index = '')
+{
+    global $lng;
+    if ($category_index != '') {
+        $category = get_category($category_index);
+        if (isset($category)) {
+            $products = get_data($category_index);
+            foreach ($products as $key => $product) {
+                if (!property_exists($product, 'id')) {
+                    $product->id = $category->last_index;
+                    $products[$key] = $product;
+                    $category->last_index++;
+                }
+            }
+            save_json($products, $category_index);
+            edit_category($category_index, "last_index", $category->last_index);
+            echo lang($lng, "updated");
+            return;
+        }
+    }
+    echo 'no category with id ' . $category_index;
+}
+
+function old_to_new()
+{
+    $orders = json_decode(file_get_contents(ORDERS_PATH . "05_21.json"));
+    $tmp = [];
+    foreach ($orders as $order) {
+        $order_path = ORDERS_PATH . date("my/") . date("my_") . substr($order->id, -3) . ".json";
+        file_put_contents($order_path, json_encode($order, JSON_UNESCAPED_UNICODE));
+    }
+    return $tmp;
 }

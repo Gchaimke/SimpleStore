@@ -63,16 +63,6 @@ if (isset($_POST['edit_company'])) {
     exit;
 }
 
-if (isset($_POST['get_form_url'])) {
-    save_image(clean($_POST['name']), clean($_POST['url']));
-    exit;
-}
-
-if (isset($_POST['delete_gallery_image'])) {
-    delete_image(clean($_POST['image']));
-    exit;
-}
-
 if (isset($_POST['save_cart'])) {
     echo save_cart($_POST['cart'], $_POST['total'], $_POST['client']);
     exit;
@@ -103,25 +93,36 @@ if (isset($_POST['remove_cookie'])) {
 }
 
 if (isset($_POST['remove_all_cookie'])) {
+    $ignore = ["PHPSESSID", "language"];
     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
     foreach ($cookies as $cookie) {
         $parts = explode('=', $cookie);
         $name = trim($parts[0]);
-        if ($name != "PHPSESSID") {
+        if (!in_array($name, $ignore)) {
             setcookie($name, '', 1);
             setcookie($name, '', 1, SITE_ROOT);
         }
     }
 }
 
+if (isset($_POST['get_form_url'])) {
+    $name = str_replace(' ', '_', $_POST['name']);
+    save_image($name, clean($_POST['url']));
+    exit;
+}
+
+if (isset($_POST['delete_gallery_image'])) {
+    delete_image(clean($_POST['image']));
+    exit;
+}
 
 if (isset($_FILES['file']['name'])) {
 
     $filename = $_FILES['file']['name'];
     $imageFileType = pathinfo($filename, PATHINFO_EXTENSION);
     $imageFileType = strtolower($imageFileType);
-
-    $location = DOC_ROOT . "img/products/" . clean($_POST['name']) . "." . $imageFileType;
+    $save_name = str_replace(' ', '_', $_POST['name']);
+    $location = DOC_ROOT . "img/products/$save_name.$imageFileType";
     /* Valid extensions */
     $valid_extensions = array("jpg", "jpeg", "png");
 
@@ -130,7 +131,7 @@ if (isset($_FILES['file']['name'])) {
     if (in_array(strtolower($imageFileType), $valid_extensions)) {
         /* Upload file */
         if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
-            $response = clean($_POST['name']) . "." . $imageFileType;
+            $response = $save_name . "." . $imageFileType;
         }
     }
 

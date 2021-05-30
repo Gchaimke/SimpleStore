@@ -13,3 +13,7 @@ main {
 .edit-category {
     left: -105px;
 }
+
+.statistic>span{
+    right:50px;
+}

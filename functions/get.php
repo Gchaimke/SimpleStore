@@ -8,7 +8,7 @@ if (isset($_GET['login'])) {
 
 if (isset($_GET['login_error'])) {
     $message['kind'] = 3;
-    $message['text'] = 'Password Error';
+    $message['text'] = lang($lng, "password_error");
 }
 
 if (isset($_GET['logout'])) {
@@ -26,7 +26,8 @@ if (isset($_GET['order'])) {
     }
     print($order);
     if (isset($_GET['sent'])) {
+        $msg = lang($lng, "order_send_success");
         $message['kind'] = 1;
-        $message['text'] = "Заказ отправлен успешно, будем на связи! <i class=\"far fa-smile-wink\"></i>";
+        $message['text'] = "$msg <i class=\"far fa-smile-wink\"></i>";
     }
 }

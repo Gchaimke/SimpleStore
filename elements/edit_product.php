@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="edit_product" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="edit_productLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="edit_productLabel">Add / Edit Product</h5>
@@ -20,7 +20,7 @@
                 include_once('elements/uploader.php');
                 ?>
                 <div class="input-group mb-3">
-                    <label class="input-group-text">Name</label>
+                    <label class="input-group-text"><?=lang($lng,"name")?></label>
                     <input type="text" class="form-control product-name" name="product_name"/>
                 </div>
                 <div class="input-group mb-3">
@@ -28,7 +28,7 @@
                     <textarea type="text" class="form-control product-description"></textarea>
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text">Price</label>
+                    <label class="input-group-text"><?=lang($lng,"price")?></label>
                     <input type="text" class="form-control product-price" />
                 </div>
                 <div class="input-group mb-3">
@@ -36,8 +36,8 @@
                     <input type="text" class="form-control product-kind" />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="Save">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=lang($lng,"close")?></button>
+                    <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="<?=lang($lng,"save")?>">
                 </div>
             </div>
 

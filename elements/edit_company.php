@@ -2,35 +2,35 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editCompanyLabel">Edit Company</h5>
+                <h5 class="modal-title" id="editCompanyLabel"><?=lang($lng,"settings")?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="edit_company">
                     <input type="hidden" name="edit_company" value="true" />
                     <div class="input-group mb-3">
-                        <label class="input-group-text">Company Name</label>
+                        <label class="input-group-text"><?=lang($lng,"company_name")?></label>
                         <input type="text" class="form-control" name="name" value="<?= $company->name ?>" />
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text">Phone</label>
+                        <label class="input-group-text"><?=lang($lng,"phone")?></label>
                         <input type="text" class="form-control" name="phone" value="<?= $company->phone ?>" />
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text">Email</label>
+                        <label class="input-group-text"><?=lang($lng,"email")?></label>
                         <input type="text" class="form-control" name="email" value="<?= $company->email ?>" />
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text">Logo</label>
+                        <label class="input-group-text"><?=lang($lng,"logo")?></label>
                         <input type="text" class="form-control" name="logo" value="<?= $company->logo ?>" />
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text">Header</label>
+                        <label class="input-group-text"><?=lang($lng,"company_message")?></label>
                         <textarea type="password" class="form-control" name="header" rows="10"><?= $company->header ?></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input name="submit" type="submit" class="btn btn-outline-dark align-middle" value="Update" />
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=lang($lng,"close")?></button>
+                        <input name="submit" type="submit" class="btn btn-outline-dark align-middle" value="<?=lang($lng,"save")?>" />
                     </div>
                 </form>
             </div>

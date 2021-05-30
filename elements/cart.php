@@ -6,10 +6,10 @@
     </h6>
     <div class="cart-wraper text-center" style="display: none;">
         <ol class="cart_items text-start"></ol>
-        <b style="font-size:1rem;"><?php lang($lng, "sum") ?>: <span class="cart-total">0</span><?= $carrency ?></b>
+        <b style="font-size:1rem;"><?= lang($lng, "sum") ?>: <span class="cart-total">0</span><?= $carrency ?></b>
         <div class="mx-2">
             <a class="btn btn-outline-success my-2 cart-send-whatsapp" aria-hidden="true" href="https://api.whatsapp.com/send/?phone=972<?php echo substr($company->phone, 1); ?>&text="><i class="fab fa-whatsapp"></i> Send</a>
-            <a class="btn btn-outline-success my-2 cart-send-email" aria-hidden="true"><i class="far fa-paper-plane"></i> <?php lang($lng, "send") ?></a>
+            <a class="btn btn-outline-success my-2 cart-send-email" aria-hidden="true"><i class="far fa-paper-plane"></i> <?= lang($lng, "send") ?></a>
         </div>
     </div>
 </div>

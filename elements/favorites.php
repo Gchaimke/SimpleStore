@@ -1,6 +1,6 @@
 <?php if (is_iterable($favorites) && count((array)$favorites) > 0) { ?>
     <section class="pt-3 pb-3">
-        <h2>Избраные товары и скидки</h2>
+        <h2><?=lang($lng,"favorites")?></h2>
         <div id="favorites_slider">
             <!-- Give wrapper ID to target with jQuery & CSS -->
             <div class="MS-content row">

@@ -3,19 +3,19 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="login_viewLabel">Login</h5>
+                <h5 class="modal-title" id="login_viewLabel"><?= lang($lng,"login") ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form>
                 <div class="modal-body">
                     <div class="d-flex justify-content-center">
                         <div class="input-group mb-3">
-                            <label class="input-group-text">Password</label>
+                            <label class="input-group-text"><?= lang($lng,"password") ?></label>
                             <input type="password" id="login-pass" class="form-control" name="password" autocomplete="on"/>
                         </div>
                     </div>
                     <center>
-                        <input type="button" id="login_btn" class="btn btn-outline-dark" value="Login" />
+                        <input type="button" id="login_btn" class="btn btn-outline-dark" value="<?= lang($lng,"login") ?>" />
                     </center>
                 </div>
             </form>

@@ -27,6 +27,9 @@ SimpleStore 1
      line-height: 37px;
      flex-direction: row !important;
  }
+ .statistic, .statistic>span{
+    border-radius: 5px;
+ }
 
  #update_stats {
      padding: 10px;
