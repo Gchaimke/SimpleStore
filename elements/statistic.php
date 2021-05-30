@@ -1,8 +1,6 @@
-<div class="content statistic">
-    <ul>
-        <b>This month:</b>
-        <li>Заказы: <b id="stats_orders"></b></li>
-        <li>Сумма: <b id="stats_total"></b><?= $carrency ?></li>
-    </ul>
-    <button type="button" id="update_stats" class="btn btn-primary"><span class="spinner-border spinner-border-sm spinner_status" role="status" aria-hidden="true" style="display: none;"></span> Update</button>
-</div>
+<ul class="content statistic navbar-nav text-center mx-md-4">
+    <b class="bg-secondary text-white px-2"><?= date("m-Y") ?></b>
+    <li class="nav-item px-2"><i class="far fa-user px-1 "></i><b id="stats_orders"></b></li>
+    <li class="nav-item px-2"><i class="fas fa-money-bill-wave px-1"></i><b id="stats_total"></b><?= $carrency ?></li>
+    <i class="fas fa-sync float-end" id="update_stats"></i>
+</ul>

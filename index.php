@@ -37,7 +37,6 @@ include_once('elements/about.php');
     <main class="flex-shrink-0">
         <div class="container mt-5 mb-5">
             <?php if ($logedin) {
-                include_once('elements/statistic.php');
                 include_once('elements/edit_company.php');
                 include_once('elements/edit_category.php');
                 include('elements/edit_product.php');
@@ -48,7 +47,7 @@ include_once('elements/about.php');
             include_once('elements/cart.php');
             include_once('elements/message.php');
             //include_once('elements/test.php');
-            echo "<div class='container overflow-hidden'>$company->header</div>";
+            echo "<div class='container'>$company->header</div>";
             include_once('elements/favorites.php');
             include_once('elements/search.php');
             include_once('elements/products.php');

@@ -9,8 +9,11 @@
         <div class="collapse navbar-collapse" id="navbarToggler02">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php if ($logedin) : ?>
-                    <input type="button" class="btn btn-outline-warning align-middle mx-md-2" value="Edit Company" data-bs-toggle="modal" data-bs-target="#editCompany">
-                    <input type="button" class="btn btn-outline-success align-middle mx-md-2 category_editor_toggle" value="New Category" data-bs-toggle="modal" data-bs-target="#categoryEditor">
+                    <span id="admin_nav">
+                        <input type="button" class="btn btn-outline-warning align-middle mx-md-2 col" value="Edit Company" data-bs-toggle="modal" data-bs-target="#editCompany">
+                        <input type="button" class="btn btn-outline-success align-middle mx-md-2 category_editor_toggle col" value="New Category" data-bs-toggle="modal" data-bs-target="#categoryEditor">
+                    </span>
+                    <?php include_once('elements/statistic.php'); ?>
                 <?php endif ?>
             </div>
             <span class="nav-item">

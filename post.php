@@ -98,8 +98,20 @@ if (isset($_POST['remove_cookie'])) {
             }
         }
     }
-    setcookie($cookie_name, null, -1, '/');
+    setcookie($cookie_name, null, -1, SITE_ROOT);
     exit;
+}
+
+if (isset($_POST['remove_all_cookie'])) {
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+    foreach ($cookies as $cookie) {
+        $parts = explode('=', $cookie);
+        $name = trim($parts[0]);
+        if ($name != "PHPSESSID") {
+            setcookie($name, '', 1);
+            setcookie($name, '', 1, SITE_ROOT);
+        }
+    }
 }
 
 
