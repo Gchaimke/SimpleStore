@@ -204,13 +204,6 @@ SimpleStore 1
      .navbar-brand {
          font-size: 0.9rem !important;
      }
-     .statistic {
-         margin: 20px;
-     }
-     #update_stats {
-         position: absolute;
-         right: 35px;
-     }
      .delete-product, .edit-product {
          margin-top: -122px;
      }
@@ -237,7 +230,15 @@ SimpleStore 1
      }
  }
 
- @media (max-width: 768px) {}
+ @media (max-width: 992px) {
+     .statistic {
+         margin: 20px;
+     }
+     #update_stats {
+         position: absolute;
+         right: 35px;
+     }
+ }
 
  /* display 3 */
 
