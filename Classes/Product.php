@@ -1,27 +1,17 @@
 <?php
 class Product
 {
-    private $company;
-    public $name, $phone, $email, $header, $logo;
+    public $id, $name, $description, $price, $kind, $img;
 
     function __construct()
     {
-        global $lng;
-
-        $path = DOC_ROOT . "data/company.json";
-        if (file_exists($path)) {
-            $this->company = json_decode(file_get_contents($path));
-        } else {
-            $this->company = json_decode("{}");
-        }
-
-        $name = "name_" . $lng;
-        $header = "header_" . $lng;
-        $this->name = $this->company->$name;
-        $this->phone = $this->company->phone;
-        $this->email = $this->company->email;
-        $this->logo = $this->company->logo;
-        $this->header = $this->company->$header;
+        $this->id = 1;
+        $this->name = "new product";
+        $this->description = '';
+        $this->price = 50;
+        $this->qtty = '1';
+        $this->kind = 'kg';
+        $this->img = 'img/product.jpg';
     }
 
     function update($data)

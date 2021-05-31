@@ -112,6 +112,7 @@ $('.edit-product').on('click', function () {
     $('.edit_product_items').find('.product-name').val($(this).data("name"));
     $('.edit_product_items').find('.product-description').val($(this).data("description"));
     $('.edit_product_items').find('.product-price').val($(this).data("price"));
+    $('.edit_product_items').find('.product-qtty').val($(this).data("qtty"));
     $('.edit_product_items').find('.product-kind').val($(this).data("kind"));
     $('.edit_product_items').find('.upload_image_toggle').attr("data-name", $(this).data("name"));
 });
@@ -123,8 +124,9 @@ $('.edit-product-btn').on('click', function () {
     var name = $('.edit_product_items').find('.product-name').val();
     var description = $('.edit_product_items').find('.product-description').val();
     var price = $('.edit_product_items').find('.product-price').val();
+    var qtty = $('.edit_product_items').find('.product-qtty').val();
     var kind = $('.edit_product_items').find('.product-kind').val();
-    $.post("post.php", { edit_product: true, category: category, product_id: product_id, img: img, name: name, description: description, price: price, kind: kind })
+    $.post("post.php", { edit_product: true, category: category, product_id: product_id, img: img, name: name, description: description, price: price, kind: kind, qtty: qtty })
         .done(function (e) {
             console.log(e)
             setTimeout(function () {

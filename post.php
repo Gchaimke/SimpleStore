@@ -8,6 +8,7 @@ if (isset($_POST['edit_product'])) {
             'name' => $_POST['name'],
             'description' => $_POST['description'],
             'price' => $_POST['price'],
+            'qtty' => $_POST['qtty'],
             'kind' => $_POST['kind'],
             'img' => $_POST['img'],
         );

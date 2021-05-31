@@ -15,6 +15,7 @@ define("ORDERS_PATH", DOC_ROOT . "data/orders/");
  */
 require_once(DOC_ROOT . 'Classes/Company.php');
 require_once(DOC_ROOT . 'Classes/Categories.php');
+require_once(DOC_ROOT . 'Classes/Product.php');
 
 /**
  * Settings
@@ -178,42 +179,24 @@ function edit_company($data)
 {
     global $company;
     $company->update($data);
-    //file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data, JSON_UNESCAPED_UNICODE));
 }
 
 function get_category($id)
 {
-    global $categories;
-    foreach ($categories as $category) {
-        if ($category->id == $id) {
-            if (!property_exists($category, 'last_index')) {
-                $category->last_index = 1;
-            }
-            return $category;
-        }
-    }
-    return null;
+    global $categories_class;
+    return $categories_class->get_category($id);
 }
 
 function new_product($product_array = array())
 {
     $name = lang("new_product");
-    $product = new stdClass();
-    if (key_exists('id', $product_array) && $product_array['id'] == '') {
-        $product->name = $product_array['name'] != '' ? $product_array['name'] : $name;
-        $product->description = $product_array['description'] != '' ? $product_array['description'] : '';
-        $product->price = $product_array['price'] != '' ? $product_array['price'] : 50;
-        $product->kind = $product_array['kind'] != '' ? $product_array['kind'] : '1kg';
-        $product->img = $product_array['img'] != '' ? $product_array['img'] : 'img/product.jpg';
-        $product->id = "";
-    } else {
-        $product->name = $name;
-        $product->description = '';
-        $product->price = 50;
-        $product->kind = '1kg';
-        $product->img = 'img/product.jpg';
-        $product->id = "";
-    }
+    $product = new Product;
+    $product->name = $product_array['name'] != '' ? $product_array['name'] : $name;
+    $product->description = $product_array['description'] != '' ? $product_array['description'] : '';
+    $product->price = $product_array['price'] != '' ? $product_array['price'] : 50;
+    $product->kind = $product_array['qtty'] != '' ? $product_array['qtty'] : '1';
+    $product->kind = $product_array['kind'] != '' ? $product_array['kind'] : 'kg';
+    $product->img = $product_array['img'] != '' ? $product_array['img'] : 'img/product.jpg';
     return $product;
 }
 

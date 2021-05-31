@@ -32,6 +32,10 @@
                     <input type="text" class="form-control product-price" />
                 </div>
                 <div class="input-group mb-3">
+                    <label class="input-group-text">Quantity</label>
+                    <input type="text" class="form-control product-qtty" />
+                </div>
+                <div class="input-group mb-3">
                     <label class="input-group-text">Kind</label>
                     <input type="text" class="form-control product-kind" />
                 </div>

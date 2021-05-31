@@ -3,7 +3,8 @@
         "name": "Бедра",
         "description": "",
         "price": "14",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Бедра.jpg",
         "id": 12
     },
@@ -11,23 +12,26 @@
         "name": "Грудка",
         "description": "",
         "price": "18",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Грудка.jpg",
         "id": 10
     },
     {
+        "id": 8,
         "name": "Куриная печень",
         "description": "",
         "price": "14",
-        "kind": "1кг",
-        "img": "img\/products\/печень.jpg",
-        "id": 8
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/печень.jpg"
     },
     {
         "name": "Куриные крылышки",
         "description": "",
         "price": "9",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Куриныекрылышки.jpeg",
         "id": 16
     },
@@ -35,7 +39,8 @@
         "name": "Куриный шашлык",
         "description": "(паргит на шпажках)",
         "price": "47",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Куриныйшашлык.jpg",
         "id": 5
     },
@@ -43,7 +48,8 @@
         "name": "Курица",
         "description": "",
         "price": "13",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Курица.jpg",
         "id": 3
     },
@@ -51,7 +57,8 @@
         "name": "Ножки",
         "description": "",
         "price": "14",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Ножки.jpg",
         "id": 13
     },
@@ -59,7 +66,8 @@
         "name": "Окорочка",
         "description": "",
         "price": "14",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Окорочка.png",
         "id": 2
     },
@@ -67,7 +75,8 @@
         "name": "Паргит без кожи",
         "description": "",
         "price": "30",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Грудка.jpg",
         "id": 4
     },
@@ -75,7 +84,8 @@
         "name": "Перепела",
         "description": "+-1.100kg  ( ограниченно)",
         "price": "70",
-        "kind": "6 шт",
+        "qtty": "6",
+        "kind": "шт",
         "img": "img\/products\/Перепела.jpg",
         "id": 14
     },
@@ -83,7 +93,8 @@
         "name": "Перепелиные яйца",
         "description": "",
         "price": "15",
-        "kind": "30 шт",
+        "qtty": "30",
+        "kind": "шт",
         "img": "img\/products\/ПерепелиныеЯйца.jpg",
         "id": 15
     },
@@ -91,7 +102,8 @@
         "name": "Сердечки",
         "description": "",
         "price": "28",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Сердечкииндюшиные.jpg",
         "id": 9
     },
@@ -99,7 +111,8 @@
         "name": "Фарш куриный",
         "description": "( 100% мясо куриной грудки)",
         "price": "22",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Фаршкуриный.jpg",
         "id": 7
     },
@@ -107,7 +120,8 @@
         "name": "Филе куриное",
         "description": "(пальчики)",
         "price": "23",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Грудка.jpg",
         "id": 11
     },
@@ -115,7 +129,8 @@
         "name": "Цыплята",
         "description": " (+-600 гр)",
         "price": "100",
-        "kind": "7 шт",
+        "qtty": "7",
+        "kind": "шт",
         "img": "img\/products\/Курица.jpg",
         "id": 1
     },
@@ -123,7 +138,8 @@
         "name": "Цыплята",
         "description": "(+-600 гр)",
         "price": "16",
-        "kind": "1 шт",
+        "qtty": "1",
+        "kind": "шт",
         "img": "img\/products\/Курица.jpg",
         "id": 17
     },
@@ -131,7 +147,8 @@
         "name": "Шницели",
         "description": "",
         "price": "32",
-        "kind": "1кг",
+        "qtty": "1",
+        "kind": "кг",
         "img": "img\/products\/Шницели.jpg",
         "id": 6
     }
