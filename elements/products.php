@@ -1,7 +1,7 @@
 <?php
 if (is_iterable($categories)) {
     foreach ($categories as $category) {
-        $products = get_data($category->id);
+        $products = $category->products;
         echo '<div class="accordion accordion-flush" id="accordionFlush">
                 <div class="accordion-item">';
         if ($logedin) {

@@ -7,9 +7,9 @@ class Categories
     {
         global $lng;
 
-        $path = DOC_ROOT . "data/categories.json";
+        $path = DOC_ROOT . "data/";
         if (file_exists($path)) {
-            $this->categories = json_decode(file_get_contents($path));
+            $this->categories = json_decode(file_get_contents($path . "categories.json"));
         } else {
             $this->categories = json_decode("{}");
         }
@@ -17,6 +17,7 @@ class Categories
         foreach ($this->categories as &$category) {
             $name = "name_" . $lng;
             $category->name = $category->$name;
+            $category->products = json_decode(file_get_contents($path . $category->id . ".json"));;
         }
     }
 

@@ -189,14 +189,7 @@ function get_category($id)
 
 function new_product($product_array = array())
 {
-    $name = lang("new_product");
-    $product = new Product;
-    $product->name = $product_array['name'] != '' ? $product_array['name'] : $name;
-    $product->description = $product_array['description'] != '' ? $product_array['description'] : '';
-    $product->price = $product_array['price'] != '' ? $product_array['price'] : 50;
-    $product->kind = $product_array['qtty'] != '' ? $product_array['qtty'] : '1';
-    $product->kind = $product_array['kind'] != '' ? $product_array['kind'] : 'kg';
-    $product->img = $product_array['img'] != '' ? $product_array['img'] : 'img/product.jpg';
+    $product = new Product($product_array);
     return $product;
 }
 
@@ -244,15 +237,9 @@ function favorite_product($category_index, $product_index)
 
 function edit_product($category_index, $product)
 {
-    $products = get_data($category_index);
-    $product = (object)$product;
-    $product->id = intval($product->id);
-    foreach ($products as $key => $curent_product) {
-        if ($curent_product->id == $product->id) {
-            $products[$key] = $product;
-        }
-    }
-    save_json($products, $category_index);
+    $product_class = new Product;
+    $product_class->update($category_index, $product);
+    return true;
 }
 
 function delete_product($category_index, $product_index)

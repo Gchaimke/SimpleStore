@@ -4,6 +4,7 @@ main {
 
 .cart {
     right: initial;
+    left: 5px;
 }
 
 .delete-category {
