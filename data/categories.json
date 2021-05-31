@@ -1,1 +1,37 @@
-[{"id":1,"name":"Баранина","last_index":13},{"id":0,"name":"Говядина","last_index":40},{"id":3,"name":"Индюшка","last_index":6},{"id":2,"name":"Птица","last_index":17},{"id":4,"name":"Рыба","last_index":7}]
+[
+    {
+        "id": 1,
+        "name": "Баранина",
+        "name_ru": "Баранина",
+        "name_he": "כבש",
+        "last_index": 13
+    },
+    {
+        "id": 0,
+        "name": "Баранина",
+        "name_ru": "Говядина",
+        "name_he": "בקר",
+        "last_index": 40
+    },
+    {
+        "id": 3,
+        "name": "Баранина",
+        "name_ru": "Индюшка",
+        "name_he": "הודו",
+        "last_index": 6
+    },
+    {
+        "id": 2,
+        "name": "Баранина",
+        "name_ru": "Птица",
+        "name_he": "ציפורים",
+        "last_index": 17
+    },
+    {
+        "id": 4,
+        "name": "Баранина",
+        "name_ru": "Рыба",
+        "name_he": "דגים",
+        "last_index": 7
+    }
+]

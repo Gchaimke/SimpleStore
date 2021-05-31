@@ -14,6 +14,7 @@ define("ORDERS_PATH", DOC_ROOT . "data/orders/");
  * Classes
  */
 require_once(DOC_ROOT . 'Classes/Company.php');
+require_once(DOC_ROOT . 'Classes/Categories.php');
 
 /**
  * Settings
@@ -49,10 +50,13 @@ if (isset($_COOKIE['language']) && $_COOKIE['language']) {
  */
 $carrency = "₪";
 $company = new Company;
-$categories = get_data("categories");
+$categories_class = new Categories;
+$categories = $categories_class->categories;
 $images = get_files();
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
+
+
 
 /**
  * Functions
