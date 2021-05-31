@@ -4,16 +4,20 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
     exit();
 };
 
+/**
+ * Config
+ */
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DOC_ROOT . "data/orders/");
-$carrency = "₪";
-$company = get_data("company");
-$categories = get_data("categories");
-$images = get_files();
-$favorites = get_data("favorites");
-$distrikts = get_data("distrikts");
 
+/**
+ * Classes
+ */
+require_once(DOC_ROOT . 'Classes/Company.php');
 
+/**
+ * Settings
+ */
 if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = true;
 } else {
@@ -40,6 +44,19 @@ if (isset($_COOKIE['language']) && $_COOKIE['language']) {
     require(DOC_ROOT . "lang/$lng.php");
 }
 
+/**
+ * Globals
+ */
+$carrency = "₪";
+$company = new Company;
+$categories = get_data("categories");
+$images = get_files();
+$favorites = get_data("favorites");
+$distrikts = get_data("distrikts");
+
+/**
+ * Functions
+ */
 function set_lang($lng)
 {
     $cookie_name = "language";
@@ -155,7 +172,9 @@ function get_stats()
 
 function edit_company($data)
 {
-    file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data, JSON_UNESCAPED_UNICODE));
+    global $company;
+    $company->update($data);
+    //file_put_contents(DOC_ROOT . "data/company.json", json_encode((object)$data, JSON_UNESCAPED_UNICODE));
 }
 
 function get_category($id)
@@ -174,7 +193,6 @@ function get_category($id)
 
 function new_product($product_array = array())
 {
-    global $lng;
     $name = lang("new_product");
     $product = new stdClass();
     if (key_exists('id', $product_array) && $product_array['id'] == '') {
