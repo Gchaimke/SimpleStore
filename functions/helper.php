@@ -20,10 +20,10 @@ if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = false;
 }
 
-if (isset($_COOKIE['language']) && $_COOKIE['language']) {
-    $lng = $_COOKIE['language'];
+if (isset($_COOKIE['total']) && $_COOKIE['total']) {
+    $previos_total = $_COOKIE['total'];
 } else {
-    $lng = 'ru';
+    $previos_total = 0;
 }
 
 if (isset($_COOKIE['items']) && $_COOKIE['items']) {
@@ -32,10 +32,12 @@ if (isset($_COOKIE['items']) && $_COOKIE['items']) {
     $previos_cart = '';
 }
 
-if (isset($_COOKIE['total']) && $_COOKIE['total']) {
-    $previos_total = $_COOKIE['total'];
+if (isset($_COOKIE['language']) && $_COOKIE['language']) {
+    $lng = $_COOKIE['language'];
+    require(DOC_ROOT . "lang/$lng.php");
 } else {
-    $previos_total = 0;
+    $lng = 'ru';
+    require(DOC_ROOT . "lang/$lng.php");
 }
 
 function set_lang($lng)
@@ -45,9 +47,9 @@ function set_lang($lng)
     setcookie($cookie_name, $cookie_value, time() + (86400 * 30), SITE_ROOT); // 86400 = 1 day
 }
 
-function lang($lng = "ru", $key = "chaim")
+function lang($key = "chaim")
 {
-    require(DOC_ROOT . "lang/$lng.php");
+    global $lang;
     $out =  key_exists($key, $lang) ? $lang[$key] : $key;
     return $out;
 }
@@ -173,7 +175,7 @@ function get_category($id)
 function new_product($product_array = array())
 {
     global $lng;
-    $name = lang($lng, "new_product");
+    $name = lang("new_product");
     $product = new stdClass();
     if (key_exists('id', $product_array) && $product_array['id'] == '') {
         $product->name = $product_array['name'] != '' ? $product_array['name'] : $name;
@@ -313,7 +315,7 @@ function save_image($image_name, $url)
         compressImage($tmp, $location, 60);
         echo $image_name . '.' . $image_ext;
     } else {
-        $msg = lang($lng, "image_not_valid");
+        $msg = lang("image_not_valid");
         echo $msg . ' ' . $image_ext;
     }
 }
@@ -402,7 +404,7 @@ function get_order($order_num = 0)
     if (file_exists($order_path)) {
         return json_decode(file_get_contents($order_path));
     }
-    $msg = lang($lng, "order_not_found");
+    $msg = lang("order_not_found");
     return "<h3>#$order_num $msg</h3>";
 }
 
@@ -411,7 +413,7 @@ function order_client_to_html($order_num = 0)
     global $lng;
     $order = get_order($order_num);
     if (is_object($order)) {
-        $msg = lang($lng, "shipment_address");
+        $msg = lang("shipment_address");
         $html = "<br><h3>$msg</h3>";
         $html .= "<ul>";
         foreach ($order->client as $key => $value) {
@@ -420,7 +422,7 @@ function order_client_to_html($order_num = 0)
         $html .= '</ul>';
         return $html;
     }
-    $msg = lang($lng, "client_not_found");
+    $msg = lang("client_not_found");
     return "<br>$msg";
 }
 
@@ -432,12 +434,12 @@ function order_to_html($order_num = 0)
     if (is_object($order)) {
         $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
         $th_style = 'text-align: center;background-color: #bce0ff;font-size: larger;';
-        $product = lang($lng, "product");
-        $qtty = lang($lng, "qtty");
-        $price = lang($lng, "price");
-        $total = lang($lng, "total");
-        $approximately = lang($lng, "approximately");
-        $order_lbl = lang($lng, "order");
+        $product = lang("product");
+        $qtty = lang("qtty");
+        $price = lang("price");
+        $total = lang("total");
+        $approximately = lang("approximately");
+        $order_lbl = lang("order");
         $html = "<tr><th style='$style $th_style'>$product</th><th style='$style $th_style'>$qtty</th><th style='$style $th_style'>$price</th></tr>";
         foreach ($order->items as $value) {
             $html .= "<tr>";
@@ -458,7 +460,7 @@ function send_email($order_num = 0)
 {
     global $company;
     global $lng;
-    $msg = lang($lng, "email_not_useble");
+    $msg = lang("email_not_useble");
     if ($order_num != 0) {
         $to = $company->email;
         $subject = "Order #" . $order_num;
@@ -507,7 +509,7 @@ function update_products_id($category_index = '')
             }
             save_json($products, $category_index);
             edit_category($category_index, "last_index", $category->last_index);
-            echo lang($lng, "updated");
+            echo lang("updated");
             return;
         }
     }

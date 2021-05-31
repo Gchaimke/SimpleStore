@@ -10,8 +10,8 @@
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php if ($logedin) : ?>
                     <span id="admin_nav">
-                        <input type="button" class="btn btn-outline-warning align-middle mx-md-2 col" value="<?=lang($lng,"settings")?>" data-bs-toggle="modal" data-bs-target="#editCompany">
-                        <input type="button" class="btn btn-outline-success align-middle mx-md-2 category_editor_toggle col" value="<?=lang($lng,"new_category")?>" data-bs-toggle="modal" data-bs-target="#categoryEditor">
+                        <input type="button" class="btn btn-outline-warning align-middle mx-md-2 col" value="<?=lang("settings")?>" data-bs-toggle="modal" data-bs-target="#editCompany">
+                        <input type="button" class="btn btn-outline-success align-middle mx-md-2 category_editor_toggle col" value="<?=lang("new_category")?>" data-bs-toggle="modal" data-bs-target="#categoryEditor">
                     </span>
                     <?php include_once('elements/statistic.php'); ?>
                 <?php endif ?>

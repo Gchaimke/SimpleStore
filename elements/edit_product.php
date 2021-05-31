@@ -20,7 +20,7 @@
                 include_once('elements/uploader.php');
                 ?>
                 <div class="input-group mb-3">
-                    <label class="input-group-text"><?=lang($lng,"name")?></label>
+                    <label class="input-group-text"><?=lang("name")?></label>
                     <input type="text" class="form-control product-name" name="product_name"/>
                 </div>
                 <div class="input-group mb-3">
@@ -28,7 +28,7 @@
                     <textarea type="text" class="form-control product-description"></textarea>
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text"><?=lang($lng,"price")?></label>
+                    <label class="input-group-text"><?=lang("price")?></label>
                     <input type="text" class="form-control product-price" />
                 </div>
                 <div class="input-group mb-3">
@@ -36,8 +36,8 @@
                     <input type="text" class="form-control product-kind" />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=lang($lng,"close")?></button>
-                    <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="<?=lang($lng,"save")?>">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=lang("close")?></button>
+                    <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="<?=lang("save")?>">
                 </div>
             </div>
 
