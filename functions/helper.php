@@ -443,9 +443,11 @@ function order_to_html($order_num = 0)
             }
             $html .= '</tr>';
         }
-        $html .= "<tr><td style='$style'>$total (<span style='color:red;'>$approximately</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
-        return "<div style='direction:$direction'><h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> $order_lbl: <span style='direction:rtl'>$order->id </span></h3>
-        <table style='width:100%;$style'>$html</table><br>";
+        $html .= "<tr><td style='$style'>$total (<span style='color:red;'>$approximately</span>) ~
+        </td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
+
+        return "<div style='direction:$direction'><h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>
+        $order->date <br> $order_lbl: <span style='direction:rtl'>$order->id </span></h3><table style='width:100%;$style'>$html</table><br>";
     }
     return $order;
 }
