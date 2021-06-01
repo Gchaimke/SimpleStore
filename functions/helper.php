@@ -342,7 +342,7 @@ function save_cart($cart, $total, $client)
     }
     $orders = get_files($orders_path, ["json"]);
     $order_count = add_zero(count($orders) + 1);
-    $order_name = date('my_') . $order_count;
+    $order_name = date('my-') . $order_count;
     $order_path = $orders_path . "/$order_name.json";
 
     $order = new stdClass();
@@ -384,25 +384,27 @@ function get_orders($month)
 
 function get_order($order_num = 0)
 {
-    global $lng;
     $order_month = explode("_", $order_num);
     if (count($order_month) != 2) {
-        $order_month = "0521";
-        $order_num = $order_month . "_" . substr($order_num, -3);
+        $order_month = date("my");
+        $order_num = $order_month . "-" . substr($order_num, -3);
     } else {
         $order_month = $order_month[0];
     }
     $order_path = ORDERS_PATH . $order_month . '/' . $order_num . ".json";
     if (file_exists($order_path)) {
         return json_decode(file_get_contents($order_path));
+    } else {
+        $order_num = $order_month . "-" . substr($order_num, -3);
+        $order_path = ORDERS_PATH . $order_month . '/' . $order_num . ".json";
+        return json_decode(file_get_contents($order_path));
     }
     $msg = lang("order_not_found");
-    return "<h3>#$order_num $msg</h3>";
+    return "<h3>$order_num $msg</h3>";
 }
 
 function order_client_to_html($order_num = 0)
 {
-    global $lng;
     $order = get_order($order_num);
     if (is_object($order)) {
         $msg = lang("shipment_address");
@@ -421,7 +423,6 @@ function order_client_to_html($order_num = 0)
 function order_to_html($order_num = 0)
 {
     global $carrency;
-    global $lng;
     $order = get_order($order_num);
     if (is_object($order)) {
         $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
@@ -442,7 +443,7 @@ function order_to_html($order_num = 0)
             $html .= '</tr>';
         }
         $html .= "<tr><td style='$style'>$total (<span style='color:red;'>$approximately</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
-        return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> $order_lbl: #$order->id</h3>
+        return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> $order_lbl: <span style='direction:rtl'>$order->id </span></h3>
         <table style='width:100%;$style'>$html</table><br>";
     }
     return $order;
@@ -451,7 +452,6 @@ function order_to_html($order_num = 0)
 function send_email($order_num = 0)
 {
     global $company;
-    global $lng;
     $msg = lang("email_not_useble");
     if ($order_num != 0) {
         $to = $company->email;
