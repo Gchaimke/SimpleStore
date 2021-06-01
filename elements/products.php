@@ -24,7 +24,7 @@ if (is_iterable($categories)) {
                     $product->id = $product_num;
                 }
                 $product_cart_id = $category->id . '_' . $product->id;
-                echo "<div class='col-sm' id='$product_cart_id'>";
+                echo "<div class='col' id='$product_cart_id'>";
                 include('elements/card.php');
                 echo '</div>';
                 $product_num++;
