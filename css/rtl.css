@@ -14,3 +14,11 @@ main {
 .edit-category {
     left: -105px;
 }
+
+button.btn.MS-right {
+    float: initial;
+}
+
+button.btn.MS-left {
+    float: left;
+}
