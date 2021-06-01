@@ -1,4 +1,5 @@
 <?php
+
 namespace SimpleStore;
 
 class Product
@@ -11,15 +12,21 @@ class Product
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
         $kind = 'kind_' . $lng;
-        $this->$name = key_exists('name', $product) && $product['name'] != '' ? $product['name'] : "new product";
-        $this->$description = key_exists('description', $product) && $product['description'] != '' ? $product['description'] : '';
-        $this->price = key_exists('price', $product) && $product['price'] != '' ? $product['price'] : 50;
-        $this->qtty = key_exists('qtty', $product) && $product['qtty'] != '' ? $product['qtty'] : '1';
-        $this->$kind = key_exists('kind', $product) && $product['kind'] != '' ? $product['kind'] : 'kg';
-        $this->img = key_exists('img', $product) && $product['img'] != '' ? $product['img'] : 'img/product.jpg';
+        if (!key_exists("id", $product)) {
+            $this->$name = key_exists('name', $product) && $product['name'] != '' ? $product['name'] : "new product";
+            $this->$description = key_exists('description', $product) && $product['description'] != '' ? $product['description'] : '';
+            $this->price = key_exists('price', $product) && $product['price'] != '' ? $product['price'] : 50;
+            $this->qtty = key_exists('qtty', $product) && $product['qtty'] != '' ? $product['qtty'] : '1';
+            $this->$kind = key_exists('kind', $product) && $product['kind'] != '' ? $product['kind'] : 'kg';
+            $this->img = key_exists('img', $product) && $product['img'] != '' ? $product['img'] : 'img/product.jpg';
+        }else{
+            foreach($product as $key => $value){
+                $this->$key = $value;
+            }
+        }
     }
 
-    function update($category_index, $product)
+    function edit_product($category_index, $product)
     {
         global $lng;
         $products = json_decode(file_get_contents(DOC_ROOT . "data/$category_index.json"));

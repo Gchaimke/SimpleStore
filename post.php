@@ -13,9 +13,9 @@ if (isset($_POST['edit_product'])) {
             'img' => $_POST['img'],
         );
         if (!empty($_POST['product_id'])) {
-            edit_product(clean($_POST['category']), $product);
+            $product_class->edit_product(clean($_POST['category']), $product);
         } else {
-            add_product(clean($_POST['category']), $product);
+            $store->products->add_product(clean($_POST['category']), $product);
         }
     }
     exit;
@@ -30,20 +30,20 @@ if (isset($_POST['delete_product'])) {
 
 if (isset($_POST['duplicate_product'])) {
     if (!empty($_POST['category'])) {
-        duplicate_product(clean($_POST['category']), clean($_POST['product']));
+        $store->products->duplicate_product(clean($_POST['category']), clean($_POST['product']));
     }
     exit;
 }
 
 if (isset($_POST['favorite_product'])) {
     if (!empty($_POST['category'])) {
-        favorite_product(clean($_POST['category']), clean($_POST['product']));
+        $store->products->favorite_product(clean($_POST['category']), clean($_POST['product']));
     }
     exit;
 }
 
 if (isset($_POST['add_category'])) {
-    add_category($_POST['category_name']);
+    $store->categories->add_category($_POST['category_name']);
     exit;
 }
 
@@ -59,13 +59,13 @@ if (isset($_POST['delete_category'])) {
 
 if (isset($_POST['edit_company'])) {
     unset($_POST['edit_company']);
-    edit_company($_POST);
+    $company->update($_POST);
     echo 'Saved';
     exit;
 }
 
 if (isset($_POST['save_cart'])) {
-    echo save_cart($_POST['cart'], $_POST['total'], $_POST['client']);
+    echo save_order($_POST['cart'], $_POST['total'], $_POST['client']);
     exit;
 }
 

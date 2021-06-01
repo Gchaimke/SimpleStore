@@ -5,70 +5,67 @@ namespace SimpleStore;
 class Categories
 {
     public $categories;
+    public $data_path = DOC_ROOT . "data/";
 
-    function __construct()
+    function get_categories()
     {
-    }
-
-    function get()
-    {
-        global $lng;
-
-        $path = DOC_ROOT . "data/";
-        if (file_exists($path)) {
-            $this->categories = json_decode(file_get_contents($path . "categories.json"));
+        if (file_exists($this->data_path)) {
+            $this->categories = json_decode(file_get_contents($this->data_path . "categories.json"));
         } else {
             $this->categories = json_decode("{}");
-        }
-
-        foreach ($this->categories as &$category) {
-            $name = "name_" . $lng;
-            $category->name = $category->$name;
-            $category->products = json_decode(file_get_contents($path . $category->id . ".json"));
         }
         return $this->categories;
     }
 
-    function update($data)
+    function get_last_id()
     {
-        global $lng;
-        $exclude = ["id", "last_index"];
-        foreach ($data as $key => $value) {
-            if (in_array($key, $exclude)) {
-                $this->company->$key = $value;
-            } else {
-                $key = $key . "_" . $lng;
-                $this->company->$key = $value;
+        $bigest_id = 0;
+        foreach ($this->categories as $category) {
+            if ($bigest_id < $category->id) {
+                $bigest_id = $category->id;
             }
         }
-        file_put_contents(DOC_ROOT . "data/categories.json", json_encode($this->categories, JSON_UNESCAPED_UNICODE));
+        return $bigest_id;
     }
 
-    function get_category($id)
+    function get_categories_with_products()
     {
-        foreach ($this->categories as $category) {
-            if ($category->id == $id) {
-                if (!property_exists($category, 'last_index')) {
-                    $category->last_index = 1;
-                }
-                return $category;
-            }
+        global $lng;
+        $categories = $this->get_categories();
+        foreach ($categories as &$category) {
+            $name = "name_" . $lng;
+            $category->name = property_exists($category, $name) ? $category->$name : $category->name;
+            $category->products = json_decode(file_get_contents($this->data_path . $category->id . ".json"));
         }
-        return null;
+        return $categories;
     }
 
     function add_category($name = 'New Category')
     {
-        $last_category =  end($this->categories);
-        $category = new stdClass();
-        $category->id = isset($last_category->id) ? $last_category->id + 1 : 1;
-        $category->name = $name;
-        $category->last_index = 1;
+        global $lng;
+        $name_key = "name_" . $lng;
+
+        $categories = $this->get_categories();
+        $last_category_id =  $this->get_last_id();
+        $category = new Category($name);
+        $category->id = $last_category_id + 1;
+        $category->$name_key = $name;
         $categories[] = $category;
         $product = new Product();
         $product->id = 1;
         $products[] = $product;
-        file_put_contents(DOC_ROOT . "data/categories.json", json_encode($this->categories, JSON_UNESCAPED_UNICODE));
-        file_put_contents(DOC_ROOT . "data/$category->id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+        file_put_contents($this->data_path . "categories.json", json_encode($categories, JSON_UNESCAPED_UNICODE));
+        file_put_contents($this->data_path . "$category->id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+    }
+
+    function edit_category($id, $key, $value)
+    {
+        $categories = $this->get_categories();
+        foreach ($categories as &$category) {
+            if ($category->id == $id) {
+                $category->$key = $value;
+            }
+        }
+        file_put_contents($this->data_path . "categories.json", json_encode($categories, JSON_UNESCAPED_UNICODE));
     }
 }

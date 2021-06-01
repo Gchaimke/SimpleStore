@@ -19,6 +19,15 @@ require_once(DOC_ROOT . 'Classes/Store.php');
 /**
  * Settings
  */
+
+if (isset($_COOKIE['language']) && $_COOKIE['language']) {
+    $lng = $_COOKIE['language'];
+    require(DOC_ROOT . "lang/$lng.php");
+} else {
+    $lng = 'ru';
+    require(DOC_ROOT . "lang/$lng.php");
+}
+
 if (isset($_SESSION['login']) && $_SESSION['login']) {
     $logedin = true;
 } else {
@@ -37,22 +46,17 @@ if (isset($_COOKIE['items']) && $_COOKIE['items']) {
     $previos_cart = '';
 }
 
-if (isset($_COOKIE['language']) && $_COOKIE['language']) {
-    $lng = $_COOKIE['language'];
-    require(DOC_ROOT . "lang/$lng.php");
-} else {
-    $lng = 'ru';
-    require(DOC_ROOT . "lang/$lng.php");
-}
+
 
 /**
  * Globals
  */
 $store = new SimpleStore\Store();
-
 $carrency = $store->carrency;
 $company = $store->company;
-$categories = $store->categories->get();
+$categories = $store->categories->get_categories_with_products();
+$product_class = new SimpleStore\Product;
+
 
 $images = get_files();
 $favorites = get_data("favorites");
@@ -110,138 +114,6 @@ function clean($str)
     return str_replace(' ', '', $str);
 }
 
-function get_data($file)
-{
-    $path = DOC_ROOT . "data/$file.json";
-    if (file_exists($path)) {
-        return json_decode(file_get_contents($path));
-    } else {
-        return json_decode("{}");
-    }
-}
-
-function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"])
-{
-    $result = array();
-    $cdir = scandir($dir);
-    foreach ($cdir as $value) {
-        $extension = explode('.', $value);
-        $extension = end($extension);
-        if (in_array($extension, $kind)) {
-            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
-                $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
-            } else {
-                $result[] = $value;
-            }
-        }
-    }
-    return $result;
-}
-
-function save_json($array, $file_name = 'test')
-{
-    usort($array, function ($a, $b) { //Sort the array using a user defined function
-        return $a->name > $b->name ? 1 : -1; //Compare the scores
-    });
-    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
-}
-
-function update_stats()
-{
-    $stats['total'] = 0;
-    $stats['count'] = 0;
-    $orders = get_orders(date('my'));
-    if (is_array($orders)) {
-        foreach ($orders["orders"] as $order) {
-            $order = json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order));
-            if (property_exists($order, "client")) {
-                if ($order->client->name != 'test') {
-                    $stats['total'] += $order->total;
-                    $stats['count']++;
-                }
-            }
-        }
-    }
-    file_put_contents(DOC_ROOT . "data/stats.json", json_encode($stats));
-}
-
-function get_stats()
-{
-    $path = DOC_ROOT . 'data/stats.json';
-    if (file_exists($path)) {
-        return file_get_contents($path);
-    } else {
-        update_stats();
-        return file_get_contents($path);
-    }
-}
-
-function edit_company($data)
-{
-    global $company;
-    $company->update($data);
-}
-
-function get_category($id)
-{
-    global $categories_class;
-    return $categories_class->get_category($id);
-}
-
-function new_product($product_array = array())
-{
-    $product = new SimpleStore\Product($product_array);
-    return $product;
-}
-
-function add_product($category_index, $product)
-{
-    $category = get_category($category_index);
-    $products = get_data($category_index);
-    $product = new_product($product);
-    $product->id = $category->last_index + 1;
-    $products[] = $product;
-    save_json($products, $category_index);
-    edit_category($category_index, "last_index", $category->last_index + 1);
-}
-
-function duplicate_product($category_index, $product_index)
-{
-    $category = get_category($category_index);
-    $products = get_data($category_index);
-    $new_product = new stdClass();
-    foreach ($products as $curent_product) {
-        if ($curent_product->id == $product_index) {
-            $new_product = clone ($curent_product);
-        }
-    }
-    $new_product->id = $category->last_index + 1;
-    $products[] = $new_product;
-    save_json($products, $category_index);
-    edit_category($category_index, "last_index", $category->last_index + 1);
-}
-
-function favorite_product($category_index, $product_index)
-{
-    $products = get_data($category_index);
-    $favorites = get_data("favorites");
-    $new_product = new stdClass();
-    foreach ($products as $curent_product) {
-        if ($curent_product->id == $product_index) {
-            $new_product = clone ($curent_product);
-        }
-    }
-    $new_product->id = $category_index . "_" . $product_index;
-    $favorites[] = $new_product;
-    save_json($favorites, "favorites");
-}
-
-function edit_product($category_index, $product)
-{
-    $product_class = new SimpleStore\Product;
-    $product_class->update($category_index, $product);
-    return true;
-}
 
 function delete_product($category_index, $product_index)
 {
@@ -254,31 +126,12 @@ function delete_product($category_index, $product_index)
     save_json($products, $category_index);
 }
 
-function add_category($name = 'New Category')
-{
-    $categories = get_data("categories");
-    $last_category =  end($categories);
-    $category = new stdClass();
-    $category->id = isset($last_category->id) ? $last_category->id + 1 : 1;
-    $category->name = $name;
-    $category->last_index = 1;
-    $categories[] = $category;
-    $product = new_product();
-    $product->id = 1;
-    $products[] = $product;
-    save_json($categories, 'categories');
-    save_json($products, $category->id);
-}
-
 function edit_category($id, $key, $value)
 {
-    $categories = get_data("categories");
-    foreach ($categories as $index => $category) {
-        if ($category->id == $id) {
-            $categories[$index]->$key = $value;
-        }
-    }
-    save_json($categories, 'categories');
+    global $lng, $store;
+    $key = $key == "name" ? "name_" . $lng : $key;
+    $store->categories->edit_category($id, $key, $value);
+    return true;
 }
 
 function delete_category($id)
@@ -293,48 +146,11 @@ function delete_category($id)
     save_json($categories, 'categories');
 }
 
-function save_image($image_name, $url)
-{
-    $valid_ext = array('png', 'jpeg', 'jpg');
-    $image_ext = pathinfo($url, PATHINFO_EXTENSION);
-    $image_ext = strtolower($image_ext);
-
-    $tmp = DOC_ROOT . 'img/tmp.' . $image_ext;
-    $location = DOC_ROOT . 'img/products/' . $image_name . '.' . $image_ext;
-
-    if (in_array($image_ext, $valid_ext)) {
-        file_put_contents($tmp, file_get_contents($url));
-        compressImage($tmp, $location, 60);
-        echo $image_name . '.' . $image_ext;
-    } else {
-        $msg = lang("image_not_valid");
-        echo $msg . ' ' . $image_ext;
-    }
-}
-
-function delete_image($image)
-{
-    if (unlink(DOC_ROOT . $image)) {
-        echo 'success';
-    } else {
-        echo 'fail';
-    }
-}
-// Compress image
-function compressImage($source, $destination, $quality)
-{
-    $info = getimagesize($source);
-    if ($info['mime'] == 'image/jpeg')
-        $image = imagecreatefromjpeg($source);
-    elseif ($info['mime'] == 'image/gif')
-        $image = imagecreatefromgif($source);
-    elseif ($info['mime'] == 'image/png')
-        $image = imagecreatefrompng($source);
-    imagejpeg($image, $destination, $quality);
-    unlink($source);
-}
-
-function save_cart($cart, $total, $client)
+/**
+ * Order
+ * TODO: reformat to class
+ */
+function save_order($cart, $total, $client)
 {
     $orders_path = ORDERS_PATH . date('my');
     if (!file_exists($orders_path)) {
@@ -453,6 +269,127 @@ function order_to_html($order_num = 0)
     return $order;
 }
 
+
+
+//** Helper */
+
+function get_data($file)
+{
+    $path = DOC_ROOT . "data/$file.json";
+    if (file_exists($path)) {
+        return json_decode(file_get_contents($path));
+    } else {
+        return json_decode("{}");
+    }
+}
+
+function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"])
+{
+    $result = array();
+    $cdir = scandir($dir);
+    foreach ($cdir as $value) {
+        $extension = explode('.', $value);
+        $extension = end($extension);
+        if (in_array($extension, $kind)) {
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
+            } else {
+                $result[] = $value;
+            }
+        }
+    }
+    return $result;
+}
+
+function save_image($image_name, $url)
+{
+    $valid_ext = array('png', 'jpeg', 'jpg');
+    $image_ext = pathinfo($url, PATHINFO_EXTENSION);
+    $image_ext = strtolower($image_ext);
+
+    $tmp = DOC_ROOT . 'img/tmp.' . $image_ext;
+    $location = DOC_ROOT . 'img/products/' . $image_name . '.' . $image_ext;
+
+    if (in_array($image_ext, $valid_ext)) {
+        file_put_contents($tmp, file_get_contents($url));
+        compressImage($tmp, $location, 60);
+        echo $image_name . '.' . $image_ext;
+    } else {
+        $msg = lang("image_not_valid");
+        echo $msg . ' ' . $image_ext;
+    }
+}
+
+function delete_image($image)
+{
+    if (unlink(DOC_ROOT . $image)) {
+        echo 'success';
+    } else {
+        echo 'fail';
+    }
+}
+// Compress image
+function compressImage($source, $destination, $quality)
+{
+    $info = getimagesize($source);
+    if ($info['mime'] == 'image/jpeg')
+        $image = imagecreatefromjpeg($source);
+    elseif ($info['mime'] == 'image/gif')
+        $image = imagecreatefromgif($source);
+    elseif ($info['mime'] == 'image/png')
+        $image = imagecreatefrompng($source);
+    imagejpeg($image, $destination, $quality);
+    unlink($source);
+}
+
+function save_json($array, $file_name = 'test')
+{
+    usort($array, function ($a, $b) { //Sort the array using a user defined function
+        return $a->name > $b->name ? 1 : -1; //Compare the scores
+    });
+    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
+}
+
+function update_stats()
+{
+    $stats['total'] = 0;
+    $stats['count'] = 0;
+    $orders = get_orders(date('my'));
+    if (is_array($orders)) {
+        foreach ($orders["orders"] as $order) {
+            $order = json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order));
+            if (property_exists($order, "client")) {
+                if ($order->client->name != 'test') {
+                    $stats['total'] += $order->total;
+                    $stats['count']++;
+                }
+            }
+        }
+    }
+    file_put_contents(DOC_ROOT . "data/stats.json", json_encode($stats));
+}
+
+function get_stats()
+{
+    $path = DOC_ROOT . 'data/stats.json';
+    if (file_exists($path)) {
+        return file_get_contents($path);
+    } else {
+        update_stats();
+        return file_get_contents($path);
+    }
+}
+
+function str_contains($haystack, $needle, $ignoreCase = true)
+{
+    if ($ignoreCase) {
+        $haystack = strtolower($haystack);
+        $needle   = strtolower($needle);
+    }
+    $needlePos = strpos($haystack, $needle);
+    return ($needlePos === false ? false : ($needlePos + 1));
+}
+
 function send_email($order_num = 0)
 {
     global $company;
@@ -475,19 +412,8 @@ function send_email($order_num = 0)
     }
 }
 
-function str_contains($haystack, $needle, $ignoreCase = true)
-{
-    if ($ignoreCase) {
-        $haystack = strtolower($haystack);
-        $needle   = strtolower($needle);
-    }
-    $needlePos = strpos($haystack, $needle);
-    return ($needlePos === false ? false : ($needlePos + 1));
-}
-
-
 /**
- * TO DO: Delete After Use
+ * TO DO: Use one time
  */
 function update_products_id($category_index = '')
 {
