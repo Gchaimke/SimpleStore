@@ -21,11 +21,11 @@
             $product_cart_id = $category->id . '_' . $product->id
             ?>
             <center class="card-content">
-                <h5 class="card-title"><?= $product->name ?></h5>
+                <h5 class="card-title"><?= $product->name ?></h3>
                 <p class="card-text"><?= $product->description ?></p>
                 <div class="d-flex justify-content-center text-nowrap">
                     <div class="mx-1"> <?= $qtty . $product->$kind ?></div>
-                    <h5 class="card-price mx-1"><?= $product->price ?> ₪</h5>
+                    <h5 class="card-price mx-1"><?= $product->price ?> ₪</h3>
                     <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id' data-product='$product->name' data-qty='" . $qtty . "' data-kind='" . $product->$kind . "' data-price='$product->price'></i>" ?>
                 </div>
             </center>

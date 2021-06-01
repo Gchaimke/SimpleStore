@@ -5,7 +5,7 @@
     <div class="col-md">
         <div class="card">
             <div class="card-header">
-                <h5>Вторник</h5>
+                <h3>Вторник</h3>
             </div>
             <div class="card-body day-card">
                 <b>Ришон, Реховот и южнее ( Ашдод, Ашкелон...)</b>
@@ -15,7 +15,7 @@
     <div class="col-md">
         <div class="card">
             <div class="card-header">
-                <h5>Среда</h5>
+                <h3>Среда</h3>
             </div>
             <div class="card-body day-card">
                 <b>Бат Ям, Холон</b>
@@ -25,7 +25,7 @@
     <div class="col-md">
         <div class="card">
             <div class="card-header">
-                <h5>Четверг</h5>
+                <h3>Четверг</h3>
             </div>
             <div class="card-body day-card">
                 <b>Петах Тиква, Кфар Саба, Тель Авив,Рамат Ган</b>
@@ -35,7 +35,7 @@
     <div class="col-md">
         <div class="card">
             <div class="card-header">
-                <h5>Пятница</h5>
+                <h3>Пятница</h3>
             </div>
             <div class="card-body day-card">
                 <b>Север - Хадера и севернее</b>
@@ -49,7 +49,7 @@
     </center>
     <div class="col-md">
         <ul>
-            <h5><span class="badge bg-danger">Важно !</span> от дня заказа зависит доставка:</h5>
+            <h3><span class="badge bg-danger">Важно !</span> от дня заказа зависит доставка:</h3>
             <b>
                 <li>Заказы на юг и центр принимаем до воскресенья 21:00</li>
                 <li>Заказы в другие города - до понедельника 21:00</li>
@@ -62,7 +62,7 @@
     </div>
     <div class="col-md">
         <ul>
-            <h5>Минимум заказ для бесплатной доставки:</h5>
+            <h3>Минимум заказ для бесплатной доставки:</h3>
             <b>
                 <li>Центр - Бат Ям, Ришон, Холон, Тель Авив, Петах Тиква, Кфар Саба, Рамат Ган - бесплатная от
                     <span class="badge bg-success">200₪</span>
@@ -82,15 +82,15 @@
 <div class="row">
     <div class="col-md card my-1 mx-md-2 p-2">
         <center>
-            <h5>Для контактов группы в телеграм: <a target="_blank" href="https://t.me/Quail_Chicken_Chick_Egg_Delivery">App</a> /
+            <h3>Для контактов группы в телеграм: <a target="_blank" href="https://t.me/Quail_Chicken_Chick_Egg_Delivery">App</a> /
                 <a target="_blank" href="https://web.telegram.org/#/im?p=@Quail_Chicken_Chick_Egg_Delivery">WEB</a>
-            </h5>
+            </h3>
         </center>
     </div>
 
     <div class="col-md card my-1 mx-md-2 p-2">
         <center>
-            <h5>Вотсап для уточнений: <a target="_blank" href="https://wa.me/972523488059"> 0523488059</a></h5>
+            <h3>Вотсап для уточнений: <a target="_blank" href="https://wa.me/972523488059"> 0523488059</a></h3>
         </center>
     </div>
 </div>

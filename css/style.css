@@ -29,11 +29,11 @@ SimpleStore 1
     border-radius: 5px;
 
  }
- .statistic>span{
+ .statistic>div{
     border-radius: 5px 0 0 5px;
  }
 
- .statistic>span {
+ .statistic>div {
     right: 10px;
 }
 

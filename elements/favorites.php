@@ -19,8 +19,8 @@
                 ?>
             </div>
             <div class="MS-controls">
-                <button class="btn MS-left"><i class="fas fa-chevron-left"></i></button>
-                <button class="btn MS-right"><i class="fas fa-chevron-right"></i></button>
+                <button class="btn MS-left" aria-label="slider left"><i class="fas fa-chevron-left"></i></button>
+                <button class="btn MS-right" aria-label="slider right"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
