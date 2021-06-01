@@ -26,19 +26,21 @@ SimpleStore 1
      background: aliceblue;
      line-height: 37px;
      flex-direction: row !important;
-    border-radius: 5px;
-
- }
- .statistic>div{
-    border-radius: 5px 0 0 5px;
+     border-radius: 5px;
  }
 
  .statistic>div {
-    right: 10px;
-}
+     border-radius: 5px 0 0 5px;
+ }
+
+ .statistic>div {
+     right: 10px;
+ }
 
  #update_stats {
      padding: 10px;
+     position: relative;
+     left: 5px;
  }
 
  .cart {
