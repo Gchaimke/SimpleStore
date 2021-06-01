@@ -294,7 +294,6 @@ function delete_category($id)
 
 function save_image($image_name, $url)
 {
-    global $lng;
     $valid_ext = array('png', 'jpeg', 'jpg');
     $image_ext = pathinfo($url, PATHINFO_EXTENSION);
     $image_ext = strtolower($image_ext);
@@ -407,12 +406,13 @@ function order_client_to_html($order_num = 0)
 {
     $order = get_order($order_num);
     if (is_object($order)) {
-        $msg = lang("shipment_address");
-        $html = "<br><h3>$msg</h3>";
+        $html = "<br><h3>" . lang("shipment_address") . "</h3>";
         $html .= "<ul>";
-        foreach ($order->client as $key => $value) {
-            $html .= "<li>$key: $value</li>";
-        }
+        $html .= "<li>" . lang("name") . ": " . $order->client->name . "</li>";
+        $html .= "<li>" . lang("phone") . ": " . $order->client->phone . "</li>";
+        $html .= "<li>" . lang("email") . ": " . $order->client->email . "</li>";
+        $html .= "<li>" . lang("address") . ": " . $order->client->address . "</li>";
+        $html .= "<li>" . lang("city") . ": " . $order->client->city . "</li>";
         $html .= '</ul>';
         return $html;
     }
@@ -422,7 +422,8 @@ function order_client_to_html($order_num = 0)
 
 function order_to_html($order_num = 0)
 {
-    global $carrency;
+    global $carrency, $lng;
+    $direction = $lng != "he" ? "ltr" : "rtl";
     $order = get_order($order_num);
     if (is_object($order)) {
         $style = 'border: 1px solid black;border-collapse: collapse;padding: 5px;font-weight: 700;';
@@ -443,7 +444,7 @@ function order_to_html($order_num = 0)
             $html .= '</tr>';
         }
         $html .= "<tr><td style='$style'>$total (<span style='color:red;'>$approximately</span>) ~</td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
-        return "<h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> $order_lbl: <span style='direction:rtl'>$order->id </span></h3>
+        return "<div style='direction:$direction'><h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>$order->date <br> $order_lbl: <span style='direction:rtl'>$order->id </span></h3>
         <table style='width:100%;$style'>$html</table><br>";
     }
     return $order;
@@ -455,10 +456,10 @@ function send_email($order_num = 0)
     $msg = lang("email_not_useble");
     if ($order_num != 0) {
         $to = $company->email;
-        $subject = "Order #" . $order_num;
+        $subject = "New Order " . $order_num;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SITE_ROOT . "?order=" . $order_num;
         $message =  order_to_html($order_num) . order_client_to_html($order_num) .
-            "<b style='color:red;'> $msg <a href='https://wa.me/972$company->phone'>Вотсап</a> </b><br><br>" .
+            "<b style='color:red;'> $msg <a href='https://wa.me/972$company->phone'>whatsapp</a> </b><br><br>" .
             "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
