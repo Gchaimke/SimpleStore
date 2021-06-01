@@ -1,9 +1,16 @@
 <?php
+
+namespace SimpleStore;
+
 class Categories
 {
     public $categories;
 
     function __construct()
+    {
+    }
+
+    function get()
     {
         global $lng;
 
@@ -17,8 +24,9 @@ class Categories
         foreach ($this->categories as &$category) {
             $name = "name_" . $lng;
             $category->name = $category->$name;
-            $category->products = json_decode(file_get_contents($path . $category->id . ".json"));;
+            $category->products = json_decode(file_get_contents($path . $category->id . ".json"));
         }
+        return $this->categories;
     }
 
     function update($data)

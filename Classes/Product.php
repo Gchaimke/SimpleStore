@@ -1,4 +1,6 @@
 <?php
+namespace SimpleStore;
+
 class Product
 {
     public $id, $name, $description, $price, $kind, $img;

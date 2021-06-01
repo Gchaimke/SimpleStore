@@ -1,4 +1,6 @@
 <?php
+namespace SimpleStore;
+
 class Company
 {
     private $company;

@@ -8,7 +8,7 @@ include_once('elements/about.php');
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title><?= $company->name?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

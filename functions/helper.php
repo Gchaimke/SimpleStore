@@ -1,4 +1,5 @@
 <?php
+
 if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
     die('Direct access not allowed');
     exit();
@@ -11,11 +12,9 @@ require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DOC_ROOT . "data/orders/");
 
 /**
- * Classes
+ * Classes Loader
  */
-require_once(DOC_ROOT . 'Classes/Company.php');
-require_once(DOC_ROOT . 'Classes/Categories.php');
-require_once(DOC_ROOT . 'Classes/Product.php');
+require_once(DOC_ROOT . 'Classes/Store.php');
 
 /**
  * Settings
@@ -49,10 +48,12 @@ if (isset($_COOKIE['language']) && $_COOKIE['language']) {
 /**
  * Globals
  */
-$carrency = "₪";
-$company = new Company;
-$categories_class = new Categories;
-$categories = $categories_class->categories;
+$store = new SimpleStore\Store();
+
+$carrency = $store->carrency;
+$company = $store->company;
+$categories = $store->categories->get();
+
 $images = get_files();
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
@@ -189,7 +190,7 @@ function get_category($id)
 
 function new_product($product_array = array())
 {
-    $product = new Product($product_array);
+    $product = new SimpleStore\Product($product_array);
     return $product;
 }
 
@@ -237,7 +238,7 @@ function favorite_product($category_index, $product_index)
 
 function edit_product($category_index, $product)
 {
-    $product_class = new Product;
+    $product_class = new SimpleStore\Product;
     $product_class->update($category_index, $product);
     return true;
 }
