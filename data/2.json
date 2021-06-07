@@ -1,1 +1,155 @@
-[{"name":"Бедра","description":"","price":"14","kind":"кг","img":"img\/products\/Бедра.jpg","id":12},{"name":"Грудка","description":"","price":"18","kind":"кг","img":"img\/products\/Грудка.jpg","id":10},{"name":"Куриная печень","description":"","price":"14","kind":"кг","img":"img\/products\/печень.jpg","id":8},{"name":"Куриные крылышки","description":"","price":"9","kind":"кг","img":"img\/products\/Куриныекрылышки.jpeg","id":16},{"name":"Куриный шашлык","description":"(паргит на шпажках)","price":"47","kind":"кг","img":"img\/products\/Куриныйшашлык.jpg","id":5},{"id":3,"name":"Курица","description":"цена за 1кг, одна курица +-1,5кг","price":"13","kind":"1шт","img":"img\/products\/Курица.jpg"},{"name":"Ножки","description":"","price":"14","kind":"кг","img":"img\/products\/Ножки.jpg","id":13},{"name":"Окорочка","description":"","price":"14","kind":"кг","img":"img\/products\/Окорочка.png","id":2},{"name":"Паргит без кожи","description":"","price":"30","kind":"кг","img":"img\/products\/Грудка.jpg","id":4},{"name":"Перепела","description":"+-1.100kg  ( ограниченно)","price":"70","kind":"6 шт","img":"img\/products\/Перепела.jpg","id":14},{"name":"Перепелиные яйца","description":"","price":"15","kind":"30 шт","img":"img\/products\/ПерепелиныеЯйца.jpg","id":15},{"name":"Сердечки","description":"","price":"28","kind":"кг","img":"img\/products\/Сердечкииндюшиные.jpg","id":9},{"name":"Фарш куриный","description":"( 100% мясо куриной грудки)","price":"22","kind":"кг","img":"img\/products\/Фаршкуриный.jpg","id":7},{"name":"Филе куриное","description":"(пальчики)","price":"23","kind":"кг","img":"img\/products\/Грудка.jpg","id":11},{"name":"Цыплята","description":" (+-600 гр)","price":"100","kind":"7 шт","img":"img\/products\/Курица.jpg","id":1},{"name":"Цыплята","description":"(+-600 гр)","price":"16","kind":"1 шт","img":"img\/products\/Курица.jpg","id":0},{"name":"Шницели","description":"","price":"32","kind":"кг","img":"img\/products\/Шницели.jpg","id":6}]
+[
+    {
+        "name": "Бедра",
+        "description": "",
+        "price": "14",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Бедра.jpg",
+        "id": 12
+    },
+    {
+        "name": "Грудка",
+        "description": "",
+        "price": "18",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": 10
+    },
+    {
+        "name": "Куриная печень",
+        "description": "",
+        "price": "14",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/печень.jpg",
+        "id": 8
+    },
+    {
+        "name": "Куриные крылышки",
+        "description": "",
+        "price": "9",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Куриныекрылышки.jpeg",
+        "id": 16
+    },
+    {
+        "name": "Куриный шашлык",
+        "description": "(паргит на шпажках)",
+        "price": "47",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Куриныйшашлык.jpg",
+        "id": 5
+    },
+    {
+        "id": 3,
+        "name": "Курица",
+        "description": "цена за 1кг, одна курица +-1,5кг",
+        "price": "13",
+        "qtty": "1",
+        "kind": "шт",
+        "img": "img\/products\/Курица.jpg"
+    },
+    {
+        "name": "Ножки",
+        "description": "",
+        "price": "14",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Ножки.jpg",
+        "id": 13
+    },
+    {
+        "name": "Окорочка",
+        "description": "",
+        "price": "14",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Окорочка.png",
+        "id": 2
+    },
+    {
+        "name": "Паргит без кожи",
+        "description": "",
+        "price": "30",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": 4
+    },
+    {
+        "name": "Перепела",
+        "description": "+-1.100kg  ( ограниченно)",
+        "price": "70",
+        "qtty": "6",
+        "kind": "шт",
+        "img": "img\/products\/Перепела.jpg",
+        "id": 14
+    },
+    {
+        "name": "Перепелиные яйца",
+        "description": "",
+        "price": "15",
+        "qtty": "30",
+        "kind": "шт",
+        "img": "img\/products\/ПерепелиныеЯйца.jpg",
+        "id": 15
+    },
+    {
+        "name": "Сердечки",
+        "description": "",
+        "price": "28",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Сердечкииндюшиные.jpg",
+        "id": 9
+    },
+    {
+        "name": "Фарш куриный",
+        "description": "( 100% мясо куриной грудки)",
+        "price": "22",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Фаршкуриный.jpg",
+        "id": 7
+    },
+    {
+        "name": "Филе куриное",
+        "description": "(пальчики)",
+        "price": "23",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": 11
+    },
+    {
+        "name": "Цыплята",
+        "description": " (+-600 гр)",
+        "price": "100",
+        "qtty": "7",
+        "kind": "шт",
+        "img": "img\/products\/Курица.jpg",
+        "id": 1
+    },
+    {
+        "name": "Цыплята",
+        "description": "(+-600 гр)",
+        "price": "16",
+        "qtty": "1",
+        "kind": "шт",
+        "img": "img\/products\/Курица.jpg",
+        "id": 0
+    },
+    {
+        "name": "Шницели",
+        "description": "",
+        "price": "32",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Шницели.jpg",
+        "id": 6
+    }
+]

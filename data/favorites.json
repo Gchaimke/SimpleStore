@@ -1,1 +1,92 @@
-[{"name":"Грудка","description":"","price":"18","kind":"кг","img":"img\/products\/Грудка.jpg","id":"2_10"},{"name":"Паргит без кожи","description":"","price":"30","kind":"кг","img":"img\/products\/Грудка.jpg","id":"2_4"},{"name":"Перепела","description":"+-1.100kg  ( ограниченно)","price":"70","kind":"6 шт","img":"img\/products\/Перепела.jpg","id":"2_14"},{"name":"Перепелиные яйца","description":"","price":"15","kind":"30 шт","img":"img\/products\/ПерепелиныеЯйца.jpg","id":"2_15"},{"id":"0_40","name":"Стейк Тивон молочного теленка мороженый","description":"","price":"95","kind":"кг","img":"img\/products\/СтейкТивонмолочноготеленкасвежий.jpeg"},{"id":"0_43","name":"Стейк антрекот с косточкой молочного теленка мороженый","description":"","price":"100","kind":"кг","img":"img\/products\/Стейкантрекоттеленкасвежий.jpeg"},{"name":"Стейк ягненка","description":"","price":"60","kind":"кг","img":"img\/products\/Стейк.jpg","id":"1_4"},{"name":"Филе куриное","description":"(пальчики)","price":"23","kind":"кг","img":"img\/products\/Грудка.jpg","id":"2_11"},{"name":"Шаварма индюшиная (короткая)","description":"","price":"51","kind":"кг","img":"img\/products\/Шавармаиндюшиная(короткая).jpg","id":"3_3"},{"id":"0_38","name":"язык молочного теленка","description":"цена за 1кг, один язык +-1кг","price":"27","kind":"1шт","img":"img\/products\/языкмолочноготеленка.jpeg"}]
+[
+    {
+        "name": "Грудка",
+        "description": "",
+        "price": "18",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": "2_10"
+    },
+    {
+        "name": "Паргит без кожи",
+        "description": "",
+        "price": "30",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": "2_4"
+    },
+    {
+        "name": "Перепела",
+        "description": "+-1.100kg  ( ограниченно)",
+        "price": "70",
+        "qtty": "6",
+        "kind": "шт",
+        "img": "img\/products\/Перепела.jpg",
+        "id": "2_14"
+    },
+    {
+        "name": "Перепелиные яйца",
+        "description": "",
+        "price": "15",
+        "qtty": "30",
+        "kind": "шт",
+        "img": "img\/products\/ПерепелиныеЯйца.jpg",
+        "id": "2_15"
+    },
+    {
+        "id": "0_40",
+        "name": "Стейк Тивон молочного теленка мороженый",
+        "description": "",
+        "price": "95",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/СтейкТивонмолочноготеленкасвежий.jpeg"
+    },
+    {
+        "id": "0_43",
+        "name": "Стейк антрекот с косточкой молочного теленка мороженый",
+        "description": "",
+        "price": "100",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Стейкантрекоттеленкасвежий.jpeg"
+    },
+    {
+        "name": "Стейк ягненка",
+        "description": "",
+        "price": "60",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Стейк.jpg",
+        "id": "1_4"
+    },
+    {
+        "name": "Филе куриное",
+        "description": "(пальчики)",
+        "price": "23",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Грудка.jpg",
+        "id": "2_11"
+    },
+    {
+        "name": "Шаварма индюшиная (короткая)",
+        "description": "",
+        "price": "51",
+        "qtty": "1",
+        "kind": "кг",
+        "img": "img\/products\/Шавармаиндюшиная(короткая).jpg",
+        "id": "3_3"
+    },
+    {
+        "id": "0_38",
+        "name": "язык молочного теленка",
+        "description": "цена за 1кг, один язык +-1кг",
+        "price": "27",
+        "qtty": "1",
+        "kind": "шт",
+        "img": "img\/products\/языкмолочноготеленка.jpeg"
+    }
+]
