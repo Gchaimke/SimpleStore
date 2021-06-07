@@ -42,5 +42,6 @@ $lang = array(
     "category" => "קטגוריה",
     "new_category" => "הוסף קטגוריה",
     "edit_category" => "שנה קטגוריה",
-
+    "pickup"=>"איסוף עצמי",
+    "bat-yam"=>"בת ים",
 );

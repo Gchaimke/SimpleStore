@@ -43,4 +43,6 @@ $lang = array(
     "new_category" => "Добавить категорию",
     "edit_category" => "Изменить категорию",
     "Click to select the image"=>"нажмите для выбора картинки",
+    "pickup"=>"Самовывоз",
+    "bat-yam"=>"Бат Ям",
 );
