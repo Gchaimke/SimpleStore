@@ -31,7 +31,6 @@ class Product
         global $lng;
         $products = json_decode(file_get_contents(DOC_ROOT . "data/$category_index.json"));
         $product = (object)$product;
-        $product->id = intval($product->id);
         foreach ($products as $key => $curent_product) {
             if ($curent_product->id == $product->id) {
                 $old_product = $curent_product;
