@@ -1,4 +1,5 @@
 <?php
+
 namespace SimpleStore;
 
 class Company
@@ -19,11 +20,11 @@ class Company
 
         $name = "name_" . $lng;
         $header = "header_" . $lng;
-        $this->name = isset($this->company->$name)?$this->company->$name:$this->company->name;
+        $this->name = isset($this->company->$name) ? $this->company->$name : $this->company->name;
         $this->phone = $this->company->phone;
         $this->email = $this->company->email;
         $this->logo = $this->company->logo;
-        $this->header = isset($this->company->$header)?$this->company->$header:$this->company->header;
+        $this->header = isset($this->company->$header) ? $this->company->$header : $this->company->header;
     }
 
     function update($data)

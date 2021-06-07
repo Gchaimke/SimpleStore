@@ -1,6 +1,7 @@
 <?php
 $lang = array(
-    "chaim" => "קוד ועיצוב על ידי",
+    "chaim" => "חיים גורבוב",
+    "coded by" => "קוד ועיצוב על ידי",
     "company_name" => "שם החברה",
     "company_message" => "הודעה של חברה",
     "favorites" => "מוצרים נבחרים ומבצעים",

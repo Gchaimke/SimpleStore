@@ -56,7 +56,7 @@ include_once('elements/about.php');
     </main>
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
-            <span class="text-muted"><?= lang() ?><a href="mailto:gchaimke@mail.com">Chaim Gorbov</a></span>
+            <span class="text-muted">&nbsp;<?= lang("coded by") ?>&nbsp;<a href="mailto:gchaimke@mail.com"><?= lang() ?></a></span>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
