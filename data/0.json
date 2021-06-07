@@ -3,34 +3,30 @@
         "name": "Ангус премиум мороженый",
         "description": "",
         "price": "195",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Ангус.jpg",
         "id": 22
     },
     {
-        "id": 21,
         "name": "Ангус премиум охлажденный",
         "description": "",
         "price": "200",
-        "qtty": "1",
         "kind": "кг",
-        "img": "img\/products\/Ангус.jpg"
+        "img": "img\/products\/Ангус.jpg",
+        "id": 21
     },
     {
-        "id": 35,
         "name": "Асадо цельный мороженый",
         "description": "(10 ребер)",
         "price": "23",
-        "qtty": "1",
         "kind": "кг",
-        "img": "img\/products\/Асадо.jpg"
+        "img": "img\/products\/Асадо.jpg",
+        "id": 35
     },
     {
         "name": "Асадо цельный охлажденный",
         "description": "(10 ребер)",
         "price": "27",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Асадо.jpg",
         "id": 34
@@ -39,7 +35,6 @@
         "name": "Гамбургер 100% говядина",
         "description": "",
         "price": "49",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/gamburger.jpg",
         "id": 4
@@ -48,7 +43,6 @@
         "name": "Гамбургер антрекот",
         "description": " ( заказывать заранее) ",
         "price": "65",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/gamburger.jpg",
         "id": 5
@@ -57,16 +51,18 @@
         "name": "Говядина филе #6 мороженое",
         "description": "",
         "price": "32",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Говядинафиле6.jpg",
-        "id": 29
+        "id": 29,
+        "name_he": "Говядина филе #6 мороженое",
+        "description_he": "",
+        "kind_he": "кг",
+        "qtty": "1"
     },
     {
         "name": "Говядина филе #6 охлажденное",
         "description": "",
         "price": "34",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Говядинафиле6.jpg",
         "id": 28
@@ -75,7 +71,6 @@
         "name": "Грудинка мороженая",
         "description": "",
         "price": "25",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Грудинкамороженая.jpg",
         "id": 25
@@ -84,7 +79,6 @@
         "name": "Жир телячий мороженый",
         "description": "",
         "price": "11",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Жир.jpg",
         "id": 33
@@ -93,7 +87,6 @@
         "name": "Жир телячий охлажденный",
         "description": "",
         "price": "15",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Жир.jpg",
         "id": 32
@@ -102,7 +95,6 @@
         "name": "Кебаб  с бараним жиром",
         "description": "",
         "price": "55",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Кебабы.jpg",
         "id": 14
@@ -111,7 +103,6 @@
         "name": "Кебаб домашний премиум",
         "description": "",
         "price": "48",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Кебабы.jpg",
         "id": 11
@@ -120,7 +111,6 @@
         "name": "Кебаб мизрахи мороженый",
         "description": "",
         "price": "45",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Кебабы.jpg",
         "id": 13
@@ -129,7 +119,6 @@
         "name": "Кебаб мизрахи свежий",
         "description": "",
         "price": "48",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Кебабы.jpg",
         "id": 12
@@ -138,7 +127,6 @@
         "name": "Кебабы премиум",
         "description": "",
         "price": "50",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Кебабы.jpg",
         "id": 10
@@ -147,7 +135,6 @@
         "name": "Лопатка #4 мороженая",
         "description": "",
         "price": "38",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Лопатка4.jpg",
         "id": 27
@@ -156,7 +143,6 @@
         "name": "Лопатка #4 охлажденная",
         "description": "",
         "price": "43",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Лопатка4.jpg",
         "id": 26
@@ -165,7 +151,6 @@
         "name": "Лопатка (#5) мороженая",
         "description": "",
         "price": "42",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Лопатка.png",
         "id": 1
@@ -174,7 +159,6 @@
         "name": "Лопатка (#5) премиум мороженая",
         "description": "",
         "price": "55",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Лопатка.png",
         "id": 3
@@ -183,7 +167,6 @@
         "name": "Лопатка (#5) премиум охлажденная",
         "description": "",
         "price": "59",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Лопатка.png",
         "id": 2
@@ -192,16 +175,14 @@
         "name": "Лопатка (#5) свежая ",
         "description": "",
         "price": "45",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Лопатка.png",
-        "id": 41
+        "id": 0
     },
     {
         "name": "Ребра асадо(каштит) мороженые",
         "description": "",
         "price": "55",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Рёбрышки.jpg",
         "id": 31
@@ -210,7 +191,6 @@
         "name": "Ребра асадо(каштит) охлажденные",
         "description": "",
         "price": "65",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Рёбрышки.jpg",
         "id": 30
@@ -219,7 +199,6 @@
         "name": "Ребра говяжьи мороженые",
         "description": "",
         "price": "32",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Ребраговяжьиохлажденные.jpg",
         "id": 24
@@ -228,7 +207,6 @@
         "name": "Ребра говяжьи охлажденные",
         "description": "",
         "price": "35",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Ребраговяжьиохлажденные.jpg",
         "id": 23
@@ -237,7 +215,6 @@
         "name": "Сосиски острые גוריסו",
         "description": "",
         "price": "46",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Сосиски.jpg",
         "id": 6
@@ -246,16 +223,30 @@
         "name": "Сосиски מרגז",
         "description": "",
         "price": "48",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Сосиски.jpg",
         "id": 7
     },
     {
+        "id": 40,
+        "name": "Стейк Тивон молочного теленка мороженый",
+        "description": "",
+        "price": "95",
+        "kind": "кг",
+        "img": "img\/products\/СтейкТивонмолочноготеленкасвежий.jpeg"
+    },
+    {
+        "id": 42,
+        "name": "Стейк Тивон молочного теленка свежий",
+        "description": "",
+        "price": "110",
+        "kind": "кг",
+        "img": "img\/products\/СтейкТивонмолочноготеленкасвежий.jpeg"
+    },
+    {
         "name": "Стейк айн мороженый",
         "description": " можно заказать порезанный",
         "price": "90",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Стейкайн.jpg",
         "id": 18
@@ -264,7 +255,6 @@
         "name": "Стейк айн охлажденный",
         "description": "\nможно заказать порезанный",
         "price": "95",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Стейкайн.jpg",
         "id": 17
@@ -273,7 +263,6 @@
         "name": "Стейк айн премиум мороженый",
         "description": "",
         "price": "135",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Стейк.jpg",
         "id": 20
@@ -282,7 +271,6 @@
         "name": "Стейк айн премиум охлажденный",
         "description": "",
         "price": "140",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Стейкайн.jpg",
         "id": 19
@@ -291,7 +279,6 @@
         "name": "Стейк антрекот",
         "description": "",
         "price": "95",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Стейк.jpg",
         "id": 8
@@ -300,16 +287,30 @@
         "name": "Стейк антрекот премиум פידלוט",
         "description": "",
         "price": "175",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Стейк.jpg",
         "id": 9
     },
     {
+        "id": 43,
+        "name": "Стейк антрекот с косточкой молочного теленка мороженый",
+        "description": "",
+        "price": "100",
+        "kind": "кг",
+        "img": "img\/products\/Стейкантрекоттеленкасвежий.jpeg"
+    },
+    {
+        "id": 41,
+        "name": "Стейк антрекот с косточкой молочного теленка свежий",
+        "description": "",
+        "price": "120",
+        "kind": "кг",
+        "img": "img\/products\/Стейкантрекоттеленкасвежий.jpeg"
+    },
+    {
         "name": "Фарш из телятины свежий",
         "description": "",
         "price": "40",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Фарш.jpg",
         "id": 36
@@ -318,7 +319,6 @@
         "name": "Шея мороженая",
         "description": "",
         "price": "22.50",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Шея.jpg",
         "id": 16
@@ -327,7 +327,6 @@
         "name": "Шея охлажденная",
         "description": "",
         "price": "24.90",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/Шея.jpg",
         "id": 15
@@ -336,18 +335,16 @@
         "name": "печень теленка молочного",
         "description": "",
         "price": "19",
-        "qtty": "1",
         "kind": "кг",
         "img": "img\/products\/печеньтеленкамолочного.jpeg",
         "id": 37
     },
     {
+        "id": 38,
         "name": "язык молочного теленка",
-        "description": "",
+        "description": "цена за 1кг, один язык +-1кг",
         "price": "27",
-        "qtty": "1",
-        "kind": "кг",
-        "img": "img\/products\/языкмолочноготеленка.jpeg",
-        "id": 38
+        "kind": "1шт",
+        "img": "img\/products\/языкмолочноготеленка.jpeg"
     }
 ]
