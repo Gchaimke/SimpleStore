@@ -40,6 +40,7 @@ class Product
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
         $kind = 'kind_' . $lng;
+        $old_product->price = $product->price;
         $old_product->$name = $product->name;
         $old_product->$description = $product->description;
         $old_product->$kind = $product->kind;
