@@ -213,7 +213,9 @@ function get_order($order_num = 0)
     } else {
         $order_num = $order_month . "-" . substr($order_num, -3);
         $order_path = ORDERS_PATH . $order_month . '/' . $order_num . ".json";
-        return json_decode(file_get_contents($order_path));
+        if (file_exists($order_path)) {
+            return json_decode(file_get_contents($order_path));
+        }
     }
     $msg = lang("order_not_found");
     return "<h3>$order_num $msg</h3>";
@@ -279,7 +281,7 @@ function get_data($file)
     if (file_exists($path)) {
         return json_decode(file_get_contents($path));
     } else {
-        return json_decode("{}");
+        return json_decode("[{}]");
     }
 }
 
@@ -440,7 +442,11 @@ function update_products_id($category_index = '')
 
 function old_to_new()
 {
-    $orders = json_decode(file_get_contents(ORDERS_PATH . "05_21.json"));
+    if (file_exists(ORDERS_PATH . "05_21.json")) {
+        $orders = json_decode(file_get_contents(ORDERS_PATH . "05_21.json"));
+    }else{
+        $orders = array();
+    }
     $tmp = [];
     foreach ($orders as $order) {
         $order_path = ORDERS_PATH . date("my/") . date("my_") . substr($order->id, -3) . ".json";
