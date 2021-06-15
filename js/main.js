@@ -377,7 +377,9 @@ $('.cart-send-email').on('click', function () {
 });
 
 $('.delete-product').on('click', function () {
-    var confim = confirm('Delete this product?');
+    var category = $(this).data("category");
+    var product = $(this).data("product");
+    var confim = confirm('Delete this product? '+category+"_"+product);
     if (confim) {
         var category = $(this).data("category");
         var product = $(this).data("product");
