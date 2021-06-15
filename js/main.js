@@ -357,7 +357,7 @@ $('.cart-send-email').on('click', function () {
     });
     if (!$.isEmptyObject(cart)) {
         $('#client_data').modal('show');
-        $("#client_form").on("submit", function (out) {
+        $("#client_form1").on("submit", function (out) {
             out.preventDefault();
             $('.close, .btn-close, .send').prop('disabled', true);
             $('.spinner-border').toggle();
@@ -372,6 +372,10 @@ $('.cart-send-email').on('click', function () {
                 .done(function (e) {
                     location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
                 });
+        });
+        $("#client_form").on("submit", function (out) {
+            $('.close, .btn-close, .send').prop('disabled', true).hide();
+            $('.spinner-border').toggle();
         });
     } else {
         alert('Cart is empty!');

@@ -94,16 +94,7 @@ if (isset($_POST['remove_cookie'])) {
 }
 
 if (isset($_POST['remove_all_cookie'])) {
-    $ignore = ["PHPSESSID", "language"];
-    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-    foreach ($cookies as $cookie) {
-        $parts = explode('=', $cookie);
-        $name = trim($parts[0]);
-        if (!in_array($name, $ignore)) {
-            setcookie($name, '', 1);
-            setcookie($name, '', 1, SITE_ROOT);
-        }
-    }
+    clear_cookie();
 }
 
 if (isset($_POST['get_form_url'])) {

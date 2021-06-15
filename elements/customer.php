@@ -4,37 +4,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="client_dataLabel"><?= lang("shipment") ?></h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="client_form">
+                <form action="send_cart.php" id="client_form" method="POST">
+                    <input type="hidden" name="cart" />
                     <div class="input-group mt-2">
                         <label class="input-group-text"><?= lang("name") ?></label>
-                        <input type="text" class="form-control" name="name" required />
+                        <input type="text" class="form-control" name="client[name]" required />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text"><?= lang("phone") ?></label>
-                        <input type="text" class="form-control" name="phone" required />
+                        <input type="text" class="form-control" name="client[phone]" required />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text"><?= lang("email") ?></label>
-                        <input type="text" class="form-control" name="email" />
+                        <input type="text" class="form-control" name="client[email]" required />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text"><?= lang("address") ?></label>
-                        <input type="text" class="form-control" placeholder="<?= lang("address_pl") ?>" name="address" />
-                    </div>
-                    <div class="input-group mt-2">
-                        <label class="input-group-text" ><?= lang("city") ?></label>
-                        <?php include_once('elements/cities.php'); ?>
+                        <input type="text" class="form-control" placeholder="<?= lang("address_pl") ?>" name="client[address]" required />
                     </div>
                     <div class="modal-footer">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
                         <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal"><?= lang("close") ?></button>
-                        <button type="submit" class="btn btn-primary send"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> <?= lang("send") ?></button>
+                        <button type="submit" class="btn btn-primary send"> <?= lang("send") ?></button>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>

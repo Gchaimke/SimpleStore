@@ -233,7 +233,6 @@ function order_client_to_html($order_num = 0)
         $html .= "<li>" . lang("phone") . ": " . $order->client->phone . "</li>";
         $html .= "<li>" . lang("email") . ": " . $order->client->email . "</li>";
         $html .= "<li>" . lang("address") . ": " . $order->client->address . "</li>";
-        $html .= "<li>" . lang("city") . ": " . $order->client->city . "</li>";
         $html .= '</ul>';
         return $html;
     }
@@ -273,7 +272,19 @@ function order_to_html($order_num = 0)
     return $order;
 }
 
-
+function clear_cookie()
+{
+    $ignore = ["PHPSESSID", "language"];
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+    foreach ($cookies as $cookie) {
+        $parts = explode('=', $cookie);
+        $name = trim($parts[0]);
+        if (!in_array($name, $ignore)) {
+            setcookie($name, '', 1);
+            setcookie($name, '', 1, SITE_ROOT);
+        }
+    }
+}
 
 //** Helper */
 
@@ -445,7 +456,7 @@ function old_to_new()
 {
     if (file_exists(ORDERS_PATH . "05_21.json")) {
         $orders = json_decode(file_get_contents(ORDERS_PATH . "05_21.json"));
-    }else{
+    } else {
         $orders = array();
     }
     $tmp = [];

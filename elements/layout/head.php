@@ -1,14 +1,13 @@
 <?php
 session_start();
 include_once('functions/helper.php');
-include_once('elements/about.php');
 ?>
 <!doctype html>
 <html class="no-js h-100" lang=<?= $lng ?>>
 
 <head>
     <meta charset="utf-8">
-    <title><?= $company->name?></title>
+    <title><?= $company->name ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

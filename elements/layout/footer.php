@@ -15,18 +15,4 @@
         var pass = $('#login-pass').val();
         window.location.href = '<?= SITE_ROOT ?>?login=' + pass;
     });
-    $(document).ready(function() {
-        carrency = "<?= $carrency ?>";
-        var previos_cart = <?php echo json_encode($previos_cart, JSON_UNESCAPED_UNICODE); ?>;
-        var previos_total = <?= $previos_total ?>;
-        if (previos_cart != "") {
-            console.log(previos_cart);
-            $.each(previos_cart, function(index, value) {
-                restore_cart(index, value);
-            });
-            update_cart_total(parseInt(previos_total));
-        }
-    });
 </script>
-
-</html>
