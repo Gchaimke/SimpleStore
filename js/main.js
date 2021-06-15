@@ -211,7 +211,9 @@ function add_cart_product(productId, product_name, price, qty, kind, restore = 0
     var cart_item = "<li data-product_id='" + productId + "'><span data-price='" + price +
         "' class='bg-danger remove-from-cart'>X</span><span class='cart-product mx-2'>" + product_name +
         "</span><span class='cart_qty'>" + qty + "</span><span class='cart_kind me-1'>" + kind + "</span><span class='cart_price'>" + price + "</span>" + carrency;
-
+    if (restore == 1) {
+        //price = price / parseInt(qty);
+    }
     $('.cart_items').append(cart_item +
         "<div class='cart-controls text-nowrap mb-2 text-center' data-price='" + price + "' data-qty='" + qty + "' data-kind='" + kind + "' data-product_id='" + productId + "'>" +
         "<span class='btn btn-warning ml-2 minus'>-</span><b class='m-2'>1</b><span class='btn btn-success plus'>+</span></div><hr></li>");
