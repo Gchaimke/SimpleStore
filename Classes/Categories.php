@@ -9,10 +9,18 @@ class Categories
 
     function get_categories()
     {
-        if (file_exists($this->data_path)) {
+        if (file_exists($this->data_path . "categories.json")) {
             $this->categories = json_decode(file_get_contents($this->data_path . "categories.json"));
         } else {
-            $this->categories = json_decode("{}");
+            $this->categories = json_decode('[{"id":"1","name":"category 1"}]');
+            if (!file_exists(DOC_ROOT . "data")) {
+                mkdir(DOC_ROOT . "data", 0700);
+            }
+            file_put_contents($this->data_path . "categories.json", json_encode($this->categories, JSON_UNESCAPED_UNICODE));
+            $product = new Product();
+            $product->id = 1;
+            $products[] = $product;
+            file_put_contents($this->data_path . "1.json", json_encode($products, JSON_UNESCAPED_UNICODE));
         }
         return $this->categories;
     }
