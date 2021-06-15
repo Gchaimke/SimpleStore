@@ -21,6 +21,10 @@ class Categories
             $product->id = 1;
             $products[] = $product;
             file_put_contents($this->data_path . "1.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+            $product->id = "1_1";
+            $favorites[] = $product;
+            file_put_contents($this->data_path . "favorites.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+            copy(DOC_ROOT."distrikts_template.json",$this->data_path."distrikts.json");
         }
         return $this->categories;
     }

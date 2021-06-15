@@ -8,6 +8,8 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 /**
  * Config
  */
+define("VERSION", "1.5");
+
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DOC_ROOT . "data/orders/");
 
@@ -419,7 +421,6 @@ function send_email($order_num = 0)
  */
 function update_products_id($category_index = '')
 {
-    global $lng;
     if ($category_index != '') {
         $category = get_category($category_index);
         if (isset($category)) {

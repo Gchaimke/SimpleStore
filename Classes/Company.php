@@ -12,7 +12,7 @@ class Company
     {
         global $lng;
 
-        
+
         if (file_exists($this->data_path)) {
             $this->company = json_decode(file_get_contents($this->data_path));
         } else {
@@ -23,15 +23,13 @@ class Company
             file_put_contents($this->data_path, json_encode($this->company, JSON_UNESCAPED_UNICODE));
         }
 
-        if (property_exists($this->company, "name")) {
-            $name = "name_" . $lng;
-            $header = "header_" . $lng;
-            $this->name = isset($this->company->$name) ? $this->company->$name : $this->company->name;
-            $this->phone = $this->company->phone;
-            $this->email = $this->company->email;
-            $this->logo = $this->company->logo;
-            $this->header = isset($this->company->$header) ? $this->company->$header : $this->company->header;
-        }
+        $name = "name_" . $lng;
+        $header = "header_" . $lng;
+        $this->name = isset($this->company->$name) ? $this->company->$name : $this->company->name;
+        $this->phone = $this->company->phone;
+        $this->email = $this->company->email;
+        $this->logo = $this->company->logo;
+        $this->header = isset($this->company->$header) ? $this->company->$header : $this->company->header;
     }
 
     function update($data)

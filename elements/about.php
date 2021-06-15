@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <p>Autor:<a href="mailto:gchaimke@gmail.com"> Chaim Gorbov</a></p>
-                <p>Version: 1.0</p>
+                <p>Version: <?=VERSION?></p>
                 <p>Date: 05.05.2021</p>
                 <p>In this project: HTML5, CSS, JS, Jquery, Bootstrap 5, PHP 7.4</p>
 
