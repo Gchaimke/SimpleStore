@@ -114,6 +114,7 @@ if (isset($_FILES['file']['name'])) {
     $imageFileType = pathinfo($filename, PATHINFO_EXTENSION);
     $imageFileType = strtolower($imageFileType);
     $save_name = str_replace(' ', '_', $_POST['name']);
+    $tmp = DOC_ROOT . "img/products/tmp.$imageFileType";
     $location = DOC_ROOT . "img/products/$save_name.$imageFileType";
     /* Valid extensions */
     $valid_extensions = array("jpg", "jpeg", "png");
@@ -122,8 +123,9 @@ if (isset($_FILES['file']['name'])) {
     /* Check file extension */
     if (in_array(strtolower($imageFileType), $valid_extensions)) {
         /* Upload file */
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $tmp)) {
             $response = $save_name . "." . $imageFileType;
+            compressImage($tmp,$location,60);
         }
     }
 
