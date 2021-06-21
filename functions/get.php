@@ -19,6 +19,10 @@ if (isset($_GET['email_order'])) {
     send_email($_GET['email_order']);
 }
 
+if (isset($_GET['csv'])) {
+    export_csv();
+}
+
 if (isset($_GET['order'])) {
     $order = order_to_html($_GET['order']);
     if ($logedin) {

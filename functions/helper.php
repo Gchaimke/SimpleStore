@@ -375,18 +375,7 @@ function compressImage($source, $destination, $quality)
     elseif ($info['mime'] == 'image/png')
         $image = imagecreatefrompng($source);
 
-    imagecopyresampled(
-        $resized,
-        $image,
-        0,
-        0,
-        0,
-        0,
-        $width,
-        $height,
-        $orig_width,
-        $orig_height
-    );
+    imagecopyresampled($resized, $image, 0, 0,  0, 0, $width, $height, $orig_width, $orig_height);
     imagejpeg($resized, $destination, $quality);
     unlink($source);
 }
@@ -461,6 +450,32 @@ function send_email($order_num = 0)
     }
 }
 
+
+function export_csv()
+{
+    global $store;
+    global $lng;
+    $company_name = str_replace(" ","_",$store->company->name);
+    $file_name =  $company_name. ".csv";
+    $categories = $store->categories->get_categories_with_products();
+
+    //$fp = fopen('php://output', 'w');
+    $fp = fopen(DOC_ROOT . "data/".$file_name, 'w');
+    fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+    fputcsv($fp, array("Category", "Name", "Price"));
+
+    foreach ($categories as $category) {
+        $name = 'name_' . $lng;
+        foreach ($category->products as $product) {
+            if (property_exists($product, $name)) {
+                fputcsv($fp, array($category->$name, $product->$name, $product->price));
+            } else {
+                fputcsv($fp, array($category->$name, $product->name, $product->price));
+            }
+        }
+    }
+    fclose($fp);
+}
 /**
  * TO DO: Use one time
  */
