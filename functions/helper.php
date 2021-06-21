@@ -346,6 +346,27 @@ function delete_image($image)
 // Compress image
 function compressImage($source, $destination, $quality)
 {
+    $max_h = 800;
+    $max_w = 1000;
+
+    list($orig_width, $orig_height) = getimagesize($source);
+    $width = $orig_width;
+    $height = $orig_height;
+
+    # taller
+    if ($height > $max_h) {
+        $width = ($max_h / $height) * $width;
+        $height = $max_h;
+    }
+
+    # wider
+    if ($width > $max_w) {
+        $height = ($max_w / $width) * $height;
+        $width = $max_w;
+    }
+
+    $resized = imagecreatetruecolor($width, $height);
+
     $info = getimagesize($source);
     if ($info['mime'] == 'image/jpeg')
         $image = imagecreatefromjpeg($source);
@@ -353,7 +374,20 @@ function compressImage($source, $destination, $quality)
         $image = imagecreatefromgif($source);
     elseif ($info['mime'] == 'image/png')
         $image = imagecreatefrompng($source);
-    imagejpeg($image, $destination, $quality);
+
+    imagecopyresampled(
+        $resized,
+        $image,
+        0,
+        0,
+        0,
+        0,
+        $width,
+        $height,
+        $orig_width,
+        $orig_height
+    );
+    imagejpeg($resized, $destination, $quality);
     unlink($source);
 }
 
