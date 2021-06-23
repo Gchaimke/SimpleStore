@@ -97,14 +97,16 @@ if (isset($_POST['remove_all_cookie'])) {
     clear_cookie();
 }
 
-if (isset($_POST['get_form_url'])) {
-    $name = str_replace(' ', '_', $_POST['name']);
-    save_image($name, clean($_POST['url']));
-    exit;
-}
+
 
 if (isset($_POST['delete_gallery_image'])) {
     delete_image(clean($_POST['image']));
+    exit;
+}
+
+if (isset($_POST['get_form_url'])) {
+    $name = str_replace([' ','%','\\'], '_', $_POST['name']);
+    save_image($name, clean($_POST['url']));
     exit;
 }
 
@@ -113,7 +115,7 @@ if (isset($_FILES['file']['name'])) {
     $filename = $_FILES['file']['name'];
     $imageFileType = pathinfo($filename, PATHINFO_EXTENSION);
     $imageFileType = strtolower($imageFileType);
-    $save_name = str_replace(' ', '_', $_POST['name']);
+    $save_name = str_replace([' ','%','\\'], '_', $_POST['name']);
     $tmp = DOC_ROOT . "img/products/tmp.$imageFileType";
     $location = DOC_ROOT . "img/products/$save_name.$imageFileType";
     /* Valid extensions */

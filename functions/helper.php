@@ -26,7 +26,7 @@ if (isset($_COOKIE['language']) && $_COOKIE['language']) {
     $lng = $_COOKIE['language'];
     require(DOC_ROOT . "lang/$lng.php");
 } else {
-    $lng = 'ru';
+    $lng = SITE_LANG;
     require(DOC_ROOT . "lang/$lng.php");
 }
 
@@ -90,7 +90,7 @@ function redirect($url)
 
 function login($pass)
 {
-    if ($pass == PASS) {
+    if (urldecode($pass)  == PASS) {
         $_SESSION["login"] = true;
         redirect(SITE_ROOT);
     } else {

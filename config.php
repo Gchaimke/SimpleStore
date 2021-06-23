@@ -5,4 +5,5 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 };
 define("SITE_ROOT", "/");
 define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT'] . SITE_ROOT);
-define("PASS", "0523488059x");
+define("PASS", 'p@$$word');
+define("SITE_LANG","ru");

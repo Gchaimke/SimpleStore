@@ -1,4 +1,4 @@
-main {
+main, footer, .navbar {
     direction: rtl;
 }
 
@@ -21,4 +21,8 @@ button.btn.MS-right {
 
 button.btn.MS-left {
     float: left;
+}
+
+.statistic {
+    direction: ltr;
 }
