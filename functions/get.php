@@ -42,25 +42,37 @@ if (isset($_GET['order'])) {
 
 if (isset($_GET['orders'])) {
     $orders = get_orders($_GET['orders']);
+    if(isset($_GET['max'])){
+        $max = $_GET['max'];
+    }else{
+        $max = 15;
+    }
     if (isset(get_orders($_GET['orders'])['orders'])) {
         $orders = get_orders($_GET['orders'])['orders'];
         echo "<div class='orders row text-center mx-3'>";
         foreach ($orders as $order) {
+            if($max == 0){
+                break;
+            }
             $order_num = explode('.', $order)[0];
             $order_data = json_decode(file_get_contents(DOC_ROOT . 'data/orders/' . $_GET['orders'] . "/" . $order));
-            echo "
-            <a href='?order=$order_num' class='order-card card col-md m-md-3 my-2'>
-                <h4>$order_num</h4>
-                <div>
-                    <div>" . $order_data->client->name . "</div>
-                    <div>" . $order_data->client->phone . "</div>
-                    <div>" . $order_data->client->address . "</div>
-                    <div>$order_data->total $carrency</div>
-                </div>
-            </a>";
+            if ($order_data->client->name != 'test') {
+                echo "
+                <a href='?order=$order_num' class='order-card card col-md m-md-3 my-2'>
+                    <h4>$order_num</h4>
+                    <div>
+                        <div>" . $order_data->date . "</div>
+                        <div>" . $order_data->client->name . "</div>
+                        <div>" . $order_data->client->phone . "</div>
+                        <div>" . $order_data->client->address . "</div>
+                        <div>$order_data->total $carrency</div>
+                    </div>
+                </a>";
+            }
+            $max--;
         }
         echo "</div>";
-    }else{
-        echo "<div class='text-center'>no order for ".$_GET['orders']." month!</div>";
+    } else {
+        echo "<div class='text-center'>no order for " . $_GET['orders'] . " month!</div>";
     }
 }

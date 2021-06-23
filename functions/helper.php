@@ -198,7 +198,7 @@ function get_orders($month)
 {
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
-        $orders['orders'] = get_files($orders_path, ["json"]);
+        $orders['orders'] = get_files($orders_path, ["json"],1);
         $orders['month'] = $month;
         return $orders;
     }
@@ -306,22 +306,20 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"])
+function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"],$ASC=0)
 {
-    $result = array();
-    $cdir = scandir($dir);
-    foreach ($cdir as $value) {
-        $extension = explode('.', $value);
+    $files = array();
+    $cdir = scandir($dir,$ASC);
+    foreach ($cdir as $file) {
+        $extension = explode('.', $file);
         $extension = end($extension);
         if (in_array($extension, $kind)) {
-            if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
-                $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
-            } else {
-                $result[] = $value;
+            if (!is_dir($dir . DIRECTORY_SEPARATOR . $file)) {
+                $files[] =  $file;
             }
         }
     }
-    return $result;
+    return ($files) ? $files : false;
 }
 
 function save_image($image_name, $url)

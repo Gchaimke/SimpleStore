@@ -209,8 +209,9 @@ SimpleStore 1
   a.order-card {
     text-decoration: none;
     color: black;
-    max-width: 200px;
+    max-width: 350px;
     padding: 20px;
+    min-width: 220px;
   }
 
  /*jQuery slider */
