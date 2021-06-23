@@ -1,6 +1,6 @@
 <div class="item mb-5 col">
     <div class="card product-card mt-2">
-        <div class="card-image" style="background-image: url('<?= auto_version($product->img) ?>');"></div>
+        <div class="card-image" style="background-image: url('<?= auto_version($product->img) ?>');height: <?=CARD_IMG_HEIGHT?>px;"></div>
         <div class="card-body product">
             <?php
             $qtty =  property_exists($product, 'qtty') ? $product->qtty : 1;
