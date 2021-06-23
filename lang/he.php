@@ -35,6 +35,7 @@ $lang = array(
     "total" => "סך הכל",
     "approximately" => "בערך",
     "order" => "הזמנה",
+    "orders" => "הזמנות",
     "email_not_useble" => "אמייל הזה לא נבדק על ידי מנהל, נא לצור קשר ",
     "order_send_success" => "ההזמנה נשלחה בהצלחה, נהיה בקשר!",
     "password_error" => "הסיסמה שגויא",
