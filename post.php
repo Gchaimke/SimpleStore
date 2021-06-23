@@ -105,7 +105,7 @@ if (isset($_POST['delete_gallery_image'])) {
 }
 
 if (isset($_POST['get_form_url'])) {
-    $name = str_replace([' ','%','\\'], '_', $_POST['name']);
+    $name = str_replace([' ', '%', '\\'], '_', $_POST['name']);
     save_image($name, clean($_POST['url']));
     exit;
 }
@@ -115,7 +115,7 @@ if (isset($_FILES['file']['name'])) {
     $filename = $_FILES['file']['name'];
     $imageFileType = pathinfo($filename, PATHINFO_EXTENSION);
     $imageFileType = strtolower($imageFileType);
-    $save_name = str_replace([' ','%','\\'], '_', $_POST['name']);
+    $save_name = str_replace([' ', '%', '\\'], '_', $_POST['name']);
     $tmp = DOC_ROOT . "img/products/tmp.$imageFileType";
     $location = DOC_ROOT . "img/products/$save_name.$imageFileType";
     /* Valid extensions */
@@ -127,7 +127,7 @@ if (isset($_FILES['file']['name'])) {
         /* Upload file */
         if (move_uploaded_file($_FILES['file']['tmp_name'], $tmp)) {
             $response = $save_name . "." . $imageFileType;
-            compressImage($tmp,$location,60);
+            compressImage($tmp, $location, 60);
         }
     }
 
@@ -153,21 +153,26 @@ if (isset($_POST['update_stats'])) {
 }
 
 if (isset($_POST['search'])) {
-    if (strlen($_POST['search']) >= 3) {
-        $search = $_POST['search'];
+    if (strlen($_POST['search']) >= 1) {
+        $search =clean_search($_POST['search']);
         $str = "";
+        $name = 'name_' . $lng;
         foreach ($categories as $category) {
             $products = get_data($category->id);
             if (is_iterable($products)) {
                 foreach ($products as $product) {
-                    $search_name = str_replace(' ', '', $product->name);
+                    if (property_exists($product, $name)) {
+                        $search_name =clean_search($product->$name) ;
+                    } else {
+                        $search_name = clean_search($product->name);
+                    }
                     if (stripos($search_name, $search) !== false) {
                         $str .= $category->id . "_" . $product->id . ",";
                     }
                 }
-            }
+            } 
         }
-        echo $str;
+        echo "FOUND:".$str;
     } else {
         echo "Min chars 3";
     }

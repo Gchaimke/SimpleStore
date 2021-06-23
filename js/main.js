@@ -212,8 +212,8 @@ function add_cart_product(productId, product_name, price, qty, kind, restore = 0
         "' class='bg-danger remove-from-cart'>X</span><span class='cart-product mx-2'>" + product_name +
         "</span><span class='cart_qty'>" + qty + "</span><span class='cart_kind me-1'>" + kind + "</span><span class='cart_price'>" + price + "</span>" + carrency;
     if (restore == 1) {
-        price = $('i[data-product_id='+productId+']').data('price');
-        qty = $('i[data-product_id='+productId+']').data('qty');
+        price = $('i[data-product_id=' + productId + ']').data('price');
+        qty = $('i[data-product_id=' + productId + ']').data('qty');
     }
     $('.cart_items').append(cart_item +
         "<div class='cart-controls text-nowrap mb-2 text-center' data-price='" + price + "' data-qty='" + qty + "' data-kind='" + kind + "' data-product_id='" + productId + "'>" +
@@ -498,16 +498,20 @@ $('#search').on('submit', function (e) {
     var search = $("#search_text").val();
     search = search.toLowerCase();
     search = search.replace(/ /g, '');
-    search = search.substring(1);
+    //search = search.substring(1);
     $.post("post.php", { search: search })
         .done(function (res) {
             $("#search_result").empty();
-            var products = res.split(",");
-            products.forEach(function (value) {
-                if (value != "") {
-                    $("#" + value).clone().appendTo("#search_result");
-                }
-            })
+            if (res.startsWith("FOUND:")) {
+                res = res.substring(6);
+                var products = res.split(",");
+                products.forEach(function (value) {
+                    if (value != "") {
+                        $("#" + value).clone().appendTo("#search_result");
+                    }
+                });
+            }
+            console.log(res);
         });
 });
 

@@ -116,6 +116,10 @@ function clean($str)
     return str_replace(' ', '', $str);
 }
 
+function clean_search($str){
+    return preg_replace('~[^\p{L}\p{N}]++~u', '', $str);
+}
+
 
 function delete_product($category_index, $product_index)
 {
