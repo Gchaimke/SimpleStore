@@ -116,7 +116,8 @@ function clean($str)
     return str_replace(' ', '', $str);
 }
 
-function clean_search($str){
+function clean_search($str)
+{
     return preg_replace('~[^\p{L}\p{N}]++~u', '', $str);
 }
 
@@ -262,8 +263,11 @@ function order_to_html($order_num = 0)
         foreach ($order->items as $value) {
             $html .= "<tr>";
             $value = explode(',', $value);
-            foreach ($value as $td) {
-                $html .= "<td style='$style'>$td</td>";
+            if ($value[2] != 0) {
+                foreach ($value as $td) {
+
+                    $html .= "<td style='$style'>$td</td>";
+                }
             }
             $html .= '</tr>';
         }
@@ -459,13 +463,13 @@ function export_csv()
 {
     global $store;
     global $lng;
-    $company_name = str_replace(" ","_",$store->company->name);
-    $file_name =  $company_name. ".csv";
+    $company_name = str_replace(" ", "_", $store->company->name);
+    $file_name =  $company_name . ".csv";
     $categories = $store->categories->get_categories_with_products();
 
     //$fp = fopen('php://output', 'w');
-    $fp = fopen(DOC_ROOT . "data/".$file_name, 'w');
-    fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+    $fp = fopen(DOC_ROOT . "data/" . $file_name, 'w');
+    fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
     fputcsv($fp, array("Category", "Name", "Price"));
 
     foreach ($categories as $category) {

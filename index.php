@@ -1,6 +1,5 @@
 <?php
 include_once('elements/layout/head.php');
-include_once('functions/get.php');
 
 ?>
 
@@ -9,6 +8,7 @@ include_once('functions/get.php');
     <main class="flex-shrink-0">
         <div class="container mt-5 mb-5">
             <?php
+            include_once('functions/get.php');
             include_once('elements/cart.php');
             include_once('elements/message.php');
             //include_once('elements/test.php');
