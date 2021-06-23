@@ -198,7 +198,7 @@ function get_orders($month)
 {
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
-        $orders['orders'] = get_files($orders_path, ["json"],1);
+        $orders['orders'] = get_files($orders_path, ["json"], 1);
         $orders['month'] = $month;
         return $orders;
     }
@@ -306,10 +306,10 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"],$ASC=0)
+function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
-    $cdir = scandir($dir,$ASC);
+    $cdir = scandir($dir, $ASC);
     foreach ($cdir as $file) {
         $extension = explode('.', $file);
         $extension = end($extension);
@@ -371,18 +371,27 @@ function compressImage($source, $destination, $quality)
         $width = $max_w;
     }
 
-    $resized = imagecreatetruecolor($width, $height);
-
     $info = getimagesize($source);
-    if ($info['mime'] == 'image/jpeg')
+    if ($info['mime'] == 'image/jpeg') {
         $image = imagecreatefromjpeg($source);
-    elseif ($info['mime'] == 'image/gif')
+    } elseif ($info['mime'] == 'image/gif') {
         $image = imagecreatefromgif($source);
-    elseif ($info['mime'] == 'image/png')
+    } elseif ($info['mime'] == 'image/png') {
         $image = imagecreatefrompng($source);
+    }
+
+    $resized = imagecreatetruecolor($width, $height);
+    imagealphablending($resized, false);
+    imagesavealpha($resized, true);
 
     imagecopyresampled($resized, $image, 0, 0,  0, 0, $width, $height, $orig_width, $orig_height);
-    imagejpeg($resized, $destination, $quality);
+    if ($info['mime'] == 'image/jpeg') {
+        imagejpeg($resized, $destination, $quality);
+    } elseif ($info['mime'] == 'image/gif') {
+        imagegif( $resized, $destination);
+    } elseif ($info['mime'] == 'image/png') {
+        imagepng( $resized, $destination,7);
+    }
     unlink($source);
 }
 
