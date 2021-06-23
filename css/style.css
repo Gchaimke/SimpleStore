@@ -188,35 +188,36 @@ SimpleStore 1
  }
 
  div#order_controls {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-content: stretch;
-    justify-content: space-evenly;
-    align-items: center;
-  }
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+     align-content: stretch;
+     justify-content: space-evenly;
+     align-items: center;
+ }
 
-  div#order_controls a {
-    flex-basis: 50%;
-    text-align: center;
-    text-decoration: none;
-    background: #dcffb9;
-    padding: 5px 0;
-    margin: 0 20%;
-  }
+ div#order_controls a {
+     flex-basis: 50%;
+     text-align: center;
+     text-decoration: none;
+     background: #dcffb9;
+     padding: 5px 0;
+     margin: 0 20%;
+ }
 
-  a.order-card {
-    text-decoration: none;
-    color: black;
-    max-width: 350px;
-    padding: 20px;
-    min-width: 220px;
-  }
+ a.order-card {
+     text-decoration: none;
+     color: black;
+     max-width: 350px;
+     padding: 20px;
+     min-width: 220px;
+ }
 
  /*jQuery slider */
 
  .item {
      width: 50%;
+     margin-bottom: 100px;
  }
 
  .MS-content {
@@ -266,10 +267,9 @@ SimpleStore 1
  }
 
  @media (max-width: 992px) {
-    div#order_controls a {
-        margin: 0 10%;
-      }
-
+     div#order_controls a {
+         margin: 0 10%;
+     }
      .statistic {
          margin: 20px;
      }
@@ -278,8 +278,8 @@ SimpleStore 1
          right: 35px;
      }
      a.order-card {
-        max-width: 100%;
-      }
+         max-width: 100%;
+     }
  }
 
  /* display 3 */
