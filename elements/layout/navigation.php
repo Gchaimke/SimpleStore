@@ -12,6 +12,7 @@
                     <span id="admin_nav">
                         <input type="button" class="btn btn-outline-warning align-middle mx-md-2 col" value="<?= lang("settings") ?>" data-bs-toggle="modal" data-bs-target="#editCompany" tabindex="0">
                         <input type="button" class="btn btn-outline-success align-middle mx-md-2 category_editor_toggle col text-white" value="<?= lang("new_category") ?>" data-bs-toggle="modal" data-bs-target="#categoryEditor" tabindex="0">
+                        <a class="btn btn-outline-warning align-middle mx-md-2 col" href="<?='?orders='.date('my')?>" tabindex="0"><?= lang("orders") ?></a>
                     </span>
                     <?php include_once('elements/statistic.php'); ?>
                 <?php endif ?>
