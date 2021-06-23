@@ -28,9 +28,11 @@ if (isset($_GET['order'])) {
     if ($logedin) {
         $order .= order_client_to_html($_GET['order']);
         $order_num = explode("-", $_GET['order']);
-        $next = $order_num[0] . "-" . add_zero(intval($order_num[1]) + 1);
-        $prev = $order_num[0] . "-" . add_zero(intval($order_num[1]) - 1);
-        $order .= "<div id='order_controls'><a href='?order=$prev'>Previos</a><a href='?order=$next'>Next</a></div>";
+        if (count($order_num) > 1) {
+            $next = $order_num[0] . "-" . add_zero(intval($order_num[1]) + 1);
+            $prev = $order_num[0] . "-" . add_zero(intval($order_num[1]) - 1);
+            $order .= "<div id='order_controls'><a href='?order=$prev'>" . lang('prev') . "</a><a href='?order=$next'>" . lang('next') . "</a></div>";
+        }
     }
     print($order);
     if (isset($_GET['sent'])) {
@@ -42,16 +44,16 @@ if (isset($_GET['order'])) {
 
 if (isset($_GET['orders'])) {
     $orders = get_orders($_GET['orders']);
-    if(isset($_GET['max'])){
+    if (isset($_GET['max'])) {
         $max = $_GET['max'];
-    }else{
+    } else {
         $max = 15;
     }
     if (isset(get_orders($_GET['orders'])['orders'])) {
         $orders = get_orders($_GET['orders'])['orders'];
-        echo "<div class='orders row text-center mx-3'>";
+        echo "<h2 class='text-center'>" . lang('last orders') . "</h2><div class='orders row text-center mx-3'>";
         foreach ($orders as $order) {
-            if($max == 0){
+            if ($max == 0) {
                 break;
             }
             $order_num = explode('.', $order)[0];

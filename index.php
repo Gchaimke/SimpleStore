@@ -12,6 +12,12 @@ include_once('elements/layout/head.php');
             include_once('elements/cart.php');
             include_once('elements/message.php');
             //include_once('elements/test.php');
+            if ($logedin) {
+                include_once('elements/edit_company.php');
+                include_once('elements/edit_category.php');
+                include('elements/edit_product.php');
+                include_once('elements/search_order.php');
+            }
             echo "<div class='container'>$company->header</div>";
             include_once('elements/favorites.php');
             include_once('elements/search.php');
@@ -19,12 +25,6 @@ include_once('elements/layout/head.php');
             include_once('elements/login.php');
             include_once('elements/customer.php');
             include_once('elements/about.php');
-            if ($logedin) {
-                include_once('elements/edit_company.php');
-                include_once('elements/edit_category.php');
-                include('elements/edit_product.php');
-            }
-
             ?>
         </div>
     </main>

@@ -515,6 +515,14 @@ $('#search').on('submit', function (e) {
         });
 });
 
+$('#search_order').on('submit', function (e) {
+    e.preventDefault();
+    var search = $("#search_order_val").val();
+    location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + search);
+});
+
+
+
 $('.lang-ru').on('click', function () { change_language("ru") });
 $('.lang-he').on('click', function () { change_language("he") });
 
