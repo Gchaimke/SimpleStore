@@ -27,6 +27,10 @@ if (isset($_GET['order'])) {
     $order = order_to_html($_GET['order']);
     if ($logedin) {
         $order .= order_client_to_html($_GET['order']);
+        $order_num = explode("-", $_GET['order']);
+        $next = $order_num[0] . "-" . add_zero(intval($order_num[1]) + 1);
+        $prev = $order_num[0] . "-" . add_zero(intval($order_num[1]) - 1);
+        $order .= "<div id='order_controls'><a href='?order=$prev'>Previos</a><a href='?order=$next'>Next</a></div>";
     }
     print($order);
     if (isset($_GET['sent'])) {
