@@ -39,3 +39,23 @@ if (isset($_GET['order'])) {
         $message['text'] = "$msg <i class=\"far fa-smile-wink\"></i>";
     }
 }
+
+if (isset($_GET['orders'])) {
+    $orders = get_orders($_GET['orders'])['orders'];
+    echo "<div class='orders row text-center mx-3'>";
+    foreach ($orders as $order) {
+        $order_num = explode('.', $order)[0];
+        $order_data = json_decode(file_get_contents(DOC_ROOT . 'data/orders/'.$_GET['orders']."/".$order));
+        echo "
+            <a href='?order=$order_num' class='order-card card col-md m-md-3 my-2'>
+                <h4>$order_num</h4>
+                <div>
+                    <div>".$order_data->client->name."</div>
+                    <div>".$order_data->client->phone."</div>
+                    <div>".$order_data->client->address."</div>
+                    <div>$order_data->total $carrency</div>
+                </div>
+            </a>";
+    }
+    echo "</div>";
+}

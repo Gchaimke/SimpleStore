@@ -206,6 +206,13 @@ SimpleStore 1
     margin: 0 20%;
   }
 
+  a.order-card {
+    text-decoration: none;
+    color: black;
+    max-width: 200px;
+    padding: 20px;
+  }
+
  /*jQuery slider */
 
  .item {
@@ -270,6 +277,9 @@ SimpleStore 1
          position: absolute;
          right: 35px;
      }
+     a.order-card {
+        max-width: 100%;
+      }
  }
 
  /* display 3 */
