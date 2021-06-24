@@ -10,11 +10,11 @@
                 <input type="hidden" id="edit-product-id" value="" />
                 <input type="hidden" id="edit-category-id" value="" />
                 <div class="input-group mb-3">
-                    <label class="input-group-text">Picture URL</label>
+                    <label class="input-group-text"><?=lang("Image URL")?></label>
                     <input type="text" class="form-control picture-url" />
                 </div>
-                <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="Select Image">
-                <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="" value="Upload Image">
+                <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="<?=lang("Select Image")?>">
+                <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="" value="<?=lang("Upload Image")?>">
                 <?php
                 include_once("elements/gallery.php");
                 include_once('elements/uploader.php');
@@ -24,7 +24,7 @@
                     <input type="text" class="form-control product-name" name="product_name"/>
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text">Description</label>
+                    <label class="input-group-text"><?=lang("Description")?></label>
                     <textarea type="text" class="form-control product-description"></textarea>
                 </div>
                 <div class="input-group mb-3">
@@ -32,11 +32,11 @@
                     <input type="text" class="form-control product-price" />
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text">Quantity</label>
+                    <label class="input-group-text"><?=lang("Quantity")?></label>
                     <input type="text" class="form-control product-qtty" />
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text">Kind</label>
+                    <label class="input-group-text"><?=lang("Kind")?></label>
                     <input type="text" class="form-control product-kind" />
                 </div>
                 <div class="modal-footer">
