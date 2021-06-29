@@ -505,7 +505,7 @@ $('#search').on('submit', function (e) {
             if (res.startsWith("FOUND:")) {
                 res = res.substring(6);
                 var products = res.split(",");
-                let total = "Found " + (products.length - 1) + " items.";
+                let total = "Found " + (products.length - 1) + " items";
                 $("#total_found").empty();
                 $("#total_found").append(total);
                 products.forEach(function (value) {
