@@ -231,6 +231,7 @@ function get_order($order_num = 0)
 function order_client_to_html($order_num = 0)
 {
     $order = get_order($order_num);
+    $note = isset($order->client->note) ? $order->client->note : "";
     if (is_object($order)) {
         $html = "<br><h3>" . lang("shipment_address") . "</h3>";
         $html .= "<ul>";
@@ -238,6 +239,7 @@ function order_client_to_html($order_num = 0)
         $html .= "<li>" . lang("phone") . ": " . $order->client->phone . "</li>";
         $html .= "<li>" . lang("email") . ": " . $order->client->email . "</li>";
         $html .= "<li>" . lang("address") . ": " . $order->client->address . "</li>";
+        $html .= "<li>" . lang("note") . ": " . $note . "</li>";
         $html .= '</ul>';
         return $html;
     }
@@ -271,7 +273,7 @@ function order_to_html($order_num = 0)
             }
             $html .= '</tr>';
         }
-        $html .= "<tr><td style='$style'>$total (<span style='color:red;'>$approximately</span>) ~
+        $html .= "<tr><td style='$style'>$total - <span style='color:red;'>$approximately ~ </span>
         </td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
 
         return "<div style='direction:$direction'><h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>
@@ -388,9 +390,9 @@ function compressImage($source, $destination, $quality)
     if ($info['mime'] == 'image/jpeg') {
         imagejpeg($resized, $destination, $quality);
     } elseif ($info['mime'] == 'image/gif') {
-        imagegif( $resized, $destination);
+        imagegif($resized, $destination);
     } elseif ($info['mime'] == 'image/png') {
-        imagepng( $resized, $destination,7);
+        imagepng($resized, $destination, 7);
     }
     unlink($source);
 }

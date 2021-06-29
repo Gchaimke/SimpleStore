@@ -10,20 +10,24 @@
                 <form action="send_cart.php" id="client_form" method="POST">
                     <input type="hidden" name="cart" />
                     <div class="input-group mt-2">
-                        <label class="input-group-text"><?= lang("name") ?></label>
-                        <input type="text" class="form-control" name="client[name]" required />
+                        <label class="input-group-text">* <?= lang("name") ?></label>
+                        <input type="text" class="form-control" name="client[name]" placeholder="<?= lang("name") ?>" required />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text"><?= lang("phone") ?></label>
-                        <input type="text" class="form-control" name="client[phone]" required />
+                        <label class="input-group-text">* <?= lang("phone") ?></label>
+                        <input type="text" class="form-control" name="client[phone]" placeholder="054-111-2222" required />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text"><?= lang("email") ?></label>
-                        <input type="text" class="form-control" name="client[email]" required />
+                        <label class="input-group-text">* <?= lang("email") ?></label>
+                        <input type="text" class="form-control" name="client[email]" placeholder="<?= lang("email") ?>" required />
                     </div>
                     <div class="input-group mt-2">
-                        <label class="input-group-text"><?= lang("address") ?></label>
+                        <label class="input-group-text">* <?= lang("address") ?></label>
                         <input type="text" class="form-control" placeholder="<?= lang("address_pl") ?>" name="client[address]" required />
+                    </div>
+                    <div class="input-group mt-2">
+                        <label class="input-group-text"><?= lang("note") ?></label>
+                        <textarea class="form-control" placeholder="<?= lang("note") ?>" name="client[note]"></textarea>
                     </div>
                     <div class="modal-footer">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
