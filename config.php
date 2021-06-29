@@ -8,3 +8,4 @@ define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT'] . SITE_ROOT);
 define("PASS", 'p@$$word');
 define("SITE_LANG","ru");
 define('CARD_IMG_HEIGHT',120);
+define('CARD_IMG_BG_SIZE',"cover");

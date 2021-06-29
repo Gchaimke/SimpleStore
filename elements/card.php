@@ -1,5 +1,5 @@
 <div class="card product-card mt-2">
-    <div class="card-image" style="background-image: url('<?= auto_version($product->img) ?>');height: <?=CARD_IMG_HEIGHT?>px;"></div>
+    <div class="card-image" style="background-image: url('<?= auto_version($product->img) ?>');height: <?=CARD_IMG_HEIGHT?>px;background-size:<?=CARD_IMG_BG_SIZE?>;"></div>
     <div class="card-body product">
         <?php
         $qtty =  property_exists($product,'qtty')?$product->qtty:1;

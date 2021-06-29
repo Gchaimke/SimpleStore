@@ -88,7 +88,6 @@ SimpleStore 1
  .card-image {
      display: block;
      width: 100%;
-     background-size: cover;
      background-repeat: no-repeat;
      background-position: center;
  }
@@ -223,7 +222,6 @@ SimpleStore 1
      margin: 15px 1%;
      overflow: hidden;
      white-space: nowrap;
-     height: 360px;
  }
 
  .MS-controls {
@@ -259,9 +257,6 @@ SimpleStore 1
      }
      .row.overflow-auto {
          height: 260px;
-     }
-     .MS-content {
-         height: 280px;
      }
  }
 
