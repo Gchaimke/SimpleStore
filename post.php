@@ -168,6 +168,8 @@ if (isset($_POST['search'])) {
                     }
                     if (stripos($search_name, $search) !== false) {
                         $str .= $category->id . "_" . $product->id . ",";
+                    }else if(stripos($search_name, substr($search,2)) !== false){
+                        $str .= $category->id . "_" . $product->id . ",";
                     }
                 }
             } 
