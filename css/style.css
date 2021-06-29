@@ -249,7 +249,10 @@ SimpleStore 1
      .card-body.day-card {
          min-height: initial;
      }
-     .card.mt-2 {
+     .card-body.product {
+        min-height: initial;
+    }
+     .card {
          max-width: initial;
      }
      .card-body {

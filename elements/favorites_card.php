@@ -1,5 +1,5 @@
 <div class="item col">
-    <div class="card product-card mt-2">
+    <div class="card product-card m-4 m-md-1">
         <div class="card-image" style="background-image: url('<?= auto_version($product->img) ?>');height: <?=CARD_IMG_HEIGHT?>px;background-size:<?=CARD_IMG_BG_SIZE?>;"></div>
         <div class="card-body product">
             <?php
