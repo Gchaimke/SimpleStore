@@ -29,20 +29,37 @@ $(document).ready(function () {
     });
 
     if ($(".statistic").length) {
-        get_stasts();
+        let month = $('#update_stats').data('month');
+        get_stats(month);
     }
 });
 
-function get_stasts() {
-    $.post("post.php", { get_stats: true })
+function get_stats(month) {
+    $.post("post.php", { get_stats: month })
         .done(function (e) {
-            setTimeout(function () {
-                var obj = JSON.parse(e);
-                $(".statistic").find("#stats_orders").text(obj.count);
-                $(".statistic").find("#stats_total").text(obj.total);
-            }, 2000);
+            console.log(e);
+            let obj = JSON.parse(e);
+            $(".statistic").find("#month_text").text(obj.month);
+            $(".statistic").find("#stats_orders").text(obj.count);
+            $(".statistic").find("#stats_total").text(obj.total);
         });
 }
+
+$('#update_stats').on('click', function () {
+    let month = $(this).data('month');
+    $.post("post.php", { update_stats: month })
+        .done(function () {
+            get_stats(month);
+        });
+});
+
+$('#prev_stats').on('click', function () {
+    let month = $(this).data('prev-month');
+    $.post("post.php", { prev_stats: month })
+        .done(function () {
+            get_stats(month);
+        });
+});
 
 $('#edit_company').on('submit', function (e) {
     e.preventDefault();
@@ -479,18 +496,6 @@ $('.category_editor_toggle').on('click', function () {
 
 $('.close-parent').on('click', function () {
     $(this).parent().toggle();
-});
-
-$('#update_stats').on('click', function () {
-    $('.spinner_status').toggle();
-    $(this).prop('disabled', true);
-    $.post("post.php", { update_stats: true })
-        .done(function (e) {
-            get_stasts();
-            alert(e);
-        });
-    $('.spinner_status').toggle();
-    $(this).prop('disabled', false);
 });
 
 $('#search').on('submit', function (e) {

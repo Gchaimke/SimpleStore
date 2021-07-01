@@ -135,26 +135,31 @@ if (isset($_FILES['file']['name'])) {
     exit;
 }
 
-if (isset($_POST['get_stats'])) {
-    echo get_stats();
-    exit;
-}
+
 
 if (isset($_POST['set_lang'])) {
     set_lang($_POST['language']);
     exit;
 }
 
+if (isset($_POST['get_stats'])) {
+    echo  json_encode(get_stats($_POST['get_stats']));
+    exit;
+}
 
 if (isset($_POST['update_stats'])) {
-    update_stats();
-    echo 'ok';
+    echo update_stats($_POST['update_stats']);
+    exit;
+}
+
+if (isset($_POST['prev_stats'])) {
+    echo update_stats($_POST['prev_stats']);
     exit;
 }
 
 if (isset($_POST['search'])) {
     if (strlen($_POST['search']) >= 1) {
-        $search =clean_search($_POST['search']);
+        $search = clean_search($_POST['search']);
         $str = "";
         $name = 'name_' . $lng;
         foreach ($categories as $category) {
@@ -162,19 +167,19 @@ if (isset($_POST['search'])) {
             if (is_iterable($products)) {
                 foreach ($products as $product) {
                     if (property_exists($product, $name)) {
-                        $search_name =clean_search($product->$name) ;
+                        $search_name = clean_search($product->$name);
                     } else {
                         $search_name = clean_search($product->name);
                     }
                     if (stripos($search_name, $search) !== false) {
                         $str .= $category->id . "_" . $product->id . ",";
-                    }else if(stripos($search_name, substr($search,2)) !== false){
+                    } else if (stripos($search_name, substr($search, 2)) !== false) {
                         $str .= $category->id . "_" . $product->id . ",";
                     }
                 }
-            } 
+            }
         }
-        echo "FOUND:".$str;
+        echo "FOUND:" . $str;
     } else {
         echo "Min chars 3";
     }

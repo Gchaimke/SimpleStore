@@ -164,9 +164,9 @@ function save_order($cart, $total, $client)
         mkdir($orders_path, 0700);
     }
     $orders = get_files($orders_path, ["json"]);
-    if(is_countable($orders)){
+    if (is_countable($orders)) {
         $order_count = add_zero(count($orders) + 1);
-    }else{
+    } else {
         $order_count = add_zero(1);
     }
     $order_name = date('my-') . $order_count;
@@ -409,33 +409,63 @@ function save_json($array, $file_name = 'test')
     file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
-function update_stats()
+function update_stats($month = 0)
 {
-    $stats['total'] = 0;
-    $stats['count'] = 0;
-    $orders = get_orders(date('my'));
+    if ($month == 0) {
+        $month = date('my');
+    }
+    if (file_exists(DOC_ROOT . "data/stats.json")) {
+        $statistic = json_decode(file_get_contents(DOC_ROOT . "data/stats.json"));
+    } else {
+        $statistic = json_decode('[{"month":"0","total":0,"count":0}]');
+    }
+    $current_key = "";
+    $orders = get_orders($month);
+    $month_stats = new stdClass();
+    $month_stats->month = $month;
+    $month_stats->total = 0;
+    $month_stats->count = 0;
     if (is_array($orders)) {
+        foreach ($statistic as $key => $value) {
+            if ($value->month == $month) {
+                $current_key = $key;
+            }
+        }
         foreach ($orders["orders"] as $order) {
             $order = json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order));
             if (property_exists($order, "client")) {
                 if ($order->client->name != 'test') {
-                    $stats['total'] += $order->total;
-                    $stats['count']++;
+                    $month_stats->total += $order->total;
+                    $month_stats->count++;
                 }
             }
         }
+        if ($current_key == "") {
+            $statistic[] = $month_stats;
+        } else {
+            $statistic[$current_key] = $month_stats;
+        }
     }
-    file_put_contents(DOC_ROOT . "data/stats.json", json_encode($stats));
+    file_put_contents(DOC_ROOT . "data/stats.json", json_encode($statistic));
+    return $month;
 }
 
-function get_stats()
+function get_stats($month = 0)
 {
+    if ($month == 0) {
+        $month = date('my');
+    }
     $path = DOC_ROOT . 'data/stats.json';
     if (file_exists($path)) {
-        return file_get_contents($path);
+        $data =  json_decode(file_get_contents($path));
     } else {
         update_stats();
-        return file_get_contents($path);
+        $data =  json_decode(file_get_contents($path));
+    }
+    foreach ($data as $stats) {
+        if ($stats->month == $month) {
+            return $stats;
+        }
     }
 }
 
