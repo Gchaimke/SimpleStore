@@ -63,4 +63,5 @@ $lang = array(
     "Description"=>"Описание",
     "Quantity"=>"Количество",
     "Kind"=>"Вид",
+    "Previos Month"=>"Предыдущий месяц",
 );

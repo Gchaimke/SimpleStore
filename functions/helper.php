@@ -211,7 +211,7 @@ function get_orders($month)
 
 function get_order($order_num = 0)
 {
-    $order_month = explode("_", $order_num);
+    $order_month = explode("-", $order_num);
     if (count($order_month) != 2) {
         $order_month = date("my");
         $order_num = $order_month . "-" . substr($order_num, -3);
