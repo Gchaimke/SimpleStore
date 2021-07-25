@@ -103,3 +103,11 @@ if (isset($_GET['orders'])) {
         echo "<div class='text-center'>no order for " . $_GET['orders'] . " month!</div>";
     }
 }
+
+if (isset($_GET['add_c'])&&$_GET['add_p']) {
+    $cart->add_to_cart($products_class->get_product($_GET['add_c'],$_GET['add_p']));
+}
+
+if (isset($_GET['clear_cart'])) {
+    $_SESSION['cart'] = array();
+}

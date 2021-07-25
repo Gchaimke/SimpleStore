@@ -56,10 +56,10 @@ if (isset($_COOKIE['items']) && $_COOKIE['items']) {
 $store = new SimpleStore\Store();
 $carrency = $store->carrency;
 $company = $store->company;
+$cart = $store->cart;
 $categories = $store->categories->get_categories_with_products();
 $product_class = new SimpleStore\Product;
-
-
+$products_class = new SimpleStore\Products;
 $images = get_files();
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");

@@ -1,6 +1,5 @@
 <?php
 include_once('elements/layout/head.php');
-
 ?>
 
 <body class="d-flex flex-column h-100">
@@ -25,6 +24,8 @@ include_once('elements/layout/head.php');
             include_once('elements/login.php');
             include_once('elements/customer.php');
             include_once('elements/about.php');
+            echo $cart->get_total()."<br>";
+            print_r($_SESSION['cart']);
             ?>
         </div>
     </main>

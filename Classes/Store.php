@@ -6,10 +6,11 @@ require_once(DOC_ROOT . 'Classes/Categories.php');
 require_once(DOC_ROOT . 'Classes/Category.php');
 require_once(DOC_ROOT . 'Classes/Products.php');
 require_once(DOC_ROOT . 'Classes/Product.php');
+require_once(DOC_ROOT . 'Classes/Cart.php');
 
 class Store
 {
-    public $carrency, $company, $categories,$products;
+    public $carrency, $company, $categories, $products, $cart;
 
     function __construct()
     {
@@ -23,6 +24,7 @@ class Store
         $this->company = new Company;
         $this->categories = new Categories;
         $this->products = new Products;
+        $this->cart = new Cart;
     }
 
 }
