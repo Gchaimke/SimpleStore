@@ -13,7 +13,24 @@ class Cart
 
     function add_to_cart($product)
     {
-        $_SESSION['cart'][] = $product;
+        $product->price = intval($product->price);
+        $product->qtty = intval($product->qtty);
+        (int)$product->cart_qtty = isset($product->cart_qtty) ? $product->cart_qtty : $product->qtty;
+        $key = $product->id . "_" . $product->category_id;
+        $cart = $_SESSION['cart'];
+        if (count($cart) > 0) {
+            if ($key) {
+                $product->price += $cart[$key]->price;
+                $product->cart_qtty += $cart[$key]->cart_qtty;
+                $cart[$key] = $product;
+            } else {
+                $cart[$key] = $product;
+            }
+        } else {
+            $cart[$key] = $product;
+        }
+
+        $_SESSION['cart'] = $cart;
     }
 
     function get_total()

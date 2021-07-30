@@ -527,24 +527,48 @@ function export_csv()
     }
     fclose($fp);
 }
+
+function debug($data)
+{
+    if (is_array($data) || is_object($data)) {
+        foreach ($data as $key => $value) {
+            echo "<br>$key<br>";
+            if (is_array($value) || is_object($value)) {
+                foreach ($value as $key_1 => $value_1) {
+                    if (is_array($value_1) || is_object($value_1)) {
+                        foreach ($value_1 as $key_2 => $value_2) {
+                            echo "$key_2 => $value_2<br><br>";
+                        }
+                    } else {
+                        echo "$key_1 => $value_1<br>";
+                    }
+                }
+            } else {
+                echo "$key => $value<br>";
+            }
+        }
+    } else {
+        echo $data . "<br>";
+    }
+}
 /**
  * TO DO: Use one time
  */
 function update_products_id($category_index = '')
 {
     if ($category_index != '') {
-        $category = get_category($category_index);
+        $category_obj = new SimpleStore\Categories();
+        $category = $category_obj->get_category($category_index);
         if (isset($category)) {
             $products = get_data($category_index);
             foreach ($products as $key => $product) {
-                if (!property_exists($product, 'id')) {
-                    $product->id = $category->last_index;
+                if (!property_exists($product, 'category_id')) {
+                    $product->category_id = $category_index;
                     $products[$key] = $product;
-                    $category->last_index++;
                 }
             }
             save_json($products, $category_index);
-            edit_category($category_index, "last_index", $category->last_index);
+            //edit_category($category_index, "last_index", $category->last_index);
             echo lang("updated");
             return;
         }

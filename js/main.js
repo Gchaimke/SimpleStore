@@ -35,9 +35,9 @@ $(document).ready(function () {
 });
 
 function get_stats(month) {
-    $.post("post.php", { get_stats: month })
+    $.post("functions/bg_post.php", { get_stats: month })
         .done(function (e) {
-            console.log(e);
+            console.log(e)
             let obj = JSON.parse(e);
             $(".statistic").find("#month_text").text(obj.month);
             $(".statistic").find("#stats_orders").text(obj.count);
@@ -47,7 +47,7 @@ function get_stats(month) {
 
 $('#update_stats').on('click', function () {
     let month = $(this).data('month');
-    $.post("post.php", { update_stats: month })
+    $.post("functions/bg_post.php", { update_stats: month })
         .done(function () {
             get_stats(month);
         });
@@ -55,7 +55,7 @@ $('#update_stats').on('click', function () {
 
 $('#prev_stats').on('click', function () {
     let month = $(this).data('prev-month');
-    $.post("post.php", { prev_stats: month })
+    $.post("functions/bg_post.php", { prev_stats: month })
         .done(function () {
             get_stats(month);
         });
@@ -65,10 +65,10 @@ $('#edit_company').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
         type: 'post',
-        url: 'post.php',
+        url: 'index.php',
         data: $('#edit_company').serialize(),
-        success: function (res) {
-            alert(res);
+        success: function () {
+            alert("Saved");
             location.reload();
         }
     });
@@ -76,7 +76,7 @@ $('#edit_company').on('submit', function (e) {
 
 $('.add-category').on('click', function () {
     var category_name = $('.category_editor').find('.category_editor-name').val();
-    $.post("post.php", { add_category: true, category_name: category_name })
+    $.post("index.php", { add_category: true, category_name: category_name })
         .done(function () {
             setTimeout(function () {
                 location.reload();
@@ -88,7 +88,7 @@ $('.delete-category').on('click', function () {
     var confim = confirm('Delete this category?');
     if (confim) {
         var category = $(this).data("category");
-        $.post("post.php", { delete_category: true, category: category })
+        $.post("index.php", { delete_category: true, category: category })
             .done(function () {
                 setTimeout(function () {
                     location.reload();
@@ -108,7 +108,7 @@ $('.edit-category').on('click', function () {
 $('.edit-category_btn').on('click', function () {
     var category_name = $('.category_editor').find('.category_editor-name').val();
     var category_index = $('.category_editor').find('.category_editor-id').val();
-    $.post("post.php", { edit_category: true, category_name: category_name, category_index: category_index })
+    $.post("index.php", { edit_category: true, category_name: category_name, category_index: category_index })
         .done(function () {
             setTimeout(function () {
                 location.reload();
@@ -143,7 +143,7 @@ $('.edit-product-btn').on('click', function () {
     var price = $('.edit_product_items').find('.product-price').val();
     var qtty = $('.edit_product_items').find('.product-qtty').val();
     var kind = $('.edit_product_items').find('.product-kind').val();
-    $.post("post.php", { edit_product: true, category: category, product_id: product_id, img: img, name: name, description: description, price: price, kind: kind, qtty: qtty })
+    $.post("index.php", { edit_product: true, category: category, product_id: product_id, img: img, name: name, description: description, price: price, kind: kind, qtty: qtty })
         .done(function (e) {
             console.log(e)
             setTimeout(function () {
@@ -155,7 +155,7 @@ $('.edit-product-btn').on('click', function () {
 $(document).on('click', '.duplicate-product', function () {
     var category = $(this).data("category");
     var product = $(this).data("product");
-    $.post("post.php", { duplicate_product: true, category: category, product: product })
+    $.post("index.php", { duplicate_product: true, category: category, product: product })
         .done(function (e) {
             console.log(e)
             setTimeout(function () {
@@ -167,7 +167,7 @@ $(document).on('click', '.duplicate-product', function () {
 $(document).on('click', '.favorite-product', function () {
     var category = $(this).data("category");
     var product = $(this).data("product");
-    $.post("post.php", { favorite_product: true, category: category, product: product })
+    $.post("index.php", { favorite_product: true, category: category, product: product })
         .done(function (e) {
             console.log(e)
             setTimeout(function () {
@@ -176,6 +176,7 @@ $(document).on('click', '.favorite-product', function () {
         });
 });
 
+//CART
 $(document).on('click', '.plus', function () {
     var productId = $(this).parent().data("product_id");
     var product_name = $('.cart_items').find('[data-product_id=' + productId + '] .cart-product').text();
@@ -196,7 +197,6 @@ $(document).on('click', '.minus', function () {
     var updated = sum_cart_product(productId, product_name, price, minus_qty, kind);
     update_cart_total(price);
     if (updated <= 0) {
-        remove_cookie("items[" + productId + "]");
         $('.cart_items').find('li[data-product_id=' + productId + ']').remove();
     };
 
@@ -216,6 +216,10 @@ $(document).on('click', '.product-to-cart', function () {
         } else {
             add_cart_product(productId, product_name, price, qty, kind)
         }
+        $.post("index.php", { add_to_cart: true, product: productId })
+            .done(function () {
+                //location.reload();
+            });
         update_cart_total(price);
     } else {
         alert("Max cart items is 10!");
@@ -223,8 +227,6 @@ $(document).on('click', '.product-to-cart', function () {
 });
 
 function add_cart_product(productId, product_name, price, qty, kind, restore = 0) {
-    set_cookie("items[" + productId + "]", [product_name, price, qty, kind].join());
-
     var cart_item = "<li data-product_id='" + productId + "'><span data-price='" + price +
         "' class='bg-danger remove-from-cart'>X</span><span class='cart-product mx-2'>" + product_name +
         "</span><span class='cart_qty'>" + qty + "</span><span class='cart_kind me-1'>" + kind + "</span><span class='cart_price'>" + price + "</span>" + carrency;
@@ -237,20 +239,6 @@ function add_cart_product(productId, product_name, price, qty, kind, restore = 0
         "<span class='btn btn-warning ml-2 minus'>-</span><b class='m-2'>1</b><span class='btn btn-success plus'>+</span></div><hr></li>");
 }
 
-function restore_cart(id, data) {
-    data = data.replace(/["\\]/g, '');
-    item = data.split(",");
-    var product_name = item[0];
-    var price = item[1];
-    var qty = item[2];
-    var kind = item[3];
-    if (price != 0 && qty != 0) {
-        add_cart_product(id, product_name, price, qty, kind, 1);
-    } else {
-        remove_cookie("items[" + id + "]");
-    }
-}
-
 function sum_cart_product(productId, product_name, price, qty, kind) {
     if (!Number.isInteger(qty)) {
         qty = parseInt(qty.match(/\d+/)[0]);
@@ -261,7 +249,6 @@ function sum_cart_product(productId, product_name, price, qty, kind) {
     current_qty.text(current_total_qty);
     var current_total_price = parseInt(current_price.text()) + price;
     $('.cart_items').find('[data-product_id=' + productId + ']>.remove-from-cart').attr("data-price", current_total_price);
-    set_cookie("items[" + productId + "]", [product_name, current_total_price, current_total_qty, kind].join());
     current_price.text(current_total_price);
     return current_total_price;
 }
@@ -273,7 +260,6 @@ function update_cart_total(price) {
     }
     $('.cart-total').text(total);
     $('.mobile-cart-total').text(total);
-    set_cookie("total", total);
     splash_cart();
 }
 
@@ -281,47 +267,18 @@ $(document).on('click', '.remove-from-cart', function () {
     var price = parseInt($(this).data("price"));
     update_cart_total(0 - price);
     var productId = $(this).parent().data("product_id");
-    remove_cookie("items[" + productId + "]");
     $(this).parent().remove();
 });
 
 $('#clear-cart').on('click', function () {
     var confim = confirm('Clear cart?');
     if (confim) {
-        clear_cart();
+        $.get("index.php", { clear_cart: true })
+            .done(function () {
+                location.reload();
+            });
     }
 });
-
-function clear_cart() {
-    $('.cart_items').find('li').each(function () {
-        $(this).remove();
-    })
-    $('.cart-total').text(0);
-    $('.mobile-cart-total').text(0);
-    $('.close-cart').trigger("click");
-    clear_cookies();
-}
-
-function set_cookie(name, data) {
-    $.post("post.php", { set_cookie: true, name: name, data: data })
-        .done(function (e) {
-            //console.log(e);
-        });
-}
-
-function remove_cookie(name) {
-    $.post("post.php", { remove_cookie: true, name: name })
-        .done(function (e) {
-            //console.log(e);
-        });
-}
-
-function clear_cookies() {
-    $.post("post.php", { remove_all_cookie: true })
-        .done(function (e) {
-            //console.log(e);
-        });
-}
 
 
 $('.cart_header, .close-cart').on('click', function () {
@@ -351,7 +308,7 @@ $('.cart-send-whatsapp').on('click', function (e) {
             var total = $('.cart-total').text();
             clear_cart();
             //Browser has allowed it to be opened
-            $.post("post.php", { save_cart: true, cart: cart, total: total, client: client })
+            $.post("index.php", { save_cart: true, cart: cart, total: total, client: client })
                 .done(function (e) {
                     location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
                 });
@@ -385,7 +342,7 @@ $('.cart-send-email').on('click', function () {
             });
             var total = $('.cart-total').text();
             clear_cart();
-            $.post("post.php", { save_cart: true, cart: cart, total: total, client: data })
+            $.post("index.php", { save_cart: true, cart: cart, total: total, client: data })
                 .done(function (e) {
                     location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
                 });
@@ -406,7 +363,7 @@ $('.delete-product').on('click', function () {
     if (confim) {
         var category = $(this).data("category");
         var product = $(this).data("product");
-        $.post("post.php", { delete_product: true, category: category, product: product })
+        $.post("index.php", { delete_product: true, category: category, product: product })
             .done(function () {
                 setTimeout(function () {
                     location.reload();
@@ -419,7 +376,7 @@ $('.delete-gallery-image').on('click', function () {
     var confim = confirm('Delete this picture?');
     if (confim) {
         var image = $(this).data("path");
-        $.post("post.php", { delete_gallery_image: true, image: image })
+        $.post("index.php", { delete_gallery_image: true, image: image })
             .done(function (e) {
                 alert(e);
             });
@@ -431,7 +388,7 @@ $('.delete-gallery-image').on('click', function () {
 $('.get_form_url').on('click', function () {
     var name = $(this).parent().find('.upload_image_name').val();
     var url = $(this).parent().find('.upload_image_url').val();
-    $.post("post.php", { get_form_url: true, url: url, name: name })
+    $.post("index.php", { get_form_url: true, url: url, name: name })
         .done(function (e) {
             $(document).find('.picture-url').val('img/products/' + e);
             alert(e + " uploaded!");
@@ -447,7 +404,7 @@ $('.upload_btn').on('click', function () {
         fd.append('file', files[0]);
         fd.append('name', name);
         $.ajax({
-            url: 'post.php',
+            url: 'index.php',
             type: 'post',
             data: fd,
             contentType: false,
@@ -504,7 +461,7 @@ $('#search').on('submit', function (e) {
     search = search.toLowerCase();
     search = search.replace(/ /g, '');
     //search = search.substring(1);
-    $.post("post.php", { search: search })
+    $.post("index.php", { search: search })
         .done(function (res) {
             $("#search_result").empty();
             if (res.startsWith("FOUND:")) {
@@ -535,7 +492,7 @@ $('.lang-ru').on('click', function () { change_language("ru") });
 $('.lang-he').on('click', function () { change_language("he") });
 
 function change_language(language) {
-    $.post("post.php", { set_lang: true, language: language })
+    $.post("index.php", { set_lang: true, language: language })
         .done(function (e) {
             //alert(e);
             location.reload();
@@ -548,39 +505,4 @@ if ($("#favorites_slider").length) {
         duration: 0,
         interval: 5000
     });
-}
-
-//Cookie
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function checkCookie() {
-    var user = getCookie("username");
-    if (user != "") {
-        alert("Welcome again " + user);
-    } else {
-        user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
-            setCookie("username", user, 365);
-        }
-    }
 }

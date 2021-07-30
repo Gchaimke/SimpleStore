@@ -111,3 +111,9 @@ if (isset($_GET['add_c'])&&$_GET['add_p']) {
 if (isset($_GET['clear_cart'])) {
     $_SESSION['cart'] = array();
 }
+
+if (isset($_GET['update'])) {
+    update_products_id($_GET['update']);
+}
+
+

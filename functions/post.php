@@ -1,6 +1,4 @@
 <?php
-require_once('functions/helper.php');
-
 if (isset($_POST['edit_product'])) {
     if (!empty($_POST['category'])) {
         $product = array(
@@ -58,9 +56,7 @@ if (isset($_POST['delete_category'])) {
 }
 
 if (isset($_POST['edit_company'])) {
-    unset($_POST['edit_company']);
     $company->update($_POST);
-    echo 'Saved';
     exit;
 }
 
@@ -142,21 +138,6 @@ if (isset($_POST['set_lang'])) {
     exit;
 }
 
-if (isset($_POST['get_stats'])) {
-    echo  json_encode(get_stats($_POST['get_stats']));
-    exit;
-}
-
-if (isset($_POST['update_stats'])) {
-    echo update_stats($_POST['update_stats']);
-    exit;
-}
-
-if (isset($_POST['prev_stats'])) {
-    echo update_stats($_POST['prev_stats']);
-    exit;
-}
-
 if (isset($_POST['search'])) {
     if (strlen($_POST['search']) >= 1) {
         $search = clean_search($_POST['search']);
@@ -186,5 +167,16 @@ if (isset($_POST['search'])) {
     exit;
 }
 
-
-echo "Error";
+if (isset($_POST['add_to_cart'])) {
+    $product = explode("_", $_POST['product']);
+    if($product[0] != "favorites"){
+        $category_id = $product[0];
+        $product_id = $product[1];
+    }else{
+        $category_id = $product[0];
+        $product_id = $product[1]."_".$product[2];
+    }
+    
+    $cart->add_to_cart($products_class->get_product($category_id, $product_id));
+    exit;
+}

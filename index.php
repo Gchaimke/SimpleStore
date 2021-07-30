@@ -1,5 +1,6 @@
 <?php
 include_once('elements/layout/head.php');
+include_once('functions/post.php');
 ?>
 
 <body class="d-flex flex-column h-100">
@@ -24,8 +25,8 @@ include_once('elements/layout/head.php');
             include_once('elements/login.php');
             include_once('elements/customer.php');
             include_once('elements/about.php');
-            //echo $cart->get_total()."<br>";
-            //print_r($_SESSION['cart']);
+            print_r($_SESSION['cart']);
+            debug($_SESSION['cart']);
             ?>
         </div>
     </main>
@@ -33,19 +34,4 @@ include_once('elements/layout/head.php');
 </body>
 
 <?php include_once('elements/layout/footer.php'); ?>
-<script>
-    $(document).ready(function() {
-        carrency = "<?= $carrency ?>";
-        var previos_cart = <?php echo json_encode($previos_cart, JSON_UNESCAPED_UNICODE); ?>;
-        var previos_total = <?= $previos_total ?>;
-        if (previos_cart != "") {
-            console.log(previos_cart);
-            $.each(previos_cart, function(index, value) {
-                restore_cart(index, value);
-            });
-            update_cart_total(parseInt(previos_total));
-        }
-    });
-</script>
-
 </html>

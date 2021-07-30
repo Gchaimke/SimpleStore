@@ -52,6 +52,16 @@ class Categories
         return $categories;
     }
 
+    function get_category($index)
+    {
+        $categories = $this->get_categories();
+        foreach ($categories as $category) {
+            if($category->id == $index){
+                return $category;
+            }
+        }
+    }
+
     function add_category($name = 'New Category')
     {
         global $lng;
