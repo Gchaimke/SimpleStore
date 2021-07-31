@@ -4,7 +4,7 @@ namespace SimpleStore;
 
 class Cart
 {
-    public $total;
+    public $total, $cart;
 
     function __construct()
     {
@@ -13,25 +13,36 @@ class Cart
 
     function add_to_cart($product)
     {
+        $product->cart_price = $product->price;
+        $product->cart_qtty = $product->qtty;
+        $key = $product->category_id . "_" . $product->id;
+        if (isset($_SESSION['cart'][$key])) {
+            $_SESSION['cart'][$key]->cart_price += $product->price;
+            $_SESSION['cart'][$key]->cart_qtty += $product->cart_qtty;
+        } else {
+            $_SESSION['cart'][$key] = $product;
+        }
+    }
+
+    function minus_from_cart($key)
+    {
+        $product = $_SESSION['cart'][$key];
         $product->price = intval($product->price);
         $product->qtty = intval($product->qtty);
-        (int)$product->cart_qtty = isset($product->cart_qtty) ? $product->cart_qtty : $product->qtty;
-        $key = $product->id . "_" . $product->category_id;
-        $cart = $_SESSION['cart'];
-        if (count($cart) > 0) {
-            if ($key) {
-                $product->price += $cart[$key]->price;
-                $product->cart_qtty += $cart[$key]->cart_qtty;
-                $cart[$key] = $product;
-            } else {
-                $cart[$key] = $product;
-            }
-        } else {
-            $cart[$key] = $product;
+        $product->cart_price -= $product->price;
+        $product->cart_qtty -= $product->qtty;
+        $_SESSION['cart'][$key] = $product;
+        if($product->cart_price == 0 || $product->cart_qtty == 0){
+            $this->remove_from_cart($key);
         }
-
-        $_SESSION['cart'] = $cart;
     }
+
+    function remove_from_cart($key)
+    {
+        unset($_SESSION['cart'][$key]);
+        Helper::log($key);
+    }
+
 
     function get_total()
     {
@@ -40,7 +51,7 @@ class Cart
         }
 
         foreach ($_SESSION['cart'] as $product) {
-            $this->total += $product->price;
+            $this->total += $product->cart_price;
         }
         return $this->total;
     }

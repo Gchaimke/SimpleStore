@@ -177,31 +177,6 @@ $(document).on('click', '.favorite-product', function () {
 });
 
 //CART
-$(document).on('click', '.plus', function () {
-    var productId = $(this).parent().data("product_id");
-    var product_name = $('.cart_items').find('[data-product_id=' + productId + '] .cart-product').text();
-    var price = parseInt($(this).parent().data("price"));
-    var qty = $(this).parent().data("qty");
-    var kind = $(this).parent().data("kind");
-    sum_cart_product(productId, product_name, price, qty, kind);
-    update_cart_total(price);
-});
-
-$(document).on('click', '.minus', function () {
-    var productId = $(this).parent().data("product_id");
-    var product_name = $('.cart_items').find('[data-product_id=' + productId + '] .cart-product').text();
-    var price = 0 - parseInt($(this).parent().data("price"));
-    var qty = $(this).parent().data("qty");
-    var kind = $(this).parent().data("kind");
-    var minus_qty = 0 - parseInt(qty)
-    var updated = sum_cart_product(productId, product_name, price, minus_qty, kind);
-    update_cart_total(price);
-    if (updated <= 0) {
-        $('.cart_items').find('li[data-product_id=' + productId + ']').remove();
-    };
-
-});
-
 $(document).on('click', '.product-to-cart', function () {
     var productId = $(this).data("product_id");
     var numItems = $('.cart-product').length
@@ -264,10 +239,27 @@ function update_cart_total(price) {
 }
 
 $(document).on('click', '.remove-from-cart', function () {
-    var price = parseInt($(this).data("price"));
-    update_cart_total(0 - price);
     var productId = $(this).parent().data("product_id");
-    $(this).parent().remove();
+    $.post("index.php", { remove_product: productId })
+            .done(function () {
+                location.reload();
+            });
+});
+
+$(document).on('click', '.minus', function () {
+    var productId = $(this).parent().data("product_id");
+    $.post("index.php", { minus_product: productId })
+            .done(function () {
+                location.reload();
+            });
+});
+
+$(document).on('click', '.plus', function () {
+    var productId = $(this).parent().data("product_id");
+    $.post("index.php", { add_to_cart: true, product: productId })
+            .done(function () {
+                location.reload();
+            });
 });
 
 $('#clear-cart').on('click', function () {

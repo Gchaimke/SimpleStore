@@ -113,7 +113,7 @@ if (isset($_GET['clear_cart'])) {
 }
 
 if (isset($_GET['update'])) {
-    update_products_id($_GET['update']);
+    update_products_data();
 }
 
 

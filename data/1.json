@@ -10,7 +10,8 @@
         "description_he": " ",
         "kind_he": "ק\"ג",
         "qtty": "1",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "name": "Нога ягнёнка на кости мороженая",
@@ -26,7 +27,8 @@
         "name_ru": "Нога ягнёнка на кости мороженая",
         "description_ru": "",
         "kind_ru": "кг",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "name": "Нога ягнёнка на кости свежая",
@@ -39,7 +41,8 @@
         "description_he": "",
         "kind_he": "ק\"ג",
         "qtty": "1",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "name": "Рёбрышки ягненка премиум мороженые",
@@ -52,7 +55,8 @@
         "description_he": "",
         "kind_he": "ק\"ג",
         "qtty": "1",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "name": "Рёбрышки ягненка премиум свежие",
@@ -65,7 +69,8 @@
         "description_he": "",
         "kind_he": "ק\"ג",
         "qtty": "1",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "id": 8,
@@ -78,7 +83,8 @@
         "name_he": "צלעות טלה קפואות יבוא",
         "description_he": "",
         "kind_he": "ק\"ג",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "name": "Стейк бараний",
@@ -91,7 +97,8 @@
         "name_he": "סטייק כבש",
         "description_he": "",
         "kind_he": "ק\"ל",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "name": "Стейк ягненка",
@@ -104,7 +111,8 @@
         "name_he": "סטייק טלה",
         "description_he": "",
         "kind_he": "ק\"ל",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     },
     {
         "id": 9,
@@ -120,6 +128,7 @@
         "name_ru": "test",
         "description_ru": "",
         "kind_ru": "кг",
-        "category_id": "1"
+        "category_id": 1,
+        "options": ""
     }
 ]

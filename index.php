@@ -32,6 +32,9 @@ include_once('functions/post.php');
     </main>
 
 </body>
-
+<script>
+    var cart_opened = <?= isset($_GET['cart']) ? "1" : "0"; ?>;
+</script>
 <?php include_once('elements/layout/footer.php'); ?>
+
 </html>

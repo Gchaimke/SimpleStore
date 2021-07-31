@@ -60,41 +60,6 @@ if (isset($_POST['edit_company'])) {
     exit;
 }
 
-if (isset($_POST['save_cart'])) {
-    echo save_order($_POST['cart'], $_POST['total'], $_POST['client']);
-    exit;
-}
-
-if (isset($_POST['set_cookie'])) {
-    $cookie_name = $_POST['name'];
-    $cookie_value = $_POST['data'];
-    setcookie($cookie_name, json_encode($cookie_value, JSON_UNESCAPED_UNICODE), time() + (86400 * 30), SITE_ROOT); // 86400 = 1 day
-    print_r($_COOKIE);
-    exit;
-}
-
-if (isset($_POST['remove_cookie'])) {
-    $cookie_name = $_POST['name'];
-    unset($_COOKIE[$cookie_name]);
-    if (isset($_COOKIE[$cookie_name])) {
-        foreach ($_COOKIE as $cookieKey => $cookieValue) {
-            if (strpos($cookieKey, $cookie_name) === 0) {
-                // remove the cookie
-                setcookie($cookieKey, null, -1);
-                unset($_COOKIE[$cookieKey]);
-            }
-        }
-    }
-    setcookie($cookie_name, null, -1, SITE_ROOT);
-    exit;
-}
-
-if (isset($_POST['remove_all_cookie'])) {
-    clear_cookie();
-}
-
-
-
 if (isset($_POST['delete_gallery_image'])) {
     delete_image(clean($_POST['image']));
     exit;
@@ -130,8 +95,6 @@ if (isset($_FILES['file']['name'])) {
     echo $response;
     exit;
 }
-
-
 
 if (isset($_POST['set_lang'])) {
     set_lang($_POST['language']);
@@ -180,3 +143,15 @@ if (isset($_POST['add_to_cart'])) {
     $cart->add_to_cart($products_class->get_product($category_id, $product_id));
     exit;
 }
+
+if (isset($_POST['remove_product'])) {
+    $cart->remove_from_cart($_POST['remove_product']);
+    exit;
+}
+
+if (isset($_POST['minus_product'])) {
+    $cart->minus_from_cart($_POST['minus_product']);
+    exit;
+}
+
+

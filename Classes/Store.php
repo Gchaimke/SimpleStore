@@ -1,6 +1,6 @@
 <?php
 namespace SimpleStore;
-
+require_once(DOC_ROOT . 'Classes/Helper.php');
 require_once(DOC_ROOT . 'Classes/Company.php');
 require_once(DOC_ROOT . 'Classes/Categories.php');
 require_once(DOC_ROOT . 'Classes/Category.php');

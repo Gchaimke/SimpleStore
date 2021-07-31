@@ -21,7 +21,7 @@ $total = $cart->get_total();
                         <span class="cart-product mx-2"><?= $product->$name ?></span>
                         <span class="cart_qty"><?= $product->cart_qtty ?></span>
                         <span class="cart_kind me-1"><?= $product->$kind ?></span>
-                        <span class="cart_price"><?= $product->price ?></span><?= $carrency ?>
+                        <span class="cart_price"><?= $product->cart_price ?></span><?= $carrency ?>
                         <div class="cart-controls text-nowrap mb-2 text-center" data-price="<?= $product->price ?>" data-qty="<?= $product->qtty ?>" data-kind="<?= $product->$kind ?>" data-product_id="<?= $id ?>">
                             <span class="btn btn-warning ml-2 minus">-</span><b class="m-2">1</b><span class="btn btn-success plus">+</span>
                         </div>

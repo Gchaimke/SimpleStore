@@ -554,26 +554,29 @@ function debug($data)
 /**
  * TO DO: Use one time
  */
-function update_products_id($category_index = '')
+function update_products_data()
 {
-    if ($category_index != '') {
-        $category_obj = new SimpleStore\Categories();
-        $category = $category_obj->get_category($category_index);
-        if (isset($category)) {
-            $products = get_data($category_index);
-            foreach ($products as $key => $product) {
-                if (!property_exists($product, 'category_id')) {
-                    $product->category_id = $category_index;
-                    $products[$key] = $product;
-                }
+    global $categories;
+    $updated = "";
+    foreach ($categories as $category) {
+        $category_index = $category->id;
+        $category_name = $category->name;
+        $products = get_data($category_index);
+        foreach ($products as $key => $product) {
+            if (!property_exists($product, 'category_id')) {
+                $product->category_id = $category_index;
+                $products[$key] = $product;
             }
-            save_json($products, $category_index);
-            //edit_category($category_index, "last_index", $category->last_index);
-            echo lang("updated");
-            return;
+            if (!property_exists($product, 'options')) {
+                $product->options = "";
+                $products[$key] = $product;
+            }
         }
+        $updated .= $category_name . ", ";
+        save_json($products, $category_index);
+        //edit_category($category_index, "last_index", $category->last_index);
     }
-    echo 'no category with id ' . $category_index;
+    echo lang("updated:" . $updated);
 }
 
 function old_to_new()
@@ -590,3 +593,5 @@ function old_to_new()
     }
     return $tmp;
 }
+
+
