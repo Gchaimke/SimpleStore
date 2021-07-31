@@ -11,7 +11,7 @@ include_once('functions/post.php');
             include_once('functions/get.php');
             include_once('elements/cart.php');
             include_once('elements/message.php');
-            //include_once('elements/test.php');
+            //include_once('elements/html_test.php');
             if ($logedin) {
                 include_once('elements/edit_company.php');
                 include_once('elements/edit_category.php');
@@ -25,8 +25,8 @@ include_once('functions/post.php');
             include_once('elements/login.php');
             include_once('elements/customer.php');
             include_once('elements/about.php');
-            print_r($_SESSION['cart']);
-            debug($_SESSION['cart']);
+            //debug($_SESSION['cart']);
+            $cart->view_cart();
             ?>
         </div>
     </main>

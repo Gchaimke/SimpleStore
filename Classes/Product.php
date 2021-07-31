@@ -4,7 +4,7 @@ namespace SimpleStore;
 
 class Product
 {
-    public $id, $name, $description, $price, $kind, $img;
+    public $id, $name, $description, $price, $kind, $img, $options;
 
     function __construct($product = array())
     {
@@ -12,6 +12,7 @@ class Product
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
         $kind = 'kind_' . $lng;
+        $options = "options_". $lng;
         if (!key_exists("id", $product)) {
             $this->$name = key_exists('name', $product) && $product['name'] != '' ? $product['name'] : "new product";
             $this->$description = key_exists('description', $product) && $product['description'] != '' ? $product['description'] : '';
@@ -19,6 +20,7 @@ class Product
             $this->qtty = key_exists('qtty', $product) && $product['qtty'] != '' ? $product['qtty'] : '1';
             $this->$kind = key_exists('kind', $product) && $product['kind'] != '' ? $product['kind'] : 'kg';
             $this->img = key_exists('img', $product) && $product['img'] != '' ? $product['img'] : 'img/product.jpg';
+            $this->$options = key_exists('options', $product) && $product['options'] != '' ? $product['options'] : '';
         }else{
             foreach($product as $key => $value){
                 $this->$key = $value;
@@ -40,12 +42,14 @@ class Product
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
         $kind = 'kind_' . $lng;
+        $options = "options_". $lng;
         $old_product->price = $product->price;
         $old_product->$name = $product->name;
         $old_product->$description = $product->description;
         $old_product->$kind = $product->kind;
         $old_product->qtty = $product->qtty;
         $old_product->img = $product->img;
+        $old_product->$options = $product->options;
         $products[$product_key] = $old_product;
         file_put_contents(DOC_ROOT . "data/$category_index.json", json_encode($products, JSON_UNESCAPED_UNICODE));
     }

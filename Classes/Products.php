@@ -35,6 +35,7 @@ class Products
         $last_product_id =  $this->get_last_id();
         $new_product = new Product((array)$product);
         $new_product->id = $last_product_id + 1;
+        $new_product->category_id = $category_id;
         $products[] = $new_product;
         file_put_contents($this->data_path . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
     }

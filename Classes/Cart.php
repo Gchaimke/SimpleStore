@@ -4,7 +4,7 @@ namespace SimpleStore;
 
 class Cart
 {
-    public $total, $cart;
+    public $total;
 
     function __construct()
     {
@@ -32,7 +32,7 @@ class Cart
         $product->cart_price -= $product->price;
         $product->cart_qtty -= $product->qtty;
         $_SESSION['cart'][$key] = $product;
-        if($product->cart_price == 0 || $product->cart_qtty == 0){
+        if ($product->cart_price == 0 || $product->cart_qtty == 0) {
             $this->remove_from_cart($key);
         }
     }
@@ -40,7 +40,32 @@ class Cart
     function remove_from_cart($key)
     {
         unset($_SESSION['cart'][$key]);
-        Helper::log($key);
+    }
+
+    function view_cart()
+    {
+        global $carrency, $lng;
+        $html = "";
+        if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+            foreach ($_SESSION['cart'] as $product) {
+                $name = property_exists($product, "name_" . $lng) ? "name_" . $lng : "name";
+                $kind = property_exists($product, "kind_" . $lng) ? "kind_" . $lng : "kind";
+                $id = $product->category_id . "_" . $product->id;
+                $html .= "
+                <li data-product_id='$id'>
+                    <span class='bg-danger remove-from-cart'>X</span>
+                    <span class='cart-product mx-2'>{$product->$name}</span>
+                    <span class='cart_qty'>{$product->cart_qtty}</span>
+                    <span class='cart_kind me-1'>{$product->$kind}</span>
+                    <span class='cart_price'>{$product->cart_price}</span>$carrency
+                    <div class='cart-controls text-nowrap mb-2 text-center' data-product_id='$id'>
+                        <span class='btn btn-warning ml-2 minus'>-</span><b class='m-2'>1</b><span class='btn btn-success plus'>+</span>
+                    </div>
+                    <hr>
+                </li>";
+            }
+            return $html;
+        }
     }
 
 

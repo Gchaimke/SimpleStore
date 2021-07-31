@@ -9,6 +9,7 @@ if (isset($_POST['edit_product'])) {
             'qtty' => $_POST['qtty'],
             'kind' => $_POST['kind'],
             'img' => $_POST['img'],
+            'options' => $_POST['options'],
         );
         if (!empty($_POST['product_id'])) {
             $product_class->edit_product(clean($_POST['category']), $product);
@@ -132,14 +133,8 @@ if (isset($_POST['search'])) {
 
 if (isset($_POST['add_to_cart'])) {
     $product = explode("_", $_POST['product']);
-    if($product[0] != "favorites"){
-        $category_id = $product[0];
-        $product_id = $product[1];
-    }else{
-        $category_id = $product[0];
-        $product_id = $product[1]."_".$product[2];
-    }
-    
+    $category_id = $product[0];
+    $product_id = $product[1];
     $cart->add_to_cart($products_class->get_product($category_id, $product_id));
     exit;
 }
@@ -153,5 +148,3 @@ if (isset($_POST['minus_product'])) {
     $cart->minus_from_cart($_POST['minus_product']);
     exit;
 }
-
-

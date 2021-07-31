@@ -39,12 +39,15 @@
                     <label class="input-group-text"><?=lang("Kind")?></label>
                     <input type="text" class="form-control product-kind" />
                 </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text"><?=lang("Options")?></label>
+                    <input type="text" class="form-control product-options" />
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=lang("close")?></button>
                     <input type="button" class="btn btn-outline-dark align-middle edit-product-btn" value="<?=lang("save")?>">
                 </div>
             </div>
-
         </div>
     </div>
 </div>

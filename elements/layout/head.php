@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once('functions/helper.php');
 ?>
 <!doctype html>

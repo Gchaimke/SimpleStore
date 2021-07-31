@@ -10,3 +10,13 @@ if (isset($_POST['update_stats'])) {
     echo update_stats($_POST['update_stats']);
     exit;
 }
+
+if (isset($_POST['view_cart'])) {
+    echo $cart->view_cart();
+    exit;
+}
+
+if (isset($_POST['view_total'])) {
+    echo $cart->get_total();
+    exit;
+}

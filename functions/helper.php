@@ -4,6 +4,7 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
     die('Direct access not allowed');
     exit();
 };
+session_start();
 
 /**
  * Config
@@ -265,39 +266,25 @@ function order_to_html($order_num = 0)
         $total = lang("total");
         $approximately = lang("approximately");
         $order_lbl = lang("order");
-        $html = "<tr><th style='$style $th_style'>$product</th><th style='$style $th_style'>$qtty</th><th style='$style $th_style'>$price</th></tr>";
-        foreach ($order->items as $value) {
+        
+        $html = "<tr><th style='$style $th_style'>$product</th>
+        <th style='$style $th_style'>$qtty</th>
+        <th style='$style $th_style'>$price</th></tr>";
+        foreach ($order->items as $item) {
+            $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
             $html .= "<tr>";
-            $value = explode(',', $value);
-            if ($value[2] != 0) {
-                foreach ($value as $td) {
-
-                    $html .= "<td style='$style'>$td</td>";
-                }
-            }
+            $html .= "<td style='$style'>{$item->$name}</td>";
+            $html .= "<td style='$style'>$item->cart_qtty</td>";
+            $html .= "<td style='$style'>$item->cart_price $carrency</td>";
             $html .= '</tr>';
         }
         $html .= "<tr><td style='$style'>$total - <span style='color:red;'>$approximately ~ </span>
         </td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
 
         return "<div style='direction:$direction'><h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>
-        $order->date <br> $order_lbl: <span style='direction:rtl'>$order->id </span></h3><table style='width:100%;$style'>$html</table><br>";
+        $order->date <br> $order_lbl: <span style='direction:$direction'>$order->id </span></h3><table style='width:100%;$style'>$html</table><br>";
     }
     return $order;
-}
-
-function clear_cookie()
-{
-    $ignore = ["PHPSESSID", "language"];
-    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-    foreach ($cookies as $cookie) {
-        $parts = explode('=', $cookie);
-        $name = trim($parts[0]);
-        if (!in_array($name, $ignore)) {
-            setcookie($name, '', 1);
-            setcookie($name, '', 1, SITE_ROOT);
-        }
-    }
 }
 
 //** Helper */
@@ -557,6 +544,10 @@ function debug($data)
 function update_products_data()
 {
     global $categories;
+    $favorites = new stdClass();
+    $favorites->id = "favorites";
+    $favorites->name = "favorites";
+    $categories[] = $favorites;
     $updated = "";
     foreach ($categories as $category) {
         $category_index = $category->id;
@@ -593,5 +584,3 @@ function old_to_new()
     }
     return $tmp;
 }
-
-
