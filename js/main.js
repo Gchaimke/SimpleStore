@@ -380,7 +380,7 @@ $('.delete-gallery-image').on('click', function () {
 });
 
 $('.get_form_url').on('click', function () {
-    var name = $(this).parent().find('.upload_image_name').val();
+    var name = $('.upload_image_name').val();
     var url = $(this).parent().find('.upload_image_url').val();
     $.post("functions/bg_post.php", { get_form_url: true, url: url, name: name })
         .done(function (e) {
