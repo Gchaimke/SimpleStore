@@ -384,7 +384,7 @@ $('.get_form_url').on('click', function () {
     var url = $(this).parent().find('.upload_image_url').val();
     $.post("index.php", { get_form_url: true, url: url, name: name })
         .done(function (e) {
-            $(document).find('.picture-url').val('img/products/' + e);
+            $(document).find('.picture-url').val('data/products/' + e);
             alert(e + " uploaded!");
             $('.gallery_upload').hide();
         });
@@ -406,7 +406,7 @@ $('.upload_btn').on('click', function () {
             success: function (response) {
                 if (response != "Error") {
                     alert(response);
-                    $(document).find('.picture-url').val('img/products/' + response);
+                    $(document).find('.picture-url').val('data/products/' + response);
                     $('.gallery_upload').hide();
                 } else {
                     alert('file not uploaded');

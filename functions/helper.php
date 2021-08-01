@@ -301,7 +301,7 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
+function get_files($dir = DOC_ROOT . "data/products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
     $cdir = scandir($dir, $ASC);
@@ -323,8 +323,8 @@ function save_image($image_name, $url)
     $image_ext = pathinfo($url, PATHINFO_EXTENSION);
     $image_ext = strtolower($image_ext);
 
-    $tmp = DOC_ROOT . 'img/tmp.' . $image_ext;
-    $location = DOC_ROOT . 'img/products/' . $image_name . '.' . $image_ext;
+    $tmp = DOC_ROOT . 'data/tmp.' . $image_ext;
+    $location = DOC_ROOT . 'data/products/' . $image_name . '.' . $image_ext;
 
     if (in_array($image_ext, $valid_ext)) {
         file_put_contents($tmp, file_get_contents($url));

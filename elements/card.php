@@ -8,8 +8,8 @@
         $kind = property_exists($product, "kind_" . $lng) ? "kind_" . $lng : "kind";
         $options = property_exists($product, "options_" . $lng) ? "options_" . $lng : "options";
         if ($logedin) {
-            echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$category->id' data-product='$product->id'></i>";
-            echo "<i class='btn btn-outline-info far fa-edit edit-product' data-category='$category->id ' 
+            echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$product->category_id' data-product='$product->id'></i>";
+            echo "<i class='btn btn-outline-info far fa-edit edit-product' data-category='$product->category_id ' 
             data-product='$product->id' 
             data-img='$product->img' 
             data-name='" . $product->$name . "'
@@ -20,8 +20,10 @@
             data-options='" . $product->$options . "'
             data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"
             ></i>";
-            echo "<i class='btn btn-outline-dark far fa-clone duplicate-product' data-category='$category->id ' data-product='$product->id'></i>";
-            echo "<i class='btn btn-outline-warning far fa-star favorite-product' data-category='$category->id ' data-product='$product->id'></i>";
+            if ($product->category_id != "favorites") {
+                echo "<i class='btn btn-outline-dark far fa-clone duplicate-product' data-category='$product->category_id ' data-product='$product->id'></i>";
+                echo "<i class='btn btn-outline-warning far fa-star favorite-product' data-category='$product->category_id ' data-product='$product->id'></i>";
+            }
         }
         ?>
         <div class="card-content text-center">

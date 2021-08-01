@@ -10,11 +10,14 @@
                 $category->id = 'favorites';
 
                 foreach ($favorites as $product) {
+                    echo "<div class='item col'>";
                     if (!isset($product->id)) {
                         $product->id = $favorite_num;
                     }
-                    include('elements/favorites_card.php');
+                    $product_cart_id = $product->category_id . '_' . $product->id;
+                    include('elements/card.php');
                     $favorite_num++;
+                    echo "</div>";
                 }
                 ?>
             </div>
