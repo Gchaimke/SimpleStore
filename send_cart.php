@@ -2,6 +2,7 @@
 include_once('elements/layout/head.php');
 include_once('elements/about.php');
 ?>
+
 <body class="d-flex flex-column h-100">
     <?php include_once('elements/layout/navigation.php'); ?>
     <main class="flex-shrink-0">
@@ -19,6 +20,7 @@ include_once('elements/about.php');
                     $msg = lang("order_send_success");
                     $message['kind'] = 1;
                     $message['text'] = "$msg <a href='" . SITE_ROOT . "?order=$order' id='order_sent'>$order</a> <i class=\"far fa-smile-wink\"></i>";
+                    unset($_SESSION['cart']);
                 } else {
                     echo "cart is empty";
                 }

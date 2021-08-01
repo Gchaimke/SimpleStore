@@ -39,9 +39,11 @@ function get_stats(month) {
         .done(function (e) {
             console.log(e)
             let obj = JSON.parse(e);
-            $(".statistic").find("#month_text").text(obj.month);
-            $(".statistic").find("#stats_orders").text(obj.count);
-            $(".statistic").find("#stats_total").text(obj.total);
+            if (obj !== null) {
+                $(".statistic").find("#month_text").text(obj.month);
+                $(".statistic").find("#stats_orders").text(obj.count);
+                $(".statistic").find("#stats_total").text(obj.total);
+            }
         });
 }
 
@@ -185,17 +187,47 @@ $(document).on('click', '.favorite-product', function () {
 //CART
 $(document).on('click', '.product-to-cart', function () {
     var productId = $(this).data("product_id");
+    var options = $(this).data("product_options");
+    options = options.split(",");
+    $('.add_to_cart').find('.option_name').empty();
+    let product_in_cart = $('.cart_items').find('[data-product_id=' + productId + ']').data('product_id');
+    if (!product_in_cart) {
+        options.forEach(function (item) {
+            if (item != "") {
+                $('.add_to_cart').find('.option_name').append("<option value='" + item + "'>" + item + "</option>");
+            }
+        })
+    }
+    var options_length = $('.add_to_cart').find('.option_name').children('option').length;
+    if (options_length != 0) {
+        select_product_option(productId);
+    } else {
+        add_to_cart(productId)
+    }
+});
+
+function select_product_option(productId) {
+    $('.add_to_cart').find('.product_id').val(productId);
+    $('#addToCart').modal('toggle');
+}
+
+$('.add-to-cart_btn').on('click', function () {
+    var productId = $('.add_to_cart').find('.product_id').val();
+    var option = $('.add_to_cart').find('.option_name').val();
+    add_to_cart(productId, option);
+});
+
+function add_to_cart(productId, option="") {
     var numItems = $('.cart-product').length
     if (!is_whatsapp || numItems < 10) {
-        $.post("index.php", { add_to_cart: true, product: productId })
+        $.post("index.php", { add_to_cart: true, product: productId, option: option })
             .done(function () {
                 view_cart();
             });
     } else {
         alert("Max cart items is 10!");
     }
-});
-
+}
 
 $(document).on('click', '.remove-from-cart', function () {
     var productId = $(this).parent().data("product_id");
@@ -270,7 +302,6 @@ $('.cart-send-whatsapp').on('click', function (e) {
         var win = window.open(url + encodeURIComponent(msg + total), '_blank');
         if (win) {
             var total = $('.cart-total').text();
-            clear_cart();
             //Browser has allowed it to be opened
             $.post("index.php", { save_cart: true, cart: cart, total: total, client: client })
                 .done(function (e) {
@@ -305,10 +336,9 @@ $('.cart-send-email').on('click', function () {
                 data[obj.name] = obj.value;
             });
             var total = $('.cart-total').text();
-            clear_cart();
             $.post("index.php", { save_cart: true, cart: cart, total: total, client: data })
                 .done(function (e) {
-                    location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
+                    //location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
                 });
         });
         $("#client_form").on("submit", function (out) {

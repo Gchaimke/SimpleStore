@@ -30,7 +30,7 @@
                     <div class="d-flex justify-content-center text-nowrap">
                         <div class="mx-1"> <?= $qtty . $product->$kind ?></div>
                         <h5 class="card-price mx-1"><?= $product->price . $carrency ?></h3>
-                            <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id'></i>" ?>
+                            <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id' data-product_options='{$product->$options}'></i>" ?>
                     </div>
             </center>
         </div>

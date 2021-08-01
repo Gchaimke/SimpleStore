@@ -54,7 +54,7 @@ class Cart
                 $html .= "
                 <li data-product_id='$id'>
                     <span class='bg-danger remove-from-cart'>X</span>
-                    <span class='cart-product mx-2'>{$product->$name}</span>
+                    <span class='cart-product mx-2'>{$product->$name} $product->option</span>
                     <span class='cart_qty'>{$product->cart_qtty}</span>
                     <span class='cart_kind me-1'>{$product->$kind}</span>
                     <span class='cart_price'>{$product->cart_price}</span>$carrency

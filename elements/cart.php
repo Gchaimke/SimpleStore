@@ -9,28 +9,7 @@ $total = $cart->get_total();
     </h6>
     <div class="cart-wraper text-center" style="display: none;">
         <ol class="cart_items text-start">
-            <?PHP
-            if (isset($_SESSION['cart'])) {
-                foreach ($_SESSION['cart'] as $product) {
-                    $name = property_exists($product, "name_" . $lng) ? "name_" . $lng : "name";
-                    $kind = property_exists($product, "kind_" . $lng) ? "kind_" . $lng : "kind";
-                    $id = $product->category_id . "_" . $product->id;
-            ?>
-                    <li data-product_id="<?= $id ?>">
-                        <span data-price="55" class="bg-danger remove-from-cart">X</span>
-                        <span class="cart-product mx-2"><?= $product->$name ?></span>
-                        <span class="cart_qty"><?= $product->cart_qtty ?></span>
-                        <span class="cart_kind me-1"><?= $product->$kind ?></span>
-                        <span class="cart_price"><?= $product->cart_price ?></span><?= $carrency ?>
-                        <div class="cart-controls text-nowrap mb-2 text-center" data-price="<?= $product->price ?>" data-qty="<?= $product->qtty ?>" data-kind="<?= $product->$kind ?>" data-product_id="<?= $id ?>">
-                            <span class="btn btn-warning ml-2 minus">-</span><b class="m-2">1</b><span class="btn btn-success plus">+</span>
-                        </div>
-                        <hr>
-                    </li>
-            <?php }
-            }
-            ?>
-
+            <?= $cart->view_cart() ?>
         </ol>
         <b style="font-size:1rem;"><?= lang("sum") ?>: <span class="cart-total"><?= $total ?></span><?= $carrency ?></b>
         <div class="mx-2">

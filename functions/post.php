@@ -135,7 +135,9 @@ if (isset($_POST['add_to_cart'])) {
     $product = explode("_", $_POST['product']);
     $category_id = $product[0];
     $product_id = $product[1];
-    $cart->add_to_cart($products_class->get_product($category_id, $product_id));
+    $product = $products_class->get_product($category_id, $product_id);
+    $product->option = isset($_POST['option'])?$_POST['option']:"";
+    $cart->add_to_cart($product);
     exit;
 }
 
@@ -148,3 +150,4 @@ if (isset($_POST['minus_product'])) {
     $cart->minus_from_cart($_POST['minus_product']);
     exit;
 }
+

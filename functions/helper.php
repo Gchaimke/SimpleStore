@@ -266,15 +266,17 @@ function order_to_html($order_num = 0)
         $total = lang("total");
         $approximately = lang("approximately");
         $order_lbl = lang("order");
-        
+
         $html = "<tr><th style='$style $th_style'>$product</th>
         <th style='$style $th_style'>$qtty</th>
         <th style='$style $th_style'>$price</th></tr>";
         foreach ($order->items as $item) {
             $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
+            $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
+            $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
             $html .= "<tr>";
-            $html .= "<td style='$style'>{$item->$name}</td>";
-            $html .= "<td style='$style'>$item->cart_qtty</td>";
+            $html .= "<td style='$style'>{$item->$name} $option</td>";
+            $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
             $html .= "<td style='$style'>$item->cart_price $carrency</td>";
             $html .= '</tr>';
         }
