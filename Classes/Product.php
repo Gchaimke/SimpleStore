@@ -18,6 +18,7 @@ class Product
             $this->$description = key_exists('description', $product) && $product['description'] != '' ? $product['description'] : '';
             $this->price = key_exists('price', $product) && $product['price'] != '' ? $product['price'] : 50;
             $this->qtty = key_exists('qtty', $product) && $product['qtty'] != '' ? $product['qtty'] : '1';
+            $this->category_id = key_exists('category_id', $product) && $product['category_id'] != '' ? $product['category_id'] : '1';
             $this->$kind = key_exists('kind', $product) && $product['kind'] != '' ? $product['kind'] : 'kg';
             $this->img = key_exists('img', $product) && $product['img'] != '' ? $product['img'] : 'img/product.jpg';
             $this->$options = key_exists('options', $product) && $product['options'] != '' ? $product['options'] : '';

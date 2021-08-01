@@ -18,10 +18,14 @@ class Categories
             }
             file_put_contents($this->data_path . "categories.json", json_encode($this->categories, JSON_UNESCAPED_UNICODE));
             $product = new Product();
+            //Add first product
             $product->id = 1;
+            $product->category_id = 1;
             $products[] = $product;
             file_put_contents($this->data_path . "1.json", json_encode($products, JSON_UNESCAPED_UNICODE));
-            $product->id = "1_1";
+            //Add first favorites
+            $product->id = 1;
+            $product->category_id = "favorites";
             $favorites[] = $product;
             file_put_contents($this->data_path . "favorites.json", json_encode($products, JSON_UNESCAPED_UNICODE));
             copy(DOC_ROOT."distrikts_template.json",$this->data_path."distrikts.json");
