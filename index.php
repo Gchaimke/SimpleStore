@@ -26,7 +26,7 @@ include_once('functions/post.php');
             include_once('elements/login.php');
             include_once('elements/customer.php');
             include_once('elements/about.php');
-            debug($_SESSION['cart']);
+            //debug($_SESSION['cart']);
             ?>
         </div>
     </main>
