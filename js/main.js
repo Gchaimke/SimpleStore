@@ -247,7 +247,8 @@ $(document).on('click', '.minus', function () {
 
 $(document).on('click', '.plus', function () {
     var productId = $(this).parent().data("product_id");
-    $.post("index.php", { add_to_cart: true, product: productId })
+    var option = $(this).parent().data("product_option");
+    $.post("index.php", { add_to_cart: true, product: productId, option: option })
         .done(function () {
             view_cart();
         });

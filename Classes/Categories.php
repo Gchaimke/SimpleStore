@@ -75,6 +75,7 @@ class Categories
         $categories[] = $category;
         $product = new Product();
         $product->id = 1;
+        $product->category_id = $category->id;
         $products[] = $product;
         file_put_contents($this->data_path . "categories.json", json_encode($categories, JSON_UNESCAPED_UNICODE));
         file_put_contents($this->data_path . "$category->id.json", json_encode($products, JSON_UNESCAPED_UNICODE));

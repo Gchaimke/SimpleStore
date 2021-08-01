@@ -15,10 +15,14 @@ class Cart
     {
         $product->cart_price = $product->price;
         $product->cart_qtty = $product->qtty;
+        $option = preg_replace('~[^\p{L}\p{N}]++~u', '', $product->option);
+        $product->id = $product->id . "_" . $option;
         $key = $product->category_id . "_" . $product->id;
         if (isset($_SESSION['cart'][$key])) {
-            $_SESSION['cart'][$key]->cart_price += $product->price;
-            $_SESSION['cart'][$key]->cart_qtty += $product->cart_qtty;
+            $product = $_SESSION['cart'][$key];
+            $product->cart_price += $product->price;
+            $product->cart_price = number_format($product->cart_price, 2, '.', '');
+            $product->cart_qtty += $product->cart_qtty;
         } else {
             $_SESSION['cart'][$key] = $product;
         }
@@ -30,6 +34,7 @@ class Cart
         $product->price = intval($product->price);
         $product->qtty = intval($product->qtty);
         $product->cart_price -= $product->price;
+        $product->cart_price = number_format($product->cart_price, 2, '.', '');
         $product->cart_qtty -= $product->qtty;
         $_SESSION['cart'][$key] = $product;
         if ($product->cart_price == 0 || $product->cart_qtty == 0) {
@@ -58,7 +63,7 @@ class Cart
                     <span class='cart_qty'>{$product->cart_qtty}</span>
                     <span class='cart_kind me-1'>{$product->$kind}</span>
                     <span class='cart_price'>{$product->cart_price}</span>$carrency
-                    <div class='cart-controls text-nowrap mb-2 text-center' data-product_id='$id'>
+                    <div class='cart-controls text-nowrap mb-2 text-center' data-product_id='$id' data-product_option='$product->option'>
                         <span class='btn btn-warning ml-2 minus'>-</span><b class='m-2'>1</b><span class='btn btn-success plus'>+</span>
                     </div>
                     <hr>
