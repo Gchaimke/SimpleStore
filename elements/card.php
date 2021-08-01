@@ -9,17 +9,7 @@
         $options = property_exists($product, "options_" . $lng) ? "options_" . $lng : "options";
         if ($logedin) {
             echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$product->category_id' data-product='$product->id'></i>";
-            echo "<i class='btn btn-outline-info far fa-edit edit-product' data-category='$product->category_id ' 
-            data-product='$product->id' 
-            data-img='$product->img' 
-            data-name='" . $product->$name . "'
-            data-description='" . $product->$description . "'
-            data-price='$product->price'
-            data-qtty='$qtty'
-            data-kind='" . $product->$kind . "'
-            data-options='" . $product->$options . "'
-            data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"
-            ></i>";
+            echo "<i class='btn btn-outline-info far fa-edit edit-product'  data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"></i>";
             if ($product->category_id != "favorites") {
                 echo "<i class='btn btn-outline-dark far fa-clone duplicate-product' data-category='$product->category_id ' data-product='$product->id'></i>";
                 echo "<i class='btn btn-outline-warning far fa-star favorite-product' data-category='$product->category_id ' data-product='$product->id'></i>";

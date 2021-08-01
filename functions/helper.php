@@ -275,7 +275,7 @@ function order_to_html($order_num = 0)
             $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
             $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
             $html .= "<tr>";
-            $html .= "<td style='$style'>{$item->$name} $option</td>";
+            $html .= "<td style='$style'>{$item->$name} $option $item->qtty {$item->$kind}</td>";
             $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
             $html .= "<td style='$style'>$item->cart_price $carrency</td>";
             $html .= '</tr>';
@@ -304,6 +304,9 @@ function get_data($file)
 function get_files($dir = DOC_ROOT . "data/products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
+    if (!file_exists($dir)) {
+        mkdir($dir, 0700);
+    }
     $cdir = scandir($dir, $ASC);
     foreach ($cdir as $file) {
         $extension = explode('.', $file);

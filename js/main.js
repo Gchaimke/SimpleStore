@@ -370,7 +370,7 @@ $('.delete-gallery-image').on('click', function () {
     var confim = confirm('Delete this picture?');
     if (confim) {
         var image = $(this).data("path");
-        $.post("index.php", { delete_gallery_image: true, image: image })
+        $.post("functions/bg_post.php", { delete_gallery_image: true, image: image })
             .done(function (e) {
                 alert(e);
             });
@@ -382,7 +382,7 @@ $('.delete-gallery-image').on('click', function () {
 $('.get_form_url').on('click', function () {
     var name = $(this).parent().find('.upload_image_name').val();
     var url = $(this).parent().find('.upload_image_url').val();
-    $.post("index.php", { get_form_url: true, url: url, name: name })
+    $.post("functions/bg_post.php", { get_form_url: true, url: url, name: name })
         .done(function (e) {
             $(document).find('.picture-url').val('data/products/' + e);
             alert(e + " uploaded!");
@@ -398,7 +398,7 @@ $('.upload_btn').on('click', function () {
         fd.append('file', files[0]);
         fd.append('name', name);
         $.ajax({
-            url: 'index.php',
+            url: 'functions/bg_post.php',
             type: 'post',
             data: fd,
             contentType: false,
@@ -455,7 +455,7 @@ $('#search').on('submit', function (e) {
     search = search.toLowerCase();
     search = search.replace(/ /g, '');
     //search = search.substring(1);
-    $.post("index.php", { search: search })
+    $.post("functions/bg_post.php", { search: search })
         .done(function (res) {
             $("#search_result").empty();
             if (res.startsWith("FOUND:")) {
@@ -487,8 +487,7 @@ $('.lang-he').on('click', function () { change_language("he") });
 
 function change_language(language) {
     $.post("index.php", { set_lang: true, language: language })
-        .done(function (e) {
-            //alert(e);
+        .done(function () {
             location.reload();
         });
 }
