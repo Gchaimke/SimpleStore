@@ -65,6 +65,7 @@ $lang = array(
     "Kind" => "סוג",
     "Previos Month" => "חודש קודם",
     "Select product option" => "בחר באפשרות המוצר",
-    "option" => "אפשרויות",
+    "option" => "סיגנון",
+    "Options" => "סיגנונים",
     "add"=>"להוסיף",
 );

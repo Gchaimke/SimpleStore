@@ -65,6 +65,7 @@ $lang = array(
     "Kind" => "Вид",
     "Previos Month" => "Предыдущий месяц",
     "Select product option" => "Выберите вариант продукта",
-    "option" => "вариант",
+    "option" => "опция",
+    "Options" => "опции",
     "add"=>"добавить",
 );
