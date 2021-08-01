@@ -77,7 +77,7 @@ if (isset($_GET['orders'])) {
                     break;
                 }
                 $order_num = explode('.', $order)[0];
-                $order_data = json_decode(file_get_contents(DOC_ROOT . 'data/orders/' . $_GET['orders'] . "/" . $order));
+                $order_data = json_decode(file_get_contents(DATA_ROOT . 'orders/' . $_GET['orders'] . "/" . $order));
                 if ($order_data->client->name != 'test') {
                     echo "
                 <a href='?order=$order_num' class='order-card card col-md m-md-3 my-2'>

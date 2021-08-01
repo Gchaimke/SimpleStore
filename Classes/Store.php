@@ -14,11 +14,11 @@ class Store
 
     function __construct()
     {
-        if (!file_exists(DOC_ROOT . "data")) {
-            mkdir(DOC_ROOT . "data", 0700);
+        if (!file_exists(DATA_ROOT)) {
+            mkdir(DATA_ROOT, 0700);
         }
-        if (!file_exists(DOC_ROOT . "data/orders")) {
-            mkdir(DOC_ROOT . "data/orders", 0700);
+        if (!file_exists(DATA_ROOT . "orders")) {
+            mkdir(DATA_ROOT . "orders", 0700);
         }
         $this->carrency = "₪";
         $this->company = new Company;

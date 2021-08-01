@@ -217,7 +217,7 @@ $('.add-to-cart_btn').on('click', function () {
     add_to_cart(productId, option);
 });
 
-function add_to_cart(productId, option="") {
+function add_to_cart(productId, option = "") {
     var numItems = $('.cart-product').length
     if (!is_whatsapp || numItems < 10) {
         $.post("index.php", { add_to_cart: true, product: productId, option: option })
@@ -384,7 +384,7 @@ $('.get_form_url').on('click', function () {
     var url = $(this).parent().find('.upload_image_url').val();
     $.post("functions/bg_post.php", { get_form_url: true, url: url, name: name })
         .done(function (e) {
-            $(document).find('.picture-url').val('data/products/' + e);
+            $(document).find('.picture-url').val(user_data + 'products/' + e);
             alert(e + " uploaded!");
             $('.gallery_upload').hide();
         });
@@ -406,7 +406,7 @@ $('.upload_btn').on('click', function () {
             success: function (response) {
                 if (response != "Error") {
                     alert(response);
-                    $(document).find('.picture-url').val('data/products/' + response);
+                    $(document).find('.picture-url').val(user_data + 'products/' + response);
                     $('.gallery_upload').hide();
                 } else {
                     alert('file not uploaded');

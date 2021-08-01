@@ -6,7 +6,7 @@ class Company
 {
     private $company;
     public $name, $phone, $email, $header, $logo;
-    private $data_path = DOC_ROOT . "data/company.json";
+    private $data_path = DATA_ROOT . "company.json";
 
     function __construct()
     {

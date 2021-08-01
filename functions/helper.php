@@ -12,7 +12,7 @@ session_start();
 define("VERSION", "1.5");
 
 require_once(__DIR__ . '/../config.php');
-define("ORDERS_PATH", DOC_ROOT . "data/orders/");
+define("ORDERS_PATH", DATA_ROOT . "orders/");
 
 /**
  * Classes Loader
@@ -150,7 +150,7 @@ function delete_category($id)
             unset($categories[$key]);
         }
     }
-    unlink(DOC_ROOT . "data/$id.json");
+    unlink(DATA_ROOT . "$id.json");
     save_json($categories, 'categories');
 }
 
@@ -293,7 +293,7 @@ function order_to_html($order_num = 0)
 
 function get_data($file)
 {
-    $path = DOC_ROOT . "data/$file.json";
+    $path = DATA_ROOT . "$file.json";
     if (file_exists($path)) {
         return json_decode(file_get_contents($path));
     } else {
@@ -301,7 +301,7 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DOC_ROOT . "data/products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
+function get_files($dir = DATA_ROOT . "products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
     if (!file_exists($dir)) {
@@ -326,8 +326,8 @@ function save_image($image_name, $url)
     $image_ext = pathinfo($url, PATHINFO_EXTENSION);
     $image_ext = strtolower($image_ext);
 
-    $tmp = DOC_ROOT . 'data/tmp.' . $image_ext;
-    $location = DOC_ROOT . 'data/products/' . $image_name . '.' . $image_ext;
+    $tmp = DATA_ROOT . 'tmp.' . $image_ext;
+    $location = DATA_ROOT . 'products/' . $image_name . '.' . $image_ext;
 
     if (in_array($image_ext, $valid_ext)) {
         file_put_contents($tmp, file_get_contents($url));
@@ -398,7 +398,7 @@ function save_json($array, $file_name = 'test')
     usort($array, function ($a, $b) { //Sort the array using a user defined function
         return $a->name > $b->name ? 1 : -1; //Compare the scores
     });
-    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
+    file_put_contents(DATA_ROOT . "$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
 function update_stats($month = 0)
@@ -406,8 +406,8 @@ function update_stats($month = 0)
     if ($month == 0) {
         $month = date('my');
     }
-    if (file_exists(DOC_ROOT . "data/stats.json")) {
-        $statistic = json_decode(file_get_contents(DOC_ROOT . "data/stats.json"));
+    if (file_exists(DATA_ROOT . "stats.json")) {
+        $statistic = json_decode(file_get_contents(DATA_ROOT . "stats.json"));
     } else {
         $statistic = json_decode('[{"month":"0","total":0,"count":0}]');
     }
@@ -438,7 +438,7 @@ function update_stats($month = 0)
             $statistic[$current_key] = $month_stats;
         }
     }
-    file_put_contents(DOC_ROOT . "data/stats.json", json_encode($statistic));
+    file_put_contents(DATA_ROOT . "stats.json", json_encode($statistic));
     return $month;
 }
 
@@ -447,7 +447,7 @@ function get_stats($month = 0)
     if ($month == 0) {
         $month = date('my');
     }
-    $path = DOC_ROOT . 'data/stats.json';
+    $path = DATA_ROOT . 'stats.json';
     if (file_exists($path)) {
         $data =  json_decode(file_get_contents($path));
     } else {
@@ -503,7 +503,7 @@ function export_csv()
     $categories = $store->categories->get_categories_with_products();
 
     //$fp = fopen('php://output', 'w');
-    $fp = fopen(DOC_ROOT . "data/" . $file_name, 'w');
+    $fp = fopen(DATA_ROOT . "" . $file_name, 'w');
     fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
     fputcsv($fp, array("Category", "Name", "Price"));
 

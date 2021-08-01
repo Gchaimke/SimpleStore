@@ -18,8 +18,8 @@ if (isset($_FILES['file']['name'])) {
     $imageFileType = pathinfo($filename, PATHINFO_EXTENSION);
     $imageFileType = strtolower($imageFileType);
     $save_name = str_replace([' ', '%', '\\'], '_', $_POST['name']);
-    $tmp = DOC_ROOT . "data/products/tmp.$imageFileType";
-    $location = DOC_ROOT . "data/products/$save_name.$imageFileType";
+    $tmp = DATA_ROOT . "products/tmp.$imageFileType";
+    $location = DATA_ROOT . "products/$save_name.$imageFileType";
     /* Valid extensions */
     $valid_extensions = array("jpg", "jpeg", "png");
 

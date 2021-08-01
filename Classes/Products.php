@@ -5,7 +5,7 @@ namespace SimpleStore;
 class Products
 {
     public $products;
-    public $data_path = DOC_ROOT . "data/";
+    public $data_path = DATA_ROOT;
 
     function get_products($category_id)
     {

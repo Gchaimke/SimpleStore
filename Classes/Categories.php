@@ -5,7 +5,7 @@ namespace SimpleStore;
 class Categories
 {
     public $categories;
-    public $data_path = DOC_ROOT . "data/";
+    public $data_path = DATA_ROOT;
 
     function get_categories()
     {

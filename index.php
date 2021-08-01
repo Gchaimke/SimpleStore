@@ -34,6 +34,7 @@ include_once('functions/post.php');
 </body>
 <script>
     var cart_opened = <?= isset($_GET['cart']) ? "1" : "0"; ?>;
+    var user_data = "<?= USER_DATA ?>";
 </script>
 <?php include_once('elements/layout/footer.php'); ?>
 

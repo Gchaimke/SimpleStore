@@ -31,7 +31,7 @@ class Product
     function edit_product($category_index, $product)
     {
         global $lng;
-        $products = json_decode(file_get_contents(DOC_ROOT . "data/$category_index.json"));
+        $products = json_decode(file_get_contents(DATA_ROOT . "$category_index.json"));
         $product = (object)$product;
         foreach ($products as $key => $curent_product) {
             if ($curent_product->id == $product->id) {
@@ -51,6 +51,6 @@ class Product
         $old_product->img = $product->img;
         $old_product->$options = $product->options;
         $products[$product_key] = $old_product;
-        file_put_contents(DOC_ROOT . "data/$category_index.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+        file_put_contents(DATA_ROOT . "$category_index.json", json_encode($products, JSON_UNESCAPED_UNICODE));
     }
 }
