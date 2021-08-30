@@ -487,10 +487,8 @@ $('.lang-ru').on('click', function () { change_language("ru") });
 $('.lang-he').on('click', function () { change_language("he") });
 
 function change_language(language) {
-    $.post("index.php", { set_lang: true, language: language })
-        .done(function () {
-            location.reload();
-        });
+    setCookie("language", language, 365);
+    location.reload();
 }
 
 //jQuery Slider
@@ -500,3 +498,10 @@ if ($("#favorites_slider").length) {
         interval: 5000
     });
 }
+
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }

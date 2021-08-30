@@ -61,11 +61,6 @@ if (isset($_POST['edit_company'])) {
     exit;
 }
 
-if (isset($_POST['set_lang'])) {
-    set_lang($_POST['language']);
-    exit;
-}
-
 if (isset($_POST['add_to_cart'])) {
     $product = explode("_", $_POST['product']);
     $category_id = $product[0];

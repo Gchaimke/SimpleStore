@@ -9,7 +9,7 @@ session_start();
 /**
  * Config
  */
-define("VERSION", "1.5");
+define("VERSION", "1.6");
 
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DATA_ROOT . "orders/");
@@ -70,12 +70,6 @@ $distrikts = get_data("distrikts");
 /**
  * Functions
  */
-function set_lang($lng)
-{
-    $cookie_name = "language";
-    $cookie_value = $lng;
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), SITE_ROOT); // 86400 = 1 day
-}
 
 function lang($key = "chaim")
 {
