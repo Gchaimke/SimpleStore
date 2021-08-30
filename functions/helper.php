@@ -428,6 +428,7 @@ function update_stats($month = 0)
             if (property_exists($order, "client")) {
                 if ($order->client->name != 'test') {
                     $month_stats->total += $order->total;
+                    $month_stats->total = number_format($month_stats->total, 0, '.', ',');
                     $month_stats->count++;
                 }
             }
