@@ -41,9 +41,9 @@ $('#login_form').on('submit', function (e) {
         url: 'functions/bg_post.php',
         data: $('#login_form').serialize(),
         success: function (o) {
-            if(o == "true"){
+            if (o == "true") {
                 location.reload();
-            }else{
+            } else {
                 alert(o);
             }
         }
@@ -87,6 +87,8 @@ $('#prev_stats').on('click', function () {
 });
 
 $('#edit_company').on('submit', function (e) {
+    tiny_editor = $("#head_textarea_ifr").contents().find("#tinymce");
+    $('#head_textarea').html(tiny_editor.html());
     e.preventDefault();
     $.ajax({
         type: 'post',
@@ -524,7 +526,7 @@ if ($("#favorites_slider").length) {
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
+}
