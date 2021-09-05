@@ -41,8 +41,14 @@
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("logo") ?></label>
-                        <input type="text" class="form-control" name="logo" value="<?= $company->logo ?>" />
+                        <input type="text" class="form-control picture-url" name="logo" value="<?= $company->logo ?>" />
                     </div>
+                    <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="<?= lang("Select Image") ?>">
+                    <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="logo" value="<?= lang("Upload Image") ?>">
+                    <?php
+                    include("elements/gallery.php");
+                    include('elements/uploader.php');
+                    ?>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("company_message") ?></label>
                         <textarea id="head_textarea" class="form-control" name="header" rows="10"><?= $company->header ?></textarea>

@@ -16,8 +16,8 @@
                 <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="<?=lang("Select Image")?>">
                 <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="" value="<?=lang("Upload Image")?>">
                 <?php
-                include_once("elements/gallery.php");
-                include_once('elements/uploader.php');
+                include("elements/gallery.php");
+                include('elements/uploader.php');
                 ?>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("name")?></label>
