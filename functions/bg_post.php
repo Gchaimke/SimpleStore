@@ -1,6 +1,17 @@
 <?php
 include_once('helper.php');
 
+if (isset($_POST['login'])) {
+    if ($_POST['password'] != '') {
+        $login = login($_POST['password']);
+        if ($login) {
+            echo "true";
+        }else{
+            echo lang("password_error");
+        }
+    }
+}
+
 if (isset($_POST['get_stats'])) {
     echo  json_encode(get_stats($_POST['get_stats']));
     exit;

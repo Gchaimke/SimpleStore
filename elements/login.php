@@ -6,16 +6,17 @@
                 <h5 class="modal-title" id="login_viewLabel"><?= lang("login") ?></h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
+            <form id="login_form">
                 <div class="modal-body">
                     <div class="d-flex justify-content-center">
                         <div class="input-group mb-3">
                             <label class="input-group-text"><?= lang("password") ?></label>
+                            <input type="hidden" name="login" value="1" />
                             <input type="password" id="login-pass" class="form-control" name="password" autocomplete="on"/>
                         </div>
                     </div>
                     <center>
-                        <input type="button" id="login_btn" class="btn btn-outline-dark" value="<?= lang("login") ?>" />
+                        <input type="submit" id="login_btn" class="btn btn-outline-dark" value="<?= lang("login") ?>" />
                     </center>
                 </div>
             </form>

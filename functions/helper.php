@@ -87,9 +87,9 @@ function login($pass)
 {
     if (urldecode($pass)  == PASS) {
         $_SESSION["login"] = true;
-        redirect(SITE_ROOT);
+        return true;
     } else {
-        redirect(SITE_ROOT . '?login_error');
+        return false;
     }
 }
 

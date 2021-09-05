@@ -1,16 +1,5 @@
 <?php
 
-if (isset($_GET['login'])) {
-    if ($_GET['login'] != '') {
-        $login = login($_GET['login']);
-    }
-}
-
-if (isset($_GET['login_error'])) {
-    $message['kind'] = 3;
-    $message['text'] = lang("password_error");
-}
-
 if (isset($_GET['logout'])) {
     logout();
 }

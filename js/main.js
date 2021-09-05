@@ -34,6 +34,22 @@ $(document).ready(function () {
     }
 });
 
+$('#login_form').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'post',
+        url: 'functions/bg_post.php',
+        data: $('#login_form').serialize(),
+        success: function (o) {
+            if(o == "true"){
+                location.reload();
+            }else{
+                alert(o);
+            }
+        }
+    });
+});
+
 function get_stats(month) {
     $.post("functions/bg_post.php", { get_stats: month })
         .done(function (e) {
