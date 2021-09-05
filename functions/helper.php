@@ -196,7 +196,7 @@ function add_zero($orders)
 function get_orders($month)
 {
     global $logedin;
-    if(!$logedin) redirect("/");
+    if(!$logedin) redirect(SITE_ROOT);
 
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
