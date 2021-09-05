@@ -195,6 +195,9 @@ function add_zero($orders)
 
 function get_orders($month)
 {
+    global $logedin;
+    if(!$logedin) redirect("/");
+
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
         $orders['orders'] = get_files($orders_path, ["json"], 1);
