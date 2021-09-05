@@ -63,6 +63,13 @@ function get_stats(month) {
         });
 }
 
+$(document).on('click', '#logout', function () {
+    $.post("functions/bg_post.php", { logout: true })
+        .done(function () {
+            location.reload();
+        });
+});
+
 $('#update_stats').on('click', function () {
     let month = $(this).data('month');
     $.post("functions/bg_post.php", { update_stats: month })

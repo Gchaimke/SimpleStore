@@ -12,6 +12,11 @@ if (isset($_POST['login'])) {
     }
 }
 
+
+if (isset($_POST['logout'])) {
+    logout();
+}
+
 if (isset($_POST['get_stats'])) {
     echo  json_encode(get_stats($_POST['get_stats']));
     exit;

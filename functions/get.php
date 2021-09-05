@@ -1,9 +1,5 @@
 <?php
 
-if (isset($_GET['logout'])) {
-    logout();
-}
-
 if (isset($_GET['email_order'])) {
     send_email($_GET['email_order']);
 }

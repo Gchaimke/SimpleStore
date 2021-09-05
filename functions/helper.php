@@ -83,6 +83,11 @@ function redirect($url)
     echo "<script>window.location.href = '$url';</script>";
 }
 
+function reload()
+{
+    echo "<script>location.reload();</script>";
+}
+
 function login($pass)
 {
     if (urldecode($pass)  == PASS) {
@@ -96,7 +101,6 @@ function login($pass)
 function logout()
 {
     $_SESSION["login"] = '';
-    redirect(SITE_ROOT);
 }
 
 function auto_version($file)
@@ -196,7 +200,7 @@ function add_zero($orders)
 function get_orders($month)
 {
     global $logedin;
-    if(!$logedin) redirect(SITE_ROOT);
+    if (!$logedin) redirect(SITE_ROOT);
 
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
