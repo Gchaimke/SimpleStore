@@ -2,6 +2,11 @@
 SimpleStore 1
 */
 
+ .navbar-brand a {
+     text-decoration: none;
+     color: white;
+ }
+
  .card-content, .cart, .statistic {
      font-family: sans-serif;
  }
@@ -27,6 +32,7 @@ SimpleStore 1
      line-height: 37px;
      flex-direction: row !important;
      border-radius: 5px;
+     min-width: 270px;
  }
 
  .statistic>div {
@@ -46,7 +52,7 @@ SimpleStore 1
      position: fixed !important;
      right: 5px;
      top: 60px;
-     z-index: 5;
+     z-index: 1021;
      background: white;
      border: 1px solid;
      border-radius: 5px;
@@ -104,13 +110,13 @@ SimpleStore 1
  }
 
  .card-footer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: baseline;
-    background: #e7f1ff;
-  }
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: space-evenly;
+     align-items: baseline;
+     background: #e7f1ff;
+ }
 
  .delete-product, .edit-product, .duplicate-product, .favorite-product {
      position: absolute;
@@ -241,6 +247,9 @@ SimpleStore 1
  @media only screen and (max-width: 690px) {
      .navbar-brand {
          font-size: 0.9rem !important;
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
      }
      .delete-product, .edit-product {
          margin-top: -122px;
@@ -255,8 +264,8 @@ SimpleStore 1
          min-height: initial;
      }
      .card-body.product {
-        min-height: initial;
-    }
+         min-height: initial;
+     }
      .card {
          max-width: initial;
      }
