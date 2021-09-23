@@ -26,6 +26,7 @@
                     </span>
                 <?php endif ?>
             </div>
+
             <span class="nav-item">
                 <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') { ?>
                     <a class="btn btn-outline-info fas fa-sign-out-alt text-primary float-end" id="logout" aria-label="logout" tabindex="0"></a>
