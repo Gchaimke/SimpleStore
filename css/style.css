@@ -165,12 +165,15 @@ SimpleStore 1
 
  .product-to-cart {
      font-size: 1em;
-     margin-left: 10px;
      cursor: pointer;
      border: 1px solid;
      color: #1aa778;
      padding: 5px 15px;
      border-radius: 5px;
+     display: flex;
+     flex-wrap: wrap;
+     align-items: baseline;
+     justify-content: space-between;
  }
 
  .delete-category, .edit-category, .add-product_toggle {
@@ -224,11 +227,6 @@ SimpleStore 1
 
  /*jQuery slider */
 
- .item {
-     width: 50%;
-     margin-bottom: 100px;
- }
-
  .MS-content {
      margin: 15px 1%;
      overflow: hidden;
@@ -257,9 +255,6 @@ SimpleStore 1
      .favorite-product, .duplicate-product {
          margin-top: -50px;
      }
-     .row {
-         margin-top: 40px !important;
-     }
      .card-body.day-card {
          min-height: initial;
      }
@@ -274,6 +269,9 @@ SimpleStore 1
      }
      .row.overflow-auto {
          height: 260px;
+     }
+     .MS-content {
+         height: 340px !important;
      }
  }
 

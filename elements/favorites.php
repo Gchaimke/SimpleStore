@@ -3,7 +3,7 @@
         <h2><?=lang("favorites")?></h2>
         <div id="favorites_slider">
             <!-- Give wrapper ID to target with jQuery & CSS -->
-            <div class="MS-content row" style="height: <?=(CARD_IMG_HEIGHT+20)*2?>px;">
+            <div class="MS-content row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" style="height: <?=(CARD_IMG_HEIGHT+20)*2?>px;">
                 <?php
                 $favorite_num = 1;
                 $category = new stdClass();

@@ -28,15 +28,17 @@
             }
             ?>
             <div class="card-content text-center">
-                <h5 class="card-title"><?= $product->$name ?></h3>
-                    <p class="card-text"><?= $product->$description ?></p>
+                <h5 class="card-title"><?= $product->$name ?></h5>
+                <p class="card-text"><?= $product->$description ?></p>
             </div>
         </div>
 
         <div class="card-footer text-nowrap">
-            <div class="mx-1"> <?= $qtty . $product->$kind ?></div>
-            <h5 class="card-price mx-1"><?= $product->price . $carrency ?></h3>
-                <?= "<i class='fas fa-cart-plus product-to-cart' data-product_id='$product_cart_id' data-product_options='{$product->$options}'></i>" ?>
+            <div class="product-to-cart" data-product_id="<?= $product_cart_id ?>" data-product_options="<?= $product->$options ?>">
+                <?= $qtty . $product->$kind ?>
+                <h5 class="card-price mx-1"><?= $product->price . $carrency ?></h5>
+                <i class='fas fa-cart-plus'></i>
+            </div>
         </div>
     </div>
 </div>
