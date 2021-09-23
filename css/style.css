@@ -283,6 +283,9 @@ SimpleStore 1
      .delete-category {
          left: 130px;
      }
+     .cart{
+        top: 0px;
+     }
  }
 
  @media (max-width: 992px) {

@@ -26,12 +26,6 @@
                     </span>
                 <?php endif ?>
             </div>
-            <?php if ($lng == 'ru') : ?>
-                <input type="button" class="nav-item btn btn-outline-info mx-md-2 lang-he" tabindex="0" value="he">
-            <?php endif ?>
-            <?php if ($lng == 'he') : ?>
-                <input type="button" class="nav-item btn btn-outline-info mx-md-2 lang-ru" tabindex="0" value="ru">
-            <?php endif ?>
             <span class="nav-item">
                 <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') { ?>
                     <a class="btn btn-outline-info fas fa-sign-out-alt text-primary float-end" id="logout" aria-label="logout" tabindex="0"></a>
@@ -42,5 +36,11 @@
             <button class="btn btn-outline-info fas fa-info-circle text-warning mx-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" aria-label="info" tabindex="0">
             </button>
         </div>
+        <?php if ($lng == 'ru') : ?>
+            <input type="button" class="nav-item btn btn-outline-info mx-md-2 lang-he" tabindex="0" value="he">
+        <?php endif ?>
+        <?php if ($lng == 'he') : ?>
+            <input type="button" class="nav-item btn btn-outline-info mx-md-2 lang-ru" tabindex="0" value="ru">
+        <?php endif ?>
     </div>
 </nav>
