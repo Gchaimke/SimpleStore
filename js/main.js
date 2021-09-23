@@ -442,81 +442,6 @@ $('.delete-product').on('click', function () {
     }
 });
 
-$('.delete-gallery-image').on('click', function () {
-    var confim = confirm('Delete this picture?');
-    if (confim) {
-        var image = $(this).data("path");
-        $.post("functions/bg_post.php", { delete_gallery_image: true, image: image })
-            .done(function (e) {
-                alert(e);
-            });
-        $(this).parent().parent().toggle();
-
-    }
-});
-
-$('.get_form_url').on('click', function () {
-    var name = $('.upload_image_name').val();
-    var url = $(this).parent().find('.upload_image_url').val();
-    $.post("functions/bg_post.php", { get_form_url: true, url: url, name: name })
-        .done(function (e) {
-            $(document).find('.picture-url').val(user_data + 'products/' + e);
-            alert(e + " uploaded!");
-            $('.gallery_upload').hide();
-        });
-});
-
-$('.upload_btn').on('click', function () {
-    var fd = new FormData();
-    var files = $('#imagefile')[0].files;
-    var name = $('.upload_image_name').val();
-    if (files.length > 0 && name != "") {
-        fd.append('file', files[0]);
-        fd.append('name', name);
-        $.ajax({
-            url: 'functions/bg_post.php',
-            type: 'post',
-            data: fd,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                if (response != "Error") {
-                    alert(response);
-                    $(document).find('.picture-url').val(user_data + 'products/' + response);
-                    $('.gallery_upload').hide();
-                } else {
-                    alert('file not uploaded');
-                }
-            },
-        });
-    } else {
-        alert("Please select a file and set name!");
-    }
-});
-
-function splash_cart() {
-    $('.cart').css('background', '#acf5a7');
-    $('.cart').css('transition-duration', '150ms');
-    setTimeout(function () {
-        $('.cart').css('background', 'white');
-    }, 300);
-}
-
-$('.gallery_image .image').on('click', function () {
-    $image_path = $(this).data('path');
-    $('.picture-url').val($image_path);
-    $('.gallery_view').toggle();
-});
-
-$('.select_image_toggle').on('click', function () {
-    $('.gallery_view').toggle();
-});
-
-$('.upload_image_toggle').on('click', function () {
-    $('.gallery_upload').toggle();
-    $('.upload_image_name').val($(this).data('name'));
-});
-
 $('.category_editor_toggle').on('click', function () {
     $('.category_editor').find('.category_editor-name').val("");
 });
@@ -580,3 +505,72 @@ function setCookie(cname, cvalue, exdays) {
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
+
+//Gallery & Uploader
+$('.gallery_image .image').on('click', function () {
+    $image_path = $(this).data('path');
+    $('.picture-url').val($image_path);
+    $('.gallery_view').toggle();
+});
+
+$('.select_image_toggle').on('click', function () {
+    $('.gallery_view').toggle();
+});
+
+$('.delete-gallery-image').on('click', function () {
+    var confim = confirm('Delete this picture?');
+    if (confim) {
+        var image = $(this).data("path");
+        $.post("functions/bg_post.php", { delete_gallery_image: true, image: image })
+            .done(function (e) {
+                alert(e);
+            });
+        $(this).parent().parent().toggle();
+
+    }
+});
+
+$('.get_form_url').on('click', function () {
+    var name = $('#upload_image_name').val();
+    var url = $(this).parent().find('.upload_image_url').val();
+    $.post("functions/bg_post.php", { get_form_url: true, url: url, name: name })
+        .done(function (e) {
+            $(document).find('.picture-url').val(user_data + 'products/' + e);
+            alert(e + " uploaded!");
+            $('#uploader').modal('toggle');
+        });
+});
+
+$('.upload_image_toggle').on("click", function () {
+    $("#upload_image_name").val($(this).attr("data-name"));
+})
+
+$('.upload_btn').on('click', function () {
+    var fd = new FormData();
+    var files = $('#imagefile')[0].files;
+    console.log(files);
+    var name = $('#upload_image_name').val();
+    alert(name);
+    if (files.length > 0 && name != "") {
+        fd.append('file', files[0]);
+        fd.append('name', name);
+        $.ajax({
+            url: 'functions/bg_post.php',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response != "Error") {
+                    alert(response);
+                    $(document).find('.picture-url').val(user_data + 'products/' + response);
+                    $('#uploader').modal('toggle');
+                } else {
+                    alert('file not uploaded');
+                }
+            },
+        });
+    } else {
+        alert("Please select a file and set name!");
+    }
+});

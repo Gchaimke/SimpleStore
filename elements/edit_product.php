@@ -14,11 +14,8 @@
                     <input type="text" class="form-control picture-url" />
                 </div>
                 <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="<?=lang("Select Image")?>">
-                <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="" value="<?=lang("Upload Image")?>">
-                <?php
-                include("elements/gallery.php");
-                include('elements/uploader.php');
-                ?>
+                <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="1" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#uploader" value="<?=lang("Upload Image")?>">
+                <?php include("elements/gallery.php"); ?>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("name")?></label>
                     <input type="text" name="product-name" class="form-control product-name"/>

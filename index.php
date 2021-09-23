@@ -18,6 +18,7 @@ include_once('functions/post.php');
                 include_once('elements/edit_category.php');
                 include('elements/edit_product.php');
                 include_once('elements/search_order.php');
+                include('elements/uploader.php');
             }
             echo "<div class='container'>$company->header</div>";
             include_once('elements/favorites.php');

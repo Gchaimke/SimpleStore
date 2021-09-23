@@ -21,8 +21,9 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editCompanyLabel"><?= lang("settings") ?></h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="editCompanyLabel"><?= lang("settings") ?></h5>
+                <div class="btn btn-outline-success mx-2" onclick="$('.save_company').click()"><?= lang("save") ?></div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="edit_company">
@@ -44,22 +45,18 @@
                         <input type="text" class="form-control picture-url" name="logo" value="<?= $company->logo ?>" />
                     </div>
                     <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="<?= lang("Select Image") ?>">
-                    <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="logo" value="<?= lang("Upload Image") ?>">
-                    <?php
-                    include("elements/gallery.php");
-                    include('elements/uploader.php');
-                    ?>
+                    <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="logo" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#uploader" value="<?= lang("Upload Image") ?>">
+                    <?php include("elements/gallery.php"); ?>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("company_message") ?></label>
                         <textarea id="head_textarea" class="form-control" name="header" rows="10"><?= $company->header ?></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang("close") ?></button>
-                        <input name="submit" type="submit" class="btn btn-outline-dark align-middle" value="<?= lang("save") ?>" />
+                        <input name="submit" type="submit" class="btn btn-outline-dark align-middle save_company" value="<?= lang("save") ?>" />
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
