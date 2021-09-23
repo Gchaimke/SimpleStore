@@ -3,7 +3,6 @@ var carrency = '';
 $(document).ready(function () {
     $('.cart-send-whatsapp').hide();
     $('.cart-send-email').hide();
-
     $('.card-title, .card-text').each(function () {
         var text_length = $(this).text().length;
         var have_text = $(this).parent().find('.card-text')
@@ -336,7 +335,6 @@ $('#clear-cart').on('click', function () {
             });
     }
 });
-
 
 $('.cart_header, .close-cart').on('click', function () {
     $('.cart-wraper').toggle();

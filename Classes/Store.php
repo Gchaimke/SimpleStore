@@ -2,15 +2,13 @@
 namespace SimpleStore;
 require_once(DOC_ROOT . 'Classes/Helper.php');
 require_once(DOC_ROOT . 'Classes/Company.php');
-require_once(DOC_ROOT . 'Classes/Categories.php');
 require_once(DOC_ROOT . 'Classes/Category.php');
-require_once(DOC_ROOT . 'Classes/Products.php');
 require_once(DOC_ROOT . 'Classes/Product.php');
 require_once(DOC_ROOT . 'Classes/Cart.php');
 
 class Store
 {
-    public $carrency, $company, $categories, $products, $cart;
+    public $carrency, $company, $category, $product, $cart;
 
     function __construct()
     {
@@ -22,8 +20,8 @@ class Store
         }
         $this->carrency = "₪";
         $this->company = new Company;
-        $this->categories = new Categories;
-        $this->products = new Products;
+        $this->category = new Category;
+        $this->product = new Product;
         $this->cart = new Cart;
     }
 

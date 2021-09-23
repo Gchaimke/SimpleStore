@@ -4,7 +4,15 @@ namespace SimpleStore;
 
 class Product
 {
-    public $id, $name, $description, $price, $kind, $img, $options;
+    public $id;
+    public $category_id;
+    public $name = "new product";
+    public $description = "";
+    public $price = 50;
+    public $qtty = 1;
+    public $kind = 'kg';
+    public $img = 'img/product.jpg';
+    public $options = "";
 
     function __construct($product = array())
     {
@@ -13,15 +21,18 @@ class Product
         $description = 'description_' . $lng;
         $kind = 'kind_' . $lng;
         $options = "options_" . $lng;
-        if (!key_exists("id", $product)) {
-            $this->$name = key_exists('name', $product) && $product['name'] != '' ? $product['name'] : "new product";
-            $this->$description = key_exists('description', $product) && $product['description'] != '' ? $product['description'] : '';
-            $this->price = key_exists('price', $product) && $product['price'] != '' ? $product['price'] : 50;
-            $this->qtty = key_exists('qtty', $product) && $product['qtty'] != '' ? $product['qtty'] : '1';
-            $this->category_id = key_exists('category_id', $product) && $product['category_id'] != '' ? $product['category_id'] : '1';
-            $this->$kind = key_exists('kind', $product) && $product['kind'] != '' ? $product['kind'] : 'kg';
-            $this->img = key_exists('img', $product) && $product['img'] != '' ? $product['img'] : 'img/product.jpg';
-            $this->$options = key_exists('options', $product) && $product['options'] != '' ? $product['options'] : '';
+        $product = (object)$product;
+        if (!property_exists($product, "id")) {
+            $this->category_id = property_exists($product, 'category_id') && $product['category_id'] != '' ? $product['category_id'] : '1';
+            $this->id = $this->get_last_id($this->category_id) + 1;
+
+            $this->$name = property_exists($product, $name) && $product[$name] != '' ? $product[$name] : $this->name;
+            $this->$description = property_exists($product, $description) && $product[$description] != '' ? $product[$description] : '';
+            $this->price = property_exists($product, 'price') && $product['price'] != '' ? $product['price'] : $this->price;
+            $this->qtty = property_exists($product, 'qtty') && $product['qtty'] != '' ? $product['qtty'] : $this->qtty;
+            $this->$kind = property_exists($product, $kind) && $product[$kind] != '' ? $product[$kind] : $this->kind;
+            $this->img = property_exists($product, 'img') && $product['img'] != '' ? $product['img'] : $this->img;
+            $this->$options = property_exists($product, $options) && $product[$options] != '' ? $product[$options] : '';
         } else {
             foreach ($product as $key => $value) {
                 $this->$key = htmlspecialchars($value, ENT_QUOTES);
@@ -29,10 +40,31 @@ class Product
         }
     }
 
-    function edit_product($category_index, $product)
+    function get_product($category_id, $product_id)
+    {
+        $products = $this->get_products($category_id);
+        foreach ($products as $product) {
+            if ($product->id == $product_id) {
+                return $product;
+            }
+        }
+        return null;
+    }
+
+    function get_products($category_id)
+    {
+        if (file_exists(DATA_ROOT)) {
+            $products = json_decode(file_get_contents(DATA_ROOT . "$category_id.json"));
+        } else {
+            $products = json_decode("{}");
+        }
+        return $products;
+    }
+
+    function edit_product($category_id, $product)
     {
         global $lng;
-        $products = json_decode(file_get_contents(DATA_ROOT . "$category_index.json"));
+        $products = json_decode(file_get_contents(DATA_ROOT . "$category_id.json"));
         $product = (object)$product;
         foreach ($products as $key => $curent_product) {
             if ($curent_product->id == $product->id) {
@@ -45,17 +77,69 @@ class Product
         $kind = 'kind_' . $lng;
         $options = "options_" . $lng;
         $old_product->price = $product->price;
-        $old_product->name = htmlspecialchars($product->name, ENT_QUOTES);
         $old_product->$name = htmlspecialchars($product->name, ENT_QUOTES);
-        $old_product->description = htmlspecialchars($product->description, ENT_QUOTES);
         $old_product->$description = htmlspecialchars($product->description, ENT_QUOTES);
-        $old_product->kind = htmlspecialchars($product->kind, ENT_QUOTES);
         $old_product->$kind = htmlspecialchars($product->kind, ENT_QUOTES);
         $old_product->qtty = $product->qtty != "" ? $product->qtty : 1;
         $old_product->img = $product->img;
-        $old_product->options = htmlspecialchars($product->options, ENT_QUOTES);
         $old_product->$options = htmlspecialchars($product->options, ENT_QUOTES);
         $products[$product_key] = $old_product;
-        file_put_contents(DATA_ROOT . "$category_index.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+        file_put_contents(DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+    }
+
+    function get_last_id($category_id)
+    {
+        $bigest_id = 0;
+        $products =  $this->get_products($category_id);
+        foreach ($products as $product) {
+            $id = str_replace('_', '', $product->id);
+            if ($bigest_id < intval($id)) {
+                $bigest_id = $id;
+            }
+        }
+        return $bigest_id;
+    }
+
+    function new_product($category_id, $product)
+    {
+        global $lng;
+        $products = $this->get_products($category_id);
+        $last_product_id =  $this->get_last_id($category_id);
+        $product = (object)$product;
+
+        if ($product->id > 0) {
+            $new_product = new Product($product);
+        } else {
+            $new_product = new Product();
+        }
+        $new_product->id = $last_product_id + 1;
+        $new_product->category_id = $category_id;
+
+        $name = "name_" . $lng;
+        $description = 'description_' . $lng;
+        $kind = 'kind_' . $lng;
+        $options = "options_" . $lng;
+
+        $this->price = $product->price;
+        $this->$name = htmlspecialchars($product->name, ENT_QUOTES);
+        $this->$description = htmlspecialchars($product->description, ENT_QUOTES);
+        $this->$kind = htmlspecialchars($product->kind, ENT_QUOTES);
+        $this->qtty = $product->qtty != "" ? $product->qtty : 1;
+        $this->img = $product->img;
+        $this->$options = htmlspecialchars($product->options, ENT_QUOTES);
+        $products[] = $new_product;
+        file_put_contents(DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+    }
+
+    function favorite_product($category_id, $product_id)
+    {
+        $product = $this->get_product($category_id, $product_id);
+        $this->new_product("favorites", $product);
+    }
+
+    function duplicate_product($category_id, $product_id)
+    {
+        $product = $this->get_product($category_id, $product_id);
+        $this->new_product($category_id, clone ($product));
     }
 }

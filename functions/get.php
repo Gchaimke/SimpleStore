@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_GET['lang'])) {
-    echo "<script> document.cookie = 'language = {$_GET['lang']};expires=365;path=/'; window.location.href ='".SITE_ROOT."'</script>";
+    echo "<script> document.cookie = 'language = {$_GET['lang']};expires=365;path=/'; window.location.href ='" . SITE_ROOT . "'</script>";
 }
 
 if (isset($_GET['email_order'])) {
@@ -93,8 +93,8 @@ if (isset($_GET['orders'])) {
     }
 }
 
-if (isset($_GET['add_c'])&&$_GET['add_p']) {
-    $cart->add_to_cart($products_class->get_product($_GET['add_c'],$_GET['add_p']));
+if (isset($_GET['add_c']) && $_GET['add_p']) {
+    $cart->add_to_cart($store->product->get_product($_GET['add_c'], $_GET['add_p']));
 }
 
 if (isset($_GET['clear_cart'])) {
@@ -104,5 +104,3 @@ if (isset($_GET['clear_cart'])) {
 if (isset($_GET['update'])) {
     update_products_data();
 }
-
-

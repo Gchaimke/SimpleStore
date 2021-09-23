@@ -58,9 +58,7 @@ $store = new SimpleStore\Store();
 $carrency = $store->carrency;
 $company = $store->company;
 $cart = $store->cart;
-$categories = $store->categories->get_categories_with_products();
-$product_class = new SimpleStore\Product;
-$products_class = new SimpleStore\Products;
+$categories = $store->category->get_categories_with_products();
 $images = get_files();
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
@@ -136,7 +134,7 @@ function edit_category($id, $key, $value)
 {
     global $lng, $store;
     $key = $key == "name" ? "name_" . $lng : $key;
-    $store->categories->edit_category($id, $key, $value);
+    $store->category->edit_category($id, $key, $value);
     return true;
 }
 
