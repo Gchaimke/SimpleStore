@@ -77,10 +77,6 @@ SimpleStore 1
      font-size: 25px !important;
  }
 
- .product-card {
-     max-width: min-content;
- }
-
  .card-body.product {
      min-height: 145px;
  }
@@ -106,6 +102,15 @@ SimpleStore 1
  .card-text, .card-title {
      white-space: pre-wrap;
  }
+
+ .card-footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: baseline;
+    background: #e7f1ff;
+  }
 
  .delete-product, .edit-product, .duplicate-product, .favorite-product {
      position: absolute;

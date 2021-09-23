@@ -22,7 +22,7 @@ class Cart
             $product = $_SESSION['cart'][$key];
             $product->cart_price += $product->price;
             $product->cart_price = number_format($product->cart_price, 2, '.', '');
-            $product->cart_qtty += $product->cart_qtty;
+            $product->cart_qtty += $product->qtty;
         } else {
             $_SESSION['cart'][$key] = $product;
         }
