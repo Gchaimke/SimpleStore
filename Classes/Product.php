@@ -45,11 +45,15 @@ class Product
         $kind = 'kind_' . $lng;
         $options = "options_" . $lng;
         $old_product->price = $product->price;
+        $old_product->name = htmlspecialchars($product->name, ENT_QUOTES);
         $old_product->$name = htmlspecialchars($product->name, ENT_QUOTES);
+        $old_product->description = htmlspecialchars($product->description, ENT_QUOTES);
         $old_product->$description = htmlspecialchars($product->description, ENT_QUOTES);
+        $old_product->kind = htmlspecialchars($product->kind, ENT_QUOTES);
         $old_product->$kind = htmlspecialchars($product->kind, ENT_QUOTES);
         $old_product->qtty = $product->qtty != "" ? $product->qtty : 1;
         $old_product->img = $product->img;
+        $old_product->options = htmlspecialchars($product->options, ENT_QUOTES);
         $old_product->$options = htmlspecialchars($product->options, ENT_QUOTES);
         $products[$product_key] = $old_product;
         file_put_contents(DATA_ROOT . "$category_index.json", json_encode($products, JSON_UNESCAPED_UNICODE));
