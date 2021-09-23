@@ -12,7 +12,7 @@ class Product
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
         $kind = 'kind_' . $lng;
-        $options = "options_". $lng;
+        $options = "options_" . $lng;
         if (!key_exists("id", $product)) {
             $this->$name = key_exists('name', $product) && $product['name'] != '' ? $product['name'] : "new product";
             $this->$description = key_exists('description', $product) && $product['description'] != '' ? $product['description'] : '';
@@ -22,9 +22,9 @@ class Product
             $this->$kind = key_exists('kind', $product) && $product['kind'] != '' ? $product['kind'] : 'kg';
             $this->img = key_exists('img', $product) && $product['img'] != '' ? $product['img'] : 'img/product.jpg';
             $this->$options = key_exists('options', $product) && $product['options'] != '' ? $product['options'] : '';
-        }else{
-            foreach($product as $key => $value){
-                $this->$key = $value;
+        } else {
+            foreach ($product as $key => $value) {
+                $this->$key = htmlspecialchars($value, ENT_QUOTES);
             }
         }
     }
@@ -43,14 +43,14 @@ class Product
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
         $kind = 'kind_' . $lng;
-        $options = "options_". $lng;
+        $options = "options_" . $lng;
         $old_product->price = $product->price;
-        $old_product->$name = $product->name;
-        $old_product->$description = $product->description;
-        $old_product->$kind = $product->kind;
-        $old_product->qtty = $product->qtty;
+        $old_product->$name = htmlspecialchars($product->name, ENT_QUOTES);
+        $old_product->$description = htmlspecialchars($product->description, ENT_QUOTES);
+        $old_product->$kind = htmlspecialchars($product->kind, ENT_QUOTES);
+        $old_product->qtty = $product->qtty != "" ? $product->qtty : 1;
         $old_product->img = $product->img;
-        $old_product->$options = $product->options;
+        $old_product->$options = htmlspecialchars($product->options, ENT_QUOTES);
         $products[$product_key] = $old_product;
         file_put_contents(DATA_ROOT . "$category_index.json", json_encode($products, JSON_UNESCAPED_UNICODE));
     }

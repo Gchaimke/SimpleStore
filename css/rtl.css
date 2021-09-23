@@ -1,4 +1,4 @@
-main, footer, .navbar {
+main, footer, .navbar, .statistic , .product-qtty, .product-price {
     direction: rtl;
 }
 
@@ -28,6 +28,13 @@ button.btn.MS-left {
     float: left;
 }
 
-.statistic {
-    direction: ltr;
-}
+.add-product_toggle {
+    right: initial;
+    left: 50px;
+  }
+
+ @media only screen and (max-width: 690px) {
+    .delete-category {
+        right: 140px;
+    }
+ }

@@ -13,18 +13,20 @@ class Cart
 
     function add_to_cart($product)
     {
-        $product->cart_price = $product->price;
-        $product->cart_qtty = $product->qtty;
-        $option = preg_replace('~[^\p{L}\p{N}]++~u', '', $product->option);
-        $product->id = $product->id . "_" . $option;
-        $key = $product->category_id . "_" . $product->id;
-        if (isset($_SESSION['cart'][$key])) {
-            $product = $_SESSION['cart'][$key];
-            $product->cart_price += $product->price;
-            $product->cart_price = number_format($product->cart_price, 2, '.', '');
-            $product->cart_qtty += $product->qtty;
-        } else {
-            $_SESSION['cart'][$key] = $product;
+        if ($product->price > 0) {
+            $product->cart_price = $product->price;
+            $product->cart_qtty = $product->qtty;
+            $option = preg_replace('~[^\p{L}\p{N}]++~u', '', $product->option);
+            $product->id = $product->id . "_" . $option;
+            $key = $product->category_id . "_" . $product->id;
+            if (isset($_SESSION['cart'][$key])) {
+                $product = $_SESSION['cart'][$key];
+                $product->cart_price += $product->price;
+                $product->cart_price = number_format($product->cart_price, 2, '.', '');
+                $product->cart_qtty += $product->qtty;
+            } else {
+                $_SESSION['cart'][$key] = $product;
+            }
         }
     }
 

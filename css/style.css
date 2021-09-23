@@ -185,15 +185,17 @@ SimpleStore 1
      cursor: pointer;
  }
 
+ .edit-category {
+    color: #1984fe;
+    left: 170px;
+}
+
  .delete-category {
      color: red;
-     left: 130px;
+     left: 200px;
  }
 
- .edit-category {
-     color: #1984fe;
-     left: 100px;
- }
+
 
  .add-product_toggle {
      right: 50px;
@@ -272,6 +274,14 @@ SimpleStore 1
      }
      .MS-content {
          height: 340px !important;
+     }
+
+     .edit-category {
+        left: 100px;
+    }
+    
+     .delete-category {
+         left: 130px;
      }
  }
 

@@ -31,9 +31,10 @@ class Products
 
     function add_product($category_id, $product)
     {
+        $product = (array)$product;
         $products = $this->get_products($category_id);
         $last_product_id =  $this->get_last_id();
-        $new_product = new Product((array)$product);
+        $new_product = new Product($product);
         $new_product->id = $last_product_id + 1;
         $new_product->category_id = $category_id;
         $products[] = $new_product;

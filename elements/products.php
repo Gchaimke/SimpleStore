@@ -20,6 +20,9 @@ if (is_iterable($categories)) {
         $product_num = 0;
         if (is_iterable($products)) {
             foreach ($products as $product) {
+                if ($product->price <= 0 && !$logedin) {
+                    continue;
+                }
                 if (!isset($product->id)) {
                     $product->id = $product_num;
                 }

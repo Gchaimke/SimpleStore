@@ -21,27 +21,27 @@
                 ?>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("name")?></label>
-                    <input type="text" class="form-control product-name" name="product_name"/>
+                    <input type="text" name="product-name" class="form-control product-name"/>
                 </div>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("Description")?></label>
-                    <textarea type="text" class="form-control product-description"></textarea>
+                    <textarea type="text" name="product-description" class="form-control product-description"></textarea>
                 </div>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("price")?></label>
-                    <input type="text" class="form-control product-price" />
+                    <input type="number" name="product-price" class="form-control product-price"/>
                 </div>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("Quantity")?></label>
-                    <input type="text" class="form-control product-qtty" />
+                    <input type="number" name="product-qtty" class="form-control product-qtty"/>
                 </div>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("Kind")?></label>
-                    <input type="text" class="form-control product-kind" />
+                    <input type="text" name="product-kind" class="form-control product-kind" placeholder="kg"/>
                 </div>
                 <div class="input-group mb-3">
                     <label class="input-group-text"><?=lang("Options")?></label>
-                    <input type="text" class="form-control product-options" />
+                    <input type="text" name="product-options" class="form-control product-options" placeholder="slice, do not slice"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=lang("close")?></button>

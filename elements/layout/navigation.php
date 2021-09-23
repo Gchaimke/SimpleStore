@@ -14,7 +14,7 @@
                 <?php if ($logedin) : ?>
                     <span id="admin_nav" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle btn btn-outline-success text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?= lang("settings") ?>
+                            <?= lang("admin") ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <?php include_once('elements/statistic.php'); ?>
