@@ -6,9 +6,12 @@
             <a href="<?= SITE_ROOT ?>" tabindex="0"> <?= $company->name ?></a>
             <a href="tel:<?= $company->phone ?>" tabindex="0"> <?= $company->phone ?></a>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler02" aria-controls="navbarToggler02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler02" aria-controls="navbarToggler02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <input type="button" class="nav-item btn btn-outline-info mx-md-2 <?= $lng == 'he' ? "lang-ru" : 'lang-he' ?> lang-ru d-lg-none d-md-inline d-sm-inline " tabindex="0" value="<?= $lng == 'he' ? "ru" : 'he' ?>">
+        </div>
         <div class="collapse navbar-collapse" id="navbarToggler02">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php if ($logedin) : ?>
@@ -37,11 +40,6 @@
             <button class="btn btn-outline-info fas fa-info-circle text-warning mx-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" aria-label="info" tabindex="0">
             </button>
         </div>
-        <?php if ($lng == 'ru') : ?>
-            <input type="button" class="nav-item btn btn-outline-info mx-md-2 lang-he" tabindex="0" value="he">
-        <?php endif ?>
-        <?php if ($lng == 'he') : ?>
-            <input type="button" class="nav-item btn btn-outline-info mx-md-2 lang-ru" tabindex="0" value="ru">
-        <?php endif ?>
+        <input type="button" class="nav-item btn btn-outline-info mx-md-2 <?= $lng == 'he' ? "lang-ru" : 'lang-he' ?> lang-ru d-lg-inline d-none " tabindex="0" value="<?= $lng == 'he' ? "ru" : 'he' ?>">
     </div>
 </nav>

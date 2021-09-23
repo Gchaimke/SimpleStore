@@ -16,7 +16,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=lang("close")?></button>
                         <input type="button" class="btn btn-outline-dark align-middle add-category" value="<?=lang("save")?>" />
-                        <input type="button" class="btn btn-outline-dark align-middle edit-category_btn" value="Update" style="display: none;" />
+                        <input type="button" class="btn btn-outline-dark align-middle edit-category_btn" value="<?= lang("save") ?>" style="display: none;" />
                     </div>
                 </div>
             </div>

@@ -279,21 +279,6 @@ function add_to_cart_animation(productId) {
                 'height': 75
             }, 1000);
 
-        setTimeout(function () {
-            cart.animate({
-                marginLeft: '+=5px',
-            }, 50);
-            cart.animate({
-                marginLeft: '-=5px',
-            }, 50);
-            cart.animate({
-                marginLeft: '+=5px',
-            }, 50);
-            cart.animate({
-                marginLeft: '-=5px',
-            }, 50);
-        }, 1000);
-
         imgclone.animate({
             'width': 0,
             'height': 0

@@ -30,7 +30,7 @@
                     <input type="hidden" name="edit_company" value="true" />
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("company_name") ?></label>
-                        <input type="text" class="form-control" name="name" value="<?= $company->name ?>" />
+                        <input type="text" class="form-control company_name" name="name" value="<?= $company->name ?>" />
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("phone") ?></label>

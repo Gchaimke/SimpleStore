@@ -4,6 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="edit_productLabel">Add / Edit Product</h3>
+                <div class="btn btn-outline-success mx-2" onclick="$('.edit-product-btn').click()"><?= lang("save") ?></div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body edit_product_items">
