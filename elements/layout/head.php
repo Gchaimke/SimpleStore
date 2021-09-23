@@ -17,7 +17,6 @@ include_once('functions/helper.php');
 
     <link rel="stylesheet" href="<?= auto_version('css/normalize.css') ?>" type="text/css">
     <?php if ($lng == "he") : ?>
-        <link rel="stylesheet" href="<?= auto_version('css/rtl.css') ?>" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.rtl.min.css" integrity="sha384-LPvXVVAlyPoBSGkX8UddpctDks+1P4HG8MhT7/YwqHtJ40bstjzCqjj+VVVDhsCo" crossorigin="anonymous">
     <?php endif ?>
 
@@ -28,6 +27,6 @@ include_once('functions/helper.php');
     <meta name="theme-color" content="#fafafa">
     <link rel="stylesheet" href="<?= auto_version('css/main.css') ?>" type="text/css">
     <link rel="stylesheet" href="<?= auto_version('css/style.css') ?>" type="text/css">
-
+    <link rel="stylesheet" href="<?= auto_version('css/rtl.css') ?>" type="text/css">
 
 </head>
