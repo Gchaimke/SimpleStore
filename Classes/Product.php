@@ -108,7 +108,7 @@ class Product
         $last_product_id =  $this->get_last_id($category_id);
         $product = (object)$product;
 
-        if ($product->id > 0) {
+        if ($product->name != "") {
             $new_product = new Product($product);
         } else {
             $new_product = new Product();

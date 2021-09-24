@@ -18,10 +18,10 @@ if (isset($_POST['logout'])) {
 
 if (isset($_POST['edit_product'])) {
     if (!empty($_POST['category_id'])) {
-        if (!empty($_POST['id'])) {
-            echo $store->product->edit_product(clean($_POST['category_id']), $_POST);
-        } else {
+        if (empty($_POST['id'])) {
             echo $store->product->new_product(clean($_POST['category_id']), $_POST);
+        } else {
+            echo $store->product->edit_product(clean($_POST['category_id']), $_POST);
         }
     }
     exit;
