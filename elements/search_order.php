@@ -10,7 +10,7 @@ $folders = array_diff(scandir(ORDERS_PATH, 1), array('..', '.'));
                     echo "<option>$folder</option>";
                 } ?>
             </select>
-            <input type="number" id="search_order_val" class="form-control" name="search_order" />
+            <input type="number" id="search_order_val" class="form-control" name="search_order" min="1"/>
             <button type="submit" class="btn btn-dark send"><?= lang("search_btn") ?></button>
         </div>
     </form>
