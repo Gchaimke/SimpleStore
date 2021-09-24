@@ -9,7 +9,8 @@
         $options = property_exists($product, "options_" . $lng) ? "options_" . $lng : "options";
         if ($logedin) {
             echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$product->category_id' data-product='$product->id'></i>";
-            echo "<i class='btn btn-outline-info far fa-edit edit-product' data-category='$product->category_id ' 
+            echo "<i class='btn btn-outline-info far fa-edit edit-product' 
+            data-category='$product->category_id ' 
             data-product='$product->id' 
             data-img='$product->img' 
             data-name='" . $product->$name . "'
@@ -34,8 +35,8 @@
 
     <div class="card-footer text-nowrap">
         <div class="product-to-cart" data-product_id="<?= $product_cart_id ?>" data-product_options="<?= $product->$options ?>">
-            <?= $qtty . $product->$kind ?>
-            <h5 class="card-price mx-1"><?= $product->price . $carrency ?></h5>
+            <div class="mx-1"><span class="card-qtty"><?= $qtty . "</span><span class='card-kind'>" . $product->$kind ?></span></div>
+            <div class="mx-1"><span class="card-price h5"><?= $product->price . "</span><span>" . $carrency ?></span></div>
             <i class='fas fa-cart-plus'></i>
         </div>
     </div>

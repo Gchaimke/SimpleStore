@@ -1,24 +1,4 @@
 <?php
-if (isset($_POST['edit_product'])) {
-    if (!empty($_POST['category'])) {
-        $product = array(
-            'id' => clean($_POST['product_id']),
-            'name' => $_POST['name'],
-            'description' => $_POST['description'],
-            'price' => $_POST['price'],
-            'qtty' => $_POST['qtty'],
-            'kind' => $_POST['kind'],
-            'img' => $_POST['img'],
-            'options' => $_POST['options'],
-        );
-        if (!empty($_POST['product_id'])) {
-            $store->product->edit_product(clean($_POST['category']), $product);
-        } else {
-            $store->product->new_product(clean($_POST['category']), $product);
-        }
-    }
-    exit;
-}
 
 if (isset($_POST['delete_product'])) {
     if (!empty($_POST['category'])) {

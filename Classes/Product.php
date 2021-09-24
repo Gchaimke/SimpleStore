@@ -85,6 +85,7 @@ class Product
         $old_product->$options = htmlspecialchars($product->options, ENT_QUOTES);
         $products[$product_key] = $old_product;
         file_put_contents(DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+        return true;
     }
 
     function get_last_id($category_id)

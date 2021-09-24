@@ -12,9 +12,19 @@ if (isset($_POST['login'])) {
     }
 }
 
-
 if (isset($_POST['logout'])) {
     logout();
+}
+
+if (isset($_POST['edit_product'])) {
+    if (!empty($_POST['category_id'])) {
+        if (!empty($_POST['id'])) {
+            echo $store->product->edit_product(clean($_POST['category_id']), $_POST);
+        } else {
+            echo $store->product->new_product(clean($_POST['category_id']), $_POST);
+        }
+    }
+    exit;
 }
 
 if (isset($_POST['get_stats'])) {

@@ -161,27 +161,44 @@ $('.edit-product').on('click', function () {
     $('.edit_product_items').find('.upload_image_toggle').attr("data-name", $(this).data("name"));
 });
 
-$('.edit-product-btn').on('click', function () {
-    var product_id = $('.edit_product_items').find('#edit-product-id').val();
-    var category = $('.edit_product_items').find('#edit-category-id').val();
-    var img = $('.edit_product_items').find('.picture-url').val();
-    var name = $('.edit_product_items').find('.product-name').val();
-    var description = $('.edit_product_items').find('.product-description').val();
-    var price = $('.edit_product_items').find('.product-price').val();
-    var qtty = $('.edit_product_items').find('.product-qtty').val();
-    var kind = $('.edit_product_items').find('.product-kind').val();
-    var options = $('.edit_product_items').find('.product-options').val();
-    $.post("index.php", {
-        edit_product: true, category: category,
-        product_id: product_id, img: img, name: name, description: description,
-        price: price, kind: kind, qtty: qtty, options: options
-    })
-        .done(function (e) {
-            console.log(e)
-            setTimeout(function () {
-                location.reload();
-            }, 500);
-        });
+$('#edit_product_form').on('submit', function (e) {
+    var category = $(this).find('input[name="category_id"]').val();
+    var id = $(this).find('input[name="id"]').val();
+    var img = $(this).find('input[name="img"]').val();
+    var name = $(this).find('input[name="name"]').val();
+    var description = $(this).find('textarea[name="description"]').val();
+    var price = $(this).find('input[name="price"]').val();
+    var qtty = $(this).find('input[name="qtty"]').val();
+    var kind = $(this).find('input[name="kind"]').val();
+
+    e.preventDefault();
+    $.ajax({
+        type: 'post',
+        url: 'functions/bg_post.php',
+        data: $(this).serialize(),
+        success: function (e) {
+            if (e = 1) {
+                var product_id = category.trim() + "_" + id.trim();
+                $("#" + product_id).find('.card-image').css("background-image", 'url(' + img + ')');
+                $("#" + product_id).find('.card-title').text(name);
+                $("#" + product_id).find('.card-text').text(description);
+                $("#" + product_id).find('.card-price').text(price);
+                $("#" + product_id).find('.card-qtty').text(qtty);
+                $("#" + product_id).find('.card-kind').text(kind);
+                $("#" + product_id).find('.edit-product').data("img", img);
+                $("#" + product_id).find('.edit-product').data("name", name);
+                $("#" + product_id).find('.edit-product').data("description", description);
+                $("#" + product_id).find('.edit-product').data("price", price);
+                $("#" + product_id).find('.edit-product').data("qtty", qtty);
+                $("#" + product_id).find('.edit-product').data("kind", kind);
+                $('#edit_product').modal('toggle');
+                if(id==""){
+                    location.reload();
+                }
+            }
+            console.log(e);
+        }
+    });
 });
 
 $(document).on('click', '.duplicate-product', function () {
@@ -469,8 +486,6 @@ $('#search_order').on('submit', function (e) {
     }
     location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + month + "-" + search);
 });
-
-
 
 $('.lang-ru').on('click', function () { change_language("ru") });
 $('.lang-he').on('click', function () { change_language("he") });
