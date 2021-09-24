@@ -270,14 +270,24 @@ function order_to_html($order_num = 0)
         <th style='$style $th_style'>$qtty</th>
         <th style='$style $th_style'>$price</th></tr>";
         foreach ($order->items as $item) {
-            $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
-            $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
-            $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
-            $html .= "<tr>";
-            $html .= "<td style='$style'>{$item->$name} $option $item->qtty {$item->$kind}</td>";
-            $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
-            $html .= "<td style='$style'>$item->cart_price $carrency</td>";
-            $html .= '</tr>';
+            if (property_exists($item, "qtty")) {
+                $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
+                $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
+                $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
+                $html .= "<tr>";
+                $html .= "<td style='$style'>{$item->$name} $option $item->qtty {$item->$kind}</td>";
+                $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
+                $html .= "<td style='$style'>$item->cart_price $carrency</td>";
+                $html .= '</tr>';
+            }else{
+                //TODO: old order compatibility, please remove if you dont have old orders
+                $item = explode(",",$item);
+                $html .= "<tr>";
+                $html .= "<td style='$style'>$item[0] $item[1]</td>";
+                $html .= "<td style='$style'>$item[1]</td>";
+                $html .= "<td style='$style'>$item[2] $carrency</td>";
+                $html .= '</tr>';
+            }
         }
         $html .= "<tr><td style='$style'>$total - <span style='color:red;'>$approximately ~ </span>
         </td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";

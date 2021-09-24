@@ -19,10 +19,9 @@ if (isset($_GET['order'])) {
     if ($logedin) {
         $order .= order_client_to_html($_GET['order']);
         $order_num = explode("-", $_GET['order']);
-        if (count($order_num) > 1) {
+        if (count($order_num) > 1 && get_orders($order_num[0])) {
             $orders['this_month'] = get_orders($order_num[0])['orders'];
             $orders['prev_month'] = get_orders($prev_month)['orders'];
-
             $next = $order_num[0] . "-" . add_zero(intval($order_num[1]) + 1);
 
             if (intval($order_num[1]) == 1) {

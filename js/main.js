@@ -460,8 +460,14 @@ $('#search').on('submit', function (e) {
 
 $('#search_order').on('submit', function (e) {
     e.preventDefault();
-    var search = $("#search_order_val").val();
-    location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + search);
+    var month = $("#search_order_month").val();
+    var search = parseInt($("#search_order_val").val());
+    if (search < 10) {
+        search = "00" + search;
+    } else if (search < 100) {
+        search = "0" + search;
+    }
+    location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + month + "-" + search);
 });
 
 
