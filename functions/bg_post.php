@@ -32,6 +32,11 @@ if (isset($_POST['get_stats'])) {
     exit;
 }
 
+if (isset($_POST['prev_stats'])) {
+    echo update_stats($_POST['prev_stats']);
+    exit;
+}
+
 if (isset($_POST['get_form_url'])) {
     $name = str_replace([' ', '%', '\\'], '_', $_POST['name']);
     save_image($name, clean($_POST['url']));

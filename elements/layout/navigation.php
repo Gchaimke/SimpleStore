@@ -20,13 +20,13 @@
                             <?= lang("admin") ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <?php include_once('elements/statistic.php'); ?>
                             <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editCompany" tabindex="0"><?= lang("settings") ?></span>
                             <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#categoryEditor" tabindex="0"><?= lang("new_category") ?></span>
                             <a class="dropdown-item" href="<?= '?orders=' . date('my') ?>" tabindex="0"><?= lang("orders") ?></a>
 
                         </ul>
                     </span>
+                    <?php include_once('elements/statistic.php'); ?>
                 <?php endif ?>
             </div>
 

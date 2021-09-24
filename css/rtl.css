@@ -1,5 +1,9 @@
-main, footer, .navbar, .statistic , .product-qtty, .product-price {
+main, footer, .navbar , .product-qtty, .product-price {
     direction: rtl;
+}
+
+.statistic {
+    direction: ltr;
 }
 
 .cart {
