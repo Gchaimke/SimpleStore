@@ -3,7 +3,7 @@
         <div class="navbar-brand text-wrap text-center">
             <a href="<?= SITE_ROOT ?>" tabindex="0"></a>
             <img src="<?= $company->logo ?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            <a href="<?= SITE_ROOT ?>" tabindex="0"> <?= $company->name ?></a>
+            <a class="mx-1" href="<?= SITE_ROOT ?>" tabindex="0"> <?= $company->name ?></a>
             <a href="tel:<?= $company->phone ?>" tabindex="0"> <?= $company->phone ?></a>
         </div>
         <div>
