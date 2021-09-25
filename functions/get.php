@@ -50,46 +50,11 @@ if (isset($_GET['order'])) {
 }
 
 if (isset($_GET['orders'])) {
-    $orders = get_orders($_GET['orders']);
-    if (isset($_GET['max'])) {
-        $max = $_GET['max'];
-    } else {
-        $max = 15;
-    }
-    if (isset(get_orders($_GET['orders'])['orders'])) {
-        $orders = get_orders($_GET['orders'])['orders'];
-        echo "<h2 class='text-center'>" . lang('last orders') . "</h2><div class='orders row text-center mx-3'>";
-        if (is_countable($orders)) {
-            foreach ($orders as $order) {
-                if ($max == 0) {
-                    break;
-                }
-                $order_num = explode('.', $order)[0];
-                $order_data = json_decode(file_get_contents(DATA_ROOT . 'orders/' . $_GET['orders'] . "/" . $order));
-                if ($order_data->client->name != 'test') {
-                    echo "
-                <a href='?order=$order_num' class='order-card card col-md m-md-3 my-2'>
-                    <h4>$order_num</h4>
-                    <div>
-                        <div>" . $order_data->date . "</div>
-                        <div>" . $order_data->client->name . "</div>
-                        <div>" . $order_data->client->phone . "</div>
-                        <div>" . $order_data->client->address . "</div>
-                        <div>$order_data->total $carrency</div>
-                    </div>
-                </a>";
-                }
-                $max--;
-            }
-        }
-        echo "</div>";
-        if (date("my") == $_GET['orders']) {
-            $prev_month = date("my", strtotime(date('my') . " -1 month"));
-            echo "<center class='m-4'><a class='btn btn-info' href='?orders=$prev_month'>" . lang("Previos Month") . "</a></center>";
-        }
-    } else {
-        echo "<div class='text-center'>no order for " . $_GET['orders'] . " month!</div>";
-    }
+    extract($_GET);
+    ob_start();
+    include($_SERVER['DOCUMENT_ROOT'].'/elements/orders.php');
+    $output = ob_get_clean();
+    print $output;
 }
 
 if (isset($_GET['add_c']) && $_GET['add_p']) {

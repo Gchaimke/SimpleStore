@@ -33,8 +33,7 @@ if (isset($_POST['get_stats'])) {
 }
 
 if (isset($_POST['prev_stats'])) {
-    var_dump( update_stats($_POST['prev_stats']));
-    // echo update_stats($_POST['prev_stats']);
+    echo update_stats($_POST['prev_stats']);
     exit;
 }
 

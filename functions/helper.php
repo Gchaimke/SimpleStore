@@ -72,6 +72,7 @@ $distrikts = get_data("distrikts");
 function lang($key = "chaim")
 {
     global $lang;
+    $key = strtolower($key);
     $out =  key_exists($key, $lang) ? $lang[$key] : $key;
     return $out;
 }
@@ -554,6 +555,14 @@ function debug($data)
     } else {
         echo $data . "<br>";
     }
+}
+
+function paginate($vars){
+    extract($vars);
+    ob_start();
+    include($_SERVER['DOCUMENT_ROOT'] .'/elements/layout/pagination.php');
+    $output = ob_get_clean();
+    print $output;
 }
 /**
  * TO DO: Use one time
