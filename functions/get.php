@@ -52,7 +52,7 @@ if (isset($_GET['order'])) {
 if (isset($_GET['orders'])) {
     extract($_GET);
     ob_start();
-    include($_SERVER['DOCUMENT_ROOT'].'/elements/orders.php');
+    include(__DIR__.'/../elements/orders.php');
     $output = ob_get_clean();
     print $output;
 }

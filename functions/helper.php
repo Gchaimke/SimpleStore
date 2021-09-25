@@ -560,7 +560,7 @@ function debug($data)
 function paginate($vars){
     extract($vars);
     ob_start();
-    include($_SERVER['DOCUMENT_ROOT'] .'/elements/layout/pagination.php');
+    include(__DIR__ .'/../elements/layout/pagination.php');
     $output = ob_get_clean();
     print $output;
 }
