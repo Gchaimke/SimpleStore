@@ -33,9 +33,16 @@ if (isset($_POST['get_stats'])) {
 }
 
 if (isset($_POST['prev_stats'])) {
-    echo update_stats($_POST['prev_stats']);
+    var_dump( update_stats($_POST['prev_stats']));
+    // echo update_stats($_POST['prev_stats']);
     exit;
 }
+
+if (isset($_POST['update_stats'])) {
+    echo update_stats($_POST['update_stats']);
+    exit;
+}
+
 
 if (isset($_POST['get_form_url'])) {
     $name = str_replace([' ', '%', '\\'], '_', $_POST['name']);
@@ -70,11 +77,6 @@ if (isset($_FILES['file']['name'])) {
 
 if (isset($_POST['delete_gallery_image'])) {
     delete_image(clean($_POST['image']));
-    exit;
-}
-
-if (isset($_POST['update_stats'])) {
-    echo update_stats($_POST['update_stats']);
     exit;
 }
 

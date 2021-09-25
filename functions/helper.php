@@ -279,9 +279,9 @@ function order_to_html($order_num = 0)
                 $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
                 $html .= "<td style='$style'>$item->cart_price $carrency</td>";
                 $html .= '</tr>';
-            }else{
+            } else {
                 //TODO: old order compatibility, please remove if you dont have old orders
-                $item = explode(",",$item);
+                $item = explode(",", $item);
                 $html .= "<tr>";
                 $html .= "<td style='$style'>$item[0] $item[1]</td>";
                 $html .= "<td style='$style'>$item[1]</td>";
@@ -435,13 +435,15 @@ function update_stats($month = 0)
         foreach ($orders["orders"] as $order) {
             $order = json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order));
             if (property_exists($order, "client")) {
-                if ($order->client->name != 'test') {
-                    $month_stats->total += $order->total;
-                    $month_stats->total = number_format($month_stats->total, 0, '.', ',');
+                if (isset($order->total) && $order->client->name != 'test') {
+                    if (is_numeric($order->total)) {
+                        $month_stats->total += $order->total;
+                    }
                     $month_stats->count++;
                 }
             }
         }
+        $month_stats->total = number_format($month_stats->total, 0);
         if ($current_key == "") {
             $statistic[] = $month_stats;
         } else {
