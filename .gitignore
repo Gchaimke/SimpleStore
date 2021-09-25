@@ -1,3 +1,4 @@
-data/orders
 SimpleStore.zip
-data/stats.json
+data/
+node_modules
+sp_old

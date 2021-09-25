@@ -16,14 +16,17 @@ if (is_iterable($categories)) {
             </h2>
             <div id="flush-collapse' . $category->id . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $category->id . '" data-bs-parent="#accordionFlush">
             ';
-        echo '<div class="accordion-body"><div class="row">';
+        echo '<div class="accordion-body"><div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">';
         $product_num = 0;
         if (is_iterable($products)) {
             foreach ($products as $product) {
+                if ($product->price <= 0 && !$logedin) {
+                    continue;
+                }
                 if (!isset($product->id)) {
                     $product->id = $product_num;
                 }
-                $product_cart_id = $category->id . '_' . $product->id;
+                $product_cart_id = $product->category_id . '_' . $product->id;
                 echo "<div class='col' id='$product_cart_id'>";
                 include('elements/card.php');
                 echo '</div>';

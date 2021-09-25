@@ -1,18 +1,7 @@
 <?php
 
-if (isset($_GET['login'])) {
-    if ($_GET['login'] != '') {
-        $login = login($_GET['login']);
-    }
-}
-
-if (isset($_GET['login_error'])) {
-    $message['kind'] = 3;
-    $message['text'] = lang("password_error");
-}
-
-if (isset($_GET['logout'])) {
-    logout();
+if (isset($_GET['lang'])) {
+    echo "<script> document.cookie = 'language = {$_GET['lang']};expires=365;path=/'; window.location.href ='" . SITE_ROOT . "'</script>";
 }
 
 if (isset($_GET['email_order'])) {
@@ -30,10 +19,9 @@ if (isset($_GET['order'])) {
     if ($logedin) {
         $order .= order_client_to_html($_GET['order']);
         $order_num = explode("-", $_GET['order']);
-        if (count($order_num) > 1) {
+        if (count($order_num) > 1 && get_orders($order_num[0])) {
             $orders['this_month'] = get_orders($order_num[0])['orders'];
             $orders['prev_month'] = get_orders($prev_month)['orders'];
-
             $next = $order_num[0] . "-" . add_zero(intval($order_num[1]) + 1);
 
             if (intval($order_num[1]) == 1) {
@@ -62,52 +50,21 @@ if (isset($_GET['order'])) {
 }
 
 if (isset($_GET['orders'])) {
-    $orders = get_orders($_GET['orders']);
-    if (isset($_GET['max'])) {
-        $max = $_GET['max'];
-    } else {
-        $max = 15;
-    }
-    if (isset(get_orders($_GET['orders'])['orders'])) {
-        $orders = get_orders($_GET['orders'])['orders'];
-        echo "<h2 class='text-center'>" . lang('last orders') . "</h2><div class='orders row text-center mx-3'>";
-        if (is_countable($orders)) {
-            foreach ($orders as $order) {
-                if ($max == 0) {
-                    break;
-                }
-                $order_num = explode('.', $order)[0];
-                $order_data = json_decode(file_get_contents(DOC_ROOT . 'data/orders/' . $_GET['orders'] . "/" . $order));
-                if ($order_data->client->name != 'test') {
-                    echo "
-                <a href='?order=$order_num' class='order-card card col-md m-md-3 my-2'>
-                    <h4>$order_num</h4>
-                    <div>
-                        <div>" . $order_data->date . "</div>
-                        <div>" . $order_data->client->name . "</div>
-                        <div>" . $order_data->client->phone . "</div>
-                        <div>" . $order_data->client->address . "</div>
-                        <div>$order_data->total $carrency</div>
-                    </div>
-                </a>";
-                }
-                $max--;
-            }
-        }
-        echo "</div>";
-        if (date("my") == $_GET['orders']) {
-            $prev_month = date("my", strtotime(date('my') . " -1 month"));
-            echo "<center class='m-4'><a class='btn btn-info' href='?orders=$prev_month'>" . lang("Previos Month") . "</a></center>";
-        }
-    } else {
-        echo "<div class='text-center'>no order for " . $_GET['orders'] . " month!</div>";
-    }
+    extract($_GET);
+    ob_start();
+    include(__DIR__.'/../elements/orders.php');
+    $output = ob_get_clean();
+    print $output;
 }
 
-if (isset($_GET['add_c'])&&$_GET['add_p']) {
-    $cart->add_to_cart($products_class->get_product($_GET['add_c'],$_GET['add_p']));
+if (isset($_GET['add_c']) && $_GET['add_p']) {
+    $cart->add_to_cart($store->product->get_product($_GET['add_c'], $_GET['add_p']));
 }
 
 if (isset($_GET['clear_cart'])) {
     $_SESSION['cart'] = array();
+}
+
+if (isset($_GET['update'])) {
+    update_products_data();
 }

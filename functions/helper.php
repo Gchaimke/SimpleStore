@@ -4,14 +4,15 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
     die('Direct access not allowed');
     exit();
 };
+session_start();
 
 /**
  * Config
  */
-define("VERSION", "1.5");
+define("VERSION", "2.0");
 
 require_once(__DIR__ . '/../config.php');
-define("ORDERS_PATH", DOC_ROOT . "data/orders/");
+define("ORDERS_PATH", DATA_ROOT . "orders/");
 
 /**
  * Classes Loader
@@ -57,9 +58,7 @@ $store = new SimpleStore\Store();
 $carrency = $store->carrency;
 $company = $store->company;
 $cart = $store->cart;
-$categories = $store->categories->get_categories_with_products();
-$product_class = new SimpleStore\Product;
-$products_class = new SimpleStore\Products;
+$categories = $store->category->get_categories_with_products();
 $images = get_files();
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
@@ -69,16 +68,11 @@ $distrikts = get_data("distrikts");
 /**
  * Functions
  */
-function set_lang($lng)
-{
-    $cookie_name = "language";
-    $cookie_value = $lng;
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), SITE_ROOT); // 86400 = 1 day
-}
 
 function lang($key = "chaim")
 {
     global $lang;
+    $key = strtolower($key);
     $out =  key_exists($key, $lang) ? $lang[$key] : $key;
     return $out;
 }
@@ -88,20 +82,24 @@ function redirect($url)
     echo "<script>window.location.href = '$url';</script>";
 }
 
+function reload()
+{
+    echo "<script>location.reload();</script>";
+}
+
 function login($pass)
 {
     if (urldecode($pass)  == PASS) {
         $_SESSION["login"] = true;
-        redirect(SITE_ROOT);
+        return true;
     } else {
-        redirect(SITE_ROOT . '?login_error');
+        return false;
     }
 }
 
 function logout()
 {
     $_SESSION["login"] = '';
-    redirect(SITE_ROOT);
 }
 
 function auto_version($file)
@@ -137,7 +135,7 @@ function edit_category($id, $key, $value)
 {
     global $lng, $store;
     $key = $key == "name" ? "name_" . $lng : $key;
-    $store->categories->edit_category($id, $key, $value);
+    $store->category->edit_category($id, $key, $value);
     return true;
 }
 
@@ -149,7 +147,7 @@ function delete_category($id)
             unset($categories[$key]);
         }
     }
-    unlink(DOC_ROOT . "data/$id.json");
+    unlink(DATA_ROOT . "$id.json");
     save_json($categories, 'categories');
 }
 
@@ -200,6 +198,9 @@ function add_zero($orders)
 
 function get_orders($month)
 {
+    global $logedin;
+    if (!$logedin) redirect(SITE_ROOT);
+
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
         $orders['orders'] = get_files($orders_path, ["json"], 1);
@@ -265,46 +266,44 @@ function order_to_html($order_num = 0)
         $total = lang("total");
         $approximately = lang("approximately");
         $order_lbl = lang("order");
-        $html = "<tr><th style='$style $th_style'>$product</th><th style='$style $th_style'>$qtty</th><th style='$style $th_style'>$price</th></tr>";
-        foreach ($order->items as $value) {
-            $html .= "<tr>";
-            $value = explode(',', $value);
-            if ($value[2] != 0) {
-                foreach ($value as $td) {
 
-                    $html .= "<td style='$style'>$td</td>";
-                }
+        $html = "<tr><th style='$style $th_style'>$product</th>
+        <th style='$style $th_style'>$qtty</th>
+        <th style='$style $th_style'>$price</th></tr>";
+        foreach ($order->items as $item) {
+            if (property_exists($item, "qtty")) {
+                $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
+                $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
+                $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
+                $html .= "<tr>";
+                $html .= "<td style='$style'>{$item->$name} $option $item->qtty {$item->$kind}</td>";
+                $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
+                $html .= "<td style='$style'>$item->cart_price $carrency</td>";
+                $html .= '</tr>';
+            } else {
+                //TODO: old order compatibility, please remove if you dont have old orders
+                $item = explode(",", $item);
+                $html .= "<tr>";
+                $html .= "<td style='$style'>$item[0] $item[1]</td>";
+                $html .= "<td style='$style'>$item[1]</td>";
+                $html .= "<td style='$style'>$item[2] $carrency</td>";
+                $html .= '</tr>';
             }
-            $html .= '</tr>';
         }
         $html .= "<tr><td style='$style'>$total - <span style='color:red;'>$approximately ~ </span>
         </td><td colspan='2' style='text-align: center;$style'>$order->total$carrency</td></tr>";
 
         return "<div style='direction:$direction'><h3 style='text-align: center;background: #bb80a1;color: white;padding: 30px;'>
-        $order->date <br> $order_lbl: <span style='direction:rtl'>$order->id </span></h3><table style='width:100%;$style'>$html</table><br>";
+        $order->date <br> $order_lbl: <span style='direction:$direction'>$order->id </span></h3><table style='width:100%;$style'>$html</table><br>";
     }
     return $order;
-}
-
-function clear_cookie()
-{
-    $ignore = ["PHPSESSID", "language"];
-    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-    foreach ($cookies as $cookie) {
-        $parts = explode('=', $cookie);
-        $name = trim($parts[0]);
-        if (!in_array($name, $ignore)) {
-            setcookie($name, '', 1);
-            setcookie($name, '', 1, SITE_ROOT);
-        }
-    }
 }
 
 //** Helper */
 
 function get_data($file)
 {
-    $path = DOC_ROOT . "data/$file.json";
+    $path = DATA_ROOT . "$file.json";
     if (file_exists($path)) {
         return json_decode(file_get_contents($path));
     } else {
@@ -312,9 +311,12 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DOC_ROOT . "img/products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
+function get_files($dir = DATA_ROOT . "products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
+    if (!file_exists($dir)) {
+        mkdir($dir, 0700);
+    }
     $cdir = scandir($dir, $ASC);
     foreach ($cdir as $file) {
         $extension = explode('.', $file);
@@ -334,8 +336,8 @@ function save_image($image_name, $url)
     $image_ext = pathinfo($url, PATHINFO_EXTENSION);
     $image_ext = strtolower($image_ext);
 
-    $tmp = DOC_ROOT . 'img/tmp.' . $image_ext;
-    $location = DOC_ROOT . 'img/products/' . $image_name . '.' . $image_ext;
+    $tmp = DATA_ROOT . 'tmp.' . $image_ext;
+    $location = DATA_ROOT . 'products/' . $image_name . '.' . $image_ext;
 
     if (in_array($image_ext, $valid_ext)) {
         file_put_contents($tmp, file_get_contents($url));
@@ -406,7 +408,7 @@ function save_json($array, $file_name = 'test')
     usort($array, function ($a, $b) { //Sort the array using a user defined function
         return $a->name > $b->name ? 1 : -1; //Compare the scores
     });
-    file_put_contents(DOC_ROOT . "data/$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
+    file_put_contents(DATA_ROOT . "$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
 function update_stats($month = 0)
@@ -414,8 +416,8 @@ function update_stats($month = 0)
     if ($month == 0) {
         $month = date('my');
     }
-    if (file_exists(DOC_ROOT . "data/stats.json")) {
-        $statistic = json_decode(file_get_contents(DOC_ROOT . "data/stats.json"));
+    if (file_exists(DATA_ROOT . "stats.json")) {
+        $statistic = json_decode(file_get_contents(DATA_ROOT . "stats.json"));
     } else {
         $statistic = json_decode('[{"month":"0","total":0,"count":0}]');
     }
@@ -434,19 +436,22 @@ function update_stats($month = 0)
         foreach ($orders["orders"] as $order) {
             $order = json_decode(file_get_contents(ORDERS_PATH . $orders["month"] . '/' . $order));
             if (property_exists($order, "client")) {
-                if ($order->client->name != 'test') {
-                    $month_stats->total += $order->total;
+                if (isset($order->total) && $order->client->name != 'test') {
+                    if (is_numeric($order->total)) {
+                        $month_stats->total += $order->total;
+                    }
                     $month_stats->count++;
                 }
             }
         }
+        $month_stats->total = number_format($month_stats->total, 0);
         if ($current_key == "") {
             $statistic[] = $month_stats;
         } else {
             $statistic[$current_key] = $month_stats;
         }
     }
-    file_put_contents(DOC_ROOT . "data/stats.json", json_encode($statistic));
+    file_put_contents(DATA_ROOT . "stats.json", json_encode($statistic));
     return $month;
 }
 
@@ -455,7 +460,7 @@ function get_stats($month = 0)
     if ($month == 0) {
         $month = date('my');
     }
-    $path = DOC_ROOT . 'data/stats.json';
+    $path = DATA_ROOT . 'stats.json';
     if (file_exists($path)) {
         $data =  json_decode(file_get_contents($path));
     } else {
@@ -511,7 +516,7 @@ function export_csv()
     $categories = $store->categories->get_categories_with_products();
 
     //$fp = fopen('php://output', 'w');
-    $fp = fopen(DOC_ROOT . "data/" . $file_name, 'w');
+    $fp = fopen(DATA_ROOT . "" . $file_name, 'w');
     fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
     fputcsv($fp, array("Category", "Name", "Price"));
 
@@ -527,29 +532,68 @@ function export_csv()
     }
     fclose($fp);
 }
+
+function debug($data)
+{
+    if (is_array($data) || is_object($data)) {
+        foreach ($data as $key => $value) {
+            echo "<br>$key<br>";
+            if (is_array($value) || is_object($value)) {
+                foreach ($value as $key_1 => $value_1) {
+                    if (is_array($value_1) || is_object($value_1)) {
+                        foreach ($value_1 as $key_2 => $value_2) {
+                            echo "$key_2 => $value_2<br><br>";
+                        }
+                    } else {
+                        echo "$key_1 => $value_1<br>";
+                    }
+                }
+            } else {
+                echo "$key => $value<br>";
+            }
+        }
+    } else {
+        echo $data . "<br>";
+    }
+}
+
+function paginate($vars){
+    extract($vars);
+    ob_start();
+    include(__DIR__ .'/../elements/layout/pagination.php');
+    $output = ob_get_clean();
+    print $output;
+}
 /**
  * TO DO: Use one time
  */
-function update_products_id($category_index = '')
+function update_products_data()
 {
-    if ($category_index != '') {
-        $category = get_category($category_index);
-        if (isset($category)) {
-            $products = get_data($category_index);
-            foreach ($products as $key => $product) {
-                if (!property_exists($product, 'id')) {
-                    $product->id = $category->last_index;
-                    $products[$key] = $product;
-                    $category->last_index++;
-                }
+    global $categories;
+    $favorites = new stdClass();
+    $favorites->id = "favorites";
+    $favorites->name = "favorites";
+    $categories[] = $favorites;
+    $updated = "";
+    foreach ($categories as $category) {
+        $category_index = $category->id;
+        $category_name = $category->name;
+        $products = get_data($category_index);
+        foreach ($products as $key => $product) {
+            if (!property_exists($product, 'category_id')) {
+                $product->category_id = $category_index;
+                $products[$key] = $product;
             }
-            save_json($products, $category_index);
-            edit_category($category_index, "last_index", $category->last_index);
-            echo lang("updated");
-            return;
+            if (!property_exists($product, 'options')) {
+                $product->options = "";
+                $products[$key] = $product;
+            }
         }
+        $updated .= $category_name . ", ";
+        save_json($products, $category_index);
+        //edit_category($category_index, "last_index", $category->last_index);
     }
-    echo 'no category with id ' . $category_index;
+    echo lang("updated:" . $updated);
 }
 
 function old_to_new()
