@@ -488,11 +488,12 @@ function send_email($order_num = 0)
     $msg = lang("email_not_useble");
     if ($order_num != 0) {
         $to = $company->email;
+        $phone = str_replace("-", "", $company->phone);
         $subject = "New Order " . $order_num;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SITE_ROOT . "?order=" . $order_num;
-        $message =  order_to_html($order_num) . order_client_to_html($order_num) .
-            "<b style='color:red;'> $msg <a href='https://wa.me/972$company->phone'>whatsapp</a> </b><br><br>" .
-            "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
+        $message =  order_to_html($order_num) . order_client_to_html($order_num);
+        $message .= $phone != "" ? "<b style='color:red;'> $msg <a href='https://wa.me/972$phone'>whatsapp</a> </b><br><br>" : "";
+        $message .=   "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: admin@mc88.co.il" . "\r\n";
@@ -555,10 +556,11 @@ function debug($data)
     }
 }
 
-function paginate($vars){
+function paginate($vars)
+{
     extract($vars);
     ob_start();
-    include(__DIR__ .'/../elements/layout/pagination.php');
+    include(__DIR__ . '/../elements/layout/pagination.php');
     $output = ob_get_clean();
     print $output;
 }
