@@ -59,7 +59,9 @@ $carrency = $store->carrency;
 $company = $store->company;
 $cart = $store->cart;
 $categories = $store->category->get_categories_with_products();
-$images = get_files();
+$products_images = get_files();
+$site_images = get_files(DOC_ROOT . "img/");
+$images = array_merge($site_images, $products_images);
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
 
@@ -159,7 +161,7 @@ function save_order($cart, $total, $client)
     if (!file_exists($orders_path)) {
         mkdir($orders_path, 0700);
     }
-    $orders = get_files($orders_path, ["json"]);
+    $orders = get_files($orders_path, false, ["json"]);
     if (is_countable($orders)) {
         $order_count = add_zero(count($orders) + 1);
     } else {
@@ -201,7 +203,7 @@ function get_orders($month)
 
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
-        $orders['orders'] = get_files($orders_path, ["json"], 1);
+        $orders['orders'] = get_files($orders_path, false, ["json"], 1);
         $orders['month'] = $month;
         return $orders;
     }
@@ -309,23 +311,28 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DATA_ROOT . "products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
+function get_files($dir = DOC_ROOT . "data/products/", $keys = true, $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
     if (!file_exists($dir)) {
         mkdir($dir, 0700);
     }
+    $path = str_replace(DOC_ROOT, SITE_ROOT, $dir);
     $cdir = scandir($dir, $ASC);
     foreach ($cdir as $file) {
         $extension = explode('.', $file);
         $extension = end($extension);
         if (in_array($extension, $kind)) {
-            if (!is_dir($dir . DIRECTORY_SEPARATOR . $file)) {
-                $files[] =  $file;
+            if (!is_dir($dir . $file)) {
+                if ($keys) {
+                    $files[$path . $file] =  $file;
+                } else {
+                    $files[] =  $file;
+                }
             }
         }
     }
-    return ($files) ? $files : false;
+    return $files;
 }
 
 function save_image($image_name, $url)
@@ -349,10 +356,14 @@ function save_image($image_name, $url)
 
 function delete_image($image)
 {
-    if (unlink(DOC_ROOT . $image)) {
-        echo 'success';
-    } else {
-        echo 'fail';
+    if (strpos($image, "/img/") === false) {
+        if (unlink(DOC_ROOT . $image)) {
+            echo 'success';
+        } else {
+            echo 'fail';
+        }
+    }else {
+        echo 'img/ folder protected';
     }
 }
 // Compress image
