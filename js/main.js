@@ -506,9 +506,6 @@ if ($("#favorites_slider").length) {
         interval: 5000
     });
 }
-$(".item").on("click",function(){
-    alert($(this).height())
-})
 //jQuery Slider END
 
 function setCookie(cname, cvalue, exdays) {
