@@ -1,5 +1,5 @@
 <center>
-    <form id="search" class="col-md-4 m-3">
+    <form id="search" class="col-md-6 my-5">
         <div class="input-group mt-2">
             <input type="text" id="search_text" class="form-control" name="search" placeholder="<?= lang("search") ?>"/>
             <button type="submit" class="btn btn-dark send"><?= lang("search_btn") ?></button>
