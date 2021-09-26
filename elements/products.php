@@ -16,7 +16,7 @@ if (is_iterable($categories)) {
             </h2>
             <div id="flush-collapse' . $category->id . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $category->id . '" data-bs-parent="#accordionFlush">
             ';
-        echo '<div class="accordion-body"><div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">';
+        echo '<div class="accordion-body"><div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">';
         $product_num = 0;
         if (is_iterable($products)) {
             foreach ($products as $product) {

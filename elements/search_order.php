@@ -1,5 +1,5 @@
 <?php
-$folders = array_diff(scandir(ORDERS_PATH, 1), array('..', '.'));
+$folders = array_diff(scandir(ORDERS_PATH, 1), array('..', '.','index.html'));
 ?>
 <center>
     <form id="search_order" class="col-md-4">

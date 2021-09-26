@@ -37,8 +37,17 @@ button.btn.MS-left {
     left: 50px;
   }
 
+  .form-control.product-price, .form-control.product-qtty{
+    direction: ltr;
+    text-align: right;
+  }
+
  @media only screen and (max-width: 690px) {
     .delete-category {
         right: 140px;
+    }
+    .MS-content {
+        margin-left: 0;
+        margin-right: 0;
     }
  }
