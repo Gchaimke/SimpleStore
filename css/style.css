@@ -173,7 +173,7 @@ SimpleStore 1
      display: flex;
      flex-wrap: wrap;
      align-items: baseline;
-     justify-content: space-between;
+     justify-content: center;
  }
 
  .delete-category, .edit-category, .add-product_toggle {
@@ -249,7 +249,7 @@ SimpleStore 1
          min-height: initial;
      }
      .card-body.product {
-         min-height: initial;
+         min-height: 140px;
      }
      .card {
          max-width: initial;
@@ -261,7 +261,8 @@ SimpleStore 1
          height: 260px;
      }
      .MS-content {
-         height: 340px !important;
+         margin-left: 0;
+         margin-right: 0;
      }
      .edit-category {
          left: 100px;

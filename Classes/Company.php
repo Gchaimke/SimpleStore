@@ -5,7 +5,7 @@ namespace SimpleStore;
 class Company
 {
     private $company;
-    public $name, $phone, $email, $header, $logo;
+    public $name, $phone, $email, $header, $logo, $image_height, $image_size;
     private $data_path = DATA_ROOT . "company.json";
 
     function __construct()
@@ -16,7 +16,7 @@ class Company
         if (file_exists($this->data_path)) {
             $this->company = json_decode(file_get_contents($this->data_path));
         } else {
-            $this->company = json_decode('{"name":"company name","phone":"","email":"","logo":"tile.png","header":""}');
+            $this->company = json_decode('{"name":"company name","phone":"","email":"","logo":"tile.png","header":"","image_height":"120","image_size":""cover}');
             if (!file_exists(DOC_ROOT . "data")) {
                 mkdir(DOC_ROOT . "data", 0700);
             }
@@ -30,12 +30,14 @@ class Company
         $this->email = $this->company->email;
         $this->logo = $this->company->logo;
         $this->header = isset($this->company->$header) ? $this->company->$header : $this->company->header;
+        $this->image_height = $this->company->image_height;
+        $this->image_size = $this->company->image_size;
     }
 
     function update($data)
     {
         global $lng;
-        $exclude = ["phone", "email", "logo"];
+        $exclude = ["phone", "email", "logo","image_height","image_size","edit_company"];
         foreach ($data as $key => $value) {
             if (in_array($key, $exclude)) {
                 $this->company->$key = $value;

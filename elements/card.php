@@ -30,12 +30,12 @@
         <div class="card-content text-center">
             <h5 class="card-title"><?= $product->$name ?></h5>
             <p class="card-text"><?= $product->$description ?></p>
+            <div class="mx-1"><span class="card-qtty"><?= $qtty . "</span><span class='card-kind'>" . $product->$kind ?></span></div>
         </div>
     </div>
 
     <div class="card-footer text-nowrap">
         <div class="product-to-cart" data-product_id="<?= $product_cart_id ?>" data-product_options="<?= $product->$options ?>">
-            <div class="mx-1"><span class="card-qtty"><?= $qtty . "</span><span class='card-kind'>" . $product->$kind ?></span></div>
             <div class="mx-1"><span class="card-price h5"><?= $product->price . "</span><span>" . $carrency ?></span></div>
             <i class='fas fa-cart-plus'></i>
         </div>

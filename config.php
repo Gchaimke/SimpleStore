@@ -10,5 +10,3 @@ define("DATA_ROOT", $_SERVER['DOCUMENT_ROOT'] . SITE_ROOT . USER_DATA);
 define("PASS", 'p@$$word');
 define("ADMIN_PASS", 'Sdrm1415');
 define("SITE_LANG", "ru");
-define('CARD_IMG_HEIGHT',130);
-define('CARD_IMG_BG_SIZE',"cover");

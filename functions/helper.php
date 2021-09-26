@@ -64,6 +64,8 @@ $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
 
 
+define('CARD_IMG_HEIGHT',$company->image_height);
+define('CARD_IMG_BG_SIZE',$company->image_size);
 
 /**
  * Functions
@@ -89,7 +91,7 @@ function reload()
 
 function login($pass)
 {
-    if (urldecode($pass)  == PASS) {
+    if (urldecode($pass)  == PASS || urldecode($pass)  == ADMIN_PASS) {
         $_SESSION["login"] = true;
         return true;
     } else {
