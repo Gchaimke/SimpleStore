@@ -217,20 +217,10 @@ SimpleStore 1
      margin: 0 20%;
  }
 
- a.order-card {
-     text-decoration: none;
-     color: black;
-     max-width: 350px;
-     padding: 20px;
-     min-width: 220px;
- }
-
  /*jQuery slider */
 
  .MS-content {
-     margin: 15px 1%;
      overflow: hidden;
-     white-space: nowrap;
  }
 
  .MS-controls {

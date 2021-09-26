@@ -31,6 +31,10 @@ $(document).ready(function () {
         let month = $('#update_stats').data('month');
         get_stats(month);
     }
+
+    if($(".MS-content").length){
+        $(".MS-content").height($(".item.col").height()+40)
+    }
 });
 
 $('#login_form').on('submit', function (e) {
@@ -502,6 +506,10 @@ if ($("#favorites_slider").length) {
         interval: 5000
     });
 }
+$(".item").on("click",function(){
+    alert($(this).height())
+})
+//jQuery Slider END
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();

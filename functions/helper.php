@@ -9,7 +9,7 @@ session_start();
 /**
  * Config
  */
-define("VERSION", "1.6");
+define("VERSION", "2.0");
 
 require_once(__DIR__ . '/../config.php');
 define("ORDERS_PATH", DATA_ROOT . "orders/");
