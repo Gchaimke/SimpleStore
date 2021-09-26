@@ -63,10 +63,6 @@ $images = get_files();
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
 
-
-define('CARD_IMG_HEIGHT',$company->image_height);
-define('CARD_IMG_BG_SIZE',$company->image_size);
-
 /**
  * Functions
  */
