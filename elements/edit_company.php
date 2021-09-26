@@ -32,13 +32,19 @@
                         <label class="input-group-text"><?= lang("company_name") ?></label>
                         <input type="text" class="form-control company_name" name="name" value="<?= $company->name ?>" />
                     </div>
-                    <div class="input-group mb-3">
-                        <label class="input-group-text"><?= lang("phone") ?></label>
-                        <input type="text" class="form-control" name="phone" value="<?= $company->phone ?>" />
-                    </div>
-                    <div class="input-group mb-3">
-                        <label class="input-group-text"><?= lang("email") ?></label>
-                        <input type="text" class="form-control" name="email" value="<?= $company->email ?>" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text"><?= lang("phone") ?></label>
+                                <input type="text" class="form-control phone" name="phone" value="<?= $company->phone ?>" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text"><?= lang("email") ?></label>
+                                <input type="text" class="form-control email" name="email" value="<?= $company->email ?>" />
+                            </div>
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("logo") ?></label>
@@ -47,6 +53,25 @@
                     <input type="button" class="btn btn-outline-dark align-middle mb-3 select_image_toggle" value="<?= lang("Select Image") ?>">
                     <input type="button" class="btn btn-outline-dark align-middle mb-3 upload_image_toggle" data-name="logo" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#uploader" value="<?= lang("Upload Image") ?>">
                     <?php include("elements/gallery.php"); ?>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group mb-3 ">
+                                <label class="input-group-text"><?= lang("product image height") ?></label>
+                                <input type="number" class="form-control image_height" name="image_height" value="<?= $company->image_height ?>" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text"><?= lang("product image size") ?></label>
+                                <select type="text" class="form-select" name="image_size">
+                                    <?php foreach (array("cover", "contain") as $option) {
+                                        $selected = $company->image_size == $option ? "selected" : "";
+                                        echo  "<option value='$option' $selected>" . lang($option) . "</option>";
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("company_message") ?></label>
                         <textarea id="head_textarea" class="form-control" name="header" rows="10"><?= $company->header ?></textarea>

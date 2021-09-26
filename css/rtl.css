@@ -1,4 +1,4 @@
-main, footer, .navbar , .product-qtty, .product-price {
+main, footer, .navbar, .product-qtty, .product-price {
     direction: rtl;
 }
 
@@ -35,14 +35,19 @@ button.btn.MS-left {
 .add-product_toggle {
     right: initial;
     left: 50px;
-  }
+}
 
-  .form-control.product-price, .form-control.product-qtty{
+.form-control.product-price, .form-control.product-qtty {
     direction: ltr;
     text-align: right;
-  }
+}
 
- @media only screen and (max-width: 690px) {
+.form-control.image_height, .form-control.phone, .form-control.email {
+    direction: ltr;
+    text-align: center;
+}
+
+@media only screen and (max-width: 690px) {
     .delete-category {
         right: 140px;
     }
@@ -50,4 +55,4 @@ button.btn.MS-left {
         margin-left: 0;
         margin-right: 0;
     }
- }
+}
