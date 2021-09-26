@@ -3,3 +3,4 @@ data/
 node_modules
 sp_old
 config.php
+data*

@@ -11,7 +11,7 @@ class Product
     public $price = 50;
     public $qtty = 1;
     public $kind = 'kg';
-    public $img = 'img/product.jpg';
+    public $img = 'img/product.png';
     public $options = "";
 
     function __construct($product = array())
@@ -53,7 +53,10 @@ class Product
 
     function get_products($category_id)
     {
-        if (file_exists(DATA_ROOT)) {
+        if (!file_exists(DATA_ROOT)) {
+            mkdir(DATA_ROOT, 0700);
+        }
+        if (file_exists(DATA_ROOT . "$category_id.json")) {
             $products = json_decode(file_get_contents(DATA_ROOT . "$category_id.json"));
         } else {
             $products = json_decode("{}");
@@ -92,10 +95,12 @@ class Product
     {
         $bigest_id = 0;
         $products =  $this->get_products($category_id);
-        foreach ($products as $product) {
-            $id = str_replace('_', '', $product->id);
-            if ($bigest_id < intval($id)) {
-                $bigest_id = $id;
+        if (is_iterable($products)) {
+            foreach ($products as $product) {
+                $id = str_replace('_', '', $product->id);
+                if ($bigest_id < intval($id)) {
+                    $bigest_id = $id;
+                }
             }
         }
         return $bigest_id;
