@@ -29,9 +29,9 @@ class Company
         $this->phone = $this->company->phone;
         $this->email = $this->company->email;
         $this->logo = $this->company->logo;
-        $this->header = isset($this->company->$header) ? $this->company->$header : $this->company->header;
-        $this->image_height = $this->company->image_height;
-        $this->image_size = $this->company->image_size;
+        $this->header = isset($this->company->$header) ? $this->company->$header : "";
+        $this->image_height = isset($this->company->image_height)?$this->company->image_height:120;
+        $this->image_size = isset($this->company->image_size)?$this->company->image_size:"contain";
     }
 
     function update($data)
