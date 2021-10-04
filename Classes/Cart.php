@@ -58,16 +58,17 @@ class Cart
                 $name = property_exists($product, "name_" . $lng) ? "name_" . $lng : "name";
                 $id = $product->category_id . "_" . $product->id;
                 $html .= "
-                <li data-product_id='$id'>
-                    <span class='bg-danger remove-from-cart'>X</span>
-                    <span class='cart-product mx-2'>{$product->$name} $product->option</span>
-                    <span class='cart_qty'>{$product->cart_qtty}</span>
-                    <span class='cart_kind me-1'>" . lang($product->kind) . "</span>
-                    <span class='cart_price'>{$product->cart_price}</span>$carrency
+                <li data-product_id='$id' class='list-group-item'>
+                    <span class='bg-danger remove-from-cart badge badge-primary badge-pill'>X</span>
+                    <center>
+                        <span class='cart-product mx-2'>{$product->$name} $product->option</span>
+                        <span class='cart_qty'>{$product->cart_qtty}</span>
+                        <span class='cart_kind me-1'>" . lang($product->kind) . "</span>
+                        <span class='cart_price'>{$product->cart_price}</span>$carrency
+                    </center>
                     <div class='cart-controls text-nowrap mb-2 text-center' data-product_id='$id' data-product_option='$product->option'>
                         <span class='btn btn-warning ml-2 minus'>-</span><b class='m-2'>1</b><span class='btn btn-success plus'>+</span>
                     </div>
-                    <hr>
                 </li>";
             }
             return $html;
