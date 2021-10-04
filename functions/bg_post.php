@@ -43,7 +43,7 @@ if (isset($_POST['update_stats'])) {
 }
 
 
-if (isset($_POST['get_form_url'])) {
+if (isset($_POST['get_from_url'])) {
     $name = str_replace([' ', '%', '\\'], '_', $_POST['name']);
     save_image($name, clean($_POST['url']));
     exit;

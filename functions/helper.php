@@ -321,7 +321,7 @@ function get_files($dir = DOC_ROOT . "data/products/", $keys = true, $kind = ["j
     if (!file_exists($dir)) {
         mkdir($dir, 0700);
     }
-    $path = str_replace(DOC_ROOT, SITE_ROOT, $dir);
+    $path = str_replace(DOC_ROOT, "", $dir);
     $cdir = scandir($dir, $ASC);
     foreach ($cdir as $file) {
         $extension = explode('.', $file);

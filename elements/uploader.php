@@ -23,7 +23,7 @@
                                 <label class="input-group-text"><?= lang('Image URL') ?></label>
                                 <input type="text" class="form-control upload_image_url" />
                             </div>
-                            <input type="button" class="btn btn-outline-dark align-middle mb-3 get_form_url" value="<?= lang('Get from URL') ?>">
+                            <input type="button" class="btn btn-outline-dark align-middle mb-3 get_from_url" value="<?= lang('Get from URL') ?>">
                         </div>
                     </div>
                 </div>
