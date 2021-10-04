@@ -461,7 +461,7 @@ $('.close-parent').on('click', function () {
 
 $('#search').on('submit', function (e) {
     e.preventDefault();
-    var search = $("#search_text").val();
+    let search = $("#search_text").val();
     search = search.toLowerCase();
     search = search.replace(/ /g, '');
     //search = search.substring(1);
@@ -476,7 +476,8 @@ $('#search').on('submit', function (e) {
                 $("#total_found").append(total);
                 products.forEach(function (value) {
                     if (value != "") {
-                        $("#" + value).clone().appendTo("#search_result");
+                        let product = $("#" + value).detach();
+                        product.appendTo("#search_result");
                     }
                 });
             }
