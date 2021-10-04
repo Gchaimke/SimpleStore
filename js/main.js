@@ -476,7 +476,7 @@ $('#search').on('submit', function (e) {
                 products.forEach(function (value) {
                     if (value != "") {
                         let product = $("#" + value).detach();
-                        product.appendTo("#search_result");
+                        product.prependTo("#search_result");
                     }
                 });
             }
