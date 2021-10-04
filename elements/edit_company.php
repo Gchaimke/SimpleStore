@@ -72,6 +72,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group mb-2 ">
+                                <label class="input-group-text"><?= lang("Price format") ?></label>
+                                <input type="number" class="form-control price_format" name="price_format" value="<?= $company->price_format ?>" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group mb-2 ">
+                                <label class="input-group-text"><?= lang("Currency") ?></label>
+                                <input type="text" class="form-control currency" name="currency" value="<?= $company->currency ?>" />
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("company_message") ?></label>
                         <textarea id="head_textarea" class="form-control" name="header" rows="10"><?= $company->header ?></textarea>

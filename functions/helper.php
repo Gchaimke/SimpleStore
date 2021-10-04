@@ -56,6 +56,7 @@ if (isset($_COOKIE['items']) && $_COOKIE['items']) {
  */
 $store = new SimpleStore\Store();
 $carrency = $store->carrency;
+$price_format = $store->price_format;
 $company = $store->company;
 $cart = $store->cart;
 $categories = $store->category->get_categories_with_products();
@@ -254,7 +255,7 @@ function order_client_to_html($order_num = 0)
 
 function order_to_html($order_num = 0)
 {
-    global $carrency, $lng;
+    global $price_format, $carrency, $lng;
     $direction = $lng != "he" ? "ltr" : "rtl";
     $order = get_order($order_num);
     if (is_object($order)) {
@@ -273,15 +274,16 @@ function order_to_html($order_num = 0)
         foreach ($order->items as $item) {
             if (property_exists($item, "qtty")) {
                 $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
-                $item_name = $item->$name!=""?$item->$name:$item->name;
+                $item_name = $item->$name != "" ? $item->$name : $item->name;
                 $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
                 $description = property_exists($item, "description_" . $lng) ? "description_" . $lng : "description";
-                $item_description = $item->$description!=""?"<i>({$item->$description})</i>":"";
+                $item_description = $item->$description != "" ? "<i>({$item->$description})</i>" : "";
                 $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
+                $cart_price = number_format($item->cart_price, $price_format)  . $carrency;
                 $html .= "<tr>";
                 $html .= "<td style='$style'>$item_name $item_description $option $item->qtty {$item->$kind}</td>";
-                $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
-                $html .= "<td style='$style'>$item->cart_price $carrency</td>";
+                $html .= "<td style='$style'>$item->cart_qtty{$item->$kind}</td>";
+                $html .= "<td style='$style'>$cart_price</td>";
                 $html .= '</tr>';
             } else {
                 //TODO: old order compatibility, please remove if you dont have old orders
@@ -365,7 +367,7 @@ function delete_image($image)
         } else {
             echo 'fail';
         }
-    }else {
+    } else {
         echo 'img/ folder protected';
     }
 }
