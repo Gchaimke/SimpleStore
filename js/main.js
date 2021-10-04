@@ -173,7 +173,8 @@ $('#edit_product_form').on('submit', function (e) {
     var description = $(this).find('textarea[name="description"]').val();
     var price = $(this).find('input[name="price"]').val();
     var qtty = $(this).find('input[name="qtty"]').val();
-    var kind = $(this).find('input[name="kind"]').val();
+    var kind_text = $(this).find('select[name="kind"] option:selected').text();
+    var kind_val = $(this).find('select[name="kind"] option:selected').val();
 
     e.preventDefault();
     $.ajax({
@@ -188,13 +189,13 @@ $('#edit_product_form').on('submit', function (e) {
                 $("#" + product_id).find('.card-text').text(description);
                 $("#" + product_id).find('.card-price').text(price);
                 $("#" + product_id).find('.card-qtty').text(qtty);
-                $("#" + product_id).find('.card-kind').text(kind);
+                $("#" + product_id).find('.card-kind').text(kind_text);
                 $("#" + product_id).find('.edit-product').data("img", img);
                 $("#" + product_id).find('.edit-product').data("name", name);
                 $("#" + product_id).find('.edit-product').data("description", description);
                 $("#" + product_id).find('.edit-product').data("price", price);
                 $("#" + product_id).find('.edit-product').data("qtty", qtty);
-                $("#" + product_id).find('.edit-product').data("kind", kind);
+                $("#" + product_id).find('.edit-product').data("kind", kind_val);
                 $('#edit_product').modal('toggle');
                 if(id==""){
                     location.reload();

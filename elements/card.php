@@ -16,7 +16,7 @@
             data-description='" . $product->$description . "'
             data-price='$product->price'
             data-qtty='$qtty'
-            data-kind='" . lang($product->kind) . "'
+            data-kind='" . $product->kind . "'
             data-options='" . $product->$options . "'
             data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"
             ></i>";
