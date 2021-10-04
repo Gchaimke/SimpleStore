@@ -55,7 +55,7 @@ if (isset($orders)) {
                                 <td><?= $order_data->client->name ?></td>
                                 <td class="text-nowrap"><?= $order_data->client->phone ?></td>
                                 <td><?= $order_data->client->address ?></td>
-                                <td class="text-nowrap"><?= $order_data->total . " " . $carrency ?></td>
+                                <td class="text-nowrap"><?= $order_data->total . $carrency ?></td>
                             </tr>
                 <?php    }
                         $max--;
@@ -69,4 +69,5 @@ if (isset($orders)) {
     paginate(array('orders_chunk' => $orders_chunk, 'month' => $month, 'current' => $current));
 } else {
     echo "<div class='text-center'>no order for " . $month . " month!</div>";
+    paginate(array('orders_chunk' => array(), 'month' => $month, 'current' => $current));
 }
