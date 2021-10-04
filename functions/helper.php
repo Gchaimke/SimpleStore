@@ -273,10 +273,13 @@ function order_to_html($order_num = 0)
         foreach ($order->items as $item) {
             if (property_exists($item, "qtty")) {
                 $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
+                $item_name = $item->$name!=""?$item->$name:$item->name;
                 $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
+                $description = property_exists($item, "description_" . $lng) ? "description_" . $lng : "description";
+                $item_description = $item->$description!=""?"<i>({$item->$description})</i>":"";
                 $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
                 $html .= "<tr>";
-                $html .= "<td style='$style'>{$item->$name} $option $item->qtty {$item->$kind}</td>";
+                $html .= "<td style='$style'>$item_name $item_description $option $item->qtty {$item->$kind}</td>";
                 $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
                 $html .= "<td style='$style'>$item->cart_price $carrency</td>";
                 $html .= '</tr>';
