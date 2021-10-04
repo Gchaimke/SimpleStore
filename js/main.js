@@ -32,8 +32,8 @@ $(document).ready(function () {
         get_stats(month);
     }
 
-    if($(".MS-content").length){
-        $(".MS-content").height($(".item.col").height()+40)
+    if ($(".MS-content").length) {
+        $(".MS-content").height($(".item.col").height() + 40)
     }
 });
 
@@ -152,6 +152,10 @@ $('.add-product_toggle').on('click', function () {
     $('.edit_product_items').find('#edit-category-id').val($(this).data("category"));
 });
 
+$(".toggle_product_options").on('click', function () {
+    $(this).parent().find(".product_options").toggle();
+});
+
 $('.edit-product').on('click', function () {
     $('.edit_product_items').find('#edit-product-id').val($(this).data("product"));
     $('.edit_product_items').find('#edit-category-id').val($(this).data("category"));
@@ -173,7 +177,8 @@ $('#edit_product_form').on('submit', function (e) {
     var description = $(this).find('textarea[name="description"]').val();
     var price = $(this).find('input[name="price"]').val();
     var qtty = $(this).find('input[name="qtty"]').val();
-    var kind = $(this).find('input[name="kind"]').val();
+    var kind_text = $(this).find('select[name="kind"] option:selected').text();
+    var kind_val = $(this).find('select[name="kind"] option:selected').val();
 
     e.preventDefault();
     $.ajax({
@@ -188,15 +193,15 @@ $('#edit_product_form').on('submit', function (e) {
                 $("#" + product_id).find('.card-text').text(description);
                 $("#" + product_id).find('.card-price').text(price);
                 $("#" + product_id).find('.card-qtty').text(qtty);
-                $("#" + product_id).find('.card-kind').text(kind);
+                $("#" + product_id).find('.card-kind').text(kind_text);
                 $("#" + product_id).find('.edit-product').data("img", img);
                 $("#" + product_id).find('.edit-product').data("name", name);
                 $("#" + product_id).find('.edit-product').data("description", description);
                 $("#" + product_id).find('.edit-product').data("price", price);
                 $("#" + product_id).find('.edit-product').data("qtty", qtty);
-                $("#" + product_id).find('.edit-product').data("kind", kind);
+                $("#" + product_id).find('.edit-product').data("kind", kind_val);
                 $('#edit_product').modal('toggle');
-                if(id==""){
+                if (id == "") {
                     location.reload();
                 }
             }
@@ -456,13 +461,12 @@ $('.close-parent').on('click', function () {
 
 $('#search').on('submit', function (e) {
     e.preventDefault();
-    var search = $("#search_text").val();
+    let search = $("#search_text").val();
     search = search.toLowerCase();
     search = search.replace(/ /g, '');
-    //search = search.substring(1);
     $.post("functions/bg_post.php", { search: search })
         .done(function (res) {
-            $("#search_result").empty();
+            $("#search_result");
             if (res.startsWith("FOUND:")) {
                 res = res.substring(6);
                 var products = res.split(",");
@@ -471,7 +475,8 @@ $('#search').on('submit', function (e) {
                 $("#total_found").append(total);
                 products.forEach(function (value) {
                     if (value != "") {
-                        $("#" + value).clone().appendTo("#search_result");
+                        let product = $("#" + value).detach();
+                        product.appendTo("#search_result");
                     }
                 });
             }
@@ -539,10 +544,10 @@ $('.delete-gallery-image').on('click', function () {
     }
 });
 
-$('.get_form_url').on('click', function () {
+$('.get_from_url').on('click', function () {
     var name = $('#upload_image_name').val();
     var url = $(this).parent().find('.upload_image_url').val();
-    $.post("functions/bg_post.php", { get_form_url: true, url: url, name: name })
+    $.post("functions/bg_post.php", { get_from_url: true, url: url, name: name })
         .done(function (e) {
             $(document).find('.picture-url').val(user_data + 'products/' + e);
             alert(e + " uploaded!");

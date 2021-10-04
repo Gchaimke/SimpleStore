@@ -1,6 +1,25 @@
 <?php
-$prev_month = "0" . ((int)$month - 100);
-$next_month = "0" . ((int)$month + 100);
+
+$prev_month = (int)$month - 100;
+$next_month = (int)$month + 100;
+
+$zero = "";
+if ($prev_month < 1000) {
+    $zero = "0";
+}
+$prev_month = $zero . $prev_month;
+if ($prev_month < 100) {
+    $prev_month = "12" . ($prev_month - 1);
+}
+
+$zero = "";
+if ($next_month < 1000) {
+    $zero = "0";
+}
+if ($next_month > 1300) {
+    $next_month = "0" . ($next_month + 1 - 1200);
+}
+$next_month = $zero . $next_month;
 ?>
 <ul class="pagination">
 

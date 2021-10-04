@@ -13,13 +13,13 @@ class Product
     public $kind = 'kg';
     public $img = 'img/product.png';
     public $options = "";
+    public $kinds = array("kg", "gr", "mg", "l", "ml", "pcs");
 
     function __construct($product = array())
     {
         global $lng;
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
-        $kind = 'kind_' . $lng;
         $options = "options_" . $lng;
         $product = (object)$product;
         if (!property_exists($product, "id")) {
@@ -30,7 +30,7 @@ class Product
             $this->$description = property_exists($product, $description) && $product[$description] != '' ? $product[$description] : '';
             $this->price = property_exists($product, 'price') && $product['price'] != '' ? $product['price'] : $this->price;
             $this->qtty = property_exists($product, 'qtty') && $product['qtty'] != '' ? $product['qtty'] : $this->qtty;
-            $this->$kind = property_exists($product, $kind) && $product[$kind] != '' ? $product[$kind] : $this->kind;
+            $this->kind = property_exists($product, 'kind') && $product['kind'] != '' ? $product['kind'] : $this->kind;
             $this->img = property_exists($product, 'img') && $product['img'] != '' ? $product['img'] : $this->img;
             $this->$options = property_exists($product, $options) && $product[$options] != '' ? $product[$options] : '';
         } else {
@@ -77,12 +77,11 @@ class Product
         }
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
-        $kind = 'kind_' . $lng;
         $options = "options_" . $lng;
         $old_product->price = $product->price;
         $old_product->$name = htmlspecialchars($product->name, ENT_QUOTES);
         $old_product->$description = htmlspecialchars($product->description, ENT_QUOTES);
-        $old_product->$kind = htmlspecialchars($product->kind, ENT_QUOTES);
+        $old_product->kind = htmlspecialchars($product->kind, ENT_QUOTES);
         $old_product->qtty = $product->qtty != "" ? $product->qtty : 1;
         $old_product->img = $product->img;
         $old_product->$options = htmlspecialchars($product->options, ENT_QUOTES);
@@ -123,13 +122,12 @@ class Product
 
         $name = "name_" . $lng;
         $description = 'description_' . $lng;
-        $kind = 'kind_' . $lng;
         $options = "options_" . $lng;
 
         $this->price = $product->price;
         $this->$name = htmlspecialchars($product->name, ENT_QUOTES);
         $this->$description = htmlspecialchars($product->description, ENT_QUOTES);
-        $this->$kind = htmlspecialchars($product->kind, ENT_QUOTES);
+        $this->kind = htmlspecialchars($product->kind, ENT_QUOTES);
         $this->qtty = $product->qtty != "" ? $product->qtty : 1;
         $this->img = $product->img;
         $this->$options = htmlspecialchars($product->options, ENT_QUOTES);

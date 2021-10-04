@@ -8,9 +8,9 @@ $total = $cart->get_total();
         <span class="me-2"><i class="fas fa-shopping-cart"></i> <span class="mobile-cart-total"><?= $total ?></span><?= $carrency ?></span>
     </h6>
     <div class="cart-wraper text-center" style="display: none;">
-        <ol class="cart_items text-start">
+        <ul class="cart_items text-start list-group mx-2">
             <?= $cart->view_cart() ?>
-        </ol>
+        </ul>
         <b style="font-size:1rem;"><?= lang("sum") ?>: <span class="cart-total"><?= $total ?></span><?= $carrency ?></b>
         <div class="mx-2">
             <a class="btn btn-outline-success my-2 cart-send-whatsapp" aria-hidden="true" href="https://api.whatsapp.com/send/?phone=972<?php echo substr($company->phone, 1); ?>&text="><i class="fab fa-whatsapp"></i> Send</a>

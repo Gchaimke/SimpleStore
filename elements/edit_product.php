@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body edit_product_items">
                 <form id="edit_product_form">
-                    <input type="hidden" name="edit_product" value="true"/>
+                    <input type="hidden" name="edit_product" value="true" />
                     <input type="hidden" name="id" id="edit-product-id" value="" />
                     <input type="hidden" name="category_id" id="edit-category-id" value="" />
                     <div class="input-group mb-3">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("price") ?></label>
-                        <input type="number" name="price" class="form-control product-price" step="0.01"/>
+                        <input type="number" name="price" class="form-control product-price" step="0.01" />
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("Quantity") ?></label>
@@ -37,7 +37,11 @@
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("Kind") ?></label>
-                        <input type="text" name="kind" class="form-control product-kind" placeholder="kg" />
+                        <select type="text" class="form-select product-kind" name="kind">
+                            <?php foreach ($store->product->kinds as $kind) {
+                                echo  "<option value='$kind'>" . lang($kind) . "</option>";
+                            } ?>
+                        </select>
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("Options") ?></label>
@@ -45,7 +49,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang("close") ?></button>
-                        <button type="submit" class="btn btn-outline-dark align-middle edit-product-btn" ><?= lang("save") ?></button>
+                        <button type="submit" class="btn btn-outline-dark align-middle edit-product-btn"><?= lang("save") ?></button>
                     </div>
                 </form>
             </div>
