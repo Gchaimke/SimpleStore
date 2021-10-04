@@ -25,7 +25,7 @@ if (isset($orders)) {
 ?>
     <h2 class='text-center'><?= lang('orders') ?></h2>
     <div class="table-responsive">
-        <table class='table table-striped table-hover table-responsive table-sm'>
+        <table class='table table-striped table-hover table-responsive table-sm text-center'>
             <thead class="table-dark">
                 <tr>
                     <th scope="col">#</th>
