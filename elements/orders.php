@@ -68,6 +68,6 @@ if (isset($orders)) {
 <?php
     paginate(array('orders_chunk' => $orders_chunk, 'month' => $month, 'current' => $current));
 } else {
-    echo "<div class='text-center'>no order for " . $month . " month!</div>";
+    echo "<h2 class='text-center'>no orders for " . $month . " month!</h2>";
     paginate(array('orders_chunk' => array(), 'month' => $month, 'current' => $current));
 }
