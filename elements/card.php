@@ -7,7 +7,6 @@
         $description = property_exists($product, "description_" . $lng) ? "description_" . $lng : "description";
         $options = property_exists($product, "options_" . $lng) ? "options_" . $lng : "options";
         if ($logedin) {
-            echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$product->category_id' data-product='$product->id'></i>";
             echo "<i class='btn btn-outline-info far fa-edit edit-product' 
             data-category='$product->category_id ' 
             data-product='$product->id' 
@@ -20,9 +19,17 @@
             data-options='" . $product->$options . "'
             data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"
             ></i>";
+
             if ($product->category_id != "favorites") {
-                echo "<i class='btn btn-outline-dark far fa-clone duplicate-product' data-category='$product->category_id ' data-product='$product->id'></i>";
-                echo "<i class='btn btn-outline-warning far fa-star favorite-product' data-category='$product->category_id ' data-product='$product->id'></i>";
+                echo "<i class='btn btn-outline-dark fas fa-ellipsis-h toggle_product_options'></i>
+                    <div class='product_options' style='display:none;'>
+                        <i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$product->category_id' data-product='$product->id'></i>
+                        <i class='btn btn-outline-dark far fa-clone duplicate-product' data-category='$product->category_id ' data-product='$product->id'></i>
+                        <i class='btn btn-outline-warning far fa-star favorite-product' data-category='$product->category_id ' data-product='$product->id'></i>
+                    </div>
+                ";
+            } else {
+                echo "<i class='btn btn-outline-danger far fa-trash-alt delete-product' data-category='$product->category_id' data-product='$product->id'></i>";
             }
         }
         ?>

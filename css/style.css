@@ -114,16 +114,6 @@ SimpleStore 1
      background: #e7f1ff;
  }
 
- .delete-product, .edit-product, .duplicate-product, .favorite-product {
-     position: absolute;
-     margin-top: -132px;
-     background: white !important;
-     font-size: 2em;
-     padding: 10px;
-     border-radius: 5px;
-     box-shadow: 1px 1px 3px 0px #0000006b;
- }
-
  .gallery_upload {
      background: #e6e6e6;
      padding: 2rem;
@@ -143,8 +133,21 @@ SimpleStore 1
      height: 300px;
  }
 
- .btn-outline-danger.delete-product:hover, .btn-outline-dark.duplicate-product:hover {
-     color: black !important;
+ .delete-product, .edit-product, .duplicate-product, .favorite-product, .toggle_product_options {
+     position: absolute;
+     margin-top: -132px;
+     background: white !important;
+     padding: 10px;
+     border-radius: 5px;
+     box-shadow: 1px 1px 3px 0px #0000006b;
+ }
+
+ .btn-outline-danger.delete-product:hover, .btn-outline-dark.duplicate-product:hover, .toggle_product_options:hover {
+     color: rgba(0, 0, 0, 0.726) !important;
+ }
+
+ .toggle_product_options {
+     right: 70px;
  }
 
  .delete-product, .favorite-product {
@@ -235,8 +238,11 @@ SimpleStore 1
          flex-wrap: wrap;
          justify-content: center;
      }
-     .delete-product, .edit-product {
+     .delete-product, .edit-product, .toggle_product_options {
          margin-top: -122px;
+     }
+     .toggle_product_options {
+         right: 50px;
      }
      .favorite-product, .duplicate-product {
          margin-top: -50px;
@@ -266,7 +272,7 @@ SimpleStore 1
      .delete-category {
          left: 130px;
      }
-     .company_name{
+     .company_name {
          width: 100% !important;
      }
  }
