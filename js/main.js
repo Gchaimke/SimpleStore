@@ -464,10 +464,9 @@ $('#search').on('submit', function (e) {
     let search = $("#search_text").val();
     search = search.toLowerCase();
     search = search.replace(/ /g, '');
-    //search = search.substring(1);
     $.post("functions/bg_post.php", { search: search })
         .done(function (res) {
-            $("#search_result").empty();
+            $("#search_result");
             if (res.startsWith("FOUND:")) {
                 res = res.substring(6);
                 var products = res.split(",");
