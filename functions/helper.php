@@ -275,14 +275,13 @@ function order_to_html($order_num = 0)
             if (property_exists($item, "qtty")) {
                 $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
                 $item_name = $item->$name != "" ? $item->$name : $item->name;
-                $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
                 $description = property_exists($item, "description_" . $lng) ? "description_" . $lng : "description";
                 $item_description = $item->$description != "" ? "<i>({$item->$description})</i>" : "";
                 $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
                 $cart_price = number_format($item->cart_price, $price_format)  . $carrency;
                 $html .= "<tr>";
-                $html .= "<td style='$style'>$item_name $item_description $option $item->qtty {$item->$kind}</td>";
-                $html .= "<td style='$style'>$item->cart_qtty{$item->$kind}</td>";
+                $html .= "<td style='$style'>$item_name $item_description $option $item->qtty" . lang($item->kind) . "</td>";
+                $html .= "<td style='$style'>$item->cart_qtty" . lang($item->kind) . "</td>";
                 $html .= "<td style='$style'>$cart_price</td>";
                 $html .= '</tr>';
             } else {
@@ -596,6 +595,7 @@ function update_products_data()
         $category_name = $category->name;
         $products = get_data($category_index);
         foreach ($products as $key => $product) {
+            //add property
             if (!property_exists($product, 'category_id')) {
                 $product->category_id = $category_index;
                 $products[$key] = $product;
@@ -603,6 +603,13 @@ function update_products_data()
             if (!property_exists($product, 'options')) {
                 $product->options = "";
                 $products[$key] = $product;
+            }
+            //remove property
+            if (property_exists($product, 'kind_ru')) {
+                unset($product->kind_ru);
+            }
+            if (property_exists($product, 'kind_he')) {
+                unset($product->kind_he);
             }
         }
         $updated .= $category_name . ", ";
