@@ -559,7 +559,6 @@ $('.upload_btn').on('click', function () {
     var files = $('#imagefile')[0].files;
     console.log(files);
     var name = $('#upload_image_name').val();
-    alert(name);
     if (files.length > 0 && name != "") {
         fd.append('file', files[0]);
         fd.append('name', name);

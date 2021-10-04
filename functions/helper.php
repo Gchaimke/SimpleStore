@@ -56,10 +56,13 @@ if (isset($_COOKIE['items']) && $_COOKIE['items']) {
  */
 $store = new SimpleStore\Store();
 $carrency = $store->carrency;
+$price_format = $store->price_format;
 $company = $store->company;
 $cart = $store->cart;
 $categories = $store->category->get_categories_with_products();
-$images = get_files();
+$products_images = get_files();
+$site_images = get_files(DOC_ROOT . "img/");
+$images = array_merge($site_images, $products_images);
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
 
@@ -159,7 +162,7 @@ function save_order($cart, $total, $client)
     if (!file_exists($orders_path)) {
         mkdir($orders_path, 0700);
     }
-    $orders = get_files($orders_path, ["json"]);
+    $orders = get_files($orders_path, false, ["json"]);
     if (is_countable($orders)) {
         $order_count = add_zero(count($orders) + 1);
     } else {
@@ -201,7 +204,7 @@ function get_orders($month)
 
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
-        $orders['orders'] = get_files($orders_path, ["json"], 1);
+        $orders['orders'] = get_files($orders_path, false, ["json"], 1);
         $orders['month'] = $month;
         return $orders;
     }
@@ -252,7 +255,7 @@ function order_client_to_html($order_num = 0)
 
 function order_to_html($order_num = 0)
 {
-    global $carrency, $lng;
+    global $price_format, $carrency, $lng;
     $direction = $lng != "he" ? "ltr" : "rtl";
     $order = get_order($order_num);
     if (is_object($order)) {
@@ -271,12 +274,16 @@ function order_to_html($order_num = 0)
         foreach ($order->items as $item) {
             if (property_exists($item, "qtty")) {
                 $name = property_exists($item, "name_" . $lng) ? "name_" . $lng : "name";
+                $item_name = $item->$name != "" ? $item->$name : $item->name;
                 $kind = property_exists($item, "kind_" . $lng) ? "kind_" . $lng : "kind";
+                $description = property_exists($item, "description_" . $lng) ? "description_" . $lng : "description";
+                $item_description = $item->$description != "" ? "<i>({$item->$description})</i>" : "";
                 $option = property_exists($item, "option") && $item->option != "" ? "($item->option)" : "";
+                $cart_price = number_format($item->cart_price, $price_format)  . $carrency;
                 $html .= "<tr>";
-                $html .= "<td style='$style'>{$item->$name} $option $item->qtty {$item->$kind}</td>";
-                $html .= "<td style='$style'>$item->cart_qtty {$item->$kind}</td>";
-                $html .= "<td style='$style'>$item->cart_price $carrency</td>";
+                $html .= "<td style='$style'>$item_name $item_description $option $item->qtty {$item->$kind}</td>";
+                $html .= "<td style='$style'>$item->cart_qtty{$item->$kind}</td>";
+                $html .= "<td style='$style'>$cart_price</td>";
                 $html .= '</tr>';
             } else {
                 //TODO: old order compatibility, please remove if you dont have old orders
@@ -309,23 +316,28 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DATA_ROOT . "products/", $kind = ["jpeg", "png", "jpg"], $ASC = 0)
+function get_files($dir = DOC_ROOT . "data/products/", $keys = true, $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
     if (!file_exists($dir)) {
         mkdir($dir, 0700);
     }
+    $path = str_replace(DOC_ROOT, SITE_ROOT, $dir);
     $cdir = scandir($dir, $ASC);
     foreach ($cdir as $file) {
         $extension = explode('.', $file);
         $extension = end($extension);
         if (in_array($extension, $kind)) {
-            if (!is_dir($dir . DIRECTORY_SEPARATOR . $file)) {
-                $files[] =  $file;
+            if (!is_dir($dir . $file)) {
+                if ($keys) {
+                    $files[$path . $file] =  $file;
+                } else {
+                    $files[] =  $file;
+                }
             }
         }
     }
-    return ($files) ? $files : false;
+    return $files;
 }
 
 function save_image($image_name, $url)
@@ -349,10 +361,14 @@ function save_image($image_name, $url)
 
 function delete_image($image)
 {
-    if (unlink(DOC_ROOT . $image)) {
-        echo 'success';
+    if (strpos($image, "/img/") === false) {
+        if (unlink(DOC_ROOT . $image)) {
+            echo 'success';
+        } else {
+            echo 'fail';
+        }
     } else {
-        echo 'fail';
+        echo 'img/ folder protected';
     }
 }
 // Compress image

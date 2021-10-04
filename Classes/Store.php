@@ -18,8 +18,9 @@ class Store
         if (!file_exists(DATA_ROOT . "orders")) {
             mkdir(DATA_ROOT . "orders", 0700);
         }
-        $this->carrency = "₪";
         $this->company = new Company;
+        $this->carrency = $this->company->currency;
+        $this->price_format = $this->company->price_format;
         $this->category = new Category;
         $this->product = new Product;
         $this->cart = new Cart;
