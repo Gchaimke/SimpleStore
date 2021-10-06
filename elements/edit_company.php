@@ -85,6 +85,12 @@
                                 <input type="text" class="form-control currency" name="currency" value="<?= $company->currency ?>" />
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="input-group mb-2 ">
+                                <label class="input-group-text"><?= lang("Min order") ?></label>
+                                <input type="text" class="form-control min_order" name="min_order" value="<?= $company->min_order ?>" />
+                            </div>
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("company_message") ?></label>

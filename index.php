@@ -36,6 +36,7 @@ include_once('functions/post.php');
 <script>
     var cart_opened = <?= isset($_GET['cart']) ? "1" : "0"; ?>;
     var user_data = "<?= USER_DATA ?>";
+    var min_order = "<?= $company->min_order ?>";
 </script>
 <?php include_once('elements/layout/footer.php'); ?>
 

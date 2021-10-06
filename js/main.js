@@ -409,27 +409,31 @@ $('.cart-send-email').on('click', function () {
     $('.cart_items>li').each(function () {
         cart[$(this).data('product_id')] = $(this).find(".cart-product").text() + "," + $(this).find(".cart_qty").text() + "," + $(this).find(".cart_price").text();
     });
+    var total = $('.cart-total').text();
     if (!$.isEmptyObject(cart)) {
-        $('#client_data').modal('show');
-        $("#client_form1").on("submit", function (out) {
-            out.preventDefault();
-            $('.close, .btn-close, .send').prop('disabled', true);
-            $('.spinner-border').toggle();
-            client = $('#client_form').serializeArray();
-            var data = {};
-            $(client).each(function (index, obj) {
-                data[obj.name] = obj.value;
-            });
-            var total = $('.cart-total').text();
-            $.post("index.php", { save_cart: true, cart: cart, total: total, client: data })
-                .done(function (e) {
-                    //location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
+        if (parseInt(total) >= parseInt(min_order)) {
+            $('#client_data').modal('show');
+            $("#client_form1").on("submit", function (out) {
+                out.preventDefault();
+                $('.close, .btn-close, .send').prop('disabled', true);
+                $('.spinner-border').toggle();
+                client = $('#client_form').serializeArray();
+                var data = {};
+                $(client).each(function (index, obj) {
+                    data[obj.name] = obj.value;
                 });
-        });
-        $("#client_form").on("submit", function (out) {
-            $('.close, .btn-close, .send').prop('disabled', true).hide();
-            $('.spinner-border').toggle();
-        });
+                $.post("index.php", { save_cart: true, cart: cart, total: total, client: data })
+                    .done(function (e) {
+                        //location.replace(location.protocol + '//' + location.host + location.pathname + "?order=" + e + "&sent");
+                    });
+            });
+            $("#client_form").on("submit", function (out) {
+                $('.close, .btn-close, .send').prop('disabled', true).hide();
+                $('.spinner-border').toggle();
+            });
+        }else{
+            alert("Minimum order is "+min_order);
+        }
     } else {
         alert('Cart is empty!');
     }
