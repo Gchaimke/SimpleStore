@@ -163,7 +163,7 @@ function save_order($cart, $total, $client)
         mkdir($orders_path, 0700);
     }
     $orders = get_files($orders_path, false, ["json"]);
-    if (is_countable($orders)) {
+    if (count($orders) > 0) {
         $order_count = add_zero(count($orders) + 1);
     } else {
         $order_count = add_zero(1);

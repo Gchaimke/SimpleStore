@@ -41,7 +41,7 @@ if (isset($orders)) {
             </thead>
             <tbody>
                 <?php
-                if (is_countable($orders_page)) {
+                if (count($orders_page) > 0) {
                     foreach ($orders_page as $order) {
                         if ($max == 0) {
                             break;
