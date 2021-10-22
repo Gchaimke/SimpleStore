@@ -14,6 +14,7 @@ if (isset($_GET['csv'])) {
 
 if (isset($_GET['order'])) {
     $hidden = '';
+    $orders['prev_month'] = "";
     $order = order_to_html($_GET['order']);
     $prev_month = date("my", strtotime(date('my') . " -1 month"));
     if ($logedin) {
@@ -21,10 +22,12 @@ if (isset($_GET['order'])) {
         $order_num = explode("-", $_GET['order']);
         if (count($order_num) > 1 && get_orders($order_num[0])) {
             $orders['this_month'] = get_orders($order_num[0])['orders'];
-            $orders['prev_month'] = get_orders($prev_month)['orders'];
+            if (get_orders($prev_month)) {
+                $orders['prev_month'] = get_orders($prev_month)['orders'];
+            }
             $next = $order_num[0] . "-" . add_zero(intval($order_num[1]) + 1);
 
-            if (intval($order_num[1]) == 1) {
+            if (intval($order_num[1]) == 1 && $orders['prev_month']!="") {
                 $prev = str_replace(".json", '', $orders['prev_month'][0]) . "&last=1";
             } else {
                 $prev = $order_num[0] . "-" . add_zero(intval($order_num[1]) - 1);
@@ -52,7 +55,7 @@ if (isset($_GET['order'])) {
 if (isset($_GET['orders'])) {
     extract($_GET);
     ob_start();
-    include(__DIR__.'/../elements/orders.php');
+    include(__DIR__ . '/../elements/orders.php');
     $output = ob_get_clean();
     print $output;
 }
