@@ -20,8 +20,11 @@ if (isset($orders)) {
     } else {
         $current = 0;
     }
-    $orders_page = array_chunk($orders, $max)[$current];
-
+    if (count($orders) > 0) {
+        $orders_page = array_chunk($orders, $max)[$current];
+    } else {
+        $orders_page = array();
+    }
 ?>
     <h2 class='text-center'><?= lang('orders') ?></h2>
     <div class="table-responsive">
