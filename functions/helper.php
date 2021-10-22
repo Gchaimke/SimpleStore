@@ -511,7 +511,7 @@ function send_email($order_num = 0)
         $message .=   "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: admin@mc88.co.il" . "\r\n";
+        $headers .= "From: admin@$_SERVER[HTTP_HOST]" . "\r\n";
         $headers .= "CC: " . get_order($order_num)->client->email . "\r\n";
         $headers .= "Bcc: gchaimke@gmail.com" . "\r\n";
 
