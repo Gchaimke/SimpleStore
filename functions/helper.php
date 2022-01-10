@@ -12,6 +12,7 @@ session_start();
 define("VERSION", "2.2");
 
 require_once(__DIR__ . '/../config.php');
+$config = config();
 define("ORDERS_PATH", DATA_ROOT . "orders/");
 
 /**
@@ -27,7 +28,7 @@ if (isset($_COOKIE['language']) && $_COOKIE['language']) {
     $lng = $_COOKIE['language'];
     require(DOC_ROOT . "lang/$lng.php");
 } else {
-    $lng = SITE_LANG;
+    $lng = $config['SITE_LANG'];
     require(DOC_ROOT . "lang/$lng.php");
 }
 
@@ -90,7 +91,8 @@ function reload()
 
 function login($pass)
 {
-    if (urldecode($pass)  == PASS || urldecode($pass)  == ADMIN_PASS) {
+    global $config;
+    if (urldecode($pass)  == $config['PASS'] || urldecode($pass)  == $config['ADMIN_PASS']) {
         $_SESSION["login"] = true;
         return true;
     } else {
