@@ -506,6 +506,7 @@ function send_email($order_num = 0)
     if ($order_num != 0) {
         $phone = str_replace("-", "", $store->company->phone);
         $subject = "New Order " . $order_num;
+        $store_name = $store->company->name;
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SP_SITE_ROOT . "?order=" . $order_num;
         $message =  order_to_html($order_num) . order_client_to_html($order_num);
         $message .= $phone != "" ? "<b style='color:red;'> $msg <a href='https://wa.me/972$phone'>whatsapp</a> </b><br><br>" : "";
@@ -515,7 +516,7 @@ function send_email($order_num = 0)
             "Store" => $store->company->email,
             "Client" => get_order($order_num)->client->email
         );
-        $store->email->send($recipients, $subject, $message, $text_message);
+        $store->email->send($recipients, $subject, $store_name, $message, $text_message);
         return $message;
     }
 }

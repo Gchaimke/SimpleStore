@@ -33,13 +33,12 @@ class Email
             }
         }
         $this->mail->Port       = $config['SMTP_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        $this->mail->setFrom($config['SMTP_EMAIL'], $config['SMTP_STORE_NAME']);
-        $this->mail->addReplyTo($config['SMTP_EMAIL'], 'Information');
     }
 
-    public function send($recipients, $subject = "", $html_body = "", $text_body = "")
+    public function send($recipients, $subject = "SimpleStore", $store_name = "SimpleStore", $html_body = "Test SimpleStore", $text_body = "")
     {
         ini_set('max_execution_time', 300);
+        global $config;
         try {
             //Recipients
             foreach ($recipients as $value) {
@@ -47,6 +46,8 @@ class Email
                     $this->mail->addAddress($value);
                 }
             }
+            $this->mail->setFrom($config['SMTP_EMAIL'], $store_name);
+            $this->mail->addReplyTo($config['SMTP_EMAIL'], 'Information');
             //Content
             $this->mail->isHTML(true);                                  //Set email format to HTML
             $this->mail->Subject = $subject;
