@@ -1,9 +1,9 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <div class="navbar-brand text-wrap text-center">
-            <a href="<?= SITE_ROOT ?>" tabindex="0"></a>
+            <a href="<?= SP_SITE_ROOT ?>" tabindex="0"></a>
             <img src="<?= $company->logo ?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            <a class="mx-1" href="<?= SITE_ROOT ?>" tabindex="0"> <?= $company->name ?></a>
+            <a class="mx-1" href="<?= SP_SITE_ROOT ?>" tabindex="0"> <?= $company->name ?></a>
             <a href="tel:<?= $company->phone ?>" tabindex="0"> <?= $company->phone ?></a>
         </div>
         <div>

@@ -6,7 +6,7 @@ class Company
 {
     private $company;
     public $name, $phone, $email, $header, $logo, $image_height, $image_size, $price_format,$currency;
-    private $data_path = DATA_ROOT . "company.json";
+    private $data_path = SP_DATA_ROOT . "company.json";
 
     function __construct()
     {
@@ -17,8 +17,8 @@ class Company
             $this->company = json_decode(file_get_contents($this->data_path));
         } else {
             $this->company = json_decode('{"name":"company name","phone":"","email":"","logo":"tile.png","header":"","image_height":"120","image_size":"cover","price_format":"0","currency":"₪"}');
-            if (!file_exists(DATA_ROOT)) {
-                mkdir(DATA_ROOT, 0700);
+            if (!file_exists(SP_DATA_ROOT)) {
+                mkdir(SP_DATA_ROOT, 0700);
             }
             file_put_contents($this->data_path, json_encode($this->company, JSON_UNESCAPED_UNICODE));
         }

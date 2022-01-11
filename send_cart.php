@@ -19,7 +19,7 @@ include_once('elements/about.php');
                     $order = save_order($_SESSION['cart'], $total, $_POST['client']);
                     $msg = lang("order_send_success");
                     $message['kind'] = 1;
-                    $message['text'] = "$msg <a href='" . SITE_ROOT . "?order=$order' id='order_sent'>$order</a> <i class=\"far fa-smile-wink\"></i>";
+                    $message['text'] = "$msg <a href='" . SP_SITE_ROOT . "?order=$order' id='order_sent'>$order</a> <i class=\"far fa-smile-wink\"></i>";
                     unset($_SESSION['cart']);
                 } else {
                     echo "cart is empty";

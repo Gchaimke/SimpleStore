@@ -6,7 +6,7 @@ include_once('functions/helper.php');
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="<?=SITE_ROOT?>favicon.ico">
+    <link rel="icon" href="<?=SP_SITE_ROOT?>favicon.ico">
     <title><?= $company->name ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">

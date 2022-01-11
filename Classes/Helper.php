@@ -7,9 +7,9 @@ class Helper
     public static function log($msg, $kind = 1)
     {
         $kinds = [1 => "INFO", 2 => "ERROR"];
-        $log_folder = DATA_ROOT . "log/" . date("m");
-        if (!file_exists(DATA_ROOT . "log/")) {
-            mkdir(DATA_ROOT . "log/", 0600);
+        $log_folder = SP_DATA_ROOT . "log/" . date("m");
+        if (!file_exists(SP_DATA_ROOT . "log/")) {
+            mkdir(SP_DATA_ROOT . "log/", 0600);
         }
         if (!file_exists($log_folder)) {
             mkdir($log_folder, 0600);

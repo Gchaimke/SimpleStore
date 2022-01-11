@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_GET['lang'])) {
-    echo "<script> document.cookie = 'language = {$_GET['lang']};expires=365;path=/'; window.location.href ='" . SITE_ROOT . "'</script>";
+    echo "<script> document.cookie = 'language = {$_GET['lang']};expires=365;path=/'; window.location.href ='" . SP_SITE_ROOT . "'</script>";
 }
 
 if (isset($_GET['email_order'])) {

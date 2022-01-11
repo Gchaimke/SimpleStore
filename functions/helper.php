@@ -13,12 +13,12 @@ define("VERSION", "2.2");
 
 require_once(__DIR__ . '/../config.php');
 $config = config();
-define("ORDERS_PATH", DATA_ROOT . "orders/");
+define("ORDERS_PATH", SP_DATA_ROOT . "orders/");
 
 /**
  * Classes Loader
  */
-require_once(DOC_ROOT . 'Classes/Store.php');
+require_once(SP_DOC_ROOT . 'Classes/Store.php');
 
 /**
  * Settings
@@ -26,10 +26,10 @@ require_once(DOC_ROOT . 'Classes/Store.php');
 
 if (isset($_COOKIE['language']) && $_COOKIE['language']) {
     $lng = $_COOKIE['language'];
-    require(DOC_ROOT . "lang/$lng.php");
+    require(SP_DOC_ROOT . "lang/$lng.php");
 } else {
     $lng = $config['SITE_LANG'];
-    require(DOC_ROOT . "lang/$lng.php");
+    require(SP_DOC_ROOT . "lang/$lng.php");
 }
 
 if (isset($_SESSION['login']) && $_SESSION['login']) {
@@ -62,7 +62,7 @@ $company = $store->company;
 $cart = $store->cart;
 $categories = $store->category->get_categories_with_products();
 $products_images = get_files();
-$site_images = get_files(DOC_ROOT . "img/");
+$site_images = get_files(SP_DOC_ROOT . "img/");
 $images = array_merge($site_images, $products_images);
 $favorites = get_data("favorites");
 $distrikts = get_data("distrikts");
@@ -107,9 +107,9 @@ function logout()
 
 function auto_version($file)
 {
-    if (!file_exists(DOC_ROOT . $file)) return $file;
-    $mtime = filemtime(DOC_ROOT . $file);
-    return sprintf("%s?v=%d", SITE_ROOT . $file, $mtime);
+    if (!file_exists(SP_DOC_ROOT . $file)) return $file;
+    $mtime = filemtime(SP_DOC_ROOT . $file);
+    return sprintf("%s?v=%d", SP_SITE_ROOT . $file, $mtime);
 }
 
 function clean($str)
@@ -150,7 +150,7 @@ function delete_category($id)
             unset($categories[$key]);
         }
     }
-    unlink(DATA_ROOT . "$id.json");
+    unlink(SP_DATA_ROOT . "$id.json");
     save_json($categories, 'categories');
 }
 
@@ -202,7 +202,7 @@ function add_zero($orders)
 function get_orders($month)
 {
     global $logedin;
-    if (!$logedin) redirect(SITE_ROOT);
+    if (!$logedin) redirect(SP_SITE_ROOT);
 
     $orders_path = ORDERS_PATH . $month;
     if (file_exists($orders_path)) {
@@ -309,7 +309,7 @@ function order_to_html($order_num = 0)
 
 function get_data($file)
 {
-    $path = DATA_ROOT . "$file.json";
+    $path = SP_DATA_ROOT . "$file.json";
     if (file_exists($path)) {
         return json_decode(file_get_contents($path));
     } else {
@@ -317,13 +317,13 @@ function get_data($file)
     }
 }
 
-function get_files($dir = DOC_ROOT . "data/products/", $keys = true, $kind = ["jpeg", "png", "jpg"], $ASC = 0)
+function get_files($dir = SP_DOC_ROOT . "data/products/", $keys = true, $kind = ["jpeg", "png", "jpg"], $ASC = 0)
 {
     $files = array();
     if (!file_exists($dir)) {
         mkdir($dir, 0700);
     }
-    $path = str_replace(DOC_ROOT, "", $dir);
+    $path = str_replace(SP_DOC_ROOT, "", $dir);
     $cdir = scandir($dir, $ASC);
     foreach ($cdir as $file) {
         $extension = explode('.', $file);
@@ -347,8 +347,8 @@ function save_image($image_name, $url)
     $image_ext = pathinfo($url, PATHINFO_EXTENSION);
     $image_ext = strtolower($image_ext);
 
-    $tmp = DATA_ROOT . 'tmp.' . $image_ext;
-    $location = DATA_ROOT . 'products/' . $image_name . '.' . $image_ext;
+    $tmp = SP_DATA_ROOT . 'tmp.' . $image_ext;
+    $location = SP_DATA_ROOT . 'products/' . $image_name . '.' . $image_ext;
 
     if (in_array($image_ext, $valid_ext)) {
         file_put_contents($tmp, file_get_contents($url));
@@ -363,7 +363,7 @@ function save_image($image_name, $url)
 function delete_image($image)
 {
     if (strpos($image, "/img/") === false) {
-        if (unlink(DOC_ROOT . $image)) {
+        if (unlink(SP_DOC_ROOT . $image)) {
             echo 'success';
         } else {
             echo 'fail';
@@ -423,7 +423,7 @@ function save_json($array, $file_name = 'test')
     usort($array, function ($a, $b) { //Sort the array using a user defined function
         return $a->name > $b->name ? 1 : -1; //Compare the scores
     });
-    file_put_contents(DATA_ROOT . "$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
+    file_put_contents(SP_DATA_ROOT . "$file_name.json", json_encode(array_values($array), JSON_UNESCAPED_UNICODE));
 }
 
 function update_stats($month = 0)
@@ -431,8 +431,8 @@ function update_stats($month = 0)
     if ($month == 0) {
         $month = date('my');
     }
-    if (file_exists(DATA_ROOT . "stats.json")) {
-        $statistic = json_decode(file_get_contents(DATA_ROOT . "stats.json"));
+    if (file_exists(SP_DATA_ROOT . "stats.json")) {
+        $statistic = json_decode(file_get_contents(SP_DATA_ROOT . "stats.json"));
     } else {
         $statistic = json_decode('[{"month":"0","total":0,"count":0}]');
     }
@@ -466,7 +466,7 @@ function update_stats($month = 0)
             $statistic[$current_key] = $month_stats;
         }
     }
-    file_put_contents(DATA_ROOT . "stats.json", json_encode($statistic));
+    file_put_contents(SP_DATA_ROOT . "stats.json", json_encode($statistic));
     return $month;
 }
 
@@ -475,7 +475,7 @@ function get_stats($month = 0)
     if ($month == 0) {
         $month = date('my');
     }
-    $path = DATA_ROOT . 'stats.json';
+    $path = SP_DATA_ROOT . 'stats.json';
     if (file_exists($path)) {
         $data =  json_decode(file_get_contents($path));
     } else {
@@ -501,23 +501,21 @@ function str_contains($haystack, $needle, $ignoreCase = true)
 
 function send_email($order_num = 0)
 {
-    global $company;
+    global $store;
     $msg = lang("email_not_useble");
     if ($order_num != 0) {
-        $to = $company->email;
-        $phone = str_replace("-", "", $company->phone);
+        $phone = str_replace("-", "", $store->company->phone);
         $subject = "New Order " . $order_num;
-        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SITE_ROOT . "?order=" . $order_num;
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . SP_SITE_ROOT . "?order=" . $order_num;
         $message =  order_to_html($order_num) . order_client_to_html($order_num);
         $message .= $phone != "" ? "<b style='color:red;'> $msg <a href='https://wa.me/972$phone'>whatsapp</a> </b><br><br>" : "";
         $message .=   "<br> Sent from <a target='_blank' href='$actual_link'> $actual_link</a><br><br><br><br>";
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: admin@$_SERVER[HTTP_HOST]" . "\r\n";
-        $headers .= "CC: " . get_order($order_num)->client->email . "\r\n";
-        $headers .= "Bcc: gchaimke@gmail.com" . "\r\n";
-
-        mail($to, $subject, $message, $headers);
+        $text_message = "Your order number is $order_num. link: $actual_link";
+        $recipients = array(
+            "Store" => $store->company->email,
+            "Client" => get_order($order_num)->client->email
+        );
+        $store->email->send($recipients, $subject, $message, $text_message);
         return $message;
     }
 }
@@ -532,7 +530,7 @@ function export_csv()
     $categories = $store->categories->get_categories_with_products();
 
     //$fp = fopen('php://output', 'w');
-    $fp = fopen(DATA_ROOT . "" . $file_name, 'w');
+    $fp = fopen(SP_DATA_ROOT . "" . $file_name, 'w');
     fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
     fputcsv($fp, array("Category", "Name", "Price"));
 

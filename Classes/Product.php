@@ -53,11 +53,11 @@ class Product
 
     function get_products($category_id)
     {
-        if (!file_exists(DATA_ROOT)) {
-            mkdir(DATA_ROOT, 0700);
+        if (!file_exists(SP_DATA_ROOT)) {
+            mkdir(SP_DATA_ROOT, 0700);
         }
-        if (file_exists(DATA_ROOT . "$category_id.json")) {
-            $products = json_decode(file_get_contents(DATA_ROOT . "$category_id.json"));
+        if (file_exists(SP_DATA_ROOT . "$category_id.json")) {
+            $products = json_decode(file_get_contents(SP_DATA_ROOT . "$category_id.json"));
         } else {
             $products = json_decode("{}");
         }
@@ -67,7 +67,7 @@ class Product
     function edit_product($category_id, $product)
     {
         global $lng;
-        $products = json_decode(file_get_contents(DATA_ROOT . "$category_id.json"));
+        $products = json_decode(file_get_contents(SP_DATA_ROOT . "$category_id.json"));
         $product = (object)$product;
         foreach ($products as $key => $curent_product) {
             if ($curent_product->id == $product->id) {
@@ -86,7 +86,7 @@ class Product
         $old_product->img = $product->img;
         $old_product->$options = htmlspecialchars($product->options, ENT_QUOTES);
         $products[$product_key] = $old_product;
-        file_put_contents(DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+        file_put_contents(SP_DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
         return true;
     }
 
@@ -132,7 +132,7 @@ class Product
         $this->img = $product->img;
         $this->$options = htmlspecialchars($product->options, ENT_QUOTES);
         $products[] = $new_product;
-        file_put_contents(DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+        file_put_contents(SP_DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
     }
 
     function favorite_product($category_id, $product_id)

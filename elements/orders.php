@@ -47,7 +47,7 @@ if (isset($orders)) {
                             break;
                         }
                         $order_num = explode('.', $order)[0];
-                        $order_data = json_decode(file_get_contents(DATA_ROOT . 'orders/' . $month . "/" . $order));
+                        $order_data = json_decode(file_get_contents(SP_DATA_ROOT . 'orders/' . $month . "/" . $order));
                         if ($order_data->client->name != 'test') {
                 ?>
                             <tr>
