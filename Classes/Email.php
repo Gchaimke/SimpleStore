@@ -16,23 +16,22 @@ class Email
 
         //Server settings
         if ($config['SMTP_DEBUG']) {
-            $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $this->mail->addBCC($config['SMTP_DEBUG_EMAIL']);
+            $this->mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output
         }
         $this->mail->CharSet = 'UTF-8';
-        $this->mail->isSMTP();                                            //Send using SMTP
-        $this->mail->Host       = $config['SMTP_HOST'];                     //Set the SMTP server to send through
-        $this->mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $this->mail->Username   = $config['SMTP_EMAIL'];                     //SMTP username
-        $this->mail->Password   = $config['SMTP_PASS'];                               //SMTP password
+        $this->mail->isSMTP();
+        $this->mail->Host = $config['SMTP_HOST'];
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = $config['SMTP_EMAIL'];
+        $this->mail->Password = $config['SMTP_PASS'];
         if ($config['SMTP_ENCRYPTION']) {
             if ($config['SMTP_ENCRYPTION_TYPE'] == "SSL") {
-                $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             } else {
                 $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             }
         }
-        $this->mail->Port       = $config['SMTP_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $this->mail->Port = $config['SMTP_PORT']; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     }
 
     public function send($recipients, $subject = "SimpleStore", $store_name = "SimpleStore", $html_body = "Test SimpleStore", $text_body = "")
@@ -46,10 +45,13 @@ class Email
                     $this->mail->addAddress($value);
                 }
             }
+            if ($config['SMTP_DEBUG_EMAIL'] != "") {
+                $this->mail->addBCC($config['SMTP_DEBUG_EMAIL']);
+            }
             $this->mail->setFrom($config['SMTP_EMAIL'], $store_name);
             $this->mail->addReplyTo($config['SMTP_EMAIL'], 'Information');
             //Content
-            $this->mail->isHTML(true);                                  //Set email format to HTML
+            $this->mail->isHTML(true);
             $this->mail->Subject = $subject;
             $this->mail->Body    = $html_body;
             $this->mail->AltBody = $text_body;
