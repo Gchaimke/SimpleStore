@@ -10,7 +10,7 @@ define("SP_DATA_ROOT", SP_DOC_ROOT . SP_USER_DATA);
 function config()
 {
     return array(
-        "PASS" => '1234',
+        "PASS" => '',
         "ADMIN_PASS" => '',
         "SMTP_EMAIL" => 'sp@mc88.co.il',
         "SMTP_PASS" => '',
