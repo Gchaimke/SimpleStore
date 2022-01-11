@@ -20,7 +20,6 @@ function config()
         "SMTP_HOST" => 'smtp.timeweb.ru',
         "SMTP_DEBUG" => false,
         "SMTP_DEBUG_EMAIL" => '',
-        "SMTP_BCC_EMAIL" => '',
         "SITE_LANG" => "ru"
     );
 }
