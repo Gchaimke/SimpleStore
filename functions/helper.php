@@ -156,7 +156,6 @@ function delete_category($id)
 
 /**
  * Order
- * TODO: reformat to class
  */
 function save_order($cart, $total, $client)
 {
@@ -180,10 +179,22 @@ function save_order($cart, $total, $client)
     $order->items = $cart;
     $order->total = $total;
     $order->client = $client;
-
+    edit_products_from_cart($cart);
     file_put_contents($order_path, json_encode($order, JSON_UNESCAPED_UNICODE));
     send_email($order_name);
     return $order_name;
+}
+
+function edit_products_from_cart($cart){
+    global $store;
+    // debug($cart,1);
+    foreach($cart as $product){
+        $product_id = $product->id;
+        $category_id = $product->category_id;
+        $qtty = $product->cart_qtty;
+    }
+
+    $store->product->edit_product_warehouse($category_id, $product_id, $qtty);
 }
 
 function add_zero($orders)
@@ -489,16 +500,6 @@ function get_stats($month = 0)
     }
 }
 
-function str_contains($haystack, $needle, $ignoreCase = true)
-{
-    if ($ignoreCase) {
-        $haystack = strtolower($haystack);
-        $needle   = strtolower($needle);
-    }
-    $needlePos = strpos($haystack, $needle);
-    return ($needlePos === false ? false : ($needlePos + 1));
-}
-
 function send_email($order_num = 0)
 {
     global $store;
@@ -548,11 +549,10 @@ function export_csv()
     fclose($fp);
 }
 
-function debug($data)
+function debug($data, $die=false)
 {
     if (is_array($data) || is_object($data)) {
         foreach ($data as $key => $value) {
-            echo "<br>$key<br>";
             if (is_array($value) || is_object($value)) {
                 foreach ($value as $key_1 => $value_1) {
                     if (is_array($value_1) || is_object($value_1)) {
@@ -569,6 +569,9 @@ function debug($data)
         }
     } else {
         echo $data . "<br>";
+    }
+    if($die){
+        die();
     }
 }
 

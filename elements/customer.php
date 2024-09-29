@@ -11,19 +11,19 @@
                     <input type="hidden" name="cart" />
                     <div class="input-group mt-2">
                         <label class="input-group-text">* <?= lang("name") ?></label>
-                        <input type="text" class="form-control" name="client[name]" placeholder="<?= lang("name") ?>" required />
+                        <input type="text" class="form-control" name="client[name]" placeholder="<?= lang("name") ?>"  />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text">* <?= lang("phone") ?></label>
-                        <input type="text" class="form-control" name="client[phone]" placeholder="054-111-2222" required />
+                        <input type="text" class="form-control" name="client[phone]" placeholder="054-111-2222"  />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text">* <?= lang("email") ?></label>
-                        <input type="text" class="form-control" name="client[email]" placeholder="<?= lang("email") ?>" required />
+                        <input type="text" class="form-control" name="client[email]" placeholder="<?= lang("email") ?>"  />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text">* <?= lang("address") ?></label>
-                        <input type="text" class="form-control" placeholder="<?= lang("address_pl") ?>" name="client[address]" required />
+                        <input type="text" class="form-control" placeholder="<?= lang("address_pl") ?>" name="client[address]"  />
                     </div>
                     <div class="input-group mt-2">
                         <label class="input-group-text"><?= lang("note") ?></label>

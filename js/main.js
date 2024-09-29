@@ -164,6 +164,7 @@ $('.edit-product').on('click', function () {
     $('.edit_product_items').find('.product-description').val($(this).data("description"));
     $('.edit_product_items').find('.product-price').val($(this).data("price"));
     $('.edit_product_items').find('.product-qtty').val($(this).data("qtty"));
+    $('.edit_product_items').find('.warehouse-qtty').val($(this).data("warehouse"));
     $('.edit_product_items').find('.product-kind').val($(this).data("kind"));
     $('.edit_product_items').find('.product-options').val($(this).data("options"));
     $('.edit_product_items').find('.upload_image_toggle').attr("data-name", $(this).data("name"));
@@ -177,6 +178,7 @@ $('#edit_product_form').on('submit', function (e) {
     var description = $(this).find('textarea[name="description"]').val();
     var price = $(this).find('input[name="price"]').val();
     var qtty = $(this).find('input[name="qtty"]').val();
+    var warehouse = $(this).find('input[name="warehouse"]').val();
     var kind_text = $(this).find('select[name="kind"] option:selected').text();
     var kind_val = $(this).find('select[name="kind"] option:selected').val();
 
@@ -193,12 +195,14 @@ $('#edit_product_form').on('submit', function (e) {
                 $("#" + product_id).find('.card-text').text(description);
                 $("#" + product_id).find('.card-price').text(price);
                 $("#" + product_id).find('.card-qtty').text(qtty);
+                $("#" + product_id).find('.card-qtty').text(warehouse);
                 $("#" + product_id).find('.card-kind').text(kind_text);
                 $("#" + product_id).find('.edit-product').data("img", img);
                 $("#" + product_id).find('.edit-product').data("name", name);
                 $("#" + product_id).find('.edit-product').data("description", description);
                 $("#" + product_id).find('.edit-product').data("price", price);
                 $("#" + product_id).find('.edit-product').data("qtty", qtty);
+                $("#" + product_id).find('.edit-product').data("warehouse", warehouse);
                 $("#" + product_id).find('.edit-product').data("kind", kind_val);
                 $('#edit_product').modal('toggle');
                 if (id == "") {
@@ -238,9 +242,14 @@ $(document).on('click', '.favorite-product', function () {
 $(document).on('click', '.product-to-cart', function () {
     var productId = $(this).data("product_id");
     var options = $(this).data("product_options");
+    var warehouse = $(this).data("warehouse");
     options = options.split(",");
     $('.add_to_cart').find('.option_name').empty();
     let product_in_cart = $('.cart_items').find('[data-product_id=' + productId + ']').data('product_id');
+    let warehouse_in_cart = $('.cart_items').find('[data-product_id=' + productId + ']').data('warehouse');
+    console.log(warehouse)
+    console.log(product_in_cart)
+    console.log(warehouse_in_cart)
     if (!product_in_cart) {
         options.forEach(function (item) {
             if (item != "") {

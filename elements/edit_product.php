@@ -36,6 +36,10 @@
                         <input type="number" name="qtty" class="form-control product-qtty" />
                     </div>
                     <div class="input-group mb-3">
+                        <label class="input-group-text"><?= lang("Warehouse") ?></label>
+                        <input type="number" name="warehouse" class="form-control warehouse-qtty" />
+                    </div>
+                    <div class="input-group mb-3">
                         <label class="input-group-text"><?= lang("Kind") ?></label>
                         <select type="text" class="form-select product-kind" name="kind">
                             <?php foreach ($store->product->kinds as $kind) {

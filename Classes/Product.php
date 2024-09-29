@@ -10,6 +10,7 @@ class Product
     public $description = "";
     public $price = 50;
     public $qtty = 1;
+    public $warehouse = 10;
     public $kind = 'kg';
     public $img = 'img/product.png';
     public $options = "";
@@ -30,6 +31,7 @@ class Product
             $this->$description = property_exists($product, $description) && $product[$description] != '' ? $product[$description] : '';
             $this->price = property_exists($product, 'price') && $product['price'] != '' ? $product['price'] : $this->price;
             $this->qtty = property_exists($product, 'qtty') && $product['qtty'] != '' ? $product['qtty'] : $this->qtty;
+            $this->warehouse = property_exists($product, 'warehouse') && $product['warehouse'] != '' ? $product['warehouse'] : $this->warehouse;
             $this->kind = property_exists($product, 'kind') && $product['kind'] != '' ? $product['kind'] : $this->kind;
             $this->img = property_exists($product, 'img') && $product['img'] != '' ? $product['img'] : $this->img;
             $this->$options = property_exists($product, $options) && $product[$options] != '' ? $product[$options] : '';
@@ -40,11 +42,14 @@ class Product
         }
     }
 
-    function get_product($category_id, $product_id)
+    function get_product($category_id, $product_id, $with_key=false)
     {
         $products = $this->get_products($category_id);
-        foreach ($products as $product) {
+        foreach ($products as $key => $product) {
             if ($product->id == $product_id) {
+                if($with_key){
+                    $product->product_key = $key;
+                }
                 return $product;
             }
         }
@@ -83,9 +88,31 @@ class Product
         $old_product->$description = htmlspecialchars($product->description, ENT_QUOTES);
         $old_product->kind = htmlspecialchars($product->kind, ENT_QUOTES);
         $old_product->qtty = $product->qtty != "" ? $product->qtty : 1;
+        $old_product->warehouse = $product->warehouse != "" ? $product->warehouse : 10;
         $old_product->img = $product->img;
         $old_product->$options = htmlspecialchars($product->options, ENT_QUOTES);
         $products[$product_key] = $old_product;
+        file_put_contents(SP_DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
+        return true;
+    }
+
+    function edit_product_warehouse($category_id, $product_id, $qtty)
+    {
+        global $store;
+        $product_id = intval(str_replace('_', '', $product_id));
+        $product = $store->product->get_product($category_id, $product_id, 1);
+        if (isset($product->warehouse)){
+            $product->warehouse -= intval($qtty);
+            if ($product->warehouse < 0){
+                $product->warehouse = 0;
+            }
+        }else{
+            $product->warehouse = 0;
+        }
+        $products = json_decode(file_get_contents(SP_DATA_ROOT . "$category_id.json"));
+        $current_key = $product->product_key;
+        unset($product->product_key);
+        $products[$current_key] = $product;
         file_put_contents(SP_DATA_ROOT . "$category_id.json", json_encode($products, JSON_UNESCAPED_UNICODE));
         return true;
     }

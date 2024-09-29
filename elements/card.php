@@ -3,6 +3,7 @@
     <div class="card-body product">
         <?php
         $qtty =  property_exists($product, 'qtty') ? $product->qtty : 1;
+        $warehouse =  property_exists($product, 'warehouse') ? $product->warehouse : 10;
         $name = property_exists($product, "name_" . $lng) ? "name_" . $lng : "name";
         $description = property_exists($product, "description_" . $lng) ? "description_" . $lng : "description";
         $options = property_exists($product, "options_" . $lng) ? "options_" . $lng : "options";
@@ -15,6 +16,7 @@
             data-description='" . $product->$description . "'
             data-price='$product->price'
             data-qtty='$qtty'
+            data-warehouse='$warehouse'
             data-kind='" . $product->kind . "'
             data-options='" . $product->$options . "'
             data-bs-toggle=\"modal\" data-bs-target=\"#edit_product\"
@@ -36,12 +38,12 @@
         <div class="card-content text-center">
             <h5 class="card-title"><?= $product->$name ?></h5>
             <p class="card-text"><?= $product->$description ?></p>
-            <div class="mx-1"><span class="card-qtty"><?= $qtty . "</span><span class='card-kind'>" . lang($product->kind) ?></span></div>
+            <div class="mx-1"><span class="card-warehouse"><?=$warehouse?></span>/<span class="card-qtty"><?= $qtty . "</span><span class='card-kind'>" . lang($product->kind) ?></span></div>
         </div>
     </div>
 
     <div class="card-footer text-nowrap">
-        <div class="product-to-cart" data-product_id="<?= $product_cart_id ?>" data-product_options="<?= $product->$options ?>">
+        <div class="product-to-cart" data-product_id="<?= $product_cart_id ?>" data-warehouse="<?= $warehouse ?>" data-product_options="<?= $product->$options ?>">
             <div class="mx-1"><span class="card-price h5"><?= $product->price . "</span><span>" . $carrency ?></span></div>
             <i class='fas fa-cart-plus'></i>
         </div>
